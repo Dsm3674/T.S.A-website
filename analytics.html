@@ -1,58 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>T.S.A — Analytics</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <header>
-    <div class="container nav">
-      <div class="brand">
-        <div class="brand__dot"></div>
-        <div>
-          <div class="brand__name">T.S.A</div>
-          <div class="brand__tag">Data for Good</div>
-        </div>
-      </div>
-      <nav class="menu">
-        <a href="index.html">Home</a>
-        <a href="businesses.html">Businesses</a>
-        <a href="nonprofits.html">Nonprofits</a>
-        <a href="analytics.html" class="active">Analytics</a>
-        <a class="cta" href="#">View Insights</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="container">
-    <section class="hero">
-      <h1 class="display">Analytics & Insights</h1>
-      <p class="lead">We use data visualization and research analytics to empower decisions that drive social change.</p>
-    </section>
-
-    <section class="features">
-      <div class="feature-card">
-        <h3>Interactive Dashboards</h3>
-        <p>Visualize data from business and nonprofit collaborations.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Impact Metrics</h3>
-        <p>Track KPIs, donations, and engagement with our real-time analytics.</p>
-      </div>
-      <div class="feature-card">
-        <h3>AI Insights</h3>
-        <p>Leverage predictive models to anticipate community needs.</p>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>&copy; 2025 T.S.A. All rights reserved.</p>
-    </div>
-  </footer>
+<body class="theme-light">
+<header class="navwrap">
+  <a class="logo" href="index.html">T.S.A</a>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="businesses.html">Businesses</a>
+    <a href="nonprofits.html">Nonprofits</a>
+    <a href="analytics.html" class="active">Analytics</a>
+  </nav>
+  <button class="mode">◐</button>
+</header>
+<section class="page-hero">
+  <h1 class="mega">Analytics & Insights</h1>
+  <p class="sub">Numbers behind the narrative.</p>
+</section>
+<section class="stats container">
+  <div class="stat"><h2 id="volunteers">0</h2><p>Volunteers</p></div>
+  <div class="stat"><h2 id="events">0</h2><p>Events</p></div>
+  <div class="stat"><h2 id="hours">0</h2><p>Hours Served</p></div>
+</section>
+<section class="chart container">
+  <svg viewBox="0 0 320 200" class="linechart">
+    <polyline class="line" points="0,160 40,150 80,142 120,120 160,110 200,95 240,70 280,58 320,40"/>
+    <line x1="0" y1="160" x2="320" y2="160" class="axis"/>
+  </svg>
+</section>
+<footer class="foot"><p>© 2025 T.S.A</p></footer>
+<script src="scripts.js"></script>
 </body>
 </html>
 
