@@ -1,88 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>T.S.A — Community × Culture × Data</title>
-  <meta name="description" content="T.S.A connects local businesses, nonprofits, and communities with data-driven programs and creative events." />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <header>
-    <div class="container nav">
-      <div class="brand">
-        <div class="brand__dot"></div>
-        <div>
-          <div class="brand__name">T.S.A</div>
-          <div class="brand__tag">Community × Culture × Data</div>
-        </div>
-      </div>
-      <nav class="menu">
-        <a href="index.html" class="active">Home</a>
-        <a href="businesses.html">Businesses</a>
-        <a href="nonprofits.html">Nonprofits</a>
-        <a href="analytics.html">Analytics</a>
-        <a class="cta" href="#"><span>Join Us</span></a>
-      </nav>
+<body class="theme-light">
+<header class="navwrap">
+  <a class="logo" href="index.html">T.S.A</a>
+  <nav class="nav">
+    <a href="index.html" class="active">Home</a>
+    <a href="businesses.html">Businesses</a>
+    <a href="nonprofits.html">Nonprofits</a>
+    <a href="analytics.html">Analytics</a>
+  </nav>
+  <button class="mode" title="Toggle theme">◐</button>
+</header>
+<section class="hero">
+  <canvas id="orbCanvas"></canvas>
+  <div class="hero__inner container">
+    <h1 class="mega">COMMUNITY × <span class="stroke">CULTURE</span> × DATA</h1>
+    <p class="sub">Stories of a community told through art, code, and analytics.</p>
+    <div class="cta-row">
+      <a class="btn" href="#work">Explore</a>
+      <a class="btn ghost" href="analytics.html">View Insights</a>
     </div>
-  </header>
-
-  <main>
-    <section class="hero container">
-      <div class="hero__grid">
-        <div>
-          <span class="eyebrow">Welcome to T.S.A</span>
-          <h1 class="display">Empowering Community Through Art and Data</h1>
-          <p class="lead">We connect creative visionaries, nonprofits, and local businesses to foster collaboration, social impact, and data-driven storytelling.</p>
-        </div>
-        <div class="hero__panel">
-          <h3>Our Initiatives</h3>
-          <p>Building digital and physical spaces where innovation meets social good.</p>
-          <div class="hero__chips">
-            <div class="chip">Cultural Events</div>
-            <div class="chip">Data for Good</div>
-            <div class="chip">Community Grants</div>
-            <div class="chip">Workshops</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="marquee">
-      <div class="marquee__track">
-        <span class="marquee__item">Creativity<span class="marquee__dot"></span>Technology<span class="marquee__dot"></span>Community<span class="marquee__dot"></span>Innovation</span>
-        <span class="marquee__item">Creativity<span class="marquee__dot"></span>Technology<span class="marquee__dot"></span>Community<span class="marquee__dot"></span>Innovation</span>
-      </div>
-    </div>
-
-    <section class="container">
-      <div class="section__head">
-        <h2 class="h2">Our Partners</h2>
-      </div>
-      <div class="features">
-        <div class="feature-card">
-          <h3>Businesses</h3>
-          <p>Empowering companies to drive meaningful impact with local communities.</p>
-          <a href="businesses.html" class="btn">Explore</a>
-        </div>
-        <div class="feature-card">
-          <h3>Nonprofits</h3>
-          <p>Supporting mission-driven organizations through creative technology.</p>
-          <a href="nonprofits.html" class="btn">Explore</a>
-        </div>
-        <div class="feature-card">
-          <h3>Analytics</h3>
-          <p>Using data visualization to reveal insights that matter.</p>
-          <a href="analytics.html" class="btn">View</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>&copy; 2025 T.S.A. All rights reserved.</p>
-    </div>
-  </footer>
+  </div>
+</section>
+<div class="marquee">
+  <div class="track">
+    <span>Art & Code</span><span>Communities</span><span>Workshops</span><span>Impact</span>
+    <span>Art & Code</span><span>Communities</span><span>Workshops</span><span>Impact</span>
+  </div>
+</div>
+<section id="work" class="grid container">
+  <article class="tile" style="--hue:310">
+    <h3>Stories Timeline</h3>
+    <p>Scroll through moments that shaped our city.</p>
+    <button class="chip" data-open="#timeline">Open</button>
+  </article>
+  <article class="tile" style="--hue:200">
+    <h3>Map of Moments</h3>
+    <p>Interactive pins revealing community landmarks.</p>
+    <button class="chip" data-open="#map">Open</button>
+  </article>
+  <article class="tile" style="--hue:140">
+    <h3>Data Stories</h3>
+    <p>Visualizing growth, volunteers, and impact metrics.</p>
+    <a class="chip" href="analytics.html">Open</a>
+  </article>
+</section>
+<section id="timeline" class="timeline container">
+  <h2 class="section-title">Community Timeline</h2>
+  <ol class="timeline-list">
+    <li class="timeline-item"><time>2012</time><h4>Community Garden</h4><p>Volunteers transformed an empty lot into a thriving garden.</p></li>
+    <li class="timeline-item"><time>2015</time><h4>Local Market Revival</h4><p>Independent vendors brought culture back downtown.</p></li>
+    <li class="timeline-item"><time>2019</time><h4>Digital Inclusion Drive</h4><p>Workshops provided coding access for all ages.</p></li>
+    <li class="timeline-item"><time>2023</time><h4>Data for Good Summit</h4><p>Analysts, artists, and activists collaborated for social impact.</p></li>
+  </ol>
+</section>
+<section id="map" class="map container">
+  <h2 class="section-title">Map of Stories</h2>
+  <svg viewBox="0 0 400 240">
+    <rect width="400" height="240" rx="16" class="map-bg"/>
+    <circle cx="80" cy="160" r="8" class="pin" data-info="Community Garden"></circle>
+    <circle cx="180" cy="110" r="8" class="pin" data-info="Local Market"></circle>
+    <circle cx="260" cy="60" r="8" class="pin" data-info="Innovation Hub"></circle>
+  </svg>
+  <div class="map-info" id="mapInfo">Hover over a pin to see its story.</div>
+</section>
+<footer class="foot"><p>© 2025 T.S.A — Built with art, data, and community.</p></footer>
+<script src="scripts.js"></script>
 </body>
 </html>
+
