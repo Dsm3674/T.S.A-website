@@ -1,80 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>T.S.A — Community × Culture × Data</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fragments of Coppell — 2025</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;600;800&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
-<body class="theme-light">
-<header class="navwrap">
-  <a class="logo" href="index.html">T.S.A</a>
-  <nav class="nav">
-    <a href="index.html" class="active">Home</a>
-    <a href="businesses.html">Businesses</a>
-    <a href="nonprofits.html">Nonprofits</a>
-    <a href="analytics.html">Analytics</a>
-  </nav>
-  <button class="mode" title="Toggle theme">◐</button>
-</header>
-<section class="hero">
-  <canvas id="orbCanvas"></canvas>
-  <div class="hero__inner container">
-    <h1 class="mega">COMMUNITY × <span class="stroke">CULTURE</span> × DATA</h1>
-    <p class="sub">Stories of a community told through art, code, and analytics.</p>
-    <div class="cta-row">
-      <a class="btn" href="#work">Explore</a>
-      <a class="btn ghost" href="analytics.html">View Insights</a>
+<body class="theme-dark">
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-ink">
+  <div class="container">
+    <a class="navbar-brand brand-graff" href="index.html">COPPELL 2025</a>
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav"><span class="navbar-toggler-icon"></span></button>
+    <div id="nav" class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="businesses.html">Businesses</a></li>
+        <li class="nav-item"><a class="nav-link" href="nonprofits.html">Nonprofits</a></li>
+        <li class="nav-item"><a class="nav-link" href="map.html">Coppell Map</a></li>
+        <li class="nav-item"><a class="nav-link" href="analytics.html">Analytics 2025</a></li>
+        <li class="nav-item"><button id="toggleTheme" class="btn btn-outline-light btn-sm">◐</button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section class="hero position-relative overflow-hidden">
+  <canvas id="paintCanvas" class="position-absolute top-0 start-0 w-100 h-100"></canvas>
+  <div class="container position-relative">
+    <h1 class="display-1 fw-bold text-wrap lh-1 hero-title"><span class="scribble">FRAGMENTS</span> OF <span class="stroke-ochre">COPPELL</span></h1>
+    <p class="lead mt-3 hero-sub">Where local stories, business, and creativity intersect in 2025.</p>
+    <div class="d-flex flex-wrap gap-3 mt-4">
+      <a href="#sections" class="btn btn-neo">Explore</a>
+      <a href="analytics.html" class="btn btn-outline-neo">View Insights</a>
     </div>
   </div>
 </section>
-<div class="marquee">
-  <div class="track">
-    <span>Art & Code</span><span>Communities</span><span>Workshops</span><span>Impact</span>
-    <span>Art & Code</span><span>Communities</span><span>Workshops</span><span>Impact</span>
+
+<section id="sections" class="container py-5">
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="tile p-4 h-100">
+        <h3 class="tile-title">Stories Timeline</h3>
+        <p class="mb-3">Moments and milestones that shaped Coppell in 2025.</p>
+        <button class="chip" data-open="#timeline">Open</button>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="tile p-4 h-100">
+        <h3 class="tile-title">Coppell Map</h3>
+        <p class="mb-3">Pins across neighborhoods highlighting partnerships.</p>
+        <a class="chip" href="map.html">Open</a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="tile p-4 h-100">
+        <h3 class="tile-title">Data Stories</h3>
+        <p class="mb-3">Business and nonprofit collaboration metrics in 2025.</p>
+        <a class="chip" href="analytics.html">Open</a>
+      </div>
+    </div>
   </div>
-</div>
-<section id="work" class="grid container">
-  <article class="tile" style="--hue:310">
-    <h3>Stories Timeline</h3>
-    <p>Scroll through moments that shaped our city.</p>
-    <button class="chip" data-open="#timeline">Open</button>
-  </article>
-  <article class="tile" style="--hue:200">
-    <h3>Map of Moments</h3>
-    <p>Interactive pins revealing community landmarks.</p>
-    <button class="chip" data-open="#map">Open</button>
-  </article>
-  <article class="tile" style="--hue:140">
-    <h3>Data Stories</h3>
-    <p>Visualizing growth, volunteers, and impact metrics.</p>
-    <a class="chip" href="analytics.html">Open</a>
-  </article>
 </section>
-<section id="timeline" class="timeline container">
-  <h2 class="section-title">Community Timeline</h2>
+
+<section id="timeline" class="container py-5">
+  <h2 class="section-title">Coppell 2025 Timeline</h2>
   <ol class="timeline-list">
-    <li class="timeline-item"><time>2012</time><h4>Community Garden</h4><p>Volunteers transformed an empty lot into a thriving garden.</p></li>
-    <li class="timeline-item"><time>2015</time><h4>Local Market Revival</h4><p>Independent vendors brought culture back downtown.</p></li>
-    <li class="timeline-item"><time>2019</time><h4>Digital Inclusion Drive</h4><p>Workshops provided coding access for all ages.</p></li>
-    <li class="timeline-item"><time>2023</time><h4>Data for Good Summit</h4><p>Analysts, artists, and activists collaborated for social impact.</p></li>
+    <li class="timeline-item"><time>Jan</time><h4>Old Town Kickoff</h4><p>Business and arts pop-ups activate the district.</p></li>
+    <li class="timeline-item"><time>Apr</time><h4>Market Reframe</h4><p>Local vendors co-design a new public market identity.</p></li>
+    <li class="timeline-item"><time>Aug</time><h4>Arts × Coffee Labs</h4><p>Partnership murals and limited-run design drops.</p></li>
+    <li class="timeline-item"><time>Nov</time><h4>Harvest Commons</h4><p>Nonprofit collaboration celebrates shared space and culture.</p></li>
   </ol>
 </section>
-<section id="map" class="map container">
-  <h2 class="section-title">Map of Stories</h2>
-  <svg viewBox="0 0 400 240">
-    <rect width="400" height="240" rx="16" class="map-bg"/>
-    <circle cx="80" cy="160" r="8" class="pin" data-info="Community Garden"></circle>
-    <circle cx="180" cy="110" r="8" class="pin" data-info="Local Market"></circle>
-    <circle cx="260" cy="60" r="8" class="pin" data-info="Innovation Hub"></circle>
-  </svg>
-  <div class="map-info" id="mapInfo">Hover over a pin to see its story.</div>
+
+<section class="container py-5">
+  <h2 class="section-title mb-4">Glance</h2>
+  <div class="row g-4">
+    <div class="col-md-4"><div class="stat tile text-center py-4"><h2 id="partners" class="accent-number">0</h2><p class="mb-0">Active Partnerships</p></div></div>
+    <div class="col-md-4"><div class="stat tile text-center py-4"><h2 id="events" class="accent-number">0</h2><p class="mb-0">Public Activations</p></div></div>
+    <div class="col-md-4"><div class="stat tile text-center py-4"><h2 id="initiatives" class="accent-number">0</h2><p class="mb-0">2025 Initiatives</p></div></div>
+  </div>
 </section>
-<footer class="foot"><p>© 2025 T.S.A — Built with art, data, and community.</p></footer>
+
+<footer class="py-4 text-center text-muted">
+  <div class="container small">© 2025 Coppell Community Studio</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="scripts.js"></script>
 </body>
 </html>
+
 
