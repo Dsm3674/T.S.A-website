@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Impact Analytics</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Community Stories</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="businesses.html">Local Businesses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="nonprofits.html">Non-Profits</a></li>
+                    <li class="nav-item"><a class="nav-link" href="heroes.html">Community Heroes</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="analytics.html">Community Impact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Analytics Hero -->
+    <section class="hero-section" style="height: 60vh;">
+        <div class="hero-content">
+            <h1 class="hero-title" style="font-size: 3.5rem;">Community Impact</h1>
+            <p class="hero-subtitle">Data-driven insights into our community's growth</p>
+        </div>
+    </section>
+
+    <!-- Stats Overview -->
+    <section class="py-5" style="background: #0a0a0a; margin-top: -50px;">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalOrganizations">0</div>
+                        <div class="stat-label">Total Organizations</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalEmployees">0</div>
+                        <div class="stat-label">Employees & Members</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-number" id="peopleImpacted">0</div>
+                        <div class="stat-label">People Impacted</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-number" id="communityEvents">0</div>
+                        <div class="stat-label">Community Events</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Charts Section -->
+    <section class="py-5" style="background: #0a0a0a;">
+        <div class="container">
+            <h2 class="section-title">Visual Analytics</h2>
+            
+            <div class="row g-4">
+                <!-- Category Distribution -->
+                <div class="col-lg-6">
+                    <div class="chart-container">
+                        <h3 class="text-center mb-4">Organizations by Category</h3>
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Timeline Growth -->
+                <div class="col-lg-6">
+                    <div class="chart-container">
+                        <h3 class="text-center mb-4">Growth Over Time</h3>
+                        <canvas id="timelineChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Impact Metrics -->
+                <div class="col-lg-6">
+                    <div class="chart-container">
+                        <h3 class="text-center mb-4">Community Impact Metrics</h3>
+                        <canvas id="impactChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Employee Distribution -->
+                <div class="col-lg-6">
+                    <div class="chart-container">
+                        <h3 class="text-center mb-4">Workforce Distribution</h3>
+                        <canvas id="employeeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Insights Section -->
+    <section class="py-5" style="background: #0a0a0a;">
+        <div class="container">
+            <h2 class="section-title">Key Insights</h2>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="chart-container">
+                        <h4>Economic Impact</h4>
+                        <p>Local businesses employ over 65 people directly, contributing significantly to the local economy through jobs and tax revenue.</p>
+                        <ul>
+                            <li>Combined 32 years of service to the community</li>
+                            <li>100+ community events hosted annually</li>
+                            <li>Supports local suppliers and farmers</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="chart-container">
+                        <h4>Social Impact</h4>
+                        <p>Non-profit organizations have touched over 16,300 lives through various programs and initiatives.</p>
+                        <ul>
+                            <li>430+ active volunteers</li>
+                            <li>26 different programs offered</li>
+                            <li>Year-round community support</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="chart-container">
+                        <h4>Safety & Protection</h4>
+                        <p>First responders have answered over 10,500 calls, protecting and serving the community 24/7.</p>
+                        <ul>
+                            <li>105 dedicated heroes</li>
+                            <li>Nearly 30 years of combined service</li>
+                            <li>125,000+ lives impacted</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="chart-container">
+                        <h4>Future Growth</h4>
+                        <p>The community continues to grow with new organizations and expanded services planned for the coming years.</p>
+                        <ul>
+                            <li>Steady growth since 1995</li>
+                            <li>New programs launching annually</li>
+                            <li>Increasing volunteer participation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container text-center">
+            <p>&copy; 2025 Community Stories. Celebrating our local heritage.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="main.js"></script>
+    <script src="analytics.js"></script>
+</body>
+</html>
