@@ -2,61 +2,39 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Coppell Nonprofits — 2025</title>
+<title>Nonprofits — Coppell 2025</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;600;800&family=Rubik+Mono+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-<body class="theme-dark">
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-ink">
-  <div class="container">
-    <a class="navbar-brand brand-graff" href="index.html">COPPELL 2025</a>
-    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav"><span class="navbar-toggler-icon"></span></button>
-    <div id="nav" class="collapse navbar-collapse">
-      <ul class="navbar-nav ms-auto gap-lg-2">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="businesses.html">Businesses</a></li>
-        <li class="nav-item"><a class="nav-link active" href="nonprofits.html">Nonprofits</a></li>
-        <li class="nav-item"><a class="nav-link" href="map.html">Coppell Map</a></li>
-        <li class="nav-item"><a class="nav-link" href="analytics.html">Analytics 2025</a></li>
-        <li class="nav-item"><button id="toggleTheme" class="btn btn-outline-light btn-sm">◐</button></li>
-      </ul>
-    </div>
+<body>
+<header class="blonded-nav">
+  <div class="container d-flex justify-content-between align-items-center">
+    <a class="nav-brand" href="index.html">COPPELL 2025</a>
+    <nav class="nav-menu">
+      <a href="index.html">ALL</a>
+      <a href="businesses.html">BUSINESSES</a>
+      <a href="nonprofits.html" class="active">NONPROFITS</a>
+      <a href="analytics.html">ANALYTICS</a>
+      <a href="map.html">MAP</a>
+    </nav>
+    <button id="themeToggle" class="nav-ghost">◐</button>
   </div>
-</nav>
+</header>
 
-<section class="page-hero container py-5">
-  <h1 class="display-4 fw-bold"><span class="stroke-ochre">Nonprofit Collaborations</span></h1>
-  <p class="lead mt-2">Coppell partnerships highlighting culture, equity, and place-making in 2025.</p>
+<section class="page-hero container">
+  <h1 class="page-title">Nonprofit Collaborations</h1>
+  <p class="page-kicker">Arts, equity, and shared space initiatives across Coppell in 2025.</p>
 </section>
 
 <section class="container pb-5">
   <div class="row g-4">
-    <div class="col-md-6">
-      <div class="card-graff h-100">
-        <div class="card-graff-body">
-          <h3>Arts Council Exhibit</h3>
-          <p>Rotating community wall with audio bites and data panels.</p>
-          <div class="badge-ink">2025</div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card-graff h-100">
-        <div class="card-graff-body">
-          <h3>Commons Harvest</h3>
-          <p>Shared space activation with storytelling stations and map pins.</p>
-          <div class="badge-ink">2025</div>
-        </div>
-      </div>
-    </div>
+    <div class="col-md-6"><div class="card-graff p-4 h-100"><h3>Arts Council Exhibit</h3><p>Rotating community wall with audio bites and data panels.</p><div class="badge-year">2025</div></div></div>
+    <div class="col-md-6"><div class="card-graff p-4 h-100"><h3>Commons Harvest</h3><p>Story stations and map pins to celebrate neighborhood ties.</p><div class="badge-year">2025</div></div></div>
   </div>
 </section>
 
-<footer class="py-4 text-center text-muted">
-  <div class="container small">© 2025 Coppell Community Studio</div>
-</footer>
-
+<footer class="site-foot"><div class="container small">© 2025 Coppell Community Studio</div></footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="scripts.js"></script>
 </body>
