@@ -2,90 +2,88 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Fragments of Coppell — 2025</title>
+<title>Coppell 2025 — Community × Culture × Data</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;600;800&family=Rubik+Mono+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-<body class="theme-dark">
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-ink">
-  <div class="container">
-    <a class="navbar-brand brand-graff" href="index.html">COPPELL 2025</a>
-    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav"><span class="navbar-toggler-icon"></span></button>
-    <div id="nav" class="collapse navbar-collapse">
-      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
-        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="businesses.html">Businesses</a></li>
-        <li class="nav-item"><a class="nav-link" href="nonprofits.html">Nonprofits</a></li>
-        <li class="nav-item"><a class="nav-link" href="map.html">Coppell Map</a></li>
-        <li class="nav-item"><a class="nav-link" href="analytics.html">Analytics 2025</a></li>
-        <li class="nav-item"><button id="toggleTheme" class="btn btn-outline-light btn-sm">◐</button></li>
-      </ul>
-    </div>
+<body>
+<header class="blonded-nav">
+  <div class="container d-flex justify-content-between align-items-center">
+    <a class="nav-brand" href="index.html">COPPELL 2025</a>
+    <nav class="nav-menu">
+      <a href="index.html" class="active">ALL</a>
+      <a href="businesses.html">BUSINESSES</a>
+      <a href="nonprofits.html">NONPROFITS</a>
+      <a href="analytics.html">ANALYTICS</a>
+      <a href="map.html">MAP</a>
+    </nav>
+    <button id="themeToggle" class="nav-ghost">◐</button>
   </div>
-</nav>
+</header>
 
-<section class="hero position-relative overflow-hidden">
-  <canvas id="paintCanvas" class="position-absolute top-0 start-0 w-100 h-100"></canvas>
-  <div class="container position-relative">
-    <h1 class="display-1 fw-bold text-wrap lh-1 hero-title"><span class="scribble">FRAGMENTS</span> OF <span class="stroke-ochre">COPPELL</span></h1>
-    <p class="lead mt-3 hero-sub">Where local stories, business, and creativity intersect in 2025.</p>
-    <div class="d-flex flex-wrap gap-3 mt-4">
-      <a href="#sections" class="btn btn-neo">Explore</a>
-      <a href="analytics.html" class="btn btn-outline-neo">View Insights</a>
+<section class="hero-canvas-wrap">
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-inner container">
+    <h1 class="hero-title"><span>COPPELL</span> <span class="outline">2025</span></h1>
+    <p class="hero-kicker">Community × Culture × Data</p>
+    <div class="d-flex justify-content-center gap-3 mt-3">
+      <a class="btn-neo" href="#panels">Explore</a>
+      <a class="btn-ghost" href="analytics.html">Insights</a>
     </div>
   </div>
 </section>
 
-<section id="sections" class="container py-5">
+<section id="panels" class="container py-5">
+  <div class="row g-4 align-items-stretch">
+    <div class="col-md-4">
+      <a href="businesses.html" class="panel brutal">
+        <div class="vlabel">COPPELL</div>
+        <h3>Businesses</h3>
+        <p>Old Town collaborations, coffee lab drops, market identity.</p>
+        <span class="panel-chip">OPEN</span>
+      </a>
+    </div>
+    <div class="col-md-4">
+      <a href="nonprofits.html" class="panel brutal">
+        <div class="vlabel">COPPELL</div>
+        <h3>Nonprofits</h3>
+        <p>Arts Council exhibits, Commons activations, equity-first stories.</p>
+        <span class="panel-chip">OPEN</span>
+      </a>
+    </div>
+    <div class="col-md-4">
+      <a href="analytics.html" class="panel brutal">
+        <div class="vlabel">COPPELL</div>
+        <h3>Analytics</h3>
+        <p>Partnerships, activations, initiatives as paint-stroke charts.</p>
+        <span class="panel-chip">OPEN</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="container pb-5">
   <div class="row g-4">
-    <div class="col-md-4">
-      <div class="tile p-4 h-100">
-        <h3 class="tile-title">Stories Timeline</h3>
-        <p class="mb-3">Moments and milestones that shaped Coppell in 2025.</p>
-        <button class="chip" data-open="#timeline">Open</button>
+    <div class="col-lg-8">
+      <div class="canvas-slap tile">
+        <canvas id="slapCanvas"></canvas>
+        <div class="slap-instruction">tap or click for a paint burst</div>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-lg-4">
       <div class="tile p-4 h-100">
-        <h3 class="tile-title">Coppell Map</h3>
-        <p class="mb-3">Pins across neighborhoods highlighting partnerships.</p>
-        <a class="chip" href="map.html">Open</a>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="tile p-4 h-100">
-        <h3 class="tile-title">Data Stories</h3>
-        <p class="mb-3">Business and nonprofit collaboration metrics in 2025.</p>
-        <a class="chip" href="analytics.html">Open</a>
+        <h4 class="mb-3">Coppell Story</h4>
+        <p>Old Town and the Farmers Market set the stage for design-forward partnerships. 2025 centers shared experiences between local businesses and nonprofits through art and data.</p>
+        <a href="map.html" class="btn-neo mt-2 w-100 text-center">Coppell Map</a>
       </div>
     </div>
   </div>
 </section>
 
-<section id="timeline" class="container py-5">
-  <h2 class="section-title">Coppell 2025 Timeline</h2>
-  <ol class="timeline-list">
-    <li class="timeline-item"><time>Jan</time><h4>Old Town Kickoff</h4><p>Business and arts pop-ups activate the district.</p></li>
-    <li class="timeline-item"><time>Apr</time><h4>Market Reframe</h4><p>Local vendors co-design a new public market identity.</p></li>
-    <li class="timeline-item"><time>Aug</time><h4>Arts × Coffee Labs</h4><p>Partnership murals and limited-run design drops.</p></li>
-    <li class="timeline-item"><time>Nov</time><h4>Harvest Commons</h4><p>Nonprofit collaboration celebrates shared space and culture.</p></li>
-  </ol>
-</section>
-
-<section class="container py-5">
-  <h2 class="section-title mb-4">Glance</h2>
-  <div class="row g-4">
-    <div class="col-md-4"><div class="stat tile text-center py-4"><h2 id="partners" class="accent-number">0</h2><p class="mb-0">Active Partnerships</p></div></div>
-    <div class="col-md-4"><div class="stat tile text-center py-4"><h2 id="events" class="accent-number">0</h2><p class="mb-0">Public Activations</p></div></div>
-    <div class="col-md-4"><div class="stat tile text-center py-4"><h2 id="initiatives" class="accent-number">0</h2><p class="mb-0">2025 Initiatives</p></div></div>
-  </div>
-</section>
-
-<footer class="py-4 text-center text-muted">
+<footer class="site-foot">
   <div class="container small">© 2025 Coppell Community Studio</div>
 </footer>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="scripts.js"></script>
 </body>
