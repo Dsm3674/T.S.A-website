@@ -7,42 +7,37 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;600;800&family=Rubik+Mono+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-<body class="theme-dark">
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-ink">
-  <div class="container">
-    <a class="navbar-brand brand-graff" href="index.html">COPPELL 2025</a>
-    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav"><span class="navbar-toggler-icon"></span></button>
-    <div id="nav" class="collapse navbar-collapse">
-      <ul class="navbar-nav ms-auto gap-lg-2">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="businesses.html">Businesses</a></li>
-        <li class="nav-item"><a class="nav-link" href="nonprofits.html">Nonprofits</a></li>
-        <li class="nav-item"><a class="nav-link active" href="map.html">Coppell Map</a></li>
-        <li class="nav-item"><a class="nav-link" href="analytics.html">Analytics 2025</a></li>
-        <li class="nav-item"><button id="toggleTheme" class="btn btn-outline-light btn-sm">◐</button></li>
-      </ul>
-    </div>
+<body>
+<header class="blonded-nav">
+  <div class="container d-flex justify-content-between align-items-center">
+    <a class="nav-brand" href="index.html">COPPELL 2025</a>
+    <nav class="nav-menu">
+      <a href="index.html">ALL</a>
+      <a href="businesses.html">BUSINESSES</a>
+      <a href="nonprofits.html">NONPROFITS</a>
+      <a href="analytics.html">ANALYTICS</a>
+      <a href="map.html" class="active">MAP</a>
+    </nav>
+    <button id="themeToggle" class="nav-ghost">◐</button>
   </div>
-</nav>
+</header>
 
 <section class="container py-5">
-  <h1 class="display-5 fw-bold mb-4"><span class="scribble">Coppell Story Map</span></h1>
+  <h1 class="page-title">Coppell Story Map</h1>
   <svg class="map-svg" viewBox="0 0 800 460">
-    <rect x="0" y="0" width="800" height="460" rx="24" class="map-bg"/>
+    <rect x="0" y="0" width="800" height="460" rx="16" class="map-bg"/>
     <path d="M80,80 L720,80 L720,380 L80,380 Z" class="map-outline"/>
-    <circle cx="180" cy="190" r="9" class="pin" data-title="Old Town District" data-desc="Business pop-ups, street art, design drops"/>
-    <circle cx="340" cy="140" r="9" class="pin" data-title="Coppell Farmers Market" data-desc="2025 flexible identity and seasonal activations"/>
-    <circle cx="520" cy="220" r="9" class="pin" data-title="Arts Center" data-desc="Gallery walls, community audio, data panels"/>
-    <circle cx="630" cy="310" r="9" class="pin" data-title="Commons" data-desc="Shared space with storytelling stations"/>
+    <circle cx="180" cy="190" r="9" class="pin" data-title="Old Town" data-desc="Shops, murals, pop-up events"/>
+    <circle cx="340" cy="140" r="9" class="pin" data-title="Farmers Market" data-desc="2025 identity and seasonal activations"/>
+    <circle cx="520" cy="220" r="9" class="pin" data-title="Arts Center" data-desc="Gallery wall and data panels"/>
+    <circle cx="630" cy="310" r="9" class="pin" data-title="Commons" data-desc="Story stations and shared space"/>
   </svg>
-  <div id="mapInfo" class="tile mt-4 p-3 text-center">Hover or tap a pin to see its story.</div>
+  <div id="mapInfo" class="tile p-3 mt-3 text-center">Hover or tap a pin to see its story.</div>
 </section>
 
-<footer class="py-4 text-center text-muted">
-  <div class="container small">© 2025 Coppell Community Studio</div>
-</footer>
-
+<footer class="site-foot"><div class="container small">© 2025 Coppell Community Studio</div></footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="scripts.js"></script>
 </body>
 </html>
+
