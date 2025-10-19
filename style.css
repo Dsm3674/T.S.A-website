@@ -1,42 +1,84 @@
 :root{
-  --ink:#0c0c0f;--paper:#fef8ee;--cyan:#00fff0;--red:#ff3650;--ochre:#f5d57d;--neo:#6aa8ff;--mint:#5af2c8;
-  --card:rgba(255,255,255,.07);--cardd:rgba(255,255,255,.04);--stroke:rgba(255,255,255,.12);--shadow:0 10px 30px rgba(0,0,0,.35);
-  --radius:18px;--t:.3s ease
+  --bg:#0a0a0c;--ink:#f6f7fb;--muted:#9aa0ad;
+  --mag:#ff005d;--cyan:#00fff0;--lime:#c6ff4d;--paper:#fef8ee;
+  --neo:#6aa8ff;--stroke:rgba(255,255,255,.14);--card:rgba(255,255,255,.05);
+  --r:18px;--t:.25s cubic-bezier(.2,.8,.2,1)
 }
-*{box-sizing:border-box}html,body{height:100%}body{font-family:"Plus Jakarta Sans",system-ui,sans-serif;line-height:1.6;letter-spacing:.1px}
-.theme-dark{background:var(--ink);color:#f5f6fa}
-.theme-light{background:var(--paper);color:#222}
-.bg-ink{background:linear-gradient(180deg,rgba(10,10,14,.9),rgba(10,10,12,.6))}
-.navbar .nav-link{opacity:.85}.navbar .nav-link.active,.navbar .nav-link:hover{opacity:1}
-.brand-graff{font-family:"Rubik Mono One",system-ui;letter-spacing:1px;color:#fff}
-.hero{min-height:78vh;display:grid;place-items:center;position:relative;background:
- radial-gradient(600px 280px at 20% 10%,rgba(0,255,240,.12),transparent 60%),
- radial-gradient(500px 260px at 80% 20%,rgba(255,54,80,.12),transparent 60%)}
-.hero-title{font-family:"Rubik Mono One",system-ui;text-transform:uppercase}
-.hero-sub{opacity:.9}
-.btn-neo{background:var(--neo);border:none;color:#fff;border-radius:999px;padding:.7rem 1.3rem;font-weight:800;box-shadow:var(--shadow)}
-.btn-outline-neo{border:2px solid var(--neo);color:var(--neo);border-radius:999px;padding:.65rem 1.2rem;font-weight:800}
-.tile{background:var(--cardd);border:1px solid var(--stroke);border-radius:var(--radius);box-shadow:var(--shadow);transition:transform var(--t)}
-.tile:hover{transform:translateY(-6px)}
-.chip{display:inline-block;padding:.5rem 1rem;border-radius:999px;background:linear-gradient(135deg,var(--mint),var(--neo));color:#001;font-weight:800;border:none}
-.section-title{font-weight:800;letter-spacing:.08em}
-.timeline-list{border-left:3px solid var(--neo);padding-left:1.25rem}
-.timeline-item{position:relative;margin:1.1rem 0}
-.timeline-item::before{content:"";position:absolute;left:-11px;top:6px;width:12px;height:12px;background:var(--neo);border-radius:50%}
-.scribble{background:linear-gradient(90deg,var(--red),var(--ochre),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
-.scribble-red{color:var(--red)}
-.stroke-ochre{color:transparent;-webkit-text-stroke:2px var(--ochre)}
-.card-graff{background:var(--cardd);border:1px solid var(--stroke);border-radius:var(--radius);box-shadow:var(--shadow);position:relative;overflow:hidden}
-.card-graff::after{content:"";position:absolute;inset:-40% -10% auto auto;background:conic-gradient(from 90deg,var(--red),var(--neo),var(--ochre),var(--cyan));filter:blur(30px);opacity:.15}
-.card-graff-body{position:relative;padding:2rem}
-.badge-ink{display:inline-block;background:var(--neo);color:#001;font-weight:900;border-radius:8px;padding:.2rem .5rem}
-.map-svg{width:100%;height:auto;border-radius:24px}
+*{box-sizing:border-box}html,body{height:100%}
+body{margin:0;font-family:"Plus Jakarta Sans",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+a{color:inherit;text-decoration:none}
+
+
+.blonded-nav{position:sticky;top:0;z-index:50;border-bottom:1px solid var(--stroke);
+  background:rgba(10,10,12,.35);backdrop-filter:blur(10px)}
+.blonded-nav .container{padding:.9rem 1rem}
+.nav-brand{font-family:"Rubik Mono One",system-ui;letter-spacing:.06em}
+.nav-menu{display:flex;gap:2rem;align-items:center;justify-content:center}
+.nav-menu a{opacity:.65;font-weight:800;letter-spacing:.1em}
+.nav-menu a:hover,.nav-menu a.active{opacity:1}
+.nav-ghost{border:1px solid var(--stroke);background:transparent;color:var(--ink);border-radius:999px;padding:.35rem .7rem}
+
+.hero-canvas-wrap{position:relative;min-height:78vh;display:grid;place-items:center;overflow:hidden}
+#heroCanvas{position:absolute;inset:0;width:100%;height:100%}
+.hero-inner{position:relative;text-align:center}
+.hero-title{font-family:"Rubik Mono One",system-ui;font-size:clamp(2.8rem,8vw,6.2rem);letter-spacing:.02em;line-height:1}
+.hero-title span:first-child{color:var(--ink)}
+.hero-title .outline{color:transparent;-webkit-text-stroke:2px var(--mag)}
+.hero-kicker{opacity:.9}
+.btn-neo{background:var(--mag);color:#0a0a0c;border:none;border-radius:999px;padding:.75rem 1.25rem;font-weight:900}
+.btn-ghost{border:2px solid var(--mag);color:var(--mag);border-radius:999px;padding:.7rem 1.2rem;font-weight:900}
+
+
+#panels .row>[class*="col-"]{display:flex}
+.panel{position:relative;display:block;height:100%;padding:2rem;border-radius:0;
+  background:linear-gradient(180deg,rgba(255,0,93,.08),rgba(0,255,240,.06));
+  border:1px solid var(--stroke);box-shadow:0 24px 60px rgba(0,0,0,.45);
+  transform:translateY(0) rotateZ(-.2deg);transition:transform var(--t),box-shadow var(--t)}
+.panel:hover{transform:translateY(-6px) rotateZ(0deg);box-shadow:0 34px 80px rgba(0,0,0,.6)}
+.panel::before{content:"";position:absolute;inset:-2px -2px auto auto;width:120px;height:120px;
+  background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.08),transparent 60%);
+  mix-blend-mode:screen;pointer-events:none}
+.brutal h3{font-family:"Rubik Mono One";margin:.4rem 0 0}
+.brutal p{color:var(--muted);max-width:32ch}
+.vlabel{position:absolute;left:-1rem;top:1rem;writing-mode:vertical-rl;letter-spacing:.15em;opacity:.5}
+.panel-chip{display:inline-block;margin-top:1rem;background:linear-gradient(135deg,var(--cyan),var(--mag));
+  color:#000;border-radius:999px;padding:.5rem 1rem;font-weight:900}
+
+
+.tile{background:var(--card);border:1px solid var(--stroke);border-radius:var(--r)}
+.canvas-slap{position:relative;min-height:360px;overflow:hidden}
+#slapCanvas{display:block;width:100%;height:100%;border-radius:var(--r)}
+.slap-instruction{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-weight:900;letter-spacing:.12em;opacity:.8}
+
+
+.page-hero{padding:4rem 0 2rem}
+.page-title{font-family:"Rubik Mono One";font-size:clamp(2rem,5.5vw,4rem)}
+.page-kicker{color:var(--muted)}
+.card-graff{position:relative;border:1px solid var(--stroke);background:
+  linear-gradient(180deg,rgba(255,0,93,.06),rgba(0,255,240,.05));border-radius:0;overflow:hidden}
+.card-graff::after{content:"";position:absolute;inset:-38% -18% auto auto;
+  background:conic-gradient(from 90deg,var(--mag),var(--cyan),var(--lime),var(--mag));
+  filter:blur(40px);opacity:.17}
+.badge-year{display:inline-block;background:var(--cyan);color:#001;border-radius:8px;padding:.2rem .55rem;font-weight:900}
+
+
+.map-svg{width:100%;height:auto;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,.03),transparent)}
 .map-bg{fill:rgba(255,255,255,.04)}
-.map-outline{fill:none;stroke:rgba(255,255,255,.25);stroke-width:3}
-.pin{fill:var(--neo);filter:drop-shadow(0 2px 8px rgba(0,0,0,.5));cursor:pointer;transition:transform .2s}
+.map-outline{fill:none;stroke:rgba(255,255,255,.24);stroke-width:3}
+.pin{fill:var(--mag);cursor:pointer;transition:transform .18s ease,filter .18s ease;
+  filter:drop-shadow(0 4px 20px rgba(255,0,93,.45))}
 .pin:hover{transform:scale(1.25)}
-.accent-number{font-size:2.6rem;color:var(--neo);font-weight:900}
+
+
+.accent-number{font-size:2.6rem;color:var(--cyan);font-weight:900}
 .scribble-chart{height:auto}
-.scribble-line{fill:none;stroke:var(--neo);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 6px 18px rgba(106,168,255,.3))}
+.scribble-line{fill:none;stroke:var(--cyan);stroke-width:4;stroke-linecap:round;
+  filter:drop-shadow(0 10px 26px rgba(0,255,240,.25))}
 .axis-line{stroke:rgba(255,255,255,.25)}
 
+
+.site-foot{border-top:1px solid var(--stroke);padding:2rem 0;text-align:center;opacity:.85}
+
+
+body::after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.07;mix-blend-mode:overlay;
+  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 140 140"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="table" tableValues="0 0.45"/></feComponentTransfer></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>')}
