@@ -1,92 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Coppell 2025 — Community × Culture × Data</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;600;800&family=Rubik+Mono+One&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coppell 2025 — Community x Culture x Data</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header class="blonded-nav">
-  <div class="container d-flex justify-content-between align-items-center">
-    <a class="nav-brand" href="index.html">COPPELL 2025</a>
-    <nav class="nav-menu">
-      <a href="index.html" class="active">ALL</a>
-      <a href="businesses.html">BUSINESSES</a>
-      <a href="nonprofits.html">NONPROFITS</a>
-      <a href="analytics.html">ANALYTICS</a>
-      <a href="map.html">MAP</a>
-    </nav>
-    <button id="themeToggle" class="nav-ghost">◐</button>
-  </div>
-</header>
-
-<section class="hero-canvas-wrap">
-  <canvas id="heroCanvas"></canvas>
-  <div class="hero-inner container">
-    <h1 class="hero-title"><span>COPPELL</span> <span class="outline">2025</span></h1>
-    <p class="hero-kicker">Community × Culture × Data</p>
-    <div class="d-flex justify-content-center gap-3 mt-3">
-      <a class="btn-neo" href="#panels">Explore</a>
-      <a class="btn-ghost" href="analytics.html">Insights</a>
-    </div>
-  </div>
-</section>
-
-<section id="panels" class="container py-5">
-  <div class="row g-4 align-items-stretch">
-    <div class="col-md-4">
-      <a href="businesses.html" class="panel brutal">
-        <div class="vlabel">COPPELL</div>
-        <h3>Businesses</h3>
-        <p>Old Town collaborations, coffee lab drops, market identity.</p>
-        <span class="panel-chip">OPEN</span>
-      </a>
-    </div>
-    <div class="col-md-4">
-      <a href="nonprofits.html" class="panel brutal">
-        <div class="vlabel">COPPELL</div>
-        <h3>Nonprofits</h3>
-        <p>Arts Council exhibits, Commons activations, equity-first stories.</p>
-        <span class="panel-chip">OPEN</span>
-      </a>
-    </div>
-    <div class="col-md-4">
-      <a href="analytics.html" class="panel brutal">
-        <div class="vlabel">COPPELL</div>
-        <h3>Analytics</h3>
-        <p>Partnerships, activations, initiatives as paint-stroke charts.</p>
-        <span class="panel-chip">OPEN</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="container pb-5">
-  <div class="row g-4">
-    <div class="col-lg-8">
-      <div class="canvas-slap tile">
-        <canvas id="slapCanvas"></canvas>
-        <div class="slap-instruction">tap or click for a paint burst</div>
+  <nav class="blonded-nav">
+    <div class="container d-flex justify-content-center">
+      <div class="nav-menu">
+        <a href="index.html" class="active">Home</a>
+        <a href="businesses.html">Businesses</a>
+        <a href="nonprofits.html">Nonprofits</a>
+        <a href="analytics.html">Analytics</a>
+        <a href="map.html">Map</a>
       </div>
     </div>
-    <div class="col-lg-4">
-      <div class="tile p-4 h-100">
-        <h4 class="mb-3">Coppell Story</h4>
-        <p>Old Town and the Farmers Market set the stage for design-forward partnerships. 2025 centers shared experiences between local businesses and nonprofits through art and data.</p>
-        <a href="map.html" class="btn-neo mt-2 w-100 text-center">Coppell Map</a>
-      </div>
-    </div>
-  </div>
-</section>
+  </nav>
 
-<footer class="site-foot">
-  <div class="container small">© 2025 Coppell Community Studio</div>
-</footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="scripts.js"></script>
+  <section class="hero-canvas-wrap">
+    <canvas id="heroCanvas"></canvas>
+    <div class="hero-inner">
+      <h1 class="hero-title">COPPELL <span class="outline">2025</span></h1>
+      <p class="hero-kicker">Tap or click anywhere to reveal Old Town Coppell</p>
+    </div>
+  </section>
+
+  <section id="oldCoppellMap" class="map-section" style="display:none;">
+    <div class="container text-center">
+      <h2 class="section-title">Old Town Coppell — Community Landmarks</h2>
+      <svg id="coppellMap" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+        <rect class="map-bg" x="0" y="0" width="600" height="400" rx="15"/>
+        <path class="map-outline" d="M80,340 L520,340 L520,80 L80,80 Z M150,250 L300,180 L450,250 Z"/>
+        <circle class="pin" cx="300" cy="180" r="9" data-label="Old Town Square"/>
+        <circle class="pin" cx="150" cy="250" r="9" data-label="Farmers Market"/>
+        <circle class="pin" cx="450" cy="250" r="9" data-label="Coppell Arts Center"/>
+        <circle class="pin" cx="380" cy="320" r="9" data-label="Riverwalk"/>
+      </svg>
+      <div id="mapLabel" class="map-label">Click a pin to learn more</div>
+    </div>
+  </section>
+
+  <footer class="site-foot">© 2025 Coppell Community Studio</footer>
+  <script src="scripts.js"></script>
 </body>
 </html>
+
 
 
