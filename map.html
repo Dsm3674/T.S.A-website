@@ -1,43 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Coppell Map — 2025</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;600;800&family=Rubik+Mono+One&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coppell Community Map — 2025</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header class="blonded-nav">
-  <div class="container d-flex justify-content-between align-items-center">
-    <a class="nav-brand" href="index.html">COPPELL 2025</a>
-    <nav class="nav-menu">
-      <a href="index.html">ALL</a>
-      <a href="businesses.html">BUSINESSES</a>
-      <a href="nonprofits.html">NONPROFITS</a>
-      <a href="analytics.html">ANALYTICS</a>
-      <a href="map.html" class="active">MAP</a>
-    </nav>
-    <button id="themeToggle" class="nav-ghost">◐</button>
-  </div>
-</header>
+  <nav class="blonded-nav">
+    <div class="container d-flex justify-content-center">
+      <div class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="businesses.html">Businesses</a>
+        <a href="nonprofits.html">Nonprofits</a>
+        <a href="analytics.html">Analytics</a>
+        <a href="map.html" class="active">Map</a>
+      </div>
+    </div>
+  </nav>
 
-<section class="container py-5">
-  <h1 class="page-title">Coppell Story Map</h1>
-  <svg class="map-svg" viewBox="0 0 800 460">
-    <rect x="0" y="0" width="800" height="460" rx="16" class="map-bg"/>
-    <path d="M80,80 L720,80 L720,380 L80,380 Z" class="map-outline"/>
-    <circle cx="180" cy="190" r="9" class="pin" data-title="Old Town" data-desc="Shops, murals, pop-up events"/>
-    <circle cx="340" cy="140" r="9" class="pin" data-title="Farmers Market" data-desc="2025 identity and seasonal activations"/>
-    <circle cx="520" cy="220" r="9" class="pin" data-title="Arts Center" data-desc="Gallery wall and data panels"/>
-    <circle cx="630" cy="310" r="9" class="pin" data-title="Commons" data-desc="Story stations and shared space"/>
-  </svg>
-  <div id="mapInfo" class="tile p-3 mt-3 text-center">Hover or tap a pin to see its story.</div>
-</section>
+  <section class="page-hero text-center">
+    <div class="container">
+      <h1 class="page-title">Coppell — 2025 Community Map</h1>
+      <p class="page-kicker">Explore both Old and New Coppell through local landmarks.</p>
+    </div>
+  </section>
 
-<footer class="site-foot"><div class="container small">© 2025 Coppell Community Studio</div></footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="scripts.js"></script>
+  <section class="map-section">
+    <div class="container text-center">
+      <svg id="coppellFullMap" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+        <rect class="map-bg" width="800" height="500" rx="15"/>
+        <path class="map-outline" d="M100,400 L700,400 L700,100 L100,100 Z M250,250 L400,200 L550,250 Z"/>
+
+    
+        <circle class="pin" cx="400" cy="200" r="10" data-label="Old Town Coppell"/>
+        <circle class="pin" cx="250" cy="250" r="10" data-label="Farmers Market"/>
+        <circle class="pin" cx="550" cy="250" r="10" data-label="Coppell Arts Center"/>
+
+ 
+        <circle class="pin" cx="600" cy="150" r="10" data-label="Andy Brown Park"/>
+        <circle class="pin" cx="650" cy="350" r="10" data-label="New Coppell Tech District"/>
+        <circle class="pin" cx="200" cy="150" r="10" data-label="Coppell High School"/>
+      </svg>
+      <div id="mapInfo" class="map-label">Hover or tap a pin to see its name</div>
+    </div>
+  </section>
+
+  <footer class="site-foot">© 2025 Coppell Community Studio</footer>
+  <script src="scripts.js"></script>
 </body>
 </html>
-
