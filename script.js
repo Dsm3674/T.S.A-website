@@ -1,68 +1,78 @@
-
-const canvas = document.getElementById("heroCanvas");
-if (canvas) {
-  const ctx = canvas.getContext("2d");
-  let revealed = false;
-
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  resizeCanvas();
-  window.addEventListener("resize", resizeCanvas);
-
-  function random(min, max) { return Math.random() * (max - min) + min; }
-
-  function paintSplash(x, y) {
-    for (let i = 0; i < 35; i++) {
-      const radius = random(20, 80);
-      const hue = random(310, 400);
-      ctx.beginPath();
-      ctx.fillStyle = `hsl(${hue}, 100%, 60%)`;
-      ctx.globalAlpha = 0.6;
-      ctx.arc(x + random(-100, 100), y + random(-100, 100), radius, 0, Math.PI * 2);
-      ctx.fill();
+const canvas=document.getElementById("heroCanvas");
+if(canvas){
+  const ctx=canvas.getContext("2d");
+  let revealed=false,particles=[],fade=0,noiseT=0;
+  function R(a,b){return Math.random()*(b-a)+a}
+  function S(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
+  S();addEventListener("resize",S);
+  function addSplash(x,y){
+    for(let i=0;i<40;i++){
+      const r=R(12,70),h=R(310,400),vx=Math.cos(R(0,Math.PI*2))*R(.8,4),vy=Math.sin(R(0,Math.PI*2))*R(.8,4);
+      particles.push({x:x+R(-90,90),y:y+R(-90,90),r,h,vx,vy,a:.6,dec:R(.96,.985)});
     }
   }
-
-  canvas.addEventListener("click", (e) => {
-    paintSplash(e.clientX, e.clientY);
-    if (!revealed) {
-      revealed = true;
-      setTimeout(() => {
-        const section = document.getElementById("oldCoppellMap");
-        if (section) {
-          section.style.display = "block";
-          section.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 800);
+  function step(){
+    noiseT+=0.006;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    for(let i=0;i<110;i++){
+      const x=canvas.width/2+Math.sin(noiseT+i*.33)*230;
+      const y=canvas.height/2+Math.cos(noiseT*.8+i*.23)*140;
+      const s=1.3+Math.sin(noiseT*1.2+i)*1.1;
+      ctx.beginPath();ctx.fillStyle=`hsla(${(noiseT*120+i*7)%360},90%,60%,.18)`;ctx.arc(x,y,s,0,Math.PI*2);ctx.fill();
     }
+    for(const p of particles){
+      ctx.beginPath();ctx.fillStyle=`hsla(${p.h},100%,60%,${p.a})`;ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
+      p.x+=p.vx;p.y+=p.vy;p.vx*=.97;p.vy*=.97;p.a*=p.dec;
+    }
+    particles=particles.filter(p=>p.a>.03);
+    if(revealed&&fade<1){fade=Math.min(1,fade+.035)}
+    if(fade>0){
+      ctx.fillStyle=`rgba(10,10,12,${fade*.92})`;
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+    }
+    requestAnimationFrame(step)
+  }
+  step();
+  function smoothReveal(){
+    const s=document.getElementById("oldCoppellMap");
+    if(!s)return;
+    s.style.display="block";
+    s.style.opacity="0";
+    s.style.transform="translateY(24px)";
+    requestAnimationFrame(()=>{
+      s.style.transition="opacity .6s ease, transform .6s ease";
+      s.style.opacity="1";s.style.transform="translateY(0)";
+      s.scrollIntoView({behavior:"smooth"})
+    })
+  }
+  function parallax(e){
+    const h=document.querySelector(".hero-title");
+    if(!h)return;
+    const rx=(e.clientX/window.innerWidth-.5)*6;
+    const ry=(e.clientY/window.innerHeight-.5)*-6;
+    h.style.transform=`translate3d(${rx}px,${ry}px,0)`
+  }
+  canvas.addEventListener("pointermove",parallax);
+  canvas.addEventListener("click",e=>{
+    addSplash(e.clientX,e.clientY);
+    if(!revealed){revealed=true;setTimeout(smoothReveal,700)}
   });
 }
 
-
-function initMapPins() {
-  const pins = document.querySelectorAll(".pin");
-  pins.forEach(pin => {
-    pin.addEventListener("mouseenter", () => {
-      const label = document.getElementById("mapLabel") || document.getElementById("mapInfo");
-      if (label) label.textContent = pin.dataset.label;
-      pin.style.transform = "scale(1.3)";
-    });
-    pin.addEventListener("mouseleave", () => {
-      const label = document.getElementById("mapLabel") || document.getElementById("mapInfo");
-      if (label) label.textContent = "Hover or tap a pin to see its name";
-      pin.style.transform = "scale(1)";
-    });
-  });
+function initMapPins(){
+  const pins=document.querySelectorAll(".pin");
+  const label=document.getElementById("mapLabel")||document.getElementById("mapInfo");
+  pins.forEach(p=>{
+    p.addEventListener("mouseenter",()=>{if(label)label.textContent=p.dataset.label;p.style.transform="scale(1.3)"});
+    p.addEventListener("mouseleave",()=>{if(label)label.textContent="Hover or tap a pin to see its name";p.style.transform="scale(1)"});
+    p.addEventListener("click",()=>{if(label)label.textContent=p.dataset.label})
+  })
 }
-document.addEventListener("DOMContentLoaded", initMapPins);
+document.addEventListener("DOMContentLoaded",initMapPins);
 
-
-const nav = document.querySelector(".blonded-nav");
-if (nav) {
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 50) nav.style.background = "rgba(10,10,12,0.85)";
-    else nav.style.background = "rgba(10,10,12,0.35)";
-  });
+const nav=document.querySelector(".blonded-nav");
+if(nav){
+  window.addEventListener("scroll",()=>{
+    nav.style.background=window.scrollY>50?"rgba(10,10,12,.85)":"rgba(10,10,12,.35)"
+  })
 }
