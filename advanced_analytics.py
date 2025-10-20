@@ -1,9 +1,7 @@
-
-
 import json
 import os
 from datetime import datetime
-from collections import defaultdict, Counter
+from collections import defaultdict
 import statistics
 
 class AdvancedCommunityAnalyzer:
@@ -126,7 +124,6 @@ class AdvancedCommunityAnalyzer:
             growth_data[year]['count'] += 1
             growth_data[year]['organizations'].append(org['name'])
         
-        # Calculate cumulative growth
         cumulative = {}
         total = 0
         for year in sorted(growth_data.keys()):
@@ -168,10 +165,9 @@ class AdvancedCommunityAnalyzer:
         total_years_service = sum(b['stats'].get('yearsActive', 0) for b in self.businesses)
         total_events = sum(b['stats'].get('communityEvents', 0) for b in self.businesses)
         
-        # Estimate economic impact
         avg_salary = 35000
         estimated_payroll = total_employees * avg_salary
-        estimated_tax_revenue = estimated_payroll * 0.15  # Simplified tax estimate
+        estimated_tax_revenue = estimated_payroll * 0.15
         
         employees_list = [b['stats'].get('employees', 0) for b in self.businesses]
         
@@ -201,10 +197,9 @@ class AdvancedCommunityAnalyzer:
         volunteers_list = [n['stats'].get('volunteers', 0) for n in self.nonprofits]
         served_list = [n['stats'].get('peopleServed', 0) for n in self.nonprofits]
         
-        # Calculate volunteer hours (estimate)
         avg_volunteer_hours_per_year = 100
         total_volunteer_hours = total_volunteers * avg_volunteer_hours_per_year
-        volunteer_value = total_volunteer_hours * 29.95  # Independent Sector value 2023
+        volunteer_value = total_volunteer_hours * 29.95
         
         return {
             'total_volunteers': total_volunteers,
@@ -216,7 +211,7 @@ class AdvancedCommunityAnalyzer:
             'estimated_volunteer_value': volunteer_value,
             'volunteer_to_served_ratio': total_volunteers / total_served if total_served else 0
         }
-    
+
     def safety_impact_analysis(self):
         """Analyze impact of first responders"""
         if not self.heroes:
@@ -224,4 +219,41 @@ class AdvancedCommunityAnalyzer:
             
         total_members = sum(h['stats'].get('members', 0) for h in self.heroes)
         total_calls = sum(h['stats'].get('callsAnswered', 0) for h in self.heroes)
-        total_impacted = sum(h['stats'].get('livesImpacted', 0)
+        total_impacted = sum(h['stats'].get('livesImpacted', 0) for h in self.heroes)
+        
+        members_list = [h['stats'].get('members', 0) for h in self.heroes]
+        calls_list = [h['stats'].get('callsAnswered', 0) for h in self.heroes]
+        impacted_list = [h['stats'].get('livesImpacted', 0) for h in self.heroes]
+        
+        avg_calls_per_member = total_calls / total_members if total_members else 0
+        avg_impact_per_call = total_impacted / total_calls if total_calls else 0
+        
+        return {
+            'total_members': total_members,
+            'total_calls_answered': total_calls,
+            'total_lives_impacted': total_impacted,
+            'avg_calls_per_member': avg_calls_per_member,
+            'avg_impact_per_call': avg_impact_per_call,
+            'avg_members_per_org': statistics.mean(members_list) if members_list else 0,
+            'median_members': statistics.median(members_list) if members_list else 0,
+            'impact_range': {
+                'min': min(impacted_list) if impacted_list else 0,
+                'max': max(impacted_list) if impacted_list else 0
+            }
+        }
+
+    def summary_report(self):
+        """Generate a full summary report combining all analyses"""
+        return {
+            'overview': self.calculate_total_impact(),
+            'growth_trends': self.analyze_growth_by_year(),
+            'categories': self.category_breakdown(),
+            'economic_impact': self.economic_impact_analysis(),
+            'social_impact': self.social_impact_analysis(),
+            'safety_impact': self.safety_impact_analysis()
+        }
+
+if __name__ == "__main__":
+    analyzer = AdvancedCommunityAnalyzer()
+    report = analyzer.summary_report()
+    print(json.dumps(report, indent=4))
