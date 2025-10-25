@@ -1,54 +1,61 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Navigation from "./components/Navigation";
 import HomePage from "./pages/HomePage";
+import StoriesPage from "./pages/StoriesPage";
 import TimelinePage from "./pages/TimelinePage";
 import MapPage from "./pages/MapPage";
-import StoriesPage from "./pages/StoriesPage";
 import ArchivePage from "./pages/ArchivePage";
+import "./styles/brutalist.css";
 
 
 function Chatbot() {
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState([
-    {
-      role: "assistant",
-      content:
-        "Hi! I’m the Archive Bot. Ask me about the timeline, the map, or stories.",
-    },
-  ]);
-  const [input, setInput] = useState("");
+  const [messages, setMessages] = useState([]);
+  const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const chatEndRef = useRef(null);
 
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, loading]);
+
+  // Send user prompt to Express backend → Gemini API
   const send = async () => {
-    if (!input.trim()) return;
-    const userMsg = { role: "user", content: input.trim() };
-    setMessages((m) => [...m, userMsg]);
-    setInput("");
+    if (!userInput.trim()) return;
+
+    const newMessage = { role: "user", content: userInput };
+    setMessages((prev) => [...prev, newMessage]);
+    setUserInput("");
     setLoading(true);
 
     try {
-      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      const response = await fetch("/api/chat", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
-        },
-        body: JSON.stringify({
-          model: "gpt-3.5-turbo",
-          messages: [...messages, userMsg],
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userPrompt: userInput }),
       });
 
+      if (!response.ok) {
+        console.error("API Error:", response.status);
+        throw new Error(`Server returned ${response.status}`);
+      }
+
       const data = await response.json();
-      const reply = data.choices?.[0]?.message?.content || "(no reply)";
-      setMessages((m) => [...m, { role: "assistant", content: reply }]);
+      const botReply = {
+        role: "assistant",
+        content:
+          data.reply ||
+          "Sorry, I couldn’t generate a response from Gemini.",
+      };
+      setMessages((prev) => [...prev, botReply]);
     } catch (err) {
-      console.error(err);
-      setMessages((m) => [
-        ...m,
+      console.error("Chatbot error:", err);
+      setMessages((prev) => [
+        ...prev,
         {
           role: "assistant",
-          content: "⚠️ There was an error reaching ChatGPT. Try again later.",
+          content:
+            "⚠️ There was a problem connecting to the Gemini server. Please try again later.",
         },
       ]);
     } finally {
@@ -58,45 +65,51 @@ function Chatbot() {
 
   return (
     <>
+      {/* Floating Chat Button */}
       <button
-        className="chat-launch"
-        onClick={() => setOpen((o) => !o)}
-        aria-label="Open Chat"
-        title="Chat"
+        className="chat-toggle"
+        onClick={() => setOpen(!open)}
+        aria-label="Toggle Chatbot"
       >
         💬
       </button>
 
+      {/* Chat Window */}
       {open && (
-        <div className="chat-panel slab">
-          <div className="chat-head">
-            <strong>ARCHIVE BOT</strong>
-            <button className="chat-close" onClick={() => setOpen(false)}>
+        <div className="chatbot-container">
+          <div className="chatbot-header">
+            <h3>Archive Bot</h3>
+            <button
+              className="close-btn"
+              onClick={() => setOpen(false)}
+              aria-label="Close Chat"
+            >
               ✕
             </button>
           </div>
-          <div className="chat-body">
-            {messages.map((m, i) => (
-              <div key={i} className={`chat-msg ${m.role}`}>
-                <div className="chat-bubble">{m.content}</div>
+
+          <div className="chatbot-messages">
+            {messages.map((msg, i) => (
+              <div
+                key={i}
+                className={`message ${msg.role === "user" ? "user" : "bot"}`}
+              >
+                {msg.content}
               </div>
             ))}
-            {loading && (
-              <div className="chat-msg assistant">
-                <div className="chat-bubble">Thinking…</div>
-              </div>
-            )}
+            {loading && <div className="loading">Thinking…</div>}
+            <div ref={chatEndRef} />
           </div>
-          <div className="chat-input-row">
+
+          <div className="chatbot-input">
             <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
+              type="text"
+              value={userInput}
+              placeholder="Ask about the archive..."
+              onChange={(e) => setUserInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && send()}
-              placeholder="Ask about eras, locations, stories…"
             />
-            <button className="btn slab" onClick={send} disabled={loading}>
-              Send
-            </button>
+            <button onClick={send}>Send</button>
           </div>
         </div>
       )}
@@ -104,50 +117,43 @@ function Chatbot() {
   );
 }
 
-
-function App() {
+// ✅ Main App Component
+export default function App() {
   const [currentPage, setCurrentPage] = useState("home");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [theme, setTheme] = useState(
-    () => document.documentElement.dataset.theme || "dark"
-  );
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
 
+  // Persist theme between sessions
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     localStorage.setItem("theme", theme);
   }, [theme]);
 
+  // Page switcher
   const renderPage = () => {
     switch (currentPage) {
-      case "home":
-        return <HomePage setCurrentPage={setCurrentPage} />;
+      case "stories":
+        return <StoriesPage />;
       case "timeline":
         return <TimelinePage />;
       case "map":
         return <MapPage />;
-      case "stories":
-        return <StoriesPage />;
       case "archive":
         return <ArchivePage />;
       default:
-        return <HomePage setCurrentPage={setCurrentPage} />;
+        return <HomePage />;
     }
   };
 
   return (
-    <div className="app-frame">
+    <div className="app-container">
       <Navigation
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
-        isLoggedIn={isLoggedIn}
-        setIsLoggedIn={setIsLoggedIn}
         theme={theme}
         setTheme={setTheme}
       />
-      <main className="page-wrap">{renderPage()}</main>
-      <Chatbot />
+      <main className="page-content">{renderPage()}</main>
+      <Chatbot /> {/* ✅ Gemini Chatbot */}
     </div>
   );
 }
-
-export default App; 
