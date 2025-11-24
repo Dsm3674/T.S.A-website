@@ -3,32 +3,32 @@ name: Deploy Website
 on:
   push:
     branches:
-      - main
+      - main   # change if your default branch is different
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-     
+      # 1. Checkout the repository
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-     
+      # 2. Use Node.js 20 (required for Vite 7)
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 20
 
-      
+      # 3. Install dependencies
       - name: Install Dependencies
         run: npm install
 
-    
+      # 4. Build the project (Vite)
       - name: Build Project
         run: npm run build
 
-     
+      # 5. Deploy ./dist to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
