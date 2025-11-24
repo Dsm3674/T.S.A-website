@@ -1,3 +1,16 @@
-.env
+
 node_modules
 dist
+
+
+.env
+.env.local
+.DS_Store
+
+
+npm-debug.log*
+yarn-error.log*
+
+
+.vscode
+.idea
