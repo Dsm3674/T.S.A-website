@@ -3,14 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "homepage": "https://Dsm3674.github.io/T.S.A-website/",
   "scripts": {
     "dev": "vite",
     "server": "node server.js",
     "start": "concurrently \"npm run server\" \"npm run dev\"",
     "build": "vite build",
+    "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
-    "preview": "vite preview"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -26,8 +27,7 @@
     "@vitejs/plugin-react": "^4.2.0",
     "concurrently": "^8.2.2",
     "vite": "^7.1.12",
-    "gh-pages": "^6.1.0"
-  },
-  "homepage": "https://Dsm3674.github.io/T.S.A-website/"
+    "gh-pages": "^6.0.0"
+  }
 }
 
