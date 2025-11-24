@@ -26,3 +26,13 @@
     "vite": "^7.1.12"
   }
 }
+
+{
+  "scripts": {
+    "build": "vite build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "homepage": "https://Dsm3674.github.io/T.S.A-website/"
+}
+
