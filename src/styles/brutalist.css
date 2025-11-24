@@ -843,21 +843,42 @@ body {
   position: fixed;
   bottom: 24px;
   right: 24px;
-  font-size: 18px;          
+  font-size: 18px;
   background: var(--ink);
   color: var(--bg);
   border: none;
   border-radius: 50%;
-  width: 42px;               
-  height: 42px;             
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  width: 46px;
+  height: 46px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.55);
   z-index: 9999;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.chat-toggle::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.28);
+  opacity: 0;
+  animation: pulse-ring 1.8s infinite;
+}
+
 .chat-toggle:hover {
-  transform: scale(1.08);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+  transform: translateY(-1px) scale(1.05);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.6);
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.15);
+    opacity: 0;
+  }
 }
 
 
