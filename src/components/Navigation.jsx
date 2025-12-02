@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import { Menu, X, LogOut, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 
 export default function Navigation({
   currentPage,
   setCurrentPage,
-  isLoggedIn,
-  setIsLoggedIn,
   theme,
   setTheme,
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+
   const navItems = [
     { label: "HOME", page: "home" },
     { label: "STORIES", page: "stories" },
@@ -50,21 +49,9 @@ export default function Navigation({
             className="toggle-theme"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             aria-label="Toggle theme"
-            title="Toggle theme"
           >
             {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
           </button>
-
-          {isLoggedIn && (
-            <button
-              onClick={() => setIsLoggedIn(false)}
-              className="btn jagged"
-              title="Logout"
-            >
-              <LogOut size={14} className="mr-1" />
-              LOGOUT
-            </button>
-          )}
 
           <button
             onClick={() => setMobileOpen((o) => !o)}
