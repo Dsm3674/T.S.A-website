@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 export default function ArchivePage() {
   const [q, setQ] = useState("");
+
   const collections = [
     { title: "ORAL HISTORIES", count: "50+" },
     { title: "PHOTOGRAPHS", count: "200+" },
@@ -12,8 +13,8 @@ export default function ArchivePage() {
   return (
     <div className="page archive">
       <header className="page-head">
-        <h2 className="xxl skew"> Coppell ARCHIVE</h2>
-        <p className="kicker">The index — search and browse</p>
+        <h2 className="xxl skew">Coppell ARCHIVE</h2>
+        <p className="kicker">Index — Search. Discover. Explore.</p>
       </header>
 
       <section className="archive-grid">
@@ -27,18 +28,22 @@ export default function ArchivePage() {
 
       <section className="archive-search slab">
         <h3 className="display sm">SEARCH ARCHIVE</h3>
-        <div className="search-row">
-          <input
-            type="text"
-            className="search-input"
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="keyword, year, location…"
-          />
-          <button className="btn slab">SEARCH</button>
+
+        <div className="better-search">
+          <div className="better-search-inner">
+            <input
+              type="text"
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="Search by keyword, year, person, place…"
+              className="better-search-input"
+            />
+            <button className="better-search-btn">SEARCH</button>
+          </div>
         </div>
+
         <div className="search-hint">
-          Try: <code>1995</code>, <code>murals</code>, <code>market</code>
+          Try: <code>murals</code> <code>town center</code> <code>1995</code>
         </div>
       </section>
     </div>
