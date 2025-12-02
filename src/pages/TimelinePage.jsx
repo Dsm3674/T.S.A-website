@@ -32,16 +32,16 @@ export default function TimelinePage() {
     {
       id: 4,
       year: "2025",
-      title: "Something",
-      desc: "Digital now",
+      title: "DIGITAL NOW",
+      desc: "Modern shift",
       detail:
         "Cultural initiatives meet open data; community dashboards launched.",
     },
     {
       id: 5,
       year: "2025",
-      title: "something",
-      desc: "Archive",
+      title: "ARCHIVE",
+      desc: "Preservation",
       detail:
         "Community voices preserved in a living, interactive brutalist index.",
     },
@@ -65,14 +65,11 @@ export default function TimelinePage() {
 
       <div className="rail" ref={railRef}>
         <div className="rail-inner">
-          {eras.map((e, i) => (
+          {eras.map((e) => (
             <button
               key={e.id}
-              className={`era-card jag-${(i % 3) + 1} ${
-                selected === e.id ? "active" : ""
-              }`}
+              className={`era-card ${selected === e.id ? "active" : ""}`}
               onClick={() => setSelected(e.id)}
-              style={{ transform: `rotate(${i % 2 === 0 ? -1 : 1}deg)` }}
             >
               <div className="era-year">{e.year}</div>
               <div className="era-title">{e.title}</div>
@@ -89,6 +86,7 @@ export default function TimelinePage() {
             {eras.find((x) => x.id === selected)?.title}
           </h3>
           <p className="lead">{eras.find((x) => x.id === selected)?.detail}</p>
+
           <div className="detail-grid">
             <div className="detail-card">
               <h4>Artifacts</h4>
@@ -108,9 +106,7 @@ export default function TimelinePage() {
             </div>
             <div className="detail-card">
               <h4>Quotes</h4>
-              <blockquote>
-                “We didn’t plan a brand. We made a place.”
-              </blockquote>
+              <blockquote>“We didn’t plan a brand. We made a place.”</blockquote>
             </div>
           </div>
         </section>
