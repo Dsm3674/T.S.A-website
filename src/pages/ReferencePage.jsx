@@ -1,7 +1,6 @@
 import React from "react";
 
-
-
+export default function ReferencePage() {
   return (
     <div className="page reference">
       <header className="page-head">
@@ -10,15 +9,7 @@ import React from "react";
       </header>
 
       <section className="reference-grid">
-        {refs.map((r, i) => (
-          <div key={i} className={`ref-card jag-${(i % 3) + 1}`}>
-            <h3 className="display">{r.title}</h3>
-            <p className="lead">{r.desc}</p>
-            <a className="btn wire" href={r.link} target="_blank">
-              OPEN →
-            </a>
-          </div>
-        ))}
+        {/* Add reference cards here */}
       </section>
     </div>
   );
