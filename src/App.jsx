@@ -10,7 +10,7 @@ import ArchivePage from "./pages/ArchivePage";
 import ReferencePage from "./pages/ReferencePage"; // ← NEW
 import "./styles/brutalist.css";
 
-// (Chatbot component unchanged — omitted for space, but you keep yours exactly)
+
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState("home");
