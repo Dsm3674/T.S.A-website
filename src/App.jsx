@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -7,8 +9,152 @@ import StoriesPage from "./pages/StoriesPage";
 import TimelinePage from "./pages/TimelinePage";
 import MapPage from "./pages/MapPage";
 import ArchivePage from "./pages/ArchivePage";
-import ReferencePage from "./pages/ReferencePage"; // ← NEW
+import ReferencePage from "./pages/ReferencePage";
 import "./styles/brutalist.css";
+
+
+
+function Chatbot() {
+  const [open, setOpen] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const [userInput, setUserInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const chatEndRef = useRef(null);
+
+  // Initial greeting
+  useEffect(() => {
+    setMessages([
+      {
+        role: "assistant",
+        content:
+          "Hey, I’m Archive Bot. Ask me about Coppell, community history, or how this archive works.",
+      },
+    ]);
+  }, []);
+
+  // Auto scroll
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, loading, open]);
+
+  const send = async () => {
+    const trimmed = userInput.trim();
+    if (!trimmed || loading) return;
+
+    // Add user message
+    setMessages((prev) => [...prev, { role: "user", content: trimmed }]);
+    setUserInput("");
+    setLoading(true);
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userPrompt: trimmed }),
+      });
+
+      const data = await response.json();
+
+      const botReply = {
+        role: "assistant",
+        content:
+          data.reply ||
+          "⚠️ Gemini returned an empty response. Try again.",
+      };
+
+      setMessages((prev) => [...prev, botReply]);
+    } catch (err) {
+      console.error(err);
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content:
+            "⚠️ There was a problem connecting to the archive AI.",
+        },
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      send();
+    }
+  };
+
+  return (
+    <>
+      {/* Floating bubble button */}
+      <button
+        className="chat-toggle"
+        onClick={() => setOpen((o) => !o)}
+      >
+        💬
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className="chatbot-container"
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="chatbot-header">
+              <span>Archive Bot</span>
+              <button
+                className="close-btn"
+                onClick={() => setOpen(false)}
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="chatbot-messages">
+              {messages.map((m, i) => (
+                <div
+                  key={i}
+                  className={`message ${
+                    m.role === "user" ? "user" : "bot"
+                  }`}
+                >
+                  {m.content}
+                </div>
+              ))}
+
+              {loading && (
+                <div className="loading">
+                  <span className="dot" />
+                  <span className="dot" />
+                  <span className="dot" />
+                </div>
+              )}
+
+              <div ref={chatEndRef} />
+            </div>
+
+            <div className="chatbot-input">
+              <input
+                value={userInput}
+                onChange={(e) => setUserInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder="Ask about Coppell or the archive..."
+              />
+              <button onClick={send} disabled={loading}>
+                {loading ? "..." : "Send"}
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
+
 
 
 
@@ -33,7 +179,7 @@ export default function App() {
         return <MapPage />;
       case "archive":
         return <ArchivePage />;
-      case "reference":                      // ← NEW PAGE
+      case "reference":
         return <ReferencePage />;
       default:
         return <HomePage setCurrentPage={setCurrentPage} />;
@@ -49,8 +195,11 @@ export default function App() {
         setTheme={setTheme}
       />
       <main className="page-content">{renderPage()}</main>
+
+      {/* ✔ Chatbot is built-in and fully working */}
       <Chatbot />
     </div>
   );
 }
+
 
