@@ -1,28 +1,6 @@
 import React from "react";
 
-export default function ReferencePage() {
-  const refs = [
-    {
-      title: "Coppell Historical Society",
-      link: "https://coppellhistory.com",
-      desc: "Primary source information on early settlers, landmarks, and oral histories."
-    },
-    {
-      title: "Coppell GIS / Public Maps",
-      link: "https://www.coppelltx.gov",
-      desc: "Open geographic datasets used to construct the noir-style map grid."
-    },
-    {
-      title: "Community Archive Dataset",
-      link: "#",
-      desc: "Dataset powering timeline eras, stories, and map locations."
-    },
-    {
-      title: "TSA 2025 Documentation",
-      link: "#",
-      desc: "Architecture, design system, and AI bot documentation for judging."
-    }
-  ];
+
 
   return (
     <div className="page reference">
