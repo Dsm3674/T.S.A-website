@@ -6,38 +6,44 @@ export default function MapPage() {
   const pts = [
     {
       id: 1,
-      name: "OLD TOWN",
+      name: "COPPELL FARMERS MARKET",
       x: 22,
       y: 38,
-      story: "Historic core: first storefronts, first murals.",
+      story:
+        "Saturday mornings: local growers, food trucks, and neighbors meeting over fresh produce.",
+      link: "https://coppellfarmersmarket.org/",
     },
     {
       id: 2,
-      name: "COMMUNITY CENTER",
+      name: "NOTELOVE SESSIONS",
       x: 56,
       y: 26,
-      story: "Nonprofit hub: 100+ activations yearly.",
+      story:
+        "Student musicians gather after school for free lessons and practice, run by youth volunteers.",
+      link: "https://www.notelove.org/",
     },
     {
       id: 3,
-      name: "BUSINESS DIST.",
+      name: "METROCREST SERVICES HUB",
       x: 71,
       y: 51,
-      story: "20+ businesses, 430+ jobs, night economy.",
+      story:
+        "A regional hub for food security, emergency aid, and senior programs serving Coppell residents.",
+      link: "https://metrocrestservices.org/",
     },
     {
       id: 4,
       name: "GREEN SPACES",
       x: 41,
       y: 72,
-      story: "Parks serving 15K+ annually, story walks.",
+      story: "Parks serving 15K+ annually, story walks, and outdoor events.",
     },
     {
       id: 5,
       name: "CULTURAL QUARTER",
       x: 65,
       y: 77,
-      story: "Murals, galleries, rotating exhibits.",
+      story: "Murals, galleries, rotating exhibits, and pop-up arts nights.",
     },
   ];
 
@@ -119,7 +125,18 @@ export default function MapPage() {
               <div className="eyebrow">LOCATION</div>
               <h3 className="display">{sel.name}</h3>
               <p className="lead">{sel.story}</p>
-              <button className="btn wire">READ MORE →</button>
+              {sel.link ? (
+                <a
+                  className="btn wire"
+                  href={sel.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  VISIT SITE →
+                </a>
+              ) : (
+                <button className="btn wire">READ MORE →</button>
+              )}
             </div>
           ) : (
             <div className="map-card ghost">
