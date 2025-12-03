@@ -590,6 +590,7 @@ input,
   justify-content: space-between;
   min-height: 300px;
   position: relative;
+  color: var(--ink); /* explicit so it doesn't go dark */
 }
 
 .split-card h3 {
@@ -658,11 +659,13 @@ input,
   padding: 0 2rem;
 }
 
+/* HIGH CONTRAST TIMELINE CARDS */
 .era-card {
   width: 400px;
   white-space: normal;
   border: var(--border-width) solid var(--ink);
-  background: var(--bg);
+  background: var(--ink); /* light in dark mode, dark in light mode */
+  color: var(--bg);       /* inverted for max contrast */
   padding: 3rem;
   flex-shrink: 0;
   cursor: pointer;
@@ -671,25 +674,18 @@ input,
 
 .era-card:hover,
 .era-card.active {
-  background: var(--ink);
+  background: var(--mag);
   color: var(--bg);
   transform: translateY(-10px);
-  box-shadow: 10px 10px 0 var(--mag);
+  box-shadow: 10px 10px 0 var(--cyan);
 }
 
 .era-year {
   font-size: 6rem;
   font-weight: 900;
   line-height: 1;
-  opacity: 0.2;
+  opacity: 0.35; /* still visible but not overpowering */
   margin-bottom: -1rem;
-}
-
-.era-card:hover .era-year,
-.era-card.active .era-year {
-  opacity: 1;
-  color: var(--bg);
-  -webkit-text-stroke: 2px var(--bg);
 }
 
 .era-title {
@@ -701,6 +697,8 @@ input,
 .era-desc {
   font-size: 0.95rem;
 }
+
+/* DETAIL SECTION */
 
 .era-detail {
   margin-top: 2rem;
@@ -760,7 +758,7 @@ input,
   fill: none;
   stroke: var(--mag);
   stroke-width: 0.5;
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 .pin-core {
