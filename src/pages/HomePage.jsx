@@ -1,5 +1,10 @@
 import React, { useEffect, useRef } from "react";
 
+// NEW: local images
+import metrocrestImg from "../assets/metrocrest.jpg";
+import noteloveImg from "../assets/notelove.jpg";
+import farmersImg from "../assets/coppell-farmers-market.jpg";
+
 export default function HomePage({ setCurrentPage }) {
   const canvasRef = useRef(null);
 
@@ -108,7 +113,7 @@ export default function HomePage({ setCurrentPage }) {
         ))}
       </section>
 
-      {/* NEW: front-page highlight of core community resources */}
+      {/* Front-page highlight of core community resources */}
       <section className="slab">
         <div className="eyebrow">COMMUNITY RESOURCES</div>
         <h3 className="display">Anchor Organizations in Coppell</h3>
@@ -125,7 +130,7 @@ export default function HomePage({ setCurrentPage }) {
             className="spotlight-card"
           >
             <img
-              src="https://images.squarespace-cdn.com/content/v1/5bffb9a0f4e5314b65fbc74a/1554321843575-HF1ZNQXQ2FHLVQ3N4FM8/IMG_6953.jpg"
+              src={farmersImg}
               className="spotlight-img"
               alt="Coppell Farmers Market"
             />
@@ -143,7 +148,7 @@ export default function HomePage({ setCurrentPage }) {
             className="spotlight-card"
           >
             <img
-              src="https://raw.githubusercontent.com/notelove/notelove-org/main/src/images/home1.jpg"
+              src={noteloveImg}
               className="spotlight-img"
               alt="NoteLove"
             />
@@ -161,7 +166,7 @@ export default function HomePage({ setCurrentPage }) {
             className="spotlight-card"
           >
             <img
-              src="https://media.licdn.com/dms/image/C4E1BAQEoT6YGtSNY-w/company-background_10000/0/1630616805084/metrocrestservices_cover?e=2147483647&v=beta&t=3YGx6eaM75skU9iXvBhL9QV5y4UIzrR6Qz5L_qpJkZ0"
+              src={metrocrestImg}
               className="spotlight-img"
               alt="Metrocrest Services"
             />
@@ -176,3 +181,4 @@ export default function HomePage({ setCurrentPage }) {
     </div>
   );
 }
+
