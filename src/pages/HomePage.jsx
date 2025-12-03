@@ -54,7 +54,7 @@ export default function HomePage({ setCurrentPage }) {
              Coppell <span className="outline">ARCHIVE</span>
           </h1>
           <p className="hero-kicker">
-             Data-driven — built for TSA
+            Showing the Community
           </p>
           <div className="hero-cta">
             <button
@@ -73,9 +73,8 @@ export default function HomePage({ setCurrentPage }) {
       <section className="stat-grid">
         {[
           { num: "100+", label: "STORIES" },
-          { num: "30+", label: "YEARS" },
+          { num: "10000+", label: "DOLLARS DONATED" },
           { num: "1000+", label: "VOICES" },
-          { num: "5", label: "ERAS" },
         ].map((s, i) => (
           <div key={i} className={`stat-card skew-${(i % 3) + 1}`}>
             <div className="stat-num">{s.num}</div>
