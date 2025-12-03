@@ -56,6 +56,10 @@ export default function TimelinePage() {
     return () => el.removeEventListener("wheel", onWheel);
   }, []);
 
+  const activeEra = selected
+    ? eras.find((x) => x.id === selected)
+    : null;
+
   return (
     <div className="page timeline">
       <header className="page-head">
@@ -82,10 +86,8 @@ export default function TimelinePage() {
       {selected && (
         <section className="era-detail slab">
           <div className="eyebrow">SELECTED ERA</div>
-          <h3 className="display">
-            {eras.find((x) => x.id === selected)?.title}
-          </h3>
-          <p className="lead">{eras.find((x) => x.id === selected)?.detail}</p>
+          <h3 className="display">{activeEra?.title}</h3>
+          <p className="lead">{activeEra?.detail}</p>
 
           <div className="detail-grid">
             <div className="detail-card">
@@ -108,9 +110,46 @@ export default function TimelinePage() {
               <h4>Quotes</h4>
               <blockquote>“We didn’t plan a brand. We made a place.”</blockquote>
             </div>
+            {/* NEW: explicit community resources card with links */}
+            <div className="detail-card">
+              <h4>Community Resources</h4>
+              <ul>
+                <li>
+                  <a
+                    href="https://coppellfarmersmarket.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Coppell Farmers Market
+                  </a>{" "}
+                  — weekend marketplace for local growers and makers.
+                </li>
+                <li>
+                  <a
+                    href="https://www.notelove.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    NoteLove
+                  </a>{" "}
+                  — free music lessons and youth arts leadership.
+                </li>
+                <li>
+                  <a
+                    href="https://metrocrestservices.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Metrocrest Services
+                  </a>{" "}
+                  — regional nonprofit providing food, housing, and senior support.
+                </li>
+              </ul>
+            </div>
           </div>
         </section>
       )}
     </div>
   );
 }
+
