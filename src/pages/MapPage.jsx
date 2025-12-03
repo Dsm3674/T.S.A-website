@@ -4,11 +4,41 @@ export default function MapPage() {
   const [sel, setSel] = useState(null);
 
   const pts = [
-    { id: 1, name: "OLD TOWN", x: 22, y: 38, story: "Historic core: first storefronts, first murals." },
-    { id: 2, name: "COMMUNITY CENTER", x: 56, y: 26, story: "Nonprofit hub: 100+ activations yearly." },
-    { id: 3, name: "BUSINESS DIST.", x: 71, y: 51, story: "20+ businesses, 430+ jobs, night economy." },
-    { id: 4, name: "GREEN SPACES", x: 41, y: 72, story: "Parks serving 15K+ annually, story walks." },
-    { id: 5, name: "CULTURAL QUARTER", x: 65, y: 77, story: "Murals, galleries, rotating exhibits." }
+    {
+      id: 1,
+      name: "OLD TOWN",
+      x: 22,
+      y: 38,
+      story: "Historic core: first storefronts, first murals.",
+    },
+    {
+      id: 2,
+      name: "COMMUNITY CENTER",
+      x: 56,
+      y: 26,
+      story: "Nonprofit hub: 100+ activations yearly.",
+    },
+    {
+      id: 3,
+      name: "BUSINESS DIST.",
+      x: 71,
+      y: 51,
+      story: "20+ businesses, 430+ jobs, night economy.",
+    },
+    {
+      id: 4,
+      name: "GREEN SPACES",
+      x: 41,
+      y: 72,
+      story: "Parks serving 15K+ annually, story walks.",
+    },
+    {
+      id: 5,
+      name: "CULTURAL QUARTER",
+      x: 65,
+      y: 77,
+      story: "Murals, galleries, rotating exhibits.",
+    },
   ];
 
   return (
@@ -21,21 +51,36 @@ export default function MapPage() {
       <div className="map-grid">
         <div className="map-pane">
           <svg className="noir-map" viewBox="0 0 100 100">
-            {/* Noir grid */}
+            {/* Theme-aware noir grid */}
             <defs>
-              <pattern id="grid10" width="10" height="10" patternUnits="userSpaceOnUse">
-                <path d="M 10 0 L 0 0 0 10"
+              <pattern
+                id="grid10"
+                width="10"
+                height="10"
+                patternUnits="userSpaceOnUse"
+              >
+                {/* Background tile picks up CSS variable */}
+                <rect width="10" height="10" fill="var(--bg)" />
+                <path
+                  d="M 10 0 L 0 0 0 10"
                   fill="none"
-                  stroke="rgba(255,255,255,0.08)"
-                  strokeWidth="0.4" />
+                  stroke="var(--ink-dim)"
+                  strokeWidth="0.4"
+                  strokeLinecap="square"
+                />
               </pattern>
             </defs>
 
+            {/* Use pattern for full map area */}
             <rect width="100" height="100" fill="url(#grid10)" />
 
             {/* Pins */}
             {pts.map((p) => (
-              <g key={p.id} className="pin-group" onClick={() => setSel(p)}>
+              <g
+                key={p.id}
+                className="pin-group"
+                onClick={() => setSel(p)}
+              >
                 {/* OUTER RING */}
                 <circle
                   cx={p.x}
@@ -49,7 +94,9 @@ export default function MapPage() {
                   cx={p.x}
                   cy={p.y}
                   r={sel?.id === p.id ? 3.2 : 2.8}
-                  className={`pin-core ${sel?.id === p.id ? "pin-active" : ""}`}
+                  className={`pin-core ${
+                    sel?.id === p.id ? "pin-active" : ""
+                  }`}
                 />
 
                 {/* LABEL */}
@@ -84,3 +131,4 @@ export default function MapPage() {
     </div>
   );
 }
+
