@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 
+// NEW: local images
+import metrocrestImg from "../assets/metrocrest.jpg";
+import noteloveImg from "../assets/notelove.jpg";
+import farmersImg from "../assets/coppell-farmers-market.jpg";
+
 export default function ArchivePage() {
   const [q, setQ] = useState("");
 
@@ -8,21 +13,21 @@ export default function ArchivePage() {
       name: "Coppell Farmers Market",
       type: "Food & Community",
       link: "https://coppellfarmersmarket.org/",
-      img: "https://images.squarespace-cdn.com/content/v1/5bffb9a0f4e5314b65fbc74a/1554321843575-HF1ZNQXQ2FHLVQ3N4FM8/IMG_6953.jpg",
+      img: farmersImg,
       desc: "Local producers, community agriculture, and weekly family-friendly events.",
     },
     {
       name: "NoteLove",
       type: "Youth Programs",
       link: "https://www.notelove.org/",
-      img: "https://raw.githubusercontent.com/notelove/notelove-org/main/src/images/home1.jpg",
+      img: noteloveImg,
       desc: "Nonprofit providing free music lessons to students across DFW.",
     },
     {
       name: "Metrocrest Services",
       type: "Community Support",
       link: "https://metrocrestservices.org/",
-      img: "https://media.licdn.com/dms/image/C4E1BAQEoT6YGtSNY-w/company-background_10000/0/1630616805084/metrocrestservices_cover?e=2147483647&v=beta&t=3YGx6eaM75skU9iXvBhL9QV5y4UIzrR6Qz5L_qpJkZ0",
+      img: metrocrestImg,
       desc: "Food pantry, housing support, senior assistance, and community uplift programs.",
     },
   ];
@@ -91,30 +96,34 @@ export default function ArchivePage() {
         <div className="spotlight-grid">
           <div className="spotlight-card">
             <img
-              src="https://images.squarespace-cdn.com/content/v1/5bffb9a0f4e5314b65fbc74a/1554321843575-HF1ZNQXQ2FHLVQ3N4FM8/IMG_6953.jpg"
+              src={metrocrestImg}
               className="spotlight-img"
+              alt="Metrocrest Services"
             />
-            <h4>Coppell Farmers Market</h4>
+            <h4>Metrocrest Services</h4>
           </div>
 
           <div className="spotlight-card">
             <img
-              src="https://raw.githubusercontent.com/notelove/notelove-org/main/src/images/home1.jpg"
+              src={noteloveImg}
               className="spotlight-img"
+              alt="NoteLove"
             />
             <h4>NoteLove</h4>
           </div>
 
           <div className="spotlight-card">
             <img
-              src="https://media.licdn.com/dms/image/C4E1BAQEoT6YGtSNY-w/company-background_10000/0/1630616805084/metrocrestservices_cover?e=2147483647&v=beta&t=3YGx6eaM75skU9iXvBhL9QV5y4UIzrR6Qz5L_qpJkZ0"
+              src={farmersImg}
               className="spotlight-img"
+              alt="Coppell Farmers Market"
             />
-            <h4>Metrocrest Services</h4>
+            <h4>Coppell Farmers Market</h4>
           </div>
         </div>
       </section>
     </div>
   );
 }
+
 
