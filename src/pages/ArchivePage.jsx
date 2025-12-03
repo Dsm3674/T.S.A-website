@@ -3,21 +3,29 @@ import React, { useState } from "react";
 export default function ArchivePage() {
   const [q, setQ] = useState("");
 
-  <img
-  src="https://images.squarespace-cdn.com/content/v1/5bffb9a0f4e5314b65fbc74a/1554321843575-HF1ZNQXQ2FHLVQ3N4FM8/IMG_6953.jpg"
-  className="spotlight-img"
-/>
-
-<img
-  src="https://raw.githubusercontent.com/notelove/notelove-org/main/src/images/home1.jpg"
-  className="spotlight-img"
-/>
-
-<img
-  src="https://media.licdn.com/dms/image/C4E1BAQEoT6YGtSNY-w/company-background_10000/0/1630616805084/metrocrestservices_cover?e=2147483647&v=beta&t=3YGx6eaM75skU9iXvBhL9QV5y4UIzrR6Qz5L_qpJkZ0"
-  className="spotlight-img"
-/>
-
+  const resources = [
+    {
+      name: "Coppell Farmers Market",
+      type: "Food & Community",
+      link: "https://coppellfarmersmarket.org/",
+      img: "https://images.squarespace-cdn.com/content/v1/5bffb9a0f4e5314b65fbc74a/1554321843575-HF1ZNQXQ2FHLVQ3N4FM8/IMG_6953.jpg",
+      desc: "Local producers, community agriculture, and weekly family-friendly events.",
+    },
+    {
+      name: "NoteLove",
+      type: "Youth Programs",
+      link: "https://www.notelove.org/",
+      img: "https://raw.githubusercontent.com/notelove/notelove-org/main/src/images/home1.jpg",
+      desc: "Nonprofit providing free music lessons to students across DFW.",
+    },
+    {
+      name: "Metrocrest Services",
+      type: "Community Support",
+      link: "https://metrocrestservices.org/",
+      img: "https://media.licdn.com/dms/image/C4E1BAQEoT6YGtSNY-w/company-background_10000/0/1630616805084/metrocrestservices_cover?e=2147483647&v=beta&t=3YGx6eaM75skU9iXvBhL9QV5y4UIzrR6Qz5L_qpJkZ0",
+      desc: "Food pantry, housing support, senior assistance, and community uplift programs.",
+    },
+  ];
 
   return (
     <div className="page archive">
@@ -26,6 +34,7 @@ export default function ArchivePage() {
         <p className="kicker">Index — Search. Discover. Explore.</p>
       </header>
 
+      {/* SEARCH BAR */}
       <section className="archive-search slab">
         <h3 className="display sm">SEARCH RESOURCES</h3>
 
@@ -50,10 +59,11 @@ export default function ArchivePage() {
       {/* RESOURCE DIRECTORY */}
       <section className="archive-grid">
         {resources
-          .filter((r) =>
-            r.name.toLowerCase().includes(q.toLowerCase()) ||
-            r.type.toLowerCase().includes(q.toLowerCase()) ||
-            r.desc.toLowerCase().includes(q.toLowerCase())
+          .filter(
+            (r) =>
+              r.name.toLowerCase().includes(q.toLowerCase()) ||
+              r.type.toLowerCase().includes(q.toLowerCase()) ||
+              r.desc.toLowerCase().includes(q.toLowerCase())
           )
           .map((r, i) => (
             <a
@@ -64,10 +74,8 @@ export default function ArchivePage() {
               className={`archive-card jag-${(i % 3) + 1}`}
             >
               <img src={r.img} alt={r.name} className="archive-img" />
-
               <div className="archive-title">{r.name}</div>
               <div className="kicker">{r.type}</div>
-
               <p className="lead" style={{ marginTop: "1rem" }}>
                 {r.desc}
               </p>
@@ -83,7 +91,7 @@ export default function ArchivePage() {
         <div className="spotlight-grid">
           <div className="spotlight-card">
             <img
-              src="https://coppellfarmersmarket.org/wp-content/uploads/2023/03/IMG_6944-1536x1024.jpg"
+              src="https://images.squarespace-cdn.com/content/v1/5bffb9a0f4e5314b65fbc74a/1554321843575-HF1ZNQXQ2FHLVQ3N4FM8/IMG_6953.jpg"
               className="spotlight-img"
             />
             <h4>Coppell Farmers Market</h4>
@@ -91,7 +99,7 @@ export default function ArchivePage() {
 
           <div className="spotlight-card">
             <img
-              src="https://www.notelove.org/assets/nl-kids2.jpg"
+              src="https://raw.githubusercontent.com/notelove/notelove-org/main/src/images/home1.jpg"
               className="spotlight-img"
             />
             <h4>NoteLove</h4>
@@ -99,7 +107,7 @@ export default function ArchivePage() {
 
           <div className="spotlight-card">
             <img
-              src="https://metrocrestservices.org/wp-content/uploads/2023/05/metrocrest-building.jpg"
+              src="https://media.licdn.com/dms/image/C4E1BAQEoT6YGtSNY-w/company-background_10000/0/1630616805084/metrocrestservices_cover?e=2147483647&v=beta&t=3YGx6eaM75skU9iXvBhL9QV5y4UIzrR6Qz5L_qpJkZ0"
               className="spotlight-img"
             />
             <h4>Metrocrest Services</h4>
