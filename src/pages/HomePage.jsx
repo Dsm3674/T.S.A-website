@@ -107,6 +107,72 @@ export default function HomePage({ setCurrentPage }) {
           </button>
         ))}
       </section>
+
+      {/* NEW: front-page highlight of core community resources */}
+      <section className="slab">
+        <div className="eyebrow">COMMUNITY RESOURCES</div>
+        <h3 className="display">Anchor Organizations in Coppell</h3>
+        <p className="lead">
+          This archive spotlights real community partners shaping Coppell&apos;s
+          everyday life — from food security to youth arts and mutual aid.
+        </p>
+
+        <div className="spotlight-grid" style={{ marginTop: "2rem" }}>
+          <a
+            href="https://coppellfarmersmarket.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="spotlight-card"
+          >
+            <img
+              src="https://images.squarespace-cdn.com/content/v1/5bffb9a0f4e5314b65fbc74a/1554321843575-HF1ZNQXQ2FHLVQ3N4FM8/IMG_6953.jpg"
+              className="spotlight-img"
+              alt="Coppell Farmers Market"
+            />
+            <h4>Coppell Farmers Market</h4>
+            <p className="lead" style={{ fontSize: "0.95rem", marginTop: "0.5rem" }}>
+              Local growers, food artisans, and weekend rituals that keep
+              Coppell rooted in community.
+            </p>
+          </a>
+
+          <a
+            href="https://www.notelove.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="spotlight-card"
+          >
+            <img
+              src="https://raw.githubusercontent.com/notelove/notelove-org/main/src/images/home1.jpg"
+              className="spotlight-img"
+              alt="NoteLove"
+            />
+            <h4>NoteLove</h4>
+            <p className="lead" style={{ fontSize: "0.95rem", marginTop: "0.5rem" }}>
+              A youth-led nonprofit offering free music lessons to students
+              across DFW, including Coppell.
+            </p>
+          </a>
+
+          <a
+            href="https://metrocrestservices.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="spotlight-card"
+          >
+            <img
+              src="https://media.licdn.com/dms/image/C4E1BAQEoT6YGtSNY-w/company-background_10000/0/1630616805084/metrocrestservices_cover?e=2147483647&v=beta&t=3YGx6eaM75skU9iXvBhL9QV5y4UIzrR6Qz5L_qpJkZ0"
+              className="spotlight-img"
+              alt="Metrocrest Services"
+            />
+            <h4>Metrocrest Services</h4>
+            <p className="lead" style={{ fontSize: "0.95rem", marginTop: "0.5rem" }}>
+              A regional lifeline providing food, housing assistance, senior
+              services, and crisis support.
+            </p>
+          </a>
+        </div>
+      </section>
     </div>
   );
 }
