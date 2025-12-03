@@ -3,36 +3,21 @@ import React, { useState } from "react";
 export default function ArchivePage() {
   const [q, setQ] = useState("");
 
-  const resources = [
-    {
-      name: "Coppell Farmers Market",
-      type: "Food & Community",
-      link: "https://coppellfarmersmarket.org/",
-      img: "https://coppellfarmersmarket.org/wp-content/uploads/2023/03/IMG_6944-1536x1024.jpg",
-      desc: "Local producers, community agriculture, and weekly family-friendly events."
-    },
-    {
-      name: "NoteLove",
-      type: "Youth Programs",
-      link: "https://www.notelove.org/",
-      img: "https://www.notelove.org/assets/nl-kids2.jpg", // working public asset
-      desc: "Nonprofit providing free music lessons to students across DFW."
-    },
-    {
-      name: "Coppell Library",
-      type: "Education",
-      link: "https://coppelltx.gov/library",
-      img: "https://www.coppelltx.gov/ImageRepository/Document?documentID=4642",
-      desc: "Programs, events, digital archives, and learning resources."
-    },
-    {
-      name: "Metrocrest Services",
-      type: "Community Support",
-      link: "https://metrocrestservices.org/",
-      img: "https://metrocrestservices.org/wp-content/uploads/2023/05/metrocrest-building.jpg",
-      desc: "Food pantry, housing support, senior services, and assistance programs."
-    }
-  ];
+  <img
+  src="https://images.squarespace-cdn.com/content/v1/5bffb9a0f4e5314b65fbc74a/1554321843575-HF1ZNQXQ2FHLVQ3N4FM8/IMG_6953.jpg"
+  className="spotlight-img"
+/>
+
+<img
+  src="https://raw.githubusercontent.com/notelove/notelove-org/main/src/images/home1.jpg"
+  className="spotlight-img"
+/>
+
+<img
+  src="https://media.licdn.com/dms/image/C4E1BAQEoT6YGtSNY-w/company-background_10000/0/1630616805084/metrocrestservices_cover?e=2147483647&v=beta&t=3YGx6eaM75skU9iXvBhL9QV5y4UIzrR6Qz5L_qpJkZ0"
+  className="spotlight-img"
+/>
+
 
   return (
     <div className="page archive">
