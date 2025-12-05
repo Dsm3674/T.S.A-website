@@ -1188,7 +1188,7 @@ input,
   background: var(--bg);
   padding: 1rem;
   text-align: center;
-  box-shadow: 8px 8px 0 var(--shadow);
+  box-shadow: 8px 8px 0 var (--shadow);
   transition: 0.3s var(--ease);
 }
 
