@@ -7,48 +7,49 @@ export default function TimelinePage() {
   const eras = [
     {
       id: 1,
-      year: "2025",
+      year: "1990s",
       title: "FOUNDATION",
       desc: "Roots planted",
       detail:
-        "Volunteer circles form, first local businesses anchor the district.",
+        "Early neighborhoods take shape, schools open, and small businesses start to define the edges of community life.",
     },
     {
       id: 2,
-      year: "2025",
+      year: "2000s",
       title: "GROWTH",
       desc: "Expansion",
       detail:
-        "Population accelerates, main street emerges, civic groups stabilize.",
+        "Population accelerates, main corridors fill in, and civic groups stabilize around shared traditions.",
     },
     {
       id: 3,
-      year: "2025",
+      year: "2010s",
       title: "PARTNERSHIP",
       desc: "Alliances",
       detail:
-        "Nonprofits and small businesses link arms for shared impact projects.",
+        "Nonprofits and local businesses connect to support families with food, education, and arts programs.",
     },
     {
       id: 4,
-      year: "2025",
+      year: "2020s",
       title: "DIGITAL NOW",
       desc: "Modern shift",
       detail:
-        "Cultural initiatives meet open data; community dashboards launched.",
+        "Community storytelling meets digital tools, from online mutual aid posts to interactive maps like this one.",
     },
     {
       id: 5,
-      year: "2025",
+      year: "FUTURE",
       title: "ARCHIVE",
       desc: "Preservation",
       detail:
-        "Community voices preserved in a living, interactive brutalist index.",
+        "Community voices are preserved in living archives, keeping Coppell’s stories accessible for future generations.",
     },
   ];
 
   useEffect(() => {
     const el = railRef.current;
+    if (!el) return;
     const onWheel = (e) => {
       el.scrollLeft += e.deltaY;
     };
@@ -92,16 +93,16 @@ export default function TimelinePage() {
               <h4>Artifacts</h4>
               <ul>
                 <li>Posters, zines, meeting notes</li>
-                <li>Local business flyers</li>
-                <li>Community event wristbands</li>
+                <li>Local business flyers and menus</li>
+                <li>Event wristbands and badges</li>
               </ul>
             </div>
             <div className="detail-card">
               <h4>Signals</h4>
               <ul>
-                <li>Foot traffic heatlines</li>
-                <li>Volunteer hour spikes</li>
-                <li>Story submissions per month</li>
+                <li>Foot traffic at the farmers market</li>
+                <li>Volunteer hours logged with Metrocrest</li>
+                <li>Music lessons delivered through NoteLove</li>
               </ul>
             </div>
             <div className="detail-card">
@@ -139,7 +140,8 @@ export default function TimelinePage() {
                   >
                     Metrocrest Services
                   </a>{" "}
-                  — regional nonprofit providing food, housing, and senior support.
+                  — regional nonprofit providing food, housing, and senior
+                  support.
                 </li>
               </ul>
             </div>
