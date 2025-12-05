@@ -1,6 +1,4 @@
 import React, { useEffect, useRef } from "react";
-
-// NEW: local images
 import metrocrestImg from "../assets/metrocrest.jpg";
 import noteloveImg from "../assets/notelove.jpg";
 import farmersImg from "../assets/coppell-farmers-market.jpg";
@@ -56,7 +54,7 @@ export default function HomePage({ setCurrentPage }) {
         <canvas ref={canvasRef} className="hero-canvas" />
         <div className="hero-inner">
           <h1 className="hero-title">
-             Coppell <span className="outline">ARCHIVE</span>
+            Coppell <span className="outline">ARCHIVE</span>
           </h1>
           <p className="hero-kicker">
             Showing the Community
