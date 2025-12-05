@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-
-// NEW: local images
 import metrocrestImg from "../assets/metrocrest.jpg";
 import noteloveImg from "../assets/notelove.jpg";
 import farmersImg from "../assets/coppell-farmers-market.jpg";
