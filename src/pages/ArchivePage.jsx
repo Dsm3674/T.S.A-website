@@ -115,6 +115,55 @@ export default function ArchivePage() {
           Coppell&apos;s commitment to showing up for one another.
         </p>
       </section>
+            {/* ===========================
+          USER SUBMISSION FORM
+      ============================ */}
+      <section className="slab block-pop">
+        <div className="eyebrow">Submit a Resource</div>
+        <h3 className="display">Add to the Community Archive</h3>
+        <p className="lead">
+          Know an organization, club, service, or initiative that should be included?
+          Add it here. Submissions help keep the archive living and updated.
+        </p>
+
+        <form
+          className="archive-form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            alert("Thank you! Your resource has been submitted for review.");
+          }}
+        >
+          <div className="form-field">
+            <label>Organization Name</label>
+            <input type="text" required placeholder="Ex: Coppell Choir Club" />
+          </div>
+
+          <div className="form-field">
+            <label>Category</label>
+            <input type="text" required placeholder="Food, Arts, Education…" />
+          </div>
+
+          <div className="form-field">
+            <label>Description</label>
+            <textarea required placeholder="Brief description of the resource…" />
+          </div>
+
+          <div className="form-field">
+            <label>Website (optional)</label>
+            <input type="url" placeholder="https://example.org" />
+          </div>
+
+          <div className="form-field">
+            <label>Tags</label>
+            <input type="text" placeholder="support, youth, music…" />
+          </div>
+
+          <button className="btn slab" type="submit">
+            SUBMIT RESOURCE
+          </button>
+        </form>
+      </section>
+
     </div>
   );
 }
