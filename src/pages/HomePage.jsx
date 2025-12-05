@@ -9,7 +9,8 @@ export default function HomePage({ setCurrentPage }) {
   useEffect(() => {
     const c = canvasRef.current;
     const ctx = c.getContext("2d");
-    let raf, t = 0;
+    let raf;
+    let t = 0;
 
     const resize = () => {
       c.width = window.innerWidth;
@@ -56,9 +57,7 @@ export default function HomePage({ setCurrentPage }) {
           <h1 className="hero-title">
             Coppell <span className="outline">ARCHIVE</span>
           </h1>
-          <p className="hero-kicker">
-            Showing the Community
-          </p>
+          <p className="hero-kicker">Showing the Community</p>
           <div className="hero-cta">
             <button
               className="btn slab"
@@ -69,15 +68,21 @@ export default function HomePage({ setCurrentPage }) {
             <button className="btn wire" onClick={() => setCurrentPage("map")}>
               OPEN MAP
             </button>
+            <button
+              className="btn wire secondary"
+              onClick={() => setCurrentPage("mission")}
+            >
+              WHY WE EXIST
+            </button>
           </div>
         </div>
       </section>
 
       <section className="stat-grid">
         {[
-          { num: "100+", label: "STORIES" },
-          { num: "10000+", label: "DOLLARS DONATED" },
-          { num: "1000+", label: "VOICES" },
+          { num: "100+", label: "STORIES GATHERED" },
+          { num: "10K+", label: "NEIGHBORS CONNECTED" },
+          { num: "3", label: "ANCHOR ORGS FEATURED" },
         ].map((s, i) => (
           <div key={i} className={`stat-card skew-${(i % 3) + 1}`}>
             <div className="stat-num">{s.num}</div>
@@ -90,18 +95,18 @@ export default function HomePage({ setCurrentPage }) {
         {[
           {
             title: "INTERACTIVE TIMELINE",
-            desc: "Scroll decades with horizontal inertia",
+            desc: "Scroll through eras of growth, art, and mutual aid in Coppell.",
             page: "timeline",
           },
           {
             title: "COMMUNITY MAP",
-            desc: "Click noir map pins to unlock stories",
+            desc: "Click noir pins to jump from farmers market mornings to music nights.",
             page: "map",
           },
         ].map((item, i) => (
           <button
             key={i}
-            className={`split-card tilt-${i === 0 ? "left" : "right"}`}
+            className={`split-card ${i === 0 ? "tilt-left" : "tilt-right"}`}
             onClick={() => setCurrentPage(item.page)}
           >
             <h3>{item.title}</h3>
@@ -111,13 +116,49 @@ export default function HomePage({ setCurrentPage }) {
         ))}
       </section>
 
-      {/* Front-page highlight of core community resources */}
+      <section className="slab people-section">
+        <div className="eyebrow">THE PEOPLE OF COPPELL</div>
+        <h3 className="display">Why We Are A Community</h3>
+        <p className="lead">
+          Coppell is more than streets and buildings. It is farmers waking up
+          before dawn, students teaching students, and neighbors organizing
+          support when life gets heavy. This archive centers those people.
+        </p>
+
+        <div className="people-grid">
+          <div className="people-card gift-card">
+            <div className="people-tag">Market Volunteer</div>
+            <h4>Saturday Regular</h4>
+            <p>
+              A resident who knows every stall at Coppell Farmers Market and
+              remembers your favorite bread.
+            </p>
+          </div>
+          <div className="people-card gift-card gift-card-delay">
+            <div className="people-tag">Youth Leader</div>
+            <h4>NoteLove Mentor</h4>
+            <p>
+              A teen musician offering free lessons so younger kids can hear
+              themselves on stage someday.
+            </p>
+          </div>
+          <div className="people-card gift-card gift-card-late">
+            <div className="people-tag">Neighbor In Action</div>
+            <h4>Metrocrest Advocate</h4>
+            <p>
+              A volunteer helping families find food, housing support, and
+              stability when they need it most.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <section className="slab">
         <div className="eyebrow">COMMUNITY RESOURCES</div>
         <h3 className="display">Anchor Organizations in Coppell</h3>
         <p className="lead">
           This archive spotlights real community partners shaping Coppell&apos;s
-          everyday life — from food security to youth arts and mutual aid.
+          everyday life, from food security to youth arts and mutual aid.
         </p>
 
         <div className="spotlight-grid" style={{ marginTop: "2rem" }}>
