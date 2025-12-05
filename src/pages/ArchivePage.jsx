@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-
-// NEW: local images
 import metrocrestImg from "../assets/metrocrest.jpg";
 import noteloveImg from "../assets/notelove.jpg";
 import farmersImg from "../assets/coppell-farmers-market.jpg";
@@ -15,6 +13,7 @@ export default function ArchivePage() {
       link: "https://coppellfarmersmarket.org/",
       img: farmersImg,
       desc: "Local producers, community agriculture, and weekly family-friendly events.",
+      tags: ["food", "market", "local"],
     },
     {
       name: "NoteLove",
@@ -22,6 +21,7 @@ export default function ArchivePage() {
       link: "https://www.notelove.org/",
       img: noteloveImg,
       desc: "Nonprofit providing free music lessons to students across DFW.",
+      tags: ["music", "students", "arts"],
     },
     {
       name: "Metrocrest Services",
@@ -29,17 +29,27 @@ export default function ArchivePage() {
       link: "https://metrocrestservices.org/",
       img: metrocrestImg,
       desc: "Food pantry, housing support, senior assistance, and community uplift programs.",
+      tags: ["support", "services", "aid"],
     },
   ];
+
+  const filtered = resources.filter((r) => {
+    const needle = q.toLowerCase();
+    return (
+      r.name.toLowerCase().includes(needle) ||
+      r.type.toLowerCase().includes(needle) ||
+      r.desc.toLowerCase().includes(needle) ||
+      r.tags.some((t) => t.toLowerCase().includes(needle))
+    );
+  });
 
   return (
     <div className="page archive">
       <header className="page-head">
-        <h2 className="xxl skew">Coppell ARCHIVE</h2>
+        <h2 className="xxl skew">COPPELL ARCHIVE</h2>
         <p className="kicker">Index — Search. Discover. Explore.</p>
       </header>
 
-      {/* SEARCH BAR */}
       <section className="archive-search slab">
         <h3 className="display sm">SEARCH RESOURCES</h3>
 
@@ -61,66 +71,49 @@ export default function ArchivePage() {
         </div>
       </section>
 
-      {/* RESOURCE DIRECTORY */}
       <section className="archive-grid">
-        {resources
-          .filter(
-            (r) =>
-              r.name.toLowerCase().includes(q.toLowerCase()) ||
-              r.type.toLowerCase().includes(q.toLowerCase()) ||
-              r.desc.toLowerCase().includes(q.toLowerCase())
-          )
-          .map((r, i) => (
-            <a
-              key={i}
-              href={r.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`archive-card jag-${(i % 3) + 1}`}
-            >
-              <img src={r.img} alt={r.name} className="archive-img" />
-              <div className="archive-title">{r.name}</div>
-              <div className="kicker">{r.type}</div>
-              <p className="lead" style={{ marginTop: "1rem" }}>
-                {r.desc}
-              </p>
-            </a>
-          ))}
+        {filtered.map((r, i) => (
+          <a
+            key={i}
+            href={r.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`archive-card jag-${(i % 3) + 1}`}
+          >
+            <img src={r.img} alt={r.name} className="archive-img" />
+            <div className="archive-title">{r.name}</div>
+            <div className="kicker">{r.type}</div>
+            <p className="lead" style={{ marginTop: "1rem" }}>
+              {r.desc}
+            </p>
+            <div className="archive-tags">
+              {r.tags.map((tag) => (
+                <span key={tag} className="archive-tag">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </a>
+        ))}
       </section>
 
-      {/* SPOTLIGHTS */}
       <section className="slab">
-        <h3 className="display">Featured Community Resources</h3>
-        <p className="lead">A curated spotlight on impactful community programs.</p>
+        <h3 className="display">How To Use This Index</h3>
+        <p className="lead">
+          The archive is a jumping-off point. Each card represents a real
+          organization doing work in and around Coppell. Use this page to scan
+          what exists, then follow links to volunteer, donate, or learn more.
+        </p>
+      </section>
 
-        <div className="spotlight-grid">
-          <div className="spotlight-card">
-            <img
-              src={metrocrestImg}
-              className="spotlight-img"
-              alt="Metrocrest Services"
-            />
-            <h4>Metrocrest Services</h4>
-          </div>
-
-          <div className="spotlight-card">
-            <img
-              src={noteloveImg}
-              className="spotlight-img"
-              alt="NoteLove"
-            />
-            <h4>NoteLove</h4>
-          </div>
-
-          <div className="spotlight-card">
-            <img
-              src={farmersImg}
-              className="spotlight-img"
-              alt="Coppell Farmers Market"
-            />
-            <h4>Coppell Farmers Market</h4>
-          </div>
-        </div>
+      <section className="slab">
+        <div className="eyebrow">COMMUNITY THEMES</div>
+        <h3 className="display">What These Resources Represent</h3>
+        <p className="lead">
+          Food access, youth arts, and wraparound support services show how a
+          city cares for its people. Together, these organizations reflect
+          Coppell&apos;s commitment to showing up for one another.
+        </p>
       </section>
     </div>
   );
