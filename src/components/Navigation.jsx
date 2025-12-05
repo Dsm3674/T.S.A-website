@@ -15,27 +15,32 @@ export default function Navigation({
     { label: "TIMELINE", page: "timeline" },
     { label: "MAP", page: "map" },
     { label: "ARCHIVE", page: "archive" },
-    { label: "REFERENCE", page: "reference" }, // ← NEW
+    { label: "REFERENCE", page: "reference" },
+    { label: "MISSION", page: "mission" },
   ];
+
+  const handleNavClick = (page) => {
+    setCurrentPage(page);
+    setMobileOpen(false);
+  };
 
   return (
     <nav className="nav">
       <div className="nav-inner">
         <button
-          onClick={() => setCurrentPage("home")}
+          onClick={() => handleNavClick("home")}
           className="brand bleeding-ink"
         >
-          COPPELL<br />ARCHIVE
+          COPPELL
+          <br />
+          ARCHIVE
         </button>
 
         <div className="nav-menu">
           {navItems.map((item) => (
             <button
               key={item.page}
-              onClick={() => {
-                setCurrentPage(item.page);
-                setMobileOpen(false);
-              }}
+              onClick={() => handleNavClick(item.page)}
               className={`nav-link ${
                 currentPage === item.page ? "is-active" : ""
               }`}
@@ -69,11 +74,10 @@ export default function Navigation({
           {navItems.map((item) => (
             <button
               key={item.page}
-              onClick={() => {
-                setCurrentPage(item.page);
-                setMobileOpen(false);
-              }}
-              className="nav-mobile-link"
+              onClick={() => handleNavClick(item.page)}
+              className={`nav-mobile-link ${
+                currentPage === item.page ? "is-active" : ""
+              }`}
             >
               {item.label}
             </button>
@@ -83,4 +87,3 @@ export default function Navigation({
     </nav>
   );
 }
-
