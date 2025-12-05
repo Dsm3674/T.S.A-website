@@ -4,23 +4,23 @@ export default function StoriesPage() {
   const stories = [
     {
       title: "FIRST BUSINESS OPENS",
-      year: 2025,
-      excerpt: "How a corner diner began the boom.",
+      year: 1990,
+      excerpt: "A small corner café becomes the unofficial meeting spot.",
     },
     {
       title: "NONPROFIT ERA",
-      year: 2025,
-      excerpt: "Mutual aid takes shape and scales.",
+      year: 2000,
+      excerpt: "Mutual aid takes shape as neighbors organize food drives.",
     },
     {
       title: "10K MILESTONE",
       year: 2015,
-      excerpt: "Population hits 10K; main street pops.",
+      excerpt: "Population grows, and main street begins to buzz.",
     },
     {
       title: "ARTS TAKE STAGE",
-      year: 2025,
-      excerpt: "art.",
+      year: 2020,
+      excerpt: "Local performances turn gyms and parks into temporary stages.",
     },
     {
       title: "Coppell Farmers Market Becomes a Weekly Ritual",
@@ -43,6 +43,12 @@ export default function StoriesPage() {
         "Food pantry lines, housing questions, and senior needs all meet a regional safety net headquartered nearby.",
       link: "https://metrocrestservices.org/",
     },
+    {
+      title: "Neighbors Helping Neighbors",
+      year: 2024,
+      excerpt:
+        "A story of residents organizing rides, meals, and homework help for families navigating hard weeks.",
+    },
   ];
 
   return (
@@ -54,7 +60,7 @@ export default function StoriesPage() {
 
       <div className="stories-list">
         {stories.map((s, i) => (
-          <div key={i} className={`story-row tilt-${i % 2 ? "r" : "l"}`}>
+          <div key={i} className={`story-row ${i % 2 ? "tilt-r" : "tilt-l"}`}>
             <div className="story-card slab">
               <div className="eyebrow">{s.year}</div>
               <h3 className="display">{s.title}</h3>
@@ -73,7 +79,7 @@ export default function StoriesPage() {
               )}
             </div>
             <div className="story-img ghost">
-              <span>[ Image Placeholder ]</span>
+              <span>[ Community Photo Placeholder ]</span>
             </div>
           </div>
         ))}
