@@ -22,7 +22,6 @@ export default function StoriesPage() {
       year: 2025,
       excerpt: "art.",
     },
-    // NEW: stories explicitly tied to the three featured resources
     {
       title: "Coppell Farmers Market Becomes a Weekly Ritual",
       year: 2009,
@@ -82,3 +81,4 @@ export default function StoriesPage() {
     </div>
   );
 }
+
