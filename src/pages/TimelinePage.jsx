@@ -56,9 +56,7 @@ export default function TimelinePage() {
     return () => el.removeEventListener("wheel", onWheel);
   }, []);
 
-  const activeEra = selected
-    ? eras.find((x) => x.id === selected)
-    : null;
+  const activeEra = selected ? eras.find((x) => x.id === selected) : null;
 
   return (
     <div className="page timeline">
@@ -110,7 +108,6 @@ export default function TimelinePage() {
               <h4>Quotes</h4>
               <blockquote>“We didn’t plan a brand. We made a place.”</blockquote>
             </div>
-            {/* NEW: explicit community resources card with links */}
             <div className="detail-card">
               <h4>Community Resources</h4>
               <ul>
@@ -152,4 +149,5 @@ export default function TimelinePage() {
     </div>
   );
 }
+
 
