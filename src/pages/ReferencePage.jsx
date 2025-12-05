@@ -63,11 +63,54 @@ export default function ReferencePage() {
             <strong>Coppell Farmers Market</strong>,{" "}
             <strong>NoteLove</strong>, and <strong>Metrocrest Services</strong>{" "}
             to show how arts, food, and mutual aid intersect in a single
-            community. Judges can follow the links to see the organizations
-            outside of this TSA project.
+            community.
+          </p>
+          <p className="lead" style={{ marginTop: "1rem" }}>
+            Judges can follow the links to see the organizations outside of this
+            TSA project and understand the real-world impact behind the visual
+            design.
           </p>
         </article>
+      </section>
+
+      <section className="slab" style={{ marginTop: "3rem" }}>
+        <div className="eyebrow">ABOUT COPPELL</div>
+        <h3 className="display">City Context</h3>
+        <p className="lead">
+          Coppell is a suburban city in the Dallas–Fort Worth area with a strong
+          emphasis on schools, parks, and neighborhood life. Many residents
+          balance local routines with regional jobs, making community spaces
+          like markets, libraries, and arts programs especially important.
+        </p>
+        <p className="lead" style={{ marginTop: "1rem" }}>
+          This archive does not attempt to document every detail of Coppell. It
+          focuses on the parts of the city where community, care, and creativity
+          are most visible.
+        </p>
+      </section>
+
+      <section className="slab">
+        <div className="eyebrow">WHAT WE REPRESENT</div>
+        <h3 className="display">Values Behind The Archive</h3>
+        <ul className="reference-values">
+          <li>
+            Community: Centering neighbors, not just buildings or brands.
+          </li>
+          <li>
+            Access: Highlighting free or low-cost resources that support
+            families.
+          </li>
+          <li>
+            Youth Voice: Recognizing the role young people play in shaping
+            Coppell’s future.
+          </li>
+          <li>
+            Continuity: Keeping stories alive so new residents can see where
+            they fit in.
+          </li>
+        </ul>
       </section>
     </div>
   );
 }
+
