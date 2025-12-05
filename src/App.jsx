@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -10,9 +8,8 @@ import TimelinePage from "./pages/TimelinePage";
 import MapPage from "./pages/MapPage";
 import ArchivePage from "./pages/ArchivePage";
 import ReferencePage from "./pages/ReferencePage";
+import MissionPage from "./pages/MissionPage";
 import "./styles/brutalist.css";
-
-
 
 function Chatbot() {
   const [open, setOpen] = useState(false);
@@ -21,7 +18,6 @@ function Chatbot() {
   const [loading, setLoading] = useState(false);
   const chatEndRef = useRef(null);
 
-  // Initial greeting
   useEffect(() => {
     setMessages([
       {
@@ -32,7 +28,6 @@ function Chatbot() {
     ]);
   }, []);
 
-  // Auto scroll
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading, open]);
@@ -41,7 +36,6 @@ function Chatbot() {
     const trimmed = userInput.trim();
     if (!trimmed || loading) return;
 
-    // Add user message
     setMessages((prev) => [...prev, { role: "user", content: trimmed }]);
     setUserInput("");
     setLoading(true);
@@ -57,20 +51,16 @@ function Chatbot() {
 
       const botReply = {
         role: "assistant",
-        content:
-          data.reply ||
-          "⚠️ Gemini returned an empty response. Try again.",
+        content: data.reply || "⚠️ Gemini returned an empty response. Try again.",
       };
 
       setMessages((prev) => [...prev, botReply]);
     } catch (err) {
-      console.error(err);
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
-          content:
-            "⚠️ There was a problem connecting to the archive AI.",
+          content: "⚠️ There was a problem connecting to the archive AI.",
         },
       ]);
     } finally {
@@ -87,11 +77,7 @@ function Chatbot() {
 
   return (
     <>
-      {/* Floating bubble button */}
-      <button
-        className="chat-toggle"
-        onClick={() => setOpen((o) => !o)}
-      >
+      <button className="chat-toggle" onClick={() => setOpen((o) => !o)}>
         💬
       </button>
 
@@ -106,10 +92,7 @@ function Chatbot() {
           >
             <div className="chatbot-header">
               <span>Archive Bot</span>
-              <button
-                className="close-btn"
-                onClick={() => setOpen(false)}
-              >
+              <button className="close-btn" onClick={() => setOpen(false)}>
                 ✕
               </button>
             </div>
@@ -155,9 +138,6 @@ function Chatbot() {
   );
 }
 
-
-
-
 export default function App() {
   const [currentPage, setCurrentPage] = useState("home");
   const [theme, setTheme] = useState(
@@ -181,6 +161,8 @@ export default function App() {
         return <ArchivePage />;
       case "reference":
         return <ReferencePage />;
+      case "mission":
+        return <MissionPage />;
       default:
         return <HomePage setCurrentPage={setCurrentPage} />;
     }
@@ -195,8 +177,6 @@ export default function App() {
         setTheme={setTheme}
       />
       <main className="page-content">{renderPage()}</main>
-
-      {/* ✔ Chatbot is built-in and fully working */}
       <Chatbot />
     </div>
   );
