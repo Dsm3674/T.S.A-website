@@ -206,6 +206,51 @@ export default function ReferencePage() {
         </p>
       </section>
 
+            {/* ===========================
+          LIBRARIES USED
+      ============================ */}
+      <section className="slab reveal" style={{ marginTop: "3rem" }}>
+        <div className="eyebrow">TOOLS & LIBRARIES</div>
+        <h3 className="display">Core Technologies Behind the Archive</h3>
+
+        <ul className="reference-values">
+          <li><strong>React</strong> — modular component system powering pages.</li>
+          <li><strong>Vite</strong> — ultra-fast dev server & GitHub Pages-friendly bundler.</li>
+          <li><strong>Lucide Icons</strong> — SVG icons fitting brutalist minimalism.</li>
+          <li><strong>Framer Motion</strong> — smooth transitions for Chatbot window.</li>
+          <li><strong>Express.js</strong> — backend API for Gemini chatbot.</li>
+          <li><strong>Google Gemini API</strong> — AI assistant providing answers based on community data.</li>
+          <li><strong>Raw CSS Animations</strong> — no animation libraries; all keyframes hand-written.</li>
+          <li><strong>Canvas API</strong> — dynamic particle wave on HomePage.</li>
+        </ul>
+      </section>
+
+            {/* ===========================
+          TECHNICAL BREAKDOWN
+      ============================ */}
+      <section className="slab" style={{ marginTop: "3rem" }}>
+        <div className="eyebrow">DEVELOPMENT</div>
+        <h3 className="display">How the Site Was Engineered</h3>
+
+        <p className="lead">
+          Every page in this archive was handcrafted using modular React
+          components, meaning each section—Map, Timeline, Stories, Archive—exists
+          as a self-contained, reusable unit.
+        </p>
+
+        <ul className="reference-values" style={{ marginTop: "1rem" }}>
+          <li><strong>MapPage</strong> — uses SVG coordinate system + animated pins.</li>
+          <li><strong>TimelinePage</strong> — horizontal scroll rail with inertia wheel capture.</li>
+          <li><strong>StoriesPage</strong> — alternating grid layout + wobble hover animations.</li>
+          <li><strong>ArchivePage</strong> — dynamic search filtering + tag matching.</li>
+          <li><strong>MissionPage</strong> — thematic grid with brutalist slabs.</li>
+          <li><strong>HomePage Canvas</strong> — real-time JS wavefield animation.</li>
+          <li><strong>Chatbot</strong> — async fetch to Express backend, Gemini API processing.</li>
+        </ul>
+      </section>
+
+
+
     </div>
   );
 }
