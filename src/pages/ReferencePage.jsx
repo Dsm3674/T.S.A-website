@@ -175,6 +175,37 @@ export default function ReferencePage() {
           <li>Continuity: Preserving stories for future residents.</li>
         </ul>
       </section>
+            {/* ===========================
+          ANIMATION & MOTION SYSTEM
+      ============================ */}
+      <section className="slab block-pop" style={{ marginTop: "3rem" }}>
+        <div className="eyebrow">ANIMATION SYSTEM</div>
+        <h3 className="display">How We Coded the Animations</h3>
+
+        <p className="lead">
+          The archive uses a hybrid animation system combining pure CSS keyframes,
+          SVG motion, and a lightweight Canvas engine. This approach keeps the site
+          extremely fast while expressing a bold, handcrafted brutalist style.
+        </p>
+
+        <ul className="reference-values" style={{ marginTop: "1rem" }}>
+          <li><strong>CSS Keyframes</strong> — powers blockPop, sliceReveal,
+              glitchShift, floatSoft, pulse, magnetic hover, cardFloat.</li>
+          <li><strong>SVG Glow Grid</strong> — the map uses an SVG grid overlay with
+              shimmer animation to create a noir digital aesthetic.</li>
+          <li><strong>Canvas Particle Engine</strong> — HomePage hero uses sine/cosine
+              waves to animate 120 particles in real time.</li>
+          <li><strong>Framer Motion</strong> — used for the chatbot open/close animation.</li>
+          <li><strong>Hover Interactions</strong> — cards rise, tilt, wobble, and distort
+              on hover using small transform bursts.</li>
+        </ul>
+
+        <p className="lead" style={{ marginTop: "1rem" }}>
+          Each animation reinforces the brutalist ethos: visible structure, expressive
+          imperfections, and bold interaction states.
+        </p>
+      </section>
+
     </div>
   );
 }
