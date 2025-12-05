@@ -1,4 +1,3 @@
-
 import express from "express";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
@@ -112,3 +111,4 @@ const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`✅ Gemini backend running on http://localhost:${PORT}`);
 });
+
