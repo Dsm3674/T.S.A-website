@@ -15,7 +15,7 @@ export default function Navigation({
     { label: "TIMELINE", page: "timeline" },
     { label: "MAP", page: "map" },
     { label: "ARCHIVE", page: "archive" },
-    { label: "REFERENCE", page: "reference" }, // ← NEW
+    { label: "REFERENCE", page: "reference" },
   ];
 
   return (
