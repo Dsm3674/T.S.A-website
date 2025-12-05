@@ -36,14 +36,16 @@ export default function MapPage() {
       name: "GREEN SPACES",
       x: 41,
       y: 72,
-      story: "Parks serving 15K+ annually, story walks, and outdoor events.",
+      story:
+        "Parks serving families year-round, with story walks, outdoor concerts, and community runs.",
     },
     {
       id: 5,
       name: "CULTURAL QUARTER",
       x: 65,
       y: 77,
-      story: "Murals, galleries, rotating exhibits, and pop-up arts nights.",
+      story:
+        "Murals, galleries, rotating exhibits, and pop-up arts nights stitching together local creativity.",
     },
   ];
 
@@ -51,13 +53,12 @@ export default function MapPage() {
     <div className="page map">
       <header className="page-head">
         <h2 className="xxl skew">COMMUNITY MAP</h2>
-        <p className="kicker">Click pins — glowing noir grid</p>
+        <p className="kicker">Click pins — glowing noir grid of Coppell</p>
       </header>
 
       <div className="map-grid">
-        <div className="map-pane">
+        <div className="map-pane grid-overlay">
           <svg className="noir-map" viewBox="0 0 100 100">
-            {/* Theme-aware noir grid */}
             <defs>
               <pattern
                 id="grid10"
@@ -65,7 +66,6 @@ export default function MapPage() {
                 height="10"
                 patternUnits="userSpaceOnUse"
               >
-                {/* Background tile picks up CSS variable */}
                 <rect width="10" height="10" fill="var(--bg)" />
                 <path
                   d="M 10 0 L 0 0 0 10"
@@ -77,35 +77,26 @@ export default function MapPage() {
               </pattern>
             </defs>
 
-            {/* Use pattern for full map area */}
             <rect width="100" height="100" fill="url(#grid10)" />
 
-            {/* Pins */}
             {pts.map((p) => (
               <g
                 key={p.id}
                 className="pin-group"
                 onClick={() => setSel(p)}
               >
-                {/* OUTER RING */}
                 <circle
                   cx={p.x}
                   cy={p.y}
                   r={sel?.id === p.id ? 5 : 4.5}
-                  className="pin-ring"
+                  className={`pin-ring ${sel?.id === p.id ? "pin-ring-active" : ""}`}
                 />
-
-                {/* INNER CIRCLE */}
                 <circle
                   cx={p.x}
                   cy={p.y}
                   r={sel?.id === p.id ? 3.2 : 2.8}
-                  className={`pin-core ${
-                    sel?.id === p.id ? "pin-active" : ""
-                  }`}
+                  className={`pin-core ${sel?.id === p.id ? "pin-active" : ""}`}
                 />
-
-                {/* LABEL */}
                 <text
                   x={p.x}
                   y={p.y - 7}
@@ -121,7 +112,7 @@ export default function MapPage() {
 
         <aside className="map-side">
           {sel ? (
-            <div className="map-card slab">
+            <div className="map-card slab map-card-active">
               <div className="eyebrow">LOCATION</div>
               <h3 className="display">{sel.name}</h3>
               <p className="lead">{sel.story}</p>
@@ -148,4 +139,5 @@ export default function MapPage() {
     </div>
   );
 }
+
 
