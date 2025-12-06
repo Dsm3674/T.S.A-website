@@ -7,19 +7,19 @@ export default function TimelinePage() {
   const eras = [
     {
       id: 1,
-      year: "1990s",
+      year: "1840s",
       title: "FOUNDATION",
       desc: "Roots planted",
       detail:
-        "Early neighborhoods take shape, schools open, and small businesses start to define the edges of community life.",
+        "Early neighborhoods take shape in Coppell, schools open, and small businesses start to define the edges of community life.",
     },
     {
       id: 2,
-      year: "2000s",
+      year: "1980s",
       title: "GROWTH",
       desc: "Expansion",
       detail:
-        "Population accelerates, main corridors fill in, and civic groups stabilize around shared traditions.",
+        "Population in Coppell begins accelerates, main corridors fill in, and civic groups stabilize around shared traditions.",
     },
     {
       id: 3,
@@ -27,7 +27,7 @@ export default function TimelinePage() {
       title: "PARTNERSHIP",
       desc: "Alliances",
       detail:
-        "Nonprofits and local businesses connect to support families with food, education, and arts programs.",
+        "Major nonprofits and local businesses start to popup and connect to support families through disaters such as Covid and the huge snowstorm.",
     },
     {
       id: 4,
@@ -43,16 +43,21 @@ export default function TimelinePage() {
       title: "ARCHIVE",
       desc: "Preservation",
       detail:
-        "Community voices are preserved in living archives, keeping Coppell’s stories accessible for future generations.",
+        "Community voices are preserved in living archives, keeping Coppell’s stories—and groups like Neighbors In Need, accessible for future generations.",
     },
   ];
 
   useEffect(() => {
     const el = railRef.current;
     if (!el) return;
+
     const onWheel = (e) => {
-      el.scrollLeft += e.deltaY;
+      // horizontal scroll on desktop, but keep it smooth for mobile
+      if (window.innerWidth >= 768) {
+        el.scrollLeft += e.deltaY;
+      }
     };
+
     el.addEventListener("wheel", onWheel, { passive: true });
     return () => el.removeEventListener("wheel", onWheel);
   }, []);
@@ -66,19 +71,21 @@ export default function TimelinePage() {
         <p className="kicker">Scroll horizontally — click to expand</p>
       </header>
 
-      <div className="rail" ref={railRef}>
-        <div className="rail-inner">
-          {eras.map((e) => (
-            <button
-              key={e.id}
-              className={`era-card ${selected === e.id ? "active" : ""}`}
-              onClick={() => setSelected(e.id)}
-            >
-              <div className="era-year">{e.year}</div>
-              <div className="era-title">{e.title}</div>
-              <div className="era-desc">{e.desc}</div>
-            </button>
-          ))}
+      <div className="timeline-container">
+        <div className="rail" ref={railRef}>
+          <div className="rail-inner">
+            {eras.map((e) => (
+              <button
+                key={e.id}
+                className={`era-card ${selected === e.id ? "active" : ""}`}
+                onClick={() => setSelected(e.id)}
+              >
+                <div className="era-year">{e.year}</div>
+                <div className="era-title">{e.title}</div>
+                <div className="era-desc">{e.desc}</div>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -103,6 +110,7 @@ export default function TimelinePage() {
                 <li>Foot traffic at the farmers market</li>
                 <li>Volunteer hours logged with Metrocrest</li>
                 <li>Music lessons delivered through NoteLove</li>
+                <li>Mutual aid runs organized by Neighbors In Need</li>
               </ul>
             </div>
             <div className="detail-card">
@@ -143,6 +151,16 @@ export default function TimelinePage() {
                   — regional nonprofit providing food, housing, and senior
                   support.
                 </li>
+                <li>
+                  <a
+                    href="https://www.instagram.com/neighbors_in_need_/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Neighbors In Need
+                  </a>{" "}
+                  — neighbors-helping-neighbors network supporting local families.
+                </li>
               </ul>
             </div>
           </div>
@@ -151,5 +169,6 @@ export default function TimelinePage() {
     </div>
   );
 }
+
 
 
