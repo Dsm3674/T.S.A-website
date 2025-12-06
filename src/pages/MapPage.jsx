@@ -47,13 +47,24 @@ export default function MapPage() {
       story:
         "Murals, galleries, rotating exhibits, and pop-up arts nights stitching together local creativity.",
     },
+    {
+      id: 6,
+      name: "NEIGHBORS IN NEED",
+      x: 34,
+      y: 55,
+      story:
+        "Neighbors organize meal trains, rides, and essentials so families have support during hard weeks.",
+      link: "https://www.instagram.com/neighbors_in_need_/",
+    },
   ];
 
   return (
     <div className="page map">
       <header className="page-head">
         <h2 className="xxl skew">COMMUNITY MAP</h2>
-        <p className="kicker">Click pins — glowing noir grid of Coppell</p>
+        <p className="kicker">
+          Click pins — glowing noir grid of Coppell, from markets to mutual aid
+        </p>
       </header>
 
       <div className="map-grid">
@@ -89,13 +100,17 @@ export default function MapPage() {
                   cx={p.x}
                   cy={p.y}
                   r={sel?.id === p.id ? 5 : 4.5}
-                  className={`pin-ring ${sel?.id === p.id ? "pin-ring-active" : ""}`}
+                  className={`pin-ring ${
+                    sel?.id === p.id ? "pin-ring-active" : ""
+                  }`}
                 />
                 <circle
                   cx={p.x}
                   cy={p.y}
                   r={sel?.id === p.id ? 3.2 : 2.8}
-                  className={`pin-core ${sel?.id === p.id ? "pin-active" : ""}`}
+                  className={`pin-core ${
+                    sel?.id === p.id ? "pin-active" : ""
+                  }`}
                 />
                 <text
                   x={p.x}
@@ -131,7 +146,9 @@ export default function MapPage() {
             </div>
           ) : (
             <div className="map-card ghost">
-              <p className="ghost-hint">Click a pin to unlock its story</p>
+              <p className="ghost-hint">
+                Click a pin to unlock its story — including neighbors-helping-neighbors.
+              </p>
             </div>
           )}
         </aside>
@@ -139,4 +156,5 @@ export default function MapPage() {
     </div>
   );
 }
+
 
