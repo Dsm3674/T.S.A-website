@@ -44,6 +44,13 @@ export default function StoriesPage() {
       link: "https://metrocrestservices.org/",
     },
     {
+      title: "Neighbors In Need Rallies Mutual Aid",
+      year: 2024,
+      excerpt:
+        "Residents coordinate grocery drops, rides, and support so families never feel alone during hard weeks.",
+      link: "https://www.instagram.com/neighbors_in_need_/",
+    },
+    {
       title: "Neighbors Helping Neighbors",
       year: 2024,
       excerpt:
@@ -87,4 +94,5 @@ export default function StoriesPage() {
     </div>
   );
 }
+
 
