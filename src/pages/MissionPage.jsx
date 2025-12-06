@@ -24,9 +24,10 @@ export default function MissionPage() {
           <div className="eyebrow">ORGANIZATIONS</div>
           <h4>Anchors, Not Ads</h4>
           <p>
-            We highlight groups like Coppell Farmers Market, NoteLove, and
-            Metrocrest Services as anchors of daily life, not as sponsors. They
-            represent food, arts, and support systems that neighbors rely on.
+            We highlight groups like Coppell Farmers Market, NoteLove,
+            Metrocrest Services, and Neighbors In Need as anchors of daily
+            life, not as sponsors. They represent food, arts, mutual aid, and
+            support systems that neighbors rely on.
           </p>
         </div>
         <div className="mission-card">
@@ -34,8 +35,8 @@ export default function MissionPage() {
           <h4>Neighbors First</h4>
           <p>
             Every map point and story hints at real people: volunteers stocking
-            shelves, teens tuning instruments, families meeting at the market
-            before a busy week.
+            shelves, teens tuning instruments, neighbors organizing meal
+            trains, and families meeting at the market before a busy week.
           </p>
         </div>
         <div className="mission-card">
