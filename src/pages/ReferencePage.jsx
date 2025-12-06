@@ -15,7 +15,7 @@ export default function ReferencePage() {
         <article className="slab block-pop">
           <div className="eyebrow">PRIMARY COMMUNITY RESOURCES</div>
           <h3 className="display">Organizations Featured in the Archive</h3>
-          <p className="lead" style={{ marginBottom: "1.5rem" }}>
+          <p className="lead" style={{ marginBottom: "1.25rem" }}>
             These are real Coppell-area organizations that ground the
             fictionalized stories, map pins, and timeline beats in actual
             community work.
@@ -53,6 +53,17 @@ export default function ReferencePage() {
               — regional safety-net nonprofit providing food, housing,
               financial coaching, and senior support.
             </li>
+            <li>
+              <a
+                href="https://www.instagram.com/neighbors_in_need_/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Neighbors In Need
+              </a>{" "}
+              — neighbors-helping-neighbors mutual aid effort coordinating
+              rides, meals, and essentials for local families.
+            </li>
           </ul>
         </article>
 
@@ -63,10 +74,11 @@ export default function ReferencePage() {
             The site blends creative design with real Coppell organizations.
             Map pins, timeline eras, and stories reference{" "}
             <strong>Coppell Farmers Market</strong>,{" "}
-            <strong>NoteLove</strong>, and <strong>Metrocrest Services</strong>{" "}
-            to show how arts, food, and mutual aid intersect in daily life.
+            <strong>NoteLove</strong>, <strong>Metrocrest Services</strong>, and{" "}
+            <strong>Neighbors In Need</strong> to show how arts, food, mutual
+            aid, and support intersect in daily life.
           </p>
-          <p className="lead" style={{ marginTop: "1rem" }}>
+          <p className="lead" style={{ marginTop: "0.75rem" }}>
             TSA judges can follow the links to understand the real-world
             impact behind the visual design and storytelling.
           </p>
@@ -76,7 +88,10 @@ export default function ReferencePage() {
       {/* ===========================
           TECHNOLOGY & IMPLEMENTATION
       ============================ */}
-      <section className="slab block-pop" style={{ marginTop: "3rem" }}>
+      <section
+        className="slab block-pop"
+        style={{ marginTop: "1.75rem" }}
+      >
         <div className="eyebrow">TECHNOLOGY & IMPLEMENTATION</div>
         <h3 className="display">How This Archive Was Built</h3>
 
@@ -86,7 +101,7 @@ export default function ReferencePage() {
           competition criteria and the bold brutalist theme.
         </p>
 
-        <ul className="reference-values" style={{ marginTop: "1rem" }}>
+        <ul className="reference-values" style={{ marginTop: "0.75rem" }}>
           <li>
             <strong>React</strong> — drives the modular structure. Each page
             (Map, Timeline, Stories, Archive) is a self-contained component,
@@ -136,7 +151,7 @@ export default function ReferencePage() {
           </li>
         </ul>
 
-        <p className="lead" style={{ marginTop: "1rem" }}>
+        <p className="lead" style={{ marginTop: "0.75rem" }}>
           Every tool—from React components to raw CSS keyframes—was chosen to
           reinforce the project’s theme: a handcrafted, loud, experimental
           brutalist archive rooted in real community impact.
@@ -146,7 +161,10 @@ export default function ReferencePage() {
       {/* ===========================
           CITY CONTEXT
       ============================ */}
-      <section className="slab reveal" style={{ marginTop: "3rem" }}>
+      <section
+        className="slab reveal"
+        style={{ marginTop: "1.75rem" }}
+      >
         <div className="eyebrow">ABOUT COPPELL</div>
         <h3 className="display">City Context</h3>
         <p className="lead">
@@ -155,7 +173,7 @@ export default function ReferencePage() {
           residents balance local routines with regional jobs, making
           community organizations especially important.
         </p>
-        <p className="lead" style={{ marginTop: "1rem" }}>
+        <p className="lead" style={{ marginTop: "0.75rem" }}>
           This archive does not attempt to document every detail of Coppell.
           It highlights the spaces where community, care, and creativity are
           most visible.
@@ -175,10 +193,14 @@ export default function ReferencePage() {
           <li>Continuity: Preserving stories for future residents.</li>
         </ul>
       </section>
-            {/* ===========================
+
+      {/* ===========================
           ANIMATION & MOTION SYSTEM
       ============================ */}
-      <section className="slab block-pop" style={{ marginTop: "3rem" }}>
+      <section
+        className="slab block-pop"
+        style={{ marginTop: "1.75rem" }}
+      >
         <div className="eyebrow">ANIMATION SYSTEM</div>
         <h3 className="display">How We Coded the Animations</h3>
 
@@ -188,7 +210,7 @@ export default function ReferencePage() {
           extremely fast while expressing a bold, handcrafted brutalist style.
         </p>
 
-        <ul className="reference-values" style={{ marginTop: "1rem" }}>
+        <ul className="reference-values" style={{ marginTop: "0.75rem" }}>
           <li><strong>CSS Keyframes</strong> — powers blockPop, sliceReveal,
               glitchShift, floatSoft, pulse, magnetic hover, cardFloat.</li>
           <li><strong>SVG Glow Grid</strong> — the map uses an SVG grid overlay with
@@ -200,16 +222,19 @@ export default function ReferencePage() {
               on hover using small transform bursts.</li>
         </ul>
 
-        <p className="lead" style={{ marginTop: "1rem" }}>
+        <p className="lead" style={{ marginTop: "0.75rem" }}>
           Each animation reinforces the brutalist ethos: visible structure, expressive
           imperfections, and bold interaction states.
         </p>
       </section>
 
-            {/* ===========================
+      {/* ===========================
           LIBRARIES USED
       ============================ */}
-      <section className="slab reveal" style={{ marginTop: "3rem" }}>
+      <section
+        className="slab reveal"
+        style={{ marginTop: "1.75rem" }}
+      >
         <div className="eyebrow">TOOLS & LIBRARIES</div>
         <h3 className="display">Core Technologies Behind the Archive</h3>
 
@@ -225,10 +250,13 @@ export default function ReferencePage() {
         </ul>
       </section>
 
-            {/* ===========================
+      {/* ===========================
           TECHNICAL BREAKDOWN
       ============================ */}
-      <section className="slab" style={{ marginTop: "3rem" }}>
+      <section
+        className="slab"
+        style={{ marginTop: "1.75rem" }}
+      >
         <div className="eyebrow">DEVELOPMENT</div>
         <h3 className="display">How the Site Was Engineered</h3>
 
@@ -238,7 +266,7 @@ export default function ReferencePage() {
           as a self-contained, reusable unit.
         </p>
 
-        <ul className="reference-values" style={{ marginTop: "1rem" }}>
+        <ul className="reference-values" style={{ marginTop: "0.75rem" }}>
           <li><strong>MapPage</strong> — uses SVG coordinate system + animated pins.</li>
           <li><strong>TimelinePage</strong> — horizontal scroll rail with inertia wheel capture.</li>
           <li><strong>StoriesPage</strong> — alternating grid layout + wobble hover animations.</li>
@@ -248,9 +276,6 @@ export default function ReferencePage() {
           <li><strong>Chatbot</strong> — async fetch to Express backend, Gemini API processing.</li>
         </ul>
       </section>
-
-
-
     </div>
   );
 }
