@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import metrocrestImg from "../assets/metrocrest.jpg";
 import noteloveImg from "../assets/notelove.jpg";
 import farmersImg from "../assets/coppell-farmers-market.jpg";
+import neighborsInNeedImg from "../assets/neighbors-in-need.jpg";
 
 export default function HomePage({ setCurrentPage }) {
   const canvasRef = useRef(null);
@@ -82,7 +83,7 @@ export default function HomePage({ setCurrentPage }) {
         {[
           { num: "100+", label: "STORIES GATHERED" },
           { num: "10K+", label: "NEIGHBORS CONNECTED" },
-          { num: "3", label: "ANCHOR ORGS FEATURED" },
+          { num: "4", label: "ANCHOR ORGS FEATURED" },
         ].map((s, i) => (
           <div key={i} className={`stat-card skew-${(i % 3) + 1}`}>
             <div className="stat-num">{s.num}</div>
@@ -150,6 +151,14 @@ export default function HomePage({ setCurrentPage }) {
               stability when they need it most.
             </p>
           </div>
+          <div className="people-card gift-card gift-card-late">
+            <div className="people-tag">Mutual Aid Organizer</div>
+            <h4>Neighbors In Need</h4>
+            <p>
+              Residents coordinating rides, groceries, and support so no one
+              feels alone during difficult weeks in Coppell.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -174,7 +183,10 @@ export default function HomePage({ setCurrentPage }) {
               alt="Coppell Farmers Market"
             />
             <h4>Coppell Farmers Market</h4>
-            <p className="lead" style={{ fontSize: "0.95rem", marginTop: "0.5rem" }}>
+            <p
+              className="lead"
+              style={{ fontSize: "0.95rem", marginTop: "0.5rem" }}
+            >
               Local growers, food artisans, and weekend rituals that keep
               Coppell rooted in community.
             </p>
@@ -192,7 +204,10 @@ export default function HomePage({ setCurrentPage }) {
               alt="NoteLove"
             />
             <h4>NoteLove</h4>
-            <p className="lead" style={{ fontSize: "0.95rem", marginTop: "0.5rem" }}>
+            <p
+              className="lead"
+              style={{ fontSize: "0.95rem", marginTop: "0.5rem" }}
+            >
               A youth-led nonprofit offering free music lessons to students
               across DFW, including Coppell.
             </p>
@@ -210,9 +225,33 @@ export default function HomePage({ setCurrentPage }) {
               alt="Metrocrest Services"
             />
             <h4>Metrocrest Services</h4>
-            <p className="lead" style={{ fontSize: "0.95rem", marginTop: "0.5rem" }}>
+            <p
+              className="lead"
+              style={{ fontSize: "0.95rem", marginTop: "0.5rem" }}
+            >
               A regional lifeline providing food, housing assistance, senior
               services, and crisis support.
+            </p>
+          </a>
+
+          <a
+            href="https://www.instagram.com/neighbors_in_need_/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="spotlight-card"
+          >
+            <img
+              src={neighborsInNeedImg}
+              className="spotlight-img"
+              alt="Neighbors In Need"
+            />
+            <h4>Neighbors In Need</h4>
+            <p
+              className="lead"
+              style={{ fontSize: "0.95rem", marginTop: "0.5rem" }}
+            >
+              A neighbors-helping-neighbors initiative organizing mutual aid,
+              from meal trains to essential supply drops.
             </p>
           </a>
         </div>
