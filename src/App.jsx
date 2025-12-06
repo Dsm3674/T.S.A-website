@@ -51,7 +51,8 @@ function Chatbot() {
 
       const botReply = {
         role: "assistant",
-        content: data.reply || "⚠️ Gemini returned an empty response. Try again.",
+        content:
+          data.reply || "⚠️ Gemini returned an empty response. Try again.",
       };
 
       setMessages((prev) => [...prev, botReply]);
@@ -77,7 +78,10 @@ function Chatbot() {
 
   return (
     <>
-      <button className="chat-toggle" onClick={() => setOpen((o) => !o)}>
+      <button
+        className="chat-toggle mx-chat-animated"
+        onClick={() => setOpen((o) => !o)}
+      >
         💬
       </button>
 
