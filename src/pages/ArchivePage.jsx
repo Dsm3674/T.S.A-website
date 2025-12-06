@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import metrocrestImg from "../assets/metrocrest.jpg";
 import noteloveImg from "../assets/notelove.jpg";
 import farmersImg from "../assets/coppell-farmers-market.jpg";
+import neighborsInNeedImg from "../assets/neighbors-in-need.jpg";
 
 export default function ArchivePage() {
   const [q, setQ] = useState("");
@@ -30,6 +31,14 @@ export default function ArchivePage() {
       img: metrocrestImg,
       desc: "Food pantry, housing support, senior assistance, and community uplift programs.",
       tags: ["support", "services", "aid"],
+    },
+    {
+      name: "Neighbors In Need",
+      type: "Mutual Aid & Support",
+      link: "https://www.instagram.com/neighbors_in_need_/",
+      img: neighborsInNeedImg,
+      desc: "Neighbors coordinating rides, meals, and essentials so families have support during tough weeks.",
+      tags: ["mutual aid", "neighbors", "support"],
     },
   ];
 
@@ -67,7 +76,10 @@ export default function ArchivePage() {
         </div>
 
         <div className="search-hint">
-          Try: <code>farmers market</code> <code>music</code> <code>support</code>
+          Try: <code>farmers market</code>{" "}
+          <code>music</code>{" "}
+          <code>support</code>{" "}
+          <code>mutual aid</code>
         </div>
       </section>
 
@@ -110,12 +122,13 @@ export default function ArchivePage() {
         <div className="eyebrow">COMMUNITY THEMES</div>
         <h3 className="display">What These Resources Represent</h3>
         <p className="lead">
-          Food access, youth arts, and wraparound support services show how a
-          city cares for its people. Together, these organizations reflect
-          Coppell&apos;s commitment to showing up for one another.
+          Food access, youth arts, mutual aid, and wraparound support services
+          show how a city cares for its people. Together, these organizations
+          reflect Coppell&apos;s commitment to showing up for one another.
         </p>
       </section>
-            {/* ===========================
+
+      {/* ===========================
           USER SUBMISSION FORM
       ============================ */}
       <section className="slab block-pop">
@@ -163,9 +176,9 @@ export default function ArchivePage() {
           </button>
         </form>
       </section>
-
     </div>
   );
 }
+
 
 
