@@ -10,6 +10,8 @@ export default function HomePage({ setCurrentPage }) {
 
   useEffect(() => {
     const c = canvasRef.current;
+    if (!c) return;
+
     const ctx = c.getContext("2d");
     let raf;
     let t = 0;
@@ -59,10 +61,8 @@ export default function HomePage({ setCurrentPage }) {
 
   return (
     <>
-      {/* MAIN PAGE WRAPPER */}
       <div className="page home page-enter page-enter-active">
         
-        {/* HERO SECTION */}
         <section className="hero reveal">
           <canvas ref={canvasRef} className="hero-canvas" />
           <div className="hero-inner">
@@ -93,7 +93,6 @@ export default function HomePage({ setCurrentPage }) {
           </div>
         </section>
 
-        {/* STATS */}
         <section className="stat-grid">
           {[
             { num: "100+", label: "STORIES GATHERED" },
@@ -101,7 +100,7 @@ export default function HomePage({ setCurrentPage }) {
             { num: "4", label: "ANCHOR ORGS FEATURED" },
           ].map((s, i) => (
             <div
-              key={i}
+              key={`stat-${i}`}
               className={`stat-card skew-${(i % 3) + 1} reveal delay-${i + 1}`}
             >
               <div className="stat-num">{s.num}</div>
@@ -110,7 +109,6 @@ export default function HomePage({ setCurrentPage }) {
           ))}
         </section>
 
-        {/* SPLIT CTA */}
         <section className="split-cta">
           {[
             {
@@ -125,7 +123,7 @@ export default function HomePage({ setCurrentPage }) {
             },
           ].map((item, i) => (
             <button
-              key={i}
+              key={`split-${i}`}
               className={`split-card ${
                 i === 0 ? "tilt-left" : "tilt-right"
               } reveal delay-${i + 1}`}
@@ -138,7 +136,6 @@ export default function HomePage({ setCurrentPage }) {
           ))}
         </section>
 
-        {/* PEOPLE SECTION */}
         <section className="slab people-section reveal">
           <div className="eyebrow">THE PEOPLE OF COPPELL</div>
           <h3 className="display">Why We Are A Community</h3>
@@ -173,7 +170,6 @@ export default function HomePage({ setCurrentPage }) {
           </div>
         </section>
 
-        {/* ANCHOR ORGS */}
         <section className="slab reveal">
           <div className="eyebrow">COMMUNITY RESOURCES</div>
           <h3 className="display">Anchor Organizations in Coppell</h3>
@@ -209,7 +205,7 @@ export default function HomePage({ setCurrentPage }) {
               },
             ].map((org, i) => (
               <a
-                key={i}
+                key={`org-${i}`}
                 href={org.link}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -227,10 +223,8 @@ export default function HomePage({ setCurrentPage }) {
 
       </div>
 
-     
       <Footer />
     </>
   );
 }
-
 
