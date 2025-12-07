@@ -53,17 +53,15 @@ export default function StoriesPage() {
   return (
     <div className="page stories page-enter page-enter-active">
       
-      {/* HEADER */}
       <header className="page-head fade-in">
         <h2 className="xxl skew">STORIES</h2>
         <p className="kicker">Raw narratives — bold layout — living history</p>
       </header>
 
-      {/* STORY ROWS */}
       <div className="stories-list">
         {stories.map((s, i) => (
           <div
-            key={i}
+            key={`story-${i}-${s.year}`}
             className={`story-row reveal fade-in-up tilt-hover delay-${(i % 5) + 1} ${
               i % 2 ? "tilt-r" : "tilt-l"
             }`}
@@ -100,7 +98,6 @@ export default function StoriesPage() {
         ))}
       </div>
 
-      {/* WHY WE FEATURED THESE ORGANIZATIONS */}
       <section className="slab block-pop reveal delay-2" style={{ marginTop: "4rem" }}>
         <div className="eyebrow">WHY THESE ORGANIZATIONS</div>
         <h3 className="display">Why We Wanted to Highlight Them</h3>
@@ -149,7 +146,4 @@ export default function StoriesPage() {
     </div>
   );
 }
-
-
-
 
