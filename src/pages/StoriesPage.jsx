@@ -6,7 +6,6 @@ import neighborsInNeedImg from "../assets/neighbors-in-need.jpg";
 import historyImg from "../assets/Document.jpg";
 import Footer from "../components/Footer";
 
-
 export default function StoriesPage() {
   const stories = [
     {
@@ -53,12 +52,14 @@ export default function StoriesPage() {
 
   return (
     <div className="page stories page-enter page-enter-active">
-
+      
+      {/* HEADER */}
       <header className="page-head fade-in">
         <h2 className="xxl skew">STORIES</h2>
         <p className="kicker">Raw narratives — bold layout — living history</p>
       </header>
 
+      {/* STORY ROWS */}
       <div className="stories-list">
         {stories.map((s, i) => (
           <div
@@ -98,12 +99,57 @@ export default function StoriesPage() {
           </div>
         ))}
       </div>
-      <Footer />
 
+      {/* WHY WE FEATURED THESE ORGANIZATIONS */}
+      <section className="slab block-pop reveal delay-2" style={{ marginTop: "4rem" }}>
+        <div className="eyebrow">WHY THESE ORGANIZATIONS</div>
+        <h3 className="display">Why We Wanted to Highlight Them</h3>
+
+        <p className="lead">
+          As students growing up in Coppell, we have seen how different parts 
+          of the community support one another — from food access to youth arts 
+          to mutual aid. We chose these organizations because they represent 
+          the real backbone of our city.
+        </p>
+
+        <ul className="why-list" style={{ marginTop: "1.25rem" }}>
+          <li>
+            <strong>Coppell Farmers Market</strong> — shows how food brings people together  
+            every weekend and gives small businesses a place to grow.
+          </li>
+
+          <li>
+            <strong>NoteLove</strong> — demonstrates how youth in Coppell step up to teach, 
+            mentor, and create opportunities for others.
+          </li>
+
+          <li>
+            <strong>Metrocrest Services</strong> — represents compassion and stability for neighbors 
+            facing financial, housing, or food insecurity.
+          </li>
+
+          <li>
+            <strong>Neighbors In Need</strong> — captures the heart of mutual aid: people helping 
+            people, no questions asked.
+          </li>
+
+          <li>
+            <strong>Coppell Historical Archives</strong> — remind us how far the city has come 
+            and how community identity is built over generations.
+          </li>
+        </ul>
+
+        <p className="lead" style={{ marginTop: "1rem" }}>
+          Partnering with these organizations allowed us to build a project that honors
+          real local impact while telling a strong visual story for TSA.
+        </p>
+      </section>
+
+      <Footer />
     </div>
-    
   );
 }
+
 
 
 
