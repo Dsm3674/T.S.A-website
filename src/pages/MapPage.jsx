@@ -1,4 +1,6 @@
-// src/pages/MapPage.jsx
+// FILE 4: src/pages/MapPage.jsx
+// REPLACE YOUR ENTIRE MapPage.jsx WITH THIS:
+
 import React, { useState, useEffect } from "react";
 
 const LOCATIONS = [
@@ -11,7 +13,6 @@ const LOCATIONS = [
     focus: "Food, housing, emergency assistance, seniors",
     role: "Anchor nonprofit for basic needs and wraparound services.",
     link: "https://www.metrocrestservices.org/",
-    // positions are percentages inside the SVG image
     top: "72%",
     left: "40%",
   },
@@ -68,7 +69,6 @@ const LOCATIONS = [
 export default function MapPage() {
   const [active, setActive] = useState(LOCATIONS[0]);
 
-  // Simple scroll-fade hook: re-observe whenever this page mounts
   useEffect(() => {
     const selector = ".fade-in, .fade-in-up, .reveal";
     const elements = document.querySelectorAll(selector);
@@ -102,17 +102,14 @@ export default function MapPage() {
       </header>
 
       <section className="map-grid">
-        {/* LEFT: MAP */}
         <div className="map-pane fade-in-up delay-1">
           <div className="map-bg">
-            {/* Your actual SVG exported to /public */}
             <img
               src="/coppell-map.svg"
               alt="Stylized outline map of Coppell, Texas"
               className="map-img coppell-map-img"
             />
 
-            {/* Clickable pins */}
             {LOCATIONS.map((loc) => (
               <button
                 key={loc.id}
@@ -122,6 +119,7 @@ export default function MapPage() {
                 }`}
                 style={{ top: loc.top, left: loc.left }}
                 onClick={() => setActive(loc)}
+                aria-label={`View ${loc.name}`}
               >
                 <span className="map-pin-dot" />
                 <span className="map-pin-label">{loc.short}</span>
@@ -130,7 +128,6 @@ export default function MapPage() {
           </div>
         </div>
 
-        {/* RIGHT: CARD */}
         <aside className="map-side">
           <article className="slab map-card fade-in-up delay-2">
             <span className="kicker">location</span>
@@ -165,7 +162,6 @@ export default function MapPage() {
         </aside>
       </section>
 
-      {/* OPTIONAL: TINY LEGEND BELOW MAP */}
       <section className="map-legend fade-in-up delay-3">
         <h4 className="eyebrow">legend</h4>
         <p>
