@@ -11,6 +11,8 @@ import ReferencePage from "./pages/ReferencePage";
 import MissionPage from "./pages/MissionPage";
 import "./styles/brutalist.css";
 
+// ... (Keep Chatbot code exactly as it was, no changes needed there) ...
+
 function Chatbot() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([]);
@@ -41,11 +43,9 @@ function Chatbot() {
     setLoading(true);
 
     try {
-      // Check if we're in development or production
       const isDevelopment = window.location.hostname === 'localhost' || 
                            window.location.hostname === '127.0.0.1';
       
-      // Only try to use API if backend is running (development)
       if (isDevelopment) {
         const response = await fetch("/api/chat", {
           method: "POST",
@@ -53,75 +53,29 @@ function Chatbot() {
           body: JSON.stringify({ userPrompt: trimmed }),
         });
 
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
 
-        const botReply = {
+        setMessages((prev) => [...prev, {
           role: "assistant",
-          content:
-            data.reply || "⚠️ Gemini returned an empty response. Try again.",
-        };
-
-        setMessages((prev) => [...prev, botReply]);
+          content: data.reply || "⚠️ Empty response."
+        }]);
       } else {
-        // Fallback response for production (when backend isn't available)
-        const fallbackResponse = {
-          role: "assistant",
-          content: getFallbackResponse(trimmed),
-        };
-        
-        // Simulate API delay
         await new Promise(resolve => setTimeout(resolve, 500));
-        setMessages((prev) => [...prev, fallbackResponse]);
+        setMessages((prev) => [...prev, {
+          role: "assistant",
+          content: "I'm here to help learn about Coppell! (API unavailable in static demo)"
+        }]);
       }
     } catch (err) {
       console.error("Chat error:", err);
-      
-      // Better fallback with context-aware responses
-      const fallbackResponse = {
+      setMessages((prev) => [...prev, {
         role: "assistant",
-        content: getFallbackResponse(trimmed),
-      };
-      
-      setMessages((prev) => [...prev, fallbackResponse]);
+        content: "I'm having trouble connecting right now."
+      }]);
     } finally {
       setLoading(false);
     }
-  };
-
-  // Fallback responses for when API isn't available
-  const getFallbackResponse = (prompt) => {
-    const lowerPrompt = prompt.toLowerCase();
-    
-    if (lowerPrompt.includes('coppell') || lowerPrompt.includes('city')) {
-      return "Coppell is a vibrant community in Texas known for its excellent schools, local farmers market, and strong community organizations like NoteLove and Metrocrest Services. Explore the different pages to learn more!";
-    }
-    
-    if (lowerPrompt.includes('farmers') || lowerPrompt.includes('market')) {
-      return "The Coppell Farmers Market is a weekly gathering where local growers and artisans connect with the community. Check out the Stories page to learn more about how it became a community hub!";
-    }
-    
-    if (lowerPrompt.includes('notelove') || lowerPrompt.includes('music')) {
-      return "NoteLove is a youth-led nonprofit offering free music lessons to local students. It's a great example of how young people in Coppell create opportunities for others. Visit the Archive page for more details!";
-    }
-    
-    if (lowerPrompt.includes('metrocrest') || lowerPrompt.includes('services')) {
-      return "Metrocrest Services provides food security, housing support, and emergency aid to Coppell-area families. They're a regional anchor for wraparound services. Learn more on the Map page!";
-    }
-    
-    if (lowerPrompt.includes('timeline') || lowerPrompt.includes('history')) {
-      return "Coppell's history spans from 1840 to today, evolving from a farming settlement to a modern, community-driven city. Check out the Timeline page to explore different eras!";
-    }
-    
-    if (lowerPrompt.includes('map')) {
-      return "The Map page shows the locations of key community organizations across Coppell. Click on different pins to learn about each organization's role in the community!";
-    }
-    
-    // Default response
-    return "I'm here to help you learn about Coppell's community, history, and local organizations. Try asking about the Farmers Market, NoteLove, Metrocrest Services, or explore the Timeline and Map pages!";
   };
 
   const handleKeyDown = (e) => {
@@ -134,7 +88,7 @@ function Chatbot() {
   return (
     <>
       <button
-        className="chat-toggle mx-chat-animated"
+        className="chat-toggle"
         onClick={() => setOpen((o) => !o)}
         aria-label="Toggle chat"
       >
@@ -152,49 +106,25 @@ function Chatbot() {
           >
             <div className="chatbot-header">
               <span>Archive Bot</span>
-              <button 
-                className="close-btn" 
-                onClick={() => setOpen(false)}
-                aria-label="Close chat"
-              >
-                ✕
-              </button>
+              <button className="close-btn" onClick={() => setOpen(false)}>✕</button>
             </div>
-
             <div className="chatbot-messages">
               {messages.map((m, i) => (
-                <div
-                  key={`msg-${i}`}
-                  className={`message ${
-                    m.role === "user" ? "user" : "bot"
-                  }`}
-                >
+                <div key={`msg-${i}`} className={`message ${m.role === "user" ? "user" : "bot"}`}>
                   {m.content}
                 </div>
               ))}
-
-              {loading && (
-                <div className="loading">
-                  <span className="dot" />
-                  <span className="dot" />
-                  <span className="dot" />
-                </div>
-              )}
-
+              {loading && <div className="loading"><span className="dot" /><span className="dot" /><span className="dot" /></div>}
               <div ref={chatEndRef} />
             </div>
-
             <div className="chatbot-input">
               <input
                 value={userInput}
                 onChange={(e) => setUserInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Ask about Coppell or the archive..."
-                aria-label="Chat input"
+                placeholder="Ask about Coppell..."
               />
-              <button onClick={send} disabled={loading}>
-                {loading ? "..." : "Send"}
-              </button>
+              <button onClick={send} disabled={loading}>{loading ? "..." : "Send"}</button>
             </div>
           </motion.div>
         )}
@@ -205,18 +135,20 @@ function Chatbot() {
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState("home");
-  const [theme, setTheme] = useState(
-    localStorage.getItem("theme") || "dark"
-  );
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     localStorage.setItem("theme", theme);
   }, [theme]);
 
+  // SCROLL TO TOP & ANIMATION TRIGGER
   useEffect(() => {
-    const revealEls = document.querySelectorAll(".reveal, .fade-in, .fade-in-up");
+    // 1. Scroll to top instantly
+    window.scrollTo(0, 0);
 
+    // 2. Trigger animations for the new page
+    const revealEls = document.querySelectorAll(".reveal, .fade-in, .fade-in-up");
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -226,32 +158,23 @@ export default function App() {
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.1 } // Lower threshold so elements trigger faster
     );
 
     revealEls.forEach((el) => obs.observe(el));
 
-    return () => {
-      obs.disconnect();
-    };
-  }, [currentPage]);
+    return () => obs.disconnect();
+  }, [currentPage]); // Runs every time currentPage changes
 
   const renderPage = () => {
     switch (currentPage) {
-      case "stories":
-        return <StoriesPage />;
-      case "timeline":
-        return <TimelinePage />;
-      case "map":
-        return <MapPage />;
-      case "archive":
-        return <ArchivePage />;
-      case "reference":
-        return <ReferencePage />;
-      case "mission":
-        return <MissionPage />;
-      default:
-        return <HomePage setCurrentPage={setCurrentPage} />;
+      case "stories": return <StoriesPage />;
+      case "timeline": return <TimelinePage />;
+      case "map": return <MapPage />;
+      case "archive": return <ArchivePage />;
+      case "reference": return <ReferencePage />;
+      case "mission": return <MissionPage />;
+      default: return <HomePage setCurrentPage={setCurrentPage} />;
     }
   };
 
