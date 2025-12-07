@@ -2309,27 +2309,6 @@ input,
 .delay-2 { animation-delay: 0.30s; }
 .delay-3 { animation-delay: 0.45s; }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  filter: blur(4px);
-  animation: revealUp 0.85s ease-out forwards;
-}
-
-@keyframes revealUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
-}
-
-
-.delay-1 { animation-delay: 0.15s; }
-.delay-2 { animation-delay: 0.30s; }
-.delay-3 { animation-delay: 0.45s; }
-.delay-4 { animation-delay: 0.60s; }
-.delay-5 { animation-delay: 0.75s; }
 
 
 
