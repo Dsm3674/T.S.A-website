@@ -1963,6 +1963,102 @@ body.scrolled .fade-in-up {
 
 
 
+.footer {
+  margin-top: 6rem;
+  background: var(--bg);
+  border-top: var(--border-width) solid var(--ink);
+  padding: 4rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.footer-title {
+  font-size: 1.1rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  position: relative;
+  display: inline-block;
+  animation: skewPulse 4s ease-in-out infinite;
+}
+
+.footer-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 85%;
+  opacity: 0.9;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.5rem;
+}
+
+.footer-links li {
+  margin: 0.35rem 0;
+}
+
+.footer-links a {
+  color: var(--ink);
+  font-weight: 700;
+  position: relative;
+  transition: 0.2s;
+}
+
+.footer-links a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--mag);
+  transition: width 0.25s ease-out;
+}
+
+.footer-links a:hover::after {
+  width: 100%;
+}
+
+.footer-bottom {
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 0.85rem;
+  opacity: 0.65;
+  border-top: 2px solid var(--ink);
+  padding-top: 1.5rem;
+}
+
+
+
+.footer-title.bleed::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 0 -6px;
+  width: 100%;
+  background: var(--mag);
+  opacity: 0.15;
+  transform: skewX(-10deg);
+  z-index: -1;
+}
+
+
+
+.footer:hover {
+  animation: hoverLift 0.4s ease-out forwards;
+}
+
+
 
 
 
