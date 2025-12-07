@@ -53,13 +53,13 @@ export default function ArchivePage() {
   });
 
   return (
-    <div className="page archive">
-      <header className="page-head">
+    <div className="page archive page-enter page-enter-active">
+      <header className="page-head reveal">
         <h2 className="xxl skew">COPPELL ARCHIVE</h2>
         <p className="kicker">Index — Search. Discover. Explore.</p>
       </header>
 
-      <section className="archive-search slab">
+      <section className="archive-search slab reveal delay-1">
         <h3 className="display sm">SEARCH RESOURCES</h3>
 
         <div className="better-search">
@@ -90,7 +90,7 @@ export default function ArchivePage() {
             href={r.link}
             target="_blank"
             rel="noopener noreferrer"
-            className={`archive-card jag-${(i % 3) + 1}`}
+            className={`archive-card jag-${(i % 3) + 1} reveal delay-${(i % 4) + 1}`}
           >
             <img src={r.img} alt={r.name} className="archive-img" />
             <div className="archive-title">{r.name}</div>
@@ -109,7 +109,7 @@ export default function ArchivePage() {
         ))}
       </section>
 
-      <section className="slab">
+      <section className="slab reveal delay-1">
         <h3 className="display">How To Use This Index</h3>
         <p className="lead">
           The archive is a jumping-off point. Each card represents a real
@@ -118,7 +118,7 @@ export default function ArchivePage() {
         </p>
       </section>
 
-      <section className="slab">
+      <section className="slab reveal delay-2">
         <div className="eyebrow">COMMUNITY THEMES</div>
         <h3 className="display">What These Resources Represent</h3>
         <p className="lead">
@@ -131,7 +131,7 @@ export default function ArchivePage() {
       {/* ===========================
           USER SUBMISSION FORM
       ============================ */}
-      <section className="slab block-pop">
+      <section className="slab block-pop reveal delay-3">
         <div className="eyebrow">Submit a Resource</div>
         <h3 className="display">Add to the Community Archive</h3>
         <p className="lead">
@@ -179,6 +179,7 @@ export default function ArchivePage() {
     </div>
   );
 }
+
 
 
 
