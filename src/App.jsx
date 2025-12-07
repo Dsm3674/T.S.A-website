@@ -23,7 +23,7 @@ function Chatbot() {
       {
         role: "assistant",
         content:
-          "Hey, I’m Archive Bot. Ask me about Coppell, community history, or how this archive works.",
+          "Hey, I'm Archive Bot. Ask me about Coppell, community history, or how this archive works.",
       },
     ]);
   }, []);
@@ -47,6 +47,10 @@ function Chatbot() {
         body: JSON.stringify({ userPrompt: trimmed }),
       });
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const data = await response.json();
 
       const botReply = {
@@ -57,6 +61,7 @@ function Chatbot() {
 
       setMessages((prev) => [...prev, botReply]);
     } catch (err) {
+      console.error("Chat error:", err);
       setMessages((prev) => [
         ...prev,
         {
@@ -81,6 +86,7 @@ function Chatbot() {
       <button
         className="chat-toggle mx-chat-animated"
         onClick={() => setOpen((o) => !o)}
+        aria-label="Toggle chat"
       >
         💬
       </button>
@@ -96,7 +102,11 @@ function Chatbot() {
           >
             <div className="chatbot-header">
               <span>Archive Bot</span>
-              <button className="close-btn" onClick={() => setOpen(false)}>
+              <button 
+                className="close-btn" 
+                onClick={() => setOpen(false)}
+                aria-label="Close chat"
+              >
                 ✕
               </button>
             </div>
@@ -104,7 +114,7 @@ function Chatbot() {
             <div className="chatbot-messages">
               {messages.map((m, i) => (
                 <div
-                  key={i}
+                  key={`msg-${i}`}
                   className={`message ${
                     m.role === "user" ? "user" : "bot"
                   }`}
@@ -130,6 +140,7 @@ function Chatbot() {
                 onChange={(e) => setUserInput(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Ask about Coppell or the archive..."
+                aria-label="Chat input"
               />
               <button onClick={send} disabled={loading}>
                 {loading ? "..." : "Send"}
@@ -154,23 +165,26 @@ export default function App() {
   }, [theme]);
 
   useEffect(() => {
-  const revealEls = document.querySelectorAll(".reveal");
+    const revealEls = document.querySelectorAll(".reveal, .fade-in, .fade-in-up");
 
-  const obs = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        }
-      });
-    },
-    { threshold: 0.2 }
-  );
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
 
-  revealEls.forEach((el) => obs.observe(el));
+    revealEls.forEach((el) => obs.observe(el));
 
-  return () => obs.disconnect();
-}, [currentPage]); // re-run when switching pages
+    return () => {
+      obs.disconnect();
+    };
+  }, [currentPage]);
 
   const renderPage = () => {
     switch (currentPage) {
@@ -204,5 +218,4 @@ export default function App() {
     </div>
   );
 }
-
 
