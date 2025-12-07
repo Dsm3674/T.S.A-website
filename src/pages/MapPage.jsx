@@ -25,14 +25,6 @@ const LOCATIONS = [
     top: "35%",
     left: "50%",
     link: "https://coppellfarmersmarket.org/"
-  },
-  {
-    id: "temple",
-    name: "Sri Temple",
-    desc: "Cultural center and place of worship serving the region.",
-    top: "55%",
-    left: "75%",
-    link: "https://www.srigttemple.org/"
   }
 ];
 
@@ -48,36 +40,23 @@ export default function MapPage() {
 
       <div className="map-grid fade-in-up">
         {/* MAP CONTAINER */}
-        <div className="map-pane">
-          {/* Subtle Grid Background */}
+        <div className="map-pane compact-map">
           <div style={{
             position: 'absolute', inset: 0,
             backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
             backgroundSize: '40px 40px'
           }} />
 
-          {/* Pins */}
           {LOCATIONS.map((loc) => (
             <button
               key={loc.id}
               className={`map-pin ${activeLoc.id === loc.id ? "active" : ""}`}
               style={{ top: loc.top, left: loc.left }}
               onClick={() => setActiveLoc(loc)}
-              aria-label={`Select ${loc.name}`}
             >
               <div className="pin-dot" />
-              {/* Only show label on active pin to reduce clutter on mobile */}
               {activeLoc.id === loc.id && (
-                <span style={{
-                  marginTop: '8px',
-                  background: 'var(--bg)',
-                  padding: '4px 8px',
-                  border: '1px solid var(--cyan)',
-                  fontSize: '0.75rem',
-                  fontWeight: 'bold',
-                  whiteSpace: 'nowrap',
-                  color: 'var(--cyan)'
-                }}>
+                <span className="pin-tooltip">
                   {loc.name}
                 </span>
               )}
@@ -87,7 +66,7 @@ export default function MapPage() {
 
         {/* INFO SIDEBAR */}
         <aside className="map-side">
-          <div className="slab" style={{ height: '100%', marginBottom: 0 }}>
+          <div className="slab" style={{ height: '100%', marginBottom: 0, padding: '2rem' }}>
             <div className="eyebrow">SELECTED LOCATION</div>
             <h3 className="display" style={{ fontSize: '2rem', marginBottom: '1rem' }}>
               {activeLoc.name}
@@ -95,24 +74,9 @@ export default function MapPage() {
             <p className="lead" style={{ fontSize: '1rem', marginBottom: '2rem' }}>
               {activeLoc.desc}
             </p>
-            
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              <a 
-                href={activeLoc.link} 
-                target="_blank" 
-                rel="noreferrer" 
-                className="btn wire"
-              >
-                Visit Website
-              </a>
-            </div>
-            
-            <hr style={{ margin: '2rem 0', borderColor: 'var(--ink-dim)', opacity: 0.3 }} />
-            
-            <p style={{ fontSize: '0.8rem', color: 'var(--ink-dim)' }}>
-              Click the pins on the map to view different organizations. 
-              On mobile, the map shows relative locations.
-            </p>
+            <a href={activeLoc.link} target="_blank" rel="noreferrer" className="btn wire">
+              Visit Website
+            </a>
           </div>
         </aside>
       </div>
