@@ -5,8 +5,20 @@ export default defineConfig(({ command }) => {
   return {
     plugins: [react()],
 
-    // Use normal base in dev, GitHub Pages base in build
     base: command === "serve" ? "/" : "/T.S.A-website/",
+
+    build: {
+      outDir: 'dist',
+      assetsDir: 'assets',
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'react-vendor': ['react', 'react-dom'],
+            'motion': ['framer-motion']
+          }
+        }
+      }
+    },
 
     server: {
       port: 5173,
@@ -14,9 +26,9 @@ export default defineConfig(({ command }) => {
         "/api": {
           target: "http://localhost:3001",
           changeOrigin: true,
+          secure: false
         },
       },
     },
   };
 });
-
