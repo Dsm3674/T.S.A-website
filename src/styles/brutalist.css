@@ -2241,7 +2241,58 @@ body.scrolled .fade-in-up {
   pointer-events: none;
 }
 
+.map-pane {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px solid var(--ink);
+  height: 600px;
+}
 
+.map-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.42) contrast(1.1);
+}
+
+/* Pins */
+.map-pins {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.pin {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.pin-core {
+  width: 14px;
+  height: 14px;
+  background: var(--mag);
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 0 10px var(--mag);
+}
+
+.map-card {
+  background: var(--panel);
+  border: 2px solid var(--ink);
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.map-card.ghost {
+  opacity: 0.5;
+  font-style: italic;
+}
 
 
 
