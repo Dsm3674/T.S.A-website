@@ -227,9 +227,10 @@ export default function HomePage({ setCurrentPage }) {
             </a>
           ))}
         </div>
-        <Footer />
+      
 
       </section>
+        <Footer />
     </div>
   );
 }
