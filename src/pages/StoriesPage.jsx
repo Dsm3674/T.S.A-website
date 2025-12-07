@@ -4,7 +4,7 @@ export default function StoriesPage() {
   const stories = [
     {
       title: "FIRST BUSINESS OPENS",
-      year: 1990,
+      year: 1840,
       excerpt: "A small corner café becomes the unofficial meeting spot.",
     },
     {
