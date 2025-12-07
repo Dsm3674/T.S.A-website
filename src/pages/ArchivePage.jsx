@@ -23,19 +23,19 @@ export default function ArchivePage() {
       title: "Coppell Farmers Market", 
       link: "https://coppellfarmersmarket.org/",
       img: farmersImg,
-      desc: "Weekly gathering for local food."
+      desc: "Weekly gathering for local food, fresh produce, and community connection."
     },
     { 
       title: "NoteLove", 
       link: "https://www.notelove.org/",
       img: noteloveImg,
-      desc: "Free youth-led music lessons."
+      desc: "Youth-led nonprofit offering free music lessons to students across the city."
     },
     { 
       title: "Metrocrest Services", 
       link: "https://metrocrestservices.org/",
       img: metrocrestImg,
-      desc: "Community support & housing."
+      desc: "A regional hub for food security, housing support, and emergency aid."
     },
   ];
 
@@ -50,15 +50,26 @@ export default function ArchivePage() {
       <section>
         <div className="archive-grid">
           {resources.map((r, i) => (
-            <div key={i} className={`archive-card fade-in-up delay-${i + 1}`}>
-              <div className="archive-img-wrapper">
-                <img src={r.img} alt={r.title} className="archive-card-img" />
+            <div key={i} className={`archive-card-uniform fade-in-up delay-${i + 1}`}>
+              
+              {/* Image Box - Fixed Height */}
+              <div className="archive-thumb-box">
+                <img src={r.img} alt={r.title} className="archive-thumb-img" />
               </div>
-              <div style={{ padding: '0 0 0.5rem 0' }}>
-                <h3 className="archive-title" style={{ marginTop: '1rem' }}>{r.title}</h3>
-                <p style={{ fontSize: '0.9rem', marginBottom: '1rem', opacity: 0.8 }}>{r.desc}</p>
-                <a href={r.link} target="_blank" className="btn wire" style={{ width: '100%' }}>View</a>
+
+              {/* Content Box */}
+              <div className="archive-content">
+                <h3 style={{ fontSize: '1.4rem', marginBottom: '0.5rem', textTransform: 'uppercase' }}>
+                  {r.title}
+                </h3>
+                <p style={{ marginBottom: '1.5rem', opacity: 0.8, lineHeight: 1.5 }}>
+                  {r.desc}
+                </p>
+                <a href={r.link} target="_blank" className="btn wire">
+                  View Resource
+                </a>
               </div>
+
             </div>
           ))}
         </div>
@@ -111,4 +122,3 @@ export default function ArchivePage() {
     </div>
   );
 }
-
