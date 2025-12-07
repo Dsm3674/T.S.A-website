@@ -1,17 +1,46 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function MissionPage() {
+
+  // Scroll reveal logic
+  useEffect(() => {
+    const observers = [];
+
+    const revealElements = document.querySelectorAll(".reveal-on-scroll");
+
+    const options = {
+      threshold: 0.15,
+      rootMargin: "0px 0px -20px 0px",
+    };
+
+    revealElements.forEach((el) => {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            el.classList.add("fade-in-up-active");
+            obs.unobserve(el);
+          }
+        });
+      }, options);
+
+      obs.observe(el);
+      observers.push(obs);
+    });
+
+    return () => observers.forEach((obs) => obs.disconnect());
+  }, []);
+
   return (
     <div className="page mission">
 
-      {/* Fade in header */}
-      <header className="page-head fade-in">
+      {/* Header scroll-reveal */}
+      <header className="page-head reveal-on-scroll fade-in-up">
         <h2 className="xxl skew">MISSION</h2>
         <p className="kicker">why this archive exists</p>
       </header>
 
-      {/* Fade in first section */}
-      <section className="slab fade-in-up">
+      {/* Purpose section */}
+      <section className="slab reveal-on-scroll fade-in-up">
         <div className="eyebrow">PURPOSE</div>
         <h3 className="display">A Living Community Ledger</h3>
         <p className="lead">
@@ -22,9 +51,10 @@ export default function MissionPage() {
         </p>
       </section>
 
-      {/* Staggered card reveals */}
+      {/* Mission cards */}
       <section className="slab mission-grid">
-        <div className="mission-card fade-in-up delay-1">
+
+        <div className="mission-card reveal-on-scroll fade-in-up delay-1">
           <div className="eyebrow">ORGANIZATIONS</div>
           <h4>Anchors, Not Ads</h4>
           <p>
@@ -35,7 +65,7 @@ export default function MissionPage() {
           </p>
         </div>
 
-        <div className="mission-card fade-in-up delay-2">
+        <div className="mission-card reveal-on-scroll fade-in-up delay-2">
           <div className="eyebrow">PEOPLE</div>
           <h4>Neighbors First</h4>
           <p>
@@ -45,7 +75,7 @@ export default function MissionPage() {
           </p>
         </div>
 
-        <div className="mission-card fade-in-up delay-3">
+        <div className="mission-card reveal-on-scroll fade-in-up delay-3">
           <div className="eyebrow">DESIGN</div>
           <h4>Brutalist On Purpose</h4>
           <p>
@@ -54,10 +84,11 @@ export default function MissionPage() {
             quiet.
           </p>
         </div>
+
       </section>
 
-      {/* Fade-in bottom section */}
-      <section className="slab fade-in-up">
+      {/* Bottom fade-in */}
+      <section className="slab reveal-on-scroll fade-in-up">
         <div className="eyebrow">WHAT WE REPRESENT</div>
         <h3 className="display">A Community That Shows Up</h3>
         <p className="lead">
@@ -71,5 +102,4 @@ export default function MissionPage() {
     </div>
   );
 }
-
 
