@@ -1,6 +1,3 @@
-// FILE 4: src/pages/MapPage.jsx
-// REPLACE YOUR ENTIRE MapPage.jsx WITH THIS:
-
 import React, { useState, useEffect } from "react";
 
 const LOCATIONS = [
@@ -95,21 +92,62 @@ export default function MapPage() {
         <span className="kicker">community geography</span>
         <h2 className="xxl skew">MAP OF COPPELL RESOURCES</h2>
         <p className="lead">
-          This stylized map uses the real outline of Coppell. Each pin marks a
-          community resource that appears in our stories, archive, and mission
-          pages.
+          Interactive map showing community resources across Coppell. 
+          Click each pin to learn more about local organizations.
         </p>
       </header>
 
       <section className="map-grid">
         <div className="map-pane fade-in-up delay-1">
-          <div className="map-bg">
-            <img
-              src="/coppell-map.svg"
-              alt="Stylized outline map of Coppell, Texas"
-              className="map-img coppell-map-img"
-            />
+          <div className="map-bg" style={{
+            background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%)',
+            position: 'relative',
+            width: '100%',
+            height: '100%',
+            minHeight: '500px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            border: '3px solid var(--mag)',
+            overflow: 'hidden'
+          }}>
+            {/* Decorative grid pattern */}
+            <div style={{
+              position: 'absolute',
+              inset: 0,
+              backgroundImage: 'linear-gradient(var(--ink-dim) 1px, transparent 1px), linear-gradient(90deg, var(--ink-dim) 1px, transparent 1px)',
+              backgroundSize: '50px 50px',
+              opacity: 0.1,
+              pointerEvents: 'none'
+            }} />
 
+            {/* Center text */}
+            <div style={{
+              textAlign: 'center',
+              padding: '2rem',
+              zIndex: 1,
+              maxWidth: '500px'
+            }}>
+              <h3 style={{
+                fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
+                color: 'var(--mag)',
+                marginBottom: '1rem',
+                textTransform: 'uppercase',
+                fontWeight: '900'
+              }}>
+                COPPELL COMMUNITY MAP
+              </h3>
+              <p style={{
+                color: 'var(--ink-dim)',
+                fontSize: '1rem',
+                lineHeight: '1.6'
+              }}>
+                Click the pins on the right to explore different community organizations 
+                and their locations throughout Coppell, Texas.
+              </p>
+            </div>
+
+            {/* Interactive Pins */}
             {LOCATIONS.map((loc) => (
               <button
                 key={loc.id}
@@ -117,12 +155,50 @@ export default function MapPage() {
                 className={`map-pin ${
                   active.id === loc.id ? "map-pin-active" : ""
                 }`}
-                style={{ top: loc.top, left: loc.left }}
+                style={{ 
+                  top: loc.top, 
+                  left: loc.left,
+                  position: 'absolute',
+                  background: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: 0,
+                  zIndex: 10
+                }}
                 onClick={() => setActive(loc)}
                 aria-label={`View ${loc.name}`}
               >
-                <span className="map-pin-dot" />
-                <span className="map-pin-label">{loc.short}</span>
+                <div style={{
+                  width: '20px',
+                  height: '20px',
+                  borderRadius: '50%',
+                  background: active.id === loc.id ? 'var(--cyan)' : 'var(--mag)',
+                  border: '3px solid var(--bg)',
+                  boxShadow: active.id === loc.id 
+                    ? '0 0 20px var(--cyan), 0 0 40px var(--cyan)' 
+                    : '0 0 15px var(--mag)',
+                  transition: 'all 0.3s ease',
+                  transform: active.id === loc.id ? 'scale(1.3)' : 'scale(1)'
+                }} />
+                <span style={{
+                  position: 'absolute',
+                  top: '100%',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  marginTop: '8px',
+                  fontSize: '0.75rem',
+                  fontWeight: '800',
+                  color: active.id === loc.id ? 'var(--cyan)' : 'var(--ink)',
+                  whiteSpace: 'nowrap',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.1em',
+                  background: 'rgba(10, 10, 10, 0.9)',
+                  padding: '4px 8px',
+                  borderRadius: '4px',
+                  border: '1px solid ' + (active.id === loc.id ? 'var(--cyan)' : 'var(--mag)')
+                }}>
+                  {loc.short}
+                </span>
               </button>
             ))}
           </div>
@@ -165,13 +241,11 @@ export default function MapPage() {
       <section className="map-legend fade-in-up delay-3">
         <h4 className="eyebrow">legend</h4>
         <p>
-          Each neon pin represents a real organization included in our
-          community resource hub. The dark background echoes night-mode
-          navigation maps, while the outline comes from the official future land
-          use map of Coppell.
+          Each pin represents a real organization included in our
+          community resource hub. This interactive map helps visualize
+          the network of support services available throughout Coppell.
         </p>
       </section>
     </div>
   );
 }
-
