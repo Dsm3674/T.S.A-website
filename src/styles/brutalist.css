@@ -2102,9 +2102,7 @@ body.scrolled .fade-in-up {
   }
 }
 
-/* ==============
-   MAP PAGE
-   ============== */
+
 
 .map-grid {
   display: grid;
@@ -2195,6 +2193,52 @@ body.scrolled .fade-in-up {
   .map-pane {
     height: 420px;
   }
+}
+
+
+
+.coppell-map {
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto;
+  display: block;
+  background: #0d1117;
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Border outline */
+.coppell-outline {
+  fill: none;
+  stroke: #6db8ff;
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+
+/* Shaded interior */
+.coppell-fill {
+  fill: rgba(70, 120, 180, 0.25);
+}
+
+/* Static pins */
+.pin-ring-static {
+  fill: none;
+  stroke: var(--mag);
+  stroke-width: 1.5;
+}
+
+.pin-core-static {
+  fill: var(--mag);
+  stroke: white;
+  stroke-width: 0.5;
+}
+
+.pin-label {
+  font-size: 2.5px;
+  fill: #fff;
+  text-shadow: 0px 0px 4px rgba(0,0,0,0.7);
+  pointer-events: none;
 }
 
 
