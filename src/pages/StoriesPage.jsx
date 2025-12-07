@@ -12,6 +12,7 @@ export default function StoriesPage() {
       year: 1840,
       excerpt: "A small corner café becomes the unofficial meeting spot.",
       img: historyImg,
+      link: "https://www.coppelltx.gov/610/History-of-Coppell",   // ✅ added
     },
     
     {
@@ -46,7 +47,6 @@ export default function StoriesPage() {
       link: "https://www.instagram.com/neighbors_in_need_/",
       img: neighborsInNeedImg,
     },
-   
   ];
 
   return (
@@ -96,5 +96,6 @@ export default function StoriesPage() {
     </div>
   );
 }
+
 
 
