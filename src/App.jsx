@@ -11,8 +11,7 @@ import ReferencePage from "./pages/ReferencePage";
 import MissionPage from "./pages/MissionPage";
 import "./styles/brutalist.css";
 
-// ... (Keep Chatbot code exactly as it was, no changes needed there) ...
-
+// --- CHATBOT COMPONENT (Keep exactly as before) ---
 function Chatbot() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([]);
@@ -21,109 +20,53 @@ function Chatbot() {
   const chatEndRef = useRef(null);
 
   useEffect(() => {
-    setMessages([
-      {
-        role: "assistant",
-        content:
-          "Hey, I'm Archive Bot. Ask me about Coppell, community history, or how this archive works.",
-      },
-    ]);
+    setMessages([{ role: "assistant", content: "Hey, I'm Archive Bot. Ask me about Coppell, community history, or how this archive works." }]);
   }, []);
 
-  useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, loading, open]);
+  useEffect(() => { chatEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages, loading, open]);
 
   const send = async () => {
     const trimmed = userInput.trim();
     if (!trimmed || loading) return;
-
     setMessages((prev) => [...prev, { role: "user", content: trimmed }]);
     setUserInput("");
     setLoading(true);
-
     try {
-      const isDevelopment = window.location.hostname === 'localhost' || 
-                           window.location.hostname === '127.0.0.1';
-      
-      if (isDevelopment) {
-        const response = await fetch("/api/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ userPrompt: trimmed }),
+      const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isDev) {
+        const res = await fetch("/api/chat", {
+          method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userPrompt: trimmed }),
         });
-
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const data = await response.json();
-
-        setMessages((prev) => [...prev, {
-          role: "assistant",
-          content: data.reply || "⚠️ Empty response."
-        }]);
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        setMessages((prev) => [...prev, { role: "assistant", content: data.reply || "⚠️ Empty response." }]);
       } else {
-        await new Promise(resolve => setTimeout(resolve, 500));
-        setMessages((prev) => [...prev, {
-          role: "assistant",
-          content: "I'm here to help learn about Coppell! (API unavailable in static demo)"
-        }]);
+        await new Promise(r => setTimeout(r, 500));
+        setMessages((prev) => [...prev, { role: "assistant", content: "I'm here to help learn about Coppell! (API unavailable in static demo)" }]);
       }
     } catch (err) {
-      console.error("Chat error:", err);
-      setMessages((prev) => [...prev, {
-        role: "assistant",
-        content: "I'm having trouble connecting right now."
-      }]);
+      setMessages((prev) => [...prev, { role: "assistant", content: "I'm having trouble connecting right now." }]);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      send();
-    }
-  };
+  const handleKeyDown = (e) => { if (e.key === "Enter") { e.preventDefault(); send(); } };
 
   return (
     <>
-      <button
-        className="chat-toggle"
-        onClick={() => setOpen((o) => !o)}
-        aria-label="Toggle chat"
-      >
-        💬
-      </button>
-
+      <button className="chat-toggle" onClick={() => setOpen((o) => !o)}>💬</button>
       <AnimatePresence>
         {open && (
-          <motion.div
-            className="chatbot-container"
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
-          >
-            <div className="chatbot-header">
-              <span>Archive Bot</span>
-              <button className="close-btn" onClick={() => setOpen(false)}>✕</button>
-            </div>
+          <motion.div className="chatbot-container" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }}>
+            <div className="chatbot-header"><span>Archive Bot</span><button className="close-btn" onClick={() => setOpen(false)}>✕</button></div>
             <div className="chatbot-messages">
-              {messages.map((m, i) => (
-                <div key={`msg-${i}`} className={`message ${m.role === "user" ? "user" : "bot"}`}>
-                  {m.content}
-                </div>
-              ))}
+              {messages.map((m, i) => <div key={i} className={`message ${m.role === "user" ? "user" : "bot"}`}>{m.content}</div>)}
               {loading && <div className="loading"><span className="dot" /><span className="dot" /><span className="dot" /></div>}
               <div ref={chatEndRef} />
             </div>
             <div className="chatbot-input">
-              <input
-                value={userInput}
-                onChange={(e) => setUserInput(e.target.value)}
-                onKeyDown={handleKeyDown}
-                placeholder="Ask about Coppell..."
-              />
+              <input value={userInput} onChange={(e) => setUserInput(e.target.value)} onKeyDown={handleKeyDown} placeholder="Ask about Coppell..." />
               <button onClick={send} disabled={loading}>{loading ? "..." : "Send"}</button>
             </div>
           </motion.div>
@@ -133,6 +76,7 @@ function Chatbot() {
   );
 }
 
+// --- MAIN APP COMPONENT ---
 export default function App() {
   const [currentPage, setCurrentPage] = useState("home");
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
@@ -142,12 +86,12 @@ export default function App() {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  // SCROLL TO TOP & ANIMATION TRIGGER
+  // --- FORCE SCROLL TO TOP LOGIC ---
   useEffect(() => {
-    // 1. Scroll to top instantly
-    window.scrollTo(0, 0);
+    // 1. Force instant scroll to top
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
 
-    // 2. Trigger animations for the new page
+    // 2. Re-trigger animations
     const revealEls = document.querySelectorAll(".reveal, .fade-in, .fade-in-up");
     const obs = new IntersectionObserver(
       (entries) => {
@@ -158,13 +102,11 @@ export default function App() {
           }
         });
       },
-      { threshold: 0.1 } // Lower threshold so elements trigger faster
+      { threshold: 0.1 }
     );
-
     revealEls.forEach((el) => obs.observe(el));
-
     return () => obs.disconnect();
-  }, [currentPage]); // Runs every time currentPage changes
+  }, [currentPage]); 
 
   const renderPage = () => {
     switch (currentPage) {
@@ -180,12 +122,7 @@ export default function App() {
 
   return (
     <div className="app-container">
-      <Navigation
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        theme={theme}
-        setTheme={setTheme}
-      />
+      <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} theme={theme} setTheme={setTheme} />
       <main className="page-content">{renderPage()}</main>
       <Chatbot />
     </div>
