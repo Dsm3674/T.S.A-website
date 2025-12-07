@@ -153,6 +153,25 @@ export default function App() {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
+  useEffect(() => {
+  const revealEls = document.querySelectorAll(".reveal");
+
+  const obs = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  revealEls.forEach((el) => obs.observe(el));
+
+  return () => obs.disconnect();
+}, [currentPage]); // re-run when switching pages
+
   const renderPage = () => {
     switch (currentPage) {
       case "stories":
