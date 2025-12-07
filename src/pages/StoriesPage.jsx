@@ -1,4 +1,9 @@
 import React from "react";
+import farmersImg from "../assets/coppell-farmers-market.jpg";
+import noteloveImg from "../assets/notelove.jpg";
+import metrocrestImg from "../assets/metrocrest.jpg";
+import neighborsInNeedImg from "../assets/neighbors-in-need.jpg";
+import historyImg from "../assets/atl-blog-coppell-part-I-10.webp";
 
 export default function StoriesPage() {
   const stories = [
@@ -6,21 +11,19 @@ export default function StoriesPage() {
       title: "FIRST BUSINESS OPENS",
       year: 1840,
       excerpt: "A small corner café becomes the unofficial meeting spot.",
+      img: historyImg,
     },
     {
       title: "NONPROFIT ERA",
       year: 2000,
       excerpt: "Mutual aid takes shape as neighbors organize food drives.",
+      img: historyImg,
     },
     {
-      title: "40K MILESTONE",
-      year: 2010,
+      title: "10K MILESTONE",
+      year: 2015,
       excerpt: "Population grows, and main street begins to buzz.",
-    },
-    {
-      title: "ARTS TAKE STAGE",
-      year: 2020,
-      excerpt: "Local performances turn gyms and parks into temporary stages.",
+      img: historyImg,
     },
     {
       title: "Coppell Farmers Market Becomes a Weekly Ritual",
@@ -28,6 +31,7 @@ export default function StoriesPage() {
       excerpt:
         "Residents gather every Saturday to support local growers, makers, and family-owned businesses.",
       link: "https://coppellfarmersmarket.org/",
+      img: farmersImg,
     },
     {
       title: "NoteLove Brings Free Music Lessons to Local Students",
@@ -35,6 +39,7 @@ export default function StoriesPage() {
       excerpt:
         "Youth volunteers turn practice rooms and living rooms into studios, expanding access to music education.",
       link: "https://www.notelove.org/",
+      img: noteloveImg,
     },
     {
       title: "Metrocrest Services Expands Support in Coppell",
@@ -42,30 +47,45 @@ export default function StoriesPage() {
       excerpt:
         "Food pantry lines, housing questions, and senior needs all meet a regional safety net headquartered nearby.",
       link: "https://metrocrestservices.org/",
+      img: metrocrestImg,
     },
     {
       title: "Neighbors In Need Rallies Mutual Aid",
       year: 2024,
       excerpt:
-        "Residents coordinate grocery drops, rides, and support so families never feel alone during hard weeks.",
+        "Residents coordinate grocery drops, rides, and support so families never feel alone.",
       link: "https://www.instagram.com/neighbors_in_need_/",
+      img: neighborsInNeedImg,
     },
     {
-     
+      title: "Neighbors Helping Neighbors",
+      year: 2024,
+      excerpt:
+        "A story of residents organizing rides, meals, and homework help for families navigating tough weeks.",
+      img: neighborsInNeedImg,
+    },
+  ];
+
   return (
-    <div className="page stories">
-      <header className="page-head">
+    <div className="page stories page-enter page-enter-active">
+      <header className="page-head fade-in">
         <h2 className="xxl skew">STORIES</h2>
-        <p className="kicker">Raw narratives, bold layout, heavy grid</p>
+        <p className="kicker">Raw narratives — bold layout — living history</p>
       </header>
 
       <div className="stories-list">
         {stories.map((s, i) => (
-          <div key={i} className={`story-row ${i % 2 ? "tilt-r" : "tilt-l"}`}>
-            <div className="story-card slab">
+          <div
+            key={i}
+            className={`story-row reveal fade-in-up tilt-hover delay-${(i % 5) + 1} ${
+              i % 2 ? "tilt-r" : "tilt-l"
+            }`}
+          >
+            <div className="story-card slab pop-hover">
               <div className="eyebrow">{s.year}</div>
               <h3 className="display">{s.title}</h3>
               <p className="lead">{s.excerpt}</p>
+
               {s.link ? (
                 <a
                   className="btn wire"
@@ -79,8 +99,13 @@ export default function StoriesPage() {
                 <button className="btn wire">READ STORY →</button>
               )}
             </div>
-            <div className="story-img ghost">
-              <span>[ Community Photo Placeholder ]</span>
+
+            <div className="story-img">
+              <img
+                src={s.img}
+                alt={s.title}
+                className={`story-photo ${s.img === historyImg ? "sepia" : "clean"}`}
+              />
             </div>
           </div>
         ))}
