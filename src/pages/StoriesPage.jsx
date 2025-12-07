@@ -13,18 +13,7 @@ export default function StoriesPage() {
       excerpt: "A small corner café becomes the unofficial meeting spot.",
       img: historyImg,
     },
-    {
-      title: "NONPROFIT ERA",
-      year: 2000,
-      excerpt: "Mutual aid takes shape as neighbors organize food drives.",
-      img: historyImg,
-    },
-    {
-      title: "10K MILESTONE",
-      year: 2015,
-      excerpt: "Population grows, and main street begins to buzz.",
-      img: historyImg,
-    },
+    
     {
       title: "Coppell Farmers Market Becomes a Weekly Ritual",
       year: 2009,
@@ -57,13 +46,7 @@ export default function StoriesPage() {
       link: "https://www.instagram.com/neighbors_in_need_/",
       img: neighborsInNeedImg,
     },
-    {
-      title: "Neighbors Helping Neighbors",
-      year: 2024,
-      excerpt:
-        "A story of residents organizing rides, meals, and homework help for families navigating tough weeks.",
-      img: neighborsInNeedImg,
-    },
+   
   ];
 
   return (
