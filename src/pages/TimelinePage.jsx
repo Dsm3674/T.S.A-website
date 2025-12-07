@@ -58,6 +58,8 @@ export default function TimelinePage() {
           </div>
         ))}
       </div>
+      <Footer />
+
     </div>
   );
 }
