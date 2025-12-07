@@ -2294,5 +2294,142 @@ body.scrolled .fade-in-up {
   font-style: italic;
 }
 
+/* ==============
+   MAP PAGE UPGRADE
+   ============== */
+
+.map-page .page-head {
+  max-width: 52rem;
+}
+
+.map-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: 2.5rem;
+  margin-top: 2.5rem;
+}
+
+@media (max-width: 900px) {
+  .map-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.map-pane {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  border: var(--border-width) solid var(--ink);
+  background: radial-gradient(circle at top, #0b1220, #020617);
+  box-shadow: 16px 16px 0 var(--shadow);
+}
+
+.map-bg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16 / 10;
+}
+
+.coppell-map-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0.7) contrast(1.45);
+  opacity: 0.95;
+}
+
+/* pins overlay the SVG */
+.map-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+}
+
+.map-pin-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  border: 2px solid var(--bg);
+  background: var(--mag);
+  box-shadow:
+    0 0 0 2px rgba(255, 42, 109, 0.4),
+    0 0 16px rgba(255, 42, 109, 0.9);
+  display: block;
+}
+
+.map-pin-label {
+  position: absolute;
+  top: 50%;
+  left: 130%;
+  transform: translateY(-50%);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  white-space: nowrap;
+}
+
+.map-pin-active .map-pin-dot {
+  background: var(--cyan);
+  box-shadow:
+    0 0 0 3px rgba(5, 217, 232, 0.4),
+    0 0 18px rgba(5, 217, 232, 0.95);
+}
+
+.map-pin-active .map-pin-label {
+  background: var(--mag);
+  color: var(--bg);
+}
+
+/* right-hand card */
+.map-side {
+  display: flex;
+  align-items: stretch;
+}
+
+.map-card {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 14px 14px 0 var(--shadow);
+}
+
+.map-meta {
+  list-style: none;
+  margin: 1.5rem 0;
+  padding: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.map-meta li + li {
+  margin-top: 0.4rem;
+}
+
+.map-footnote {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: var(--ink-dim);
+  font-family: "Courier New", Courier, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* legend strip under map */
+.map-legend {
+  margin-top: 3rem;
+  border-top: var(--border-width) solid var(--ink);
+  padding-top: 1.5rem;
+  max-width: 48rem;
+}
+
 
 
