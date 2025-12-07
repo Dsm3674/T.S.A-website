@@ -3,12 +3,15 @@ import React from "react";
 export default function MissionPage() {
   return (
     <div className="page mission">
-      <header className="page-head">
+
+      {/* Fade in header */}
+      <header className="page-head fade-in">
         <h2 className="xxl skew">MISSION</h2>
         <p className="kicker">why this archive exists</p>
       </header>
 
-      <section className="slab">
+      {/* Fade in first section */}
+      <section className="slab fade-in-up">
         <div className="eyebrow">PURPOSE</div>
         <h3 className="display">A Living Community Ledger</h3>
         <p className="lead">
@@ -19,8 +22,9 @@ export default function MissionPage() {
         </p>
       </section>
 
+      {/* Staggered card reveals */}
       <section className="slab mission-grid">
-        <div className="mission-card">
+        <div className="mission-card fade-in-up delay-1">
           <div className="eyebrow">ORGANIZATIONS</div>
           <h4>Anchors, Not Ads</h4>
           <p>
@@ -30,7 +34,8 @@ export default function MissionPage() {
             support systems that neighbors rely on.
           </p>
         </div>
-        <div className="mission-card">
+
+        <div className="mission-card fade-in-up delay-2">
           <div className="eyebrow">PEOPLE</div>
           <h4>Neighbors First</h4>
           <p>
@@ -39,7 +44,8 @@ export default function MissionPage() {
             trains, and families meeting at the market before a busy week.
           </p>
         </div>
-        <div className="mission-card">
+
+        <div className="mission-card fade-in-up delay-3">
           <div className="eyebrow">DESIGN</div>
           <h4>Brutalist On Purpose</h4>
           <p>
@@ -50,7 +56,8 @@ export default function MissionPage() {
         </div>
       </section>
 
-      <section className="slab">
+      {/* Fade-in bottom section */}
+      <section className="slab fade-in-up">
         <div className="eyebrow">WHAT WE REPRESENT</div>
         <h3 className="display">A Community That Shows Up</h3>
         <p className="lead">
@@ -60,7 +67,9 @@ export default function MissionPage() {
           the content and the visuals.
         </p>
       </section>
+
     </div>
   );
 }
+
 
