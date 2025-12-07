@@ -1,18 +1,17 @@
 import React from "react";
 import Footer from "../components/Footer";
 
-
 export default function ReferencePage() {
   return (
     <div className="page reference">
+
+      {/* HEADER */}
       <header className="page-head slice-reveal">
         <h2 className="xxl skew">REFERENCE INDEX</h2>
         <p className="kicker">sources — citations — documentation</p>
       </header>
 
-      {/* ===========================
-          COMMUNITY RESOURCES
-      ============================ */}
+      {/* COMMUNITY RESOURCES */}
       <section className="reference-grid">
         <article className="slab block-pop">
           <div className="eyebrow">PRIMARY COMMUNITY RESOURCES</div>
@@ -25,113 +24,133 @@ export default function ReferencePage() {
 
           <ul>
             <li>
-              <a
-                href="https://coppellfarmersmarket.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="https://coppellfarmersmarket.org/" target="_blank" rel="noopener noreferrer">
                 Coppell Farmers Market
               </a>{" "}
-              — weekly farmers market showcasing local growers, producers,
-              and small food businesses.
+              — weekly farmers market showcasing local growers and small food businesses.
             </li>
 
             <li>
-              <a
-                href="https://www.notelove.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="https://www.notelove.org/" target="_blank" rel="noopener noreferrer">
                 NoteLove
               </a>{" "}
-              — youth-led nonprofit offering free music lessons across DFW.
+              — youth-led nonprofit offering free music lessons.
             </li>
 
             <li>
-              <a
-                href="https://metrocrestservices.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="https://metrocrestservices.org/" target="_blank" rel="noopener noreferrer">
                 Metrocrest Services
               </a>{" "}
-              — regional safety-net nonprofit providing food, housing,
-              financial coaching, and senior support.
+              — community assistance including food, housing, and senior support.
             </li>
 
             <li>
-              <a
-                href="https://www.instagram.com/neighbors_in_need_/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="https://www.instagram.com/neighbors_in_need_/" target="_blank" rel="noopener noreferrer">
                 Neighbors In Need
               </a>{" "}
-              — neighbors-helping-neighbors mutual aid effort coordinating
-              rides, meals, and essentials for local families.
+              — mutual aid group coordinating support for local families.
             </li>
           </ul>
         </article>
 
+        {/* METHODOLOGY */}
         <article className="slab ghost block-pop">
           <div className="eyebrow">METHODOLOGY</div>
           <h3 className="display">How the Archive Uses These Resources</h3>
 
           <p className="lead">
-            The site blends creative design with real Coppell organizations.
-            Map pins, timeline eras, and stories reference{" "}
-            <strong>Coppell Farmers Market</strong>,{" "}
-            <strong>NoteLove</strong>, <strong>Metrocrest Services</strong>, and{" "}
-            <strong>Neighbors In Need</strong> to show how arts, food, mutual
-            aid, and support intersect in daily life.
+            Coppell Farmers Market, NoteLove, Metrocrest Services, and Neighbors In Need
+            shaped how we built the site’s map, visual themes, and storyline. 
+            The organizations illustrate how food security, arts, mutual aid, and 
+            wraparound support intersect in real community life.
           </p>
 
           <p className="lead" style={{ marginTop: "0.75rem" }}>
-            TSA judges can follow the links to understand the real-world
-            impact behind the visual design and storytelling.
+            TSA judges can follow the links to explore how real organizations influenced the
+            site's creative and informational structure.
           </p>
         </article>
       </section>
 
-      {/* ===========================
-          TECHNOLOGY & IMPLEMENTATION
-      ============================ */}
+      {/* TECH STACK */}
       <section className="slab block-pop">
         <div className="eyebrow">TECH STACK</div>
         <h3 className="display">How This Archive Was Built</h3>
 
         <p className="lead">
-          The project uses React (Vite), modern CSS animations, and custom
-          components to create a brutalist, poster-like interface. Every page is
-          intentionally layered to feel like a community bulletin board brought
-          to life.
+          The project uses React (Vite), modern CSS animations, SVG maps, canvas effects,
+          and mobile-focused responsive design to create a brutalist digital archive.
         </p>
 
         <ul style={{ marginTop: "1rem" }}>
           <li>React components for modular storytelling</li>
-          <li>Canvas-based hero animation for movement and atmosphere</li>
-          <li>SVG noir-grid map with interactive pins</li>
-          <li>Responsive design for mobile + TSA judging screens</li>
+          <li>Canvas-based hero animation for dynamic visuals</li>
+          <li>Custom SVG map using real Coppell boundary shapes</li>
+          <li>Mobile-first layout to support TSA judging screens</li>
         </ul>
       </section>
 
-      {/* ===========================
-          CITATIONS
-      ============================ */}
+      {/* IMAGE CREDITS */}
       <section className="slab block-pop">
-        <div className="eyebrow">CITATIONS & SOURCES</div>
-        <h3 className="display">References Used in Research</h3>
+        <div className="eyebrow">IMAGE CREDITS</div>
+        <h3 className="display">Sources for All Photos Used on the Site</h3>
 
         <ul>
-          <li>City of Coppell official website (public programs + events)</li>
-          <li>Metrocrest Services — community support descriptions</li>
-          <li>NoteLove — youth-led music nonprofit information</li>
-          <li>Coppell Farmers Market — local agriculture + vendor info</li>
-          <li>Neighbors In Need — mutual aid resources and community narratives</li>
-        </ul>
-      </section>
-      <Footer />
+          <li>
+            <strong>Coppell Farmers Market Photo</strong> — from{" "}
+            <a href="https://coppellfarmersmarket.org/" target="_blank" rel="noopener noreferrer">
+              coppellfarmersmarket.org
+            </a>{" "}
+            (public-facing promotional imagery)
+          </li>
 
+          <li>
+            <strong>NoteLove Photo</strong> — from{" "}
+            <a href="https://www.notelove.org/" target="_blank" rel="noopener noreferrer">
+              notelove.org
+            </a>{" "}
+            (official nonprofit website)
+          </li>
+
+          <li>
+            <strong>Metrocrest Services Photo</strong> — from{" "}
+            <a href="https://metrocrestservices.org/" target="_blank" rel="noopener noreferrer">
+              metrocrestservices.org
+            </a>
+          </li>
+
+          <li>
+            <strong>Neighbors In Need Logo / Photo</strong> — from{" "}
+            <a href="https://www.instagram.com/neighbors_in_need_/" target="_blank" rel="noopener noreferrer">
+              the official Instagram page @neighbors_in_need_
+            </a>{" "}
+            (public profile content)
+          </li>
+
+          <li>
+            <strong>Historical Downtown Coppell Photo</strong> — sourced from 
+            the public-domain collection, originally archived at:
+            <a 
+              href="https://www.coppelltx.gov/610/History-of-Coppell"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Coppell History Website
+            </a>
+          </li>
+
+          <li>
+            <strong>Coppell Boundary Map Image</strong> — created using Google Maps styling 
+            (fair use for educational project) for geographic reference.
+          </li>
+        </ul>
+
+        <p className="lead" style={{ marginTop: "1rem" }}>
+          All images are used for educational, nonprofit, student-competition purposes under fair use.
+        </p>
+      </section>
+
+      <Footer />
     </div>
   );
 }
