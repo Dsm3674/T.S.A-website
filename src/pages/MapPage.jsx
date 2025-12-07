@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Footer from "../components/Footer";
+
 
 export default function MapPage() {
   const [sel, setSel] = useState(null);
