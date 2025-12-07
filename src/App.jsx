@@ -41,37 +41,87 @@ function Chatbot() {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userPrompt: trimmed }),
-      });
+      // Check if we're in development or production
+      const isDevelopment = window.location.hostname === 'localhost' || 
+                           window.location.hostname === '127.0.0.1';
+      
+      // Only try to use API if backend is running (development)
+      if (isDevelopment) {
+        const response = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ userPrompt: trimmed }),
+        });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        const botReply = {
+          role: "assistant",
+          content:
+            data.reply || "⚠️ Gemini returned an empty response. Try again.",
+        };
+
+        setMessages((prev) => [...prev, botReply]);
+      } else {
+        // Fallback response for production (when backend isn't available)
+        const fallbackResponse = {
+          role: "assistant",
+          content: getFallbackResponse(trimmed),
+        };
+        
+        // Simulate API delay
+        await new Promise(resolve => setTimeout(resolve, 500));
+        setMessages((prev) => [...prev, fallbackResponse]);
       }
-
-      const data = await response.json();
-
-      const botReply = {
-        role: "assistant",
-        content:
-          data.reply || "⚠️ Gemini returned an empty response. Try again.",
-      };
-
-      setMessages((prev) => [...prev, botReply]);
     } catch (err) {
       console.error("Chat error:", err);
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          content: "⚠️ There was a problem connecting to the archive AI.",
-        },
-      ]);
+      
+      // Better fallback with context-aware responses
+      const fallbackResponse = {
+        role: "assistant",
+        content: getFallbackResponse(trimmed),
+      };
+      
+      setMessages((prev) => [...prev, fallbackResponse]);
     } finally {
       setLoading(false);
     }
+  };
+
+  // Fallback responses for when API isn't available
+  const getFallbackResponse = (prompt) => {
+    const lowerPrompt = prompt.toLowerCase();
+    
+    if (lowerPrompt.includes('coppell') || lowerPrompt.includes('city')) {
+      return "Coppell is a vibrant community in Texas known for its excellent schools, local farmers market, and strong community organizations like NoteLove and Metrocrest Services. Explore the different pages to learn more!";
+    }
+    
+    if (lowerPrompt.includes('farmers') || lowerPrompt.includes('market')) {
+      return "The Coppell Farmers Market is a weekly gathering where local growers and artisans connect with the community. Check out the Stories page to learn more about how it became a community hub!";
+    }
+    
+    if (lowerPrompt.includes('notelove') || lowerPrompt.includes('music')) {
+      return "NoteLove is a youth-led nonprofit offering free music lessons to local students. It's a great example of how young people in Coppell create opportunities for others. Visit the Archive page for more details!";
+    }
+    
+    if (lowerPrompt.includes('metrocrest') || lowerPrompt.includes('services')) {
+      return "Metrocrest Services provides food security, housing support, and emergency aid to Coppell-area families. They're a regional anchor for wraparound services. Learn more on the Map page!";
+    }
+    
+    if (lowerPrompt.includes('timeline') || lowerPrompt.includes('history')) {
+      return "Coppell's history spans from 1840 to today, evolving from a farming settlement to a modern, community-driven city. Check out the Timeline page to explore different eras!";
+    }
+    
+    if (lowerPrompt.includes('map')) {
+      return "The Map page shows the locations of key community organizations across Coppell. Click on different pins to learn about each organization's role in the community!";
+    }
+    
+    // Default response
+    return "I'm here to help you learn about Coppell's community, history, and local organizations. Try asking about the Farmers Market, NoteLove, Metrocrest Services, or explore the Timeline and Map pages!";
   };
 
   const handleKeyDown = (e) => {
@@ -218,4 +268,3 @@ export default function App() {
     </div>
   );
 }
-
