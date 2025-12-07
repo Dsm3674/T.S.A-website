@@ -13,8 +13,8 @@ export default function StoriesPage() {
       excerpt: "Mutual aid takes shape as neighbors organize food drives.",
     },
     {
-      title: "10K MILESTONE",
-      year: 2015,
+      title: "40K MILESTONE",
+      year: 2010,
       excerpt: "Population grows, and main street begins to buzz.",
     },
     {
@@ -51,13 +51,7 @@ export default function StoriesPage() {
       link: "https://www.instagram.com/neighbors_in_need_/",
     },
     {
-      title: "Neighbors Helping Neighbors",
-      year: 2024,
-      excerpt:
-        "A story of residents organizing rides, meals, and homework help for families navigating hard weeks.",
-    },
-  ];
-
+     
   return (
     <div className="page stories">
       <header className="page-head">
