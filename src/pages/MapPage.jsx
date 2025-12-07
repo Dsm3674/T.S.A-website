@@ -60,7 +60,9 @@ export default function MapPage() {
 
   return (
     <div className="page map">
-      <header className="page-head">
+      
+      {/* Header fades in */}
+      <header className="page-head fade-in">
         <h2 className="xxl skew">COMMUNITY MAP</h2>
         <p className="kicker">
           Click pins — glowing noir grid of Coppell, from markets to mutual aid
@@ -68,6 +70,8 @@ export default function MapPage() {
       </header>
 
       <div className="map-grid">
+        
+        {/* MAP — NO ANIMATIONS HERE */}
         <div className="map-pane grid-overlay">
           <svg className="noir-map" viewBox="0 0 100 100">
             <defs>
@@ -93,7 +97,7 @@ export default function MapPage() {
             {pts.map((p) => (
               <g
                 key={p.id}
-                className="pin-group"
+                className="pin-group"   /* ← NO ANIMATION HERE */
                 onClick={() => setSel(p)}
               >
                 <circle
@@ -108,9 +112,7 @@ export default function MapPage() {
                   cx={p.x}
                   cy={p.y}
                   r={sel?.id === p.id ? 3.2 : 2.8}
-                  className={`pin-core ${
-                    sel?.id === p.id ? "pin-active" : ""
-                  }`}
+                  className={`pin-core ${sel?.id === p.id ? "pin-active" : ""}`}
                 />
                 <text
                   x={p.x}
@@ -125,9 +127,10 @@ export default function MapPage() {
           </svg>
         </div>
 
+        {/* SIDEBAR — SOFT FADE IN WHEN CARD APPEARS */}
         <aside className="map-side">
           {sel ? (
-            <div className="map-card slab map-card-active">
+            <div className="map-card slab map-card-active fade-in-up">
               <div className="eyebrow">LOCATION</div>
               <h3 className="display">{sel.name}</h3>
               <p className="lead">{sel.story}</p>
@@ -145,13 +148,14 @@ export default function MapPage() {
               )}
             </div>
           ) : (
-            <div className="map-card ghost">
+            <div className="map-card ghost fade-in-up">
               <p className="ghost-hint">
                 Click a pin to unlock its story — including neighbors-helping-neighbors.
               </p>
             </div>
           )}
         </aside>
+
       </div>
     </div>
   );
