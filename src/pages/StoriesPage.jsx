@@ -4,6 +4,8 @@ import noteloveImg from "../assets/notelove.jpg";
 import metrocrestImg from "../assets/metrocrest.jpg";
 import neighborsInNeedImg from "../assets/neighbors-in-need.jpg";
 import historyImg from "../assets/Document.jpg";
+import Footer from "../components/Footer";
+
 
 export default function StoriesPage() {
   const stories = [
