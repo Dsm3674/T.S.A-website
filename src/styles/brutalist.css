@@ -2328,6 +2328,16 @@ input,
 .delay-2 { transition-delay: 0.25s; }
 .delay-3 { transition-delay: 0.4s; }
 
+.pin-ring,
+.pin-core {
+  transition: none !important;
+}
+
+.pin-ring-active,
+.pin-active {
+  transition: none !important;
+}
+
 
 
 
