@@ -3,7 +3,7 @@ import farmersImg from "../assets/coppell-farmers-market.jpg";
 import noteloveImg from "../assets/notelove.jpg";
 import metrocrestImg from "../assets/metrocrest.jpg";
 import neighborsInNeedImg from "../assets/neighbors-in-need.jpg";
-import historyImg from "../assets/atl-blog-coppell-part-I-10.webp";
+import historyImg from "../assets/Document.jpg";
 
 export default function StoriesPage() {
   const stories = [
