@@ -12,9 +12,9 @@ export default function StoriesPage() {
       year: 1840,
       excerpt: "A small corner café becomes the unofficial meeting spot.",
       img: historyImg,
-      link: "https://www.coppelltx.gov/610/History-of-Coppell",   // ✅ added
+      link: "https://www.coppelltx.gov/610/History-of-Coppell",
     },
-    
+
     {
       title: "Coppell Farmers Market Becomes a Weekly Ritual",
       year: 2009,
@@ -51,6 +51,7 @@ export default function StoriesPage() {
 
   return (
     <div className="page stories page-enter page-enter-active">
+
       <header className="page-head fade-in">
         <h2 className="xxl skew">STORIES</h2>
         <p className="kicker">Raw narratives — bold layout — living history</p>
@@ -87,7 +88,9 @@ export default function StoriesPage() {
               <img
                 src={s.img}
                 alt={s.title}
-                className={`story-photo ${s.img === historyImg ? "sepia" : "clean"}`}
+                className={`story-photo ${
+                  s.img === historyImg ? "sepia" : "clean"
+                }`}
               />
             </div>
           </div>
