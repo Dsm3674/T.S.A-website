@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import Footer from "../components/Footer";
-import historyImg from "../assets/Document.jpg"; // Using generic assets for demo
+import historyImg from "../assets/Document.jpg";
 
 export default function TimelinePage() {
   const [selectedEra, setSelectedEra] = useState(null);
@@ -41,23 +41,20 @@ export default function TimelinePage() {
     }
   ];
 
-  // Enable drag to scroll
   const handleMouseDown = (e) => {
     const slider = scrollRef.current;
     let isDown = true;
     let startX = e.pageX - slider.offsetLeft;
     let scrollLeft = slider.scrollLeft;
-
-    const onMouseUp = () => { isDown = false; slider.classList.remove('active'); };
-    const onMouseLeave = () => { isDown = false; slider.classList.remove('active'); };
+    const onMouseUp = () => { isDown = false; };
+    const onMouseLeave = () => { isDown = false; };
     const onMouseMove = (e) => {
       if (!isDown) return;
       e.preventDefault();
       const x = e.pageX - slider.offsetLeft;
-      const walk = (x - startX) * 2; // Scroll-fast
+      const walk = (x - startX) * 2; 
       slider.scrollLeft = scrollLeft - walk;
     };
-
     slider.addEventListener('mouseleave', onMouseLeave);
     slider.addEventListener('mouseup', onMouseUp);
     slider.addEventListener('mousemove', onMouseMove);
@@ -84,7 +81,6 @@ export default function TimelinePage() {
               onClick={() => setSelectedEra(item)}
             >
               <div className="t-img-box">
-                {/* No text inside image anymore */}
                 <img src={item.img} alt={item.era} />
               </div>
               <div className="eyebrow">{item.years}</div>
@@ -97,10 +93,10 @@ export default function TimelinePage() {
         </div>
       </div>
 
-      {/* Expanded Details Section */}
       <div id="era-details">
         {selectedEra ? (
-          <div className="timeline-detail-panel slab">
+          // Added 'padding: 3.5rem' here to separate text from border
+          <div className="timeline-detail-panel slab" style={{ padding: "3.5rem" }}>
             <div className="eyebrow">HISTORICAL CONTEXT: {selectedEra.years}</div>
             <h3 className="display">{selectedEra.era}</h3>
             <hr style={{ border: 'none', borderTop: '2px solid var(--ink)', margin: '1.5rem 0' }} />
