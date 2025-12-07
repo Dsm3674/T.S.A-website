@@ -230,8 +230,9 @@ export default function HomePage({ setCurrentPage }) {
       
 
       </section>
-        <Footer />
+      
     </div>
+      <Footer />
   );
 }
 
