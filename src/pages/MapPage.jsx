@@ -32,22 +32,6 @@ export default function MapPage() {
       link: "https://metrocrestservices.org/",
     },
     {
-      id: 4,
-      name: "GREEN SPACES",
-      x: 41,
-      y: 72,
-      story:
-        "Parks serving families year-round, with story walks, outdoor concerts, and community runs.",
-    },
-    {
-      id: 5,
-      name: "CULTURAL QUARTER",
-      x: 65,
-      y: 77,
-      story:
-        "Murals, galleries, rotating exhibits, and pop-up arts nights stitching together local creativity.",
-    },
-    {
       id: 6,
       name: "NEIGHBORS IN NEED",
       x: 34,
@@ -60,8 +44,8 @@ export default function MapPage() {
 
   return (
     <div className="page map">
-      
-      {/* Header fades in */}
+
+      {/* Header stays animated */}
       <header className="page-head fade-in">
         <h2 className="xxl skew">COMMUNITY MAP</h2>
         <p className="kicker">
@@ -70,8 +54,8 @@ export default function MapPage() {
       </header>
 
       <div className="map-grid">
-        
-        {/* MAP — NO ANIMATIONS HERE */}
+
+        {/* 🟢 FULLY STABLE MAP (NO ANIMATION ON DOTS) */}
         <div className="map-pane grid-overlay">
           <svg className="noir-map" viewBox="0 0 100 100">
             <defs>
@@ -97,23 +81,26 @@ export default function MapPage() {
             {pts.map((p) => (
               <g
                 key={p.id}
-                className="pin-group"   /* ← NO ANIMATION HERE */
+                className="pin-group"
                 onClick={() => setSel(p)}
+                style={{ cursor: "pointer" }}
               >
+                {/* Outer ring — FIXED size */}
                 <circle
                   cx={p.x}
                   cy={p.y}
-                  r={sel?.id === p.id ? 5 : 4.5}
-                  className={`pin-ring ${
-                    sel?.id === p.id ? "pin-ring-active" : ""
-                  }`}
+                  r={5}
+                  className={`pin-ring ${sel?.id === p.id ? "pin-ring-active" : ""}`}
                 />
+
+                {/* Inner dot — FIXED size */}
                 <circle
                   cx={p.x}
                   cy={p.y}
-                  r={sel?.id === p.id ? 3.2 : 2.8}
+                  r={3}
                   className={`pin-core ${sel?.id === p.id ? "pin-active" : ""}`}
                 />
+
                 <text
                   x={p.x}
                   y={p.y - 7}
@@ -127,13 +114,14 @@ export default function MapPage() {
           </svg>
         </div>
 
-        {/* SIDEBAR — SOFT FADE IN WHEN CARD APPEARS */}
+        {/* Sidebar card animation stays */}
         <aside className="map-side">
           {sel ? (
             <div className="map-card slab map-card-active fade-in-up">
               <div className="eyebrow">LOCATION</div>
               <h3 className="display">{sel.name}</h3>
               <p className="lead">{sel.story}</p>
+
               {sel.link ? (
                 <a
                   className="btn wire"
@@ -155,7 +143,6 @@ export default function MapPage() {
             </div>
           )}
         </aside>
-
       </div>
     </div>
   );
