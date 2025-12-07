@@ -1,96 +1,195 @@
-import React, { useState } from "react";
-import Footer from "../components/Footer";
-import { CheckCircle } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-export default function ArchivePage() {
-  const [submitted, setSubmitted] = useState(false);
+import Navigation from "./components/Navigation";
+import HomePage from "./pages/HomePage";
+import StoriesPage from "./pages/StoriesPage";
+import TimelinePage from "./pages/TimelinePage";
+import MapPage from "./pages/MapPage";
+import ArchivePage from "./pages/ArchivePage";
+import ReferencePage from "./pages/ReferencePage";
+import MissionPage from "./pages/MissionPage";
+import "./styles/brutalist.css";
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Simulate API call or processing
-    setTimeout(() => {
-      setSubmitted(true);
-      // Optional: scroll to top or focus on message
-      window.scrollTo({ top: 300, behavior: 'smooth' });
-    }, 400);
+// ... (Keep Chatbot code exactly as it was, no changes needed there) ...
+
+function Chatbot() {
+  const [open, setOpen] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const [userInput, setUserInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const chatEndRef = useRef(null);
+
+  useEffect(() => {
+    setMessages([
+      {
+        role: "assistant",
+        content:
+          "Hey, I'm Archive Bot. Ask me about Coppell, community history, or how this archive works.",
+      },
+    ]);
+  }, []);
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, loading, open]);
+
+  const send = async () => {
+    const trimmed = userInput.trim();
+    if (!trimmed || loading) return;
+
+    setMessages((prev) => [...prev, { role: "user", content: trimmed }]);
+    setUserInput("");
+    setLoading(true);
+
+    try {
+      const isDevelopment = window.location.hostname === 'localhost' || 
+                           window.location.hostname === '127.0.0.1';
+      
+      if (isDevelopment) {
+        const response = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ userPrompt: trimmed }),
+        });
+
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const data = await response.json();
+
+        setMessages((prev) => [...prev, {
+          role: "assistant",
+          content: data.reply || "⚠️ Empty response."
+        }]);
+      } else {
+        await new Promise(resolve => setTimeout(resolve, 500));
+        setMessages((prev) => [...prev, {
+          role: "assistant",
+          content: "I'm here to help learn about Coppell! (API unavailable in static demo)"
+        }]);
+      }
+    } catch (err) {
+      console.error("Chat error:", err);
+      setMessages((prev) => [...prev, {
+        role: "assistant",
+        content: "I'm having trouble connecting right now."
+      }]);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const resources = [
-    { title: "Coppell Farmers Market", link: "https://coppellfarmersmarket.org/" },
-    { title: "NoteLove", link: "https://www.notelove.org/" },
-    { title: "Metrocrest Services", link: "https://metrocrestservices.org/" },
-  ];
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      send();
+    }
+  };
 
   return (
-    <div className="page archive">
-      <header className="page-head fade-in">
-        <h2 className="xxl skew">ARCHIVE</h2>
-        <p className="kicker">Submit & Explore</p>
-      </header>
+    <>
+      <button
+        className="chat-toggle"
+        onClick={() => setOpen((o) => !o)}
+        aria-label="Toggle chat"
+      >
+        💬
+      </button>
 
-      {/* Browse Section */}
-      <section className="fade-in-up">
-        <div className="archive-grid">
-          {resources.map((r, i) => (
-            <div key={i} className="archive-card fade-in-up delay-1">
-              <h3 className="archive-title">{r.title}</h3>
-              <a href={r.link} target="_blank" className="btn wire" style={{ marginTop: '1rem' }}>View</a>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className="chatbot-container"
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="chatbot-header">
+              <span>Archive Bot</span>
+              <button className="close-btn" onClick={() => setOpen(false)}>✕</button>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Submission Section */}
-      <section className="slab fade-in-up delay-2" style={{ marginTop: '4rem' }}>
-        <h3 className="display">Submit a New Resource</h3>
-        <p className="lead" style={{ marginBottom: '2rem' }}>
-          Know of a community group that belongs here? Let us know.
-        </p>
-
-        {submitted ? (
-          <div className="success-msg fade-in">
-            <span className="success-icon">
-              <CheckCircle size={64} color="var(--mag)" />
-            </span>
-            <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>THANK YOU FOR SUBMISSION</h3>
-            <p>We will review it shortly.</p>
-            <button 
-              className="btn wire" 
-              style={{ marginTop: '1.5rem' }}
-              onClick={() => setSubmitted(false)}
-            >
-              Submit Another
-            </button>
-          </div>
-        ) : (
-          <form className="archive-form" onSubmit={handleSubmit}>
-            <div className="form-field">
-              <label>Resource Name</label>
-              <input type="text" placeholder="Example: Youth Arts Program" required />
+            <div className="chatbot-messages">
+              {messages.map((m, i) => (
+                <div key={`msg-${i}`} className={`message ${m.role === "user" ? "user" : "bot"}`}>
+                  {m.content}
+                </div>
+              ))}
+              {loading && <div className="loading"><span className="dot" /><span className="dot" /><span className="dot" /></div>}
+              <div ref={chatEndRef} />
             </div>
-
-            <div className="form-field">
-              <label>Description</label>
-              <textarea placeholder="Describe what this resource offers..." required />
+            <div className="chatbot-input">
+              <input
+                value={userInput}
+                onChange={(e) => setUserInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder="Ask about Coppell..."
+              />
+              <button onClick={send} disabled={loading}>{loading ? "..." : "Send"}</button>
             </div>
-
-            <div className="form-field">
-              <label>Link (Optional)</label>
-              <input type="url" placeholder="https://" />
-            </div>
-
-            <button type="submit" className="btn slab">
-              Submit Resource
-            </button>
-          </form>
+          </motion.div>
         )}
-      </section>
-
-      <Footer />
-    </div>
+      </AnimatePresence>
+    </>
   );
 }
 
+export default function App() {
+  const [currentPage, setCurrentPage] = useState("home");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
 
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  // SCROLL TO TOP & ANIMATION TRIGGER
+  useEffect(() => {
+    // 1. Scroll to top instantly
+    window.scrollTo(0, 0);
+
+    // 2. Trigger animations for the new page
+    const revealEls = document.querySelectorAll(".reveal, .fade-in, .fade-in-up");
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 } // Lower threshold so elements trigger faster
+    );
+
+    revealEls.forEach((el) => obs.observe(el));
+
+    return () => obs.disconnect();
+  }, [currentPage]); // Runs every time currentPage changes
+
+  const renderPage = () => {
+    switch (currentPage) {
+      case "stories": return <StoriesPage />;
+      case "timeline": return <TimelinePage />;
+      case "map": return <MapPage />;
+      case "archive": return <ArchivePage />;
+      case "reference": return <ReferencePage />;
+      case "mission": return <MissionPage />;
+      default: return <HomePage setCurrentPage={setCurrentPage} />;
+    }
+  };
+
+  return (
+    <div className="app-container">
+      <Navigation
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        theme={theme}
+        setTheme={setTheme}
+      />
+      <main className="page-content">{renderPage()}</main>
+      <Chatbot />
+    </div>
+  );
+}
 
 
