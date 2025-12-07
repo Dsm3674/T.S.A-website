@@ -98,7 +98,10 @@ export default function StoriesPage() {
           </div>
         ))}
       </div>
+      <Footer />
+
     </div>
+    
   );
 }
 
