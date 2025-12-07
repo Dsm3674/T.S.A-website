@@ -32,12 +32,12 @@ export default function MapPage() {
       link: "https://metrocrestservices.org/",
     },
     {
-      id: 6,
+      id: 4,
       name: "NEIGHBORS IN NEED",
       x: 34,
       y: 55,
       story:
-        "Neighbors organize meal trains, rides, and essentials so families have support during hard weeks.",
+        "Neighbors organize meal trains, rides, and essentials so families have support during difficult weeks.",
       link: "https://www.instagram.com/neighbors_in_need_/",
     },
   ];
@@ -45,17 +45,13 @@ export default function MapPage() {
   return (
     <div className="page map">
 
-      {/* Header stays animated */}
       <header className="page-head fade-in">
         <h2 className="xxl skew">COMMUNITY MAP</h2>
-        <p className="kicker">
-          Click pins — glowing noir grid of Coppell, from markets to mutual aid
-        </p>
+        <p className="kicker">Click a pin to explore Coppell’s real community anchors.</p>
       </header>
 
       <div className="map-grid">
 
-        {/* 🟢 FULLY STABLE MAP (NO ANIMATION ON DOTS) */}
         <div className="map-pane grid-overlay">
           <svg className="noir-map" viewBox="0 0 100 100">
             <defs>
@@ -71,7 +67,6 @@ export default function MapPage() {
                   fill="none"
                   stroke="var(--ink-dim)"
                   strokeWidth="0.4"
-                  strokeLinecap="square"
                 />
               </pattern>
             </defs>
@@ -79,34 +74,10 @@ export default function MapPage() {
             <rect width="100" height="100" fill="url(#grid10)" />
 
             {pts.map((p) => (
-              <g
-                key={p.id}
-                className="pin-group"
-                onClick={() => setSel(p)}
-                style={{ cursor: "pointer" }}
-              >
-                {/* Outer ring — FIXED size */}
-                <circle
-                  cx={p.x}
-                  cy={p.y}
-                  r={5}
-                  className={`pin-ring ${sel?.id === p.id ? "pin-ring-active" : ""}`}
-                />
-
-                {/* Inner dot — FIXED size */}
-                <circle
-                  cx={p.x}
-                  cy={p.y}
-                  r={3}
-                  className={`pin-core ${sel?.id === p.id ? "pin-active" : ""}`}
-                />
-
-                <text
-                  x={p.x}
-                  y={p.y - 7}
-                  className="pin-label"
-                  textAnchor="middle"
-                >
+              <g key={p.id} className="pin-group-static" onClick={() => setSel(p)}>
+                <circle cx={p.x} cy={p.y} r={5} className="pin-ring-static" />
+                <circle cx={p.x} cy={p.y} r={3} className="pin-core-static" />
+                <text x={p.x} y={p.y - 7} className="pin-label" textAnchor="middle">
                   {p.name}
                 </text>
               </g>
@@ -114,21 +85,14 @@ export default function MapPage() {
           </svg>
         </div>
 
-        {/* Sidebar card animation stays */}
         <aside className="map-side">
           {sel ? (
-            <div className="map-card slab map-card-active fade-in-up">
+            <div className="map-card slab fade-in-up">
               <div className="eyebrow">LOCATION</div>
               <h3 className="display">{sel.name}</h3>
               <p className="lead">{sel.story}</p>
-
               {sel.link ? (
-                <a
-                  className="btn wire"
-                  href={sel.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a className="btn wire" href={sel.link} target="_blank">
                   VISIT SITE →
                 </a>
               ) : (
@@ -137,9 +101,7 @@ export default function MapPage() {
             </div>
           ) : (
             <div className="map-card ghost fade-in-up">
-              <p className="ghost-hint">
-                Click a pin to unlock its story — including neighbors-helping-neighbors.
-              </p>
+              <p className="ghost-hint">Select a community location to learn more.</p>
             </div>
           )}
         </aside>
