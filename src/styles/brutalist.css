@@ -2571,7 +2571,33 @@ body.scrolled .fade-in-up {
   }
 }
 
+/* WHY LIST STYLING (for StoriesPage) */
+.why-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 1.25rem;
+}
 
+.why-list li {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+  position: relative;
+  line-height: 1.6;
+}
+
+.why-list li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--mag);
+  font-weight: 900;
+  font-size: 1.2rem;
+}
+
+.why-list strong {
+  color: var(--mag);
+  font-weight: 800;
+}
 
 
 
