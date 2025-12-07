@@ -177,8 +177,9 @@ export default function ArchivePage() {
             SUBMIT RESOURCE
           </button>
         </form>
-        <Footer />
+      
       </section>
+        <Footer />
     </div>
   );
 }
