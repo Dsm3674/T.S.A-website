@@ -3,6 +3,8 @@ import metrocrestImg from "../assets/metrocrest.jpg";
 import noteloveImg from "../assets/notelove.jpg";
 import farmersImg from "../assets/coppell-farmers-market.jpg";
 import neighborsInNeedImg from "../assets/neighbors-in-need.jpg";
+import Footer from "../components/Footer";
+
 
 export default function ArchivePage() {
   const [q, setQ] = useState("");
