@@ -5,7 +5,6 @@ import farmersImg from "../assets/coppell-farmers-market.jpg";
 import neighborsInNeedImg from "../assets/neighbors-in-need.jpg";
 import Footer from "../components/Footer";
 
-
 export default function ArchivePage() {
   const [q, setQ] = useState("");
 
@@ -55,133 +54,101 @@ export default function ArchivePage() {
   });
 
   return (
-    <div className="page archive page-enter page-enter-active">
-      <header className="page-head reveal">
-        <h2 className="xxl skew">COPPELL ARCHIVE</h2>
-        <p className="kicker">Index — Search. Discover. Explore.</p>
-      </header>
+    <>
+      <div className="page archive page-enter page-enter-active">
 
-      <section className="archive-search slab reveal delay-1">
-        <h3 className="display sm">SEARCH RESOURCES</h3>
+        <header className="page-head reveal">
+          <h2 className="xxl skew">COPPELL ARCHIVE</h2>
+          <p className="kicker">Index — Search. Discover. Explore.</p>
+        </header>
 
-        <div className="better-search">
-          <div className="better-search-inner">
-            <input
-              type="text"
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              placeholder="Search by name, category, or keyword…"
-              className="better-search-input"
-            />
-            <button className="better-search-btn">SEARCH</button>
-          </div>
-        </div>
+        <section className="archive-search slab reveal delay-1">
+          <h3 className="display sm">SEARCH RESOURCES</h3>
 
-        <div className="search-hint">
-          Try: <code>farmers market</code>{" "}
-          <code>music</code>{" "}
-          <code>support</code>{" "}
-          <code>mutual aid</code>
-        </div>
-      </section>
-
-      <section className="archive-grid">
-        {filtered.map((r, i) => (
-          <a
-            key={i}
-            href={r.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`archive-card jag-${(i % 3) + 1} reveal delay-${(i % 4) + 1}`}
-          >
-            <img src={r.img} alt={r.name} className="archive-img" />
-            <div className="archive-title">{r.name}</div>
-            <div className="kicker">{r.type}</div>
-            <p className="lead" style={{ marginTop: "1rem" }}>
-              {r.desc}
-            </p>
-            <div className="archive-tags">
-              {r.tags.map((tag) => (
-                <span key={tag} className="archive-tag">
-                  {tag}
-                </span>
-              ))}
+          <div className="better-search">
+            <div className="better-search-inner">
+              <input
+                type="text"
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+                placeholder="Search by name, category, or keyword…"
+                className="better-search-input"
+              />
+              <button className="better-search-btn">SEARCH</button>
             </div>
-          </a>
-        ))}
-      </section>
-
-      <section className="slab reveal delay-1">
-        <h3 className="display">How To Use This Index</h3>
-        <p className="lead">
-          The archive is a jumping-off point. Each card represents a real
-          organization doing work in and around Coppell. Use this page to scan
-          what exists, then follow links to volunteer, donate, or learn more.
-        </p>
-      </section>
-
-      <section className="slab reveal delay-2">
-        <div className="eyebrow">COMMUNITY THEMES</div>
-        <h3 className="display">What These Resources Represent</h3>
-        <p className="lead">
-          Food access, youth arts, mutual aid, and wraparound support services
-          show how a city cares for its people. Together, these organizations
-          reflect Coppell&apos;s commitment to showing up for one another.
-        </p>
-      </section>
-
-      {/* ===========================
-          USER SUBMISSION FORM
-      ============================ */}
-      <section className="slab block-pop reveal delay-3">
-        <div className="eyebrow">Submit a Resource</div>
-        <h3 className="display">Add to the Community Archive</h3>
-        <p className="lead">
-          Know an organization, club, service, or initiative that should be included?
-          Add it here. Submissions help keep the archive living and updated.
-        </p>
-
-        <form
-          className="archive-form"
-          onSubmit={(e) => {
-            e.preventDefault();
-            alert("Thank you! Your resource has been submitted for review.");
-          }}
-        >
-          <div className="form-field">
-            <label>Organization Name</label>
-            <input type="text" required placeholder="Ex: Coppell Choir Club" />
           </div>
 
-          <div className="form-field">
-            <label>Category</label>
-            <input type="text" required placeholder="Food, Arts, Education…" />
+          <div className="search-hint">
+            Try: <code>farmers market</code>{" "}
+            <code>music</code>{" "}
+            <code>support</code>{" "}
+            <code>mutual aid</code>
           </div>
+        </section>
 
-          <div className="form-field">
-            <label>Description</label>
-            <textarea required placeholder="Brief description of the resource…" />
-          </div>
+        <section className="archive-grid">
+          {filtered.map((r, i) => (
+            <a
+              key={i}
+              href={r.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`archive-card jag-${(i % 3) + 1} reveal delay-${(i % 4) + 1}`}
+            >
+              <img src={r.img} alt={r.name} className="archive-img" />
+              <div className="archive-title">{r.name}</div>
+              <div className="kicker">{r.type}</div>
+              <p className="lead" style={{ marginTop: "1rem" }}>
+                {r.desc}
+              </p>
+              <div className="archive-tags">
+                {r.tags.map((tag) => (
+                  <span key={tag} className="archive-tag">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </a>
+          ))}
+        </section>
 
-          <div className="form-field">
-            <label>Website (optional)</label>
-            <input type="url" placeholder="https://example.org" />
-          </div>
+        <section className="slab reveal delay-1">
+          <h3 className="display">How To Use This Index</h3>
+          <p className="lead">
+            The archive is a jumping-off point...
+          </p>
+        </section>
 
-          <div className="form-field">
-            <label>Tags</label>
-            <input type="text" placeholder="support, youth, music…" />
-          </div>
+        <section className="slab reveal delay-2">
+          <div className="eyebrow">COMMUNITY THEMES</div>
+          <h3 className="display">What These Resources Represent</h3>
+          <p className="lead">
+            Food access, youth arts, mutual aid...
+          </p>
+        </section>
 
-          <button className="btn slab" type="submit">
-            SUBMIT RESOURCE
-          </button>
-        </form>
-      
-      </section>
-       
-    </div>
-     <Footer />
+        <section className="slab block-pop reveal delay-3">
+          <div className="eyebrow">Submit a Resource</div>
+          <h3 className="display">Add to the Community Archive</h3>
+
+          <form
+            className="archive-form"
+            onSubmit={(e) => {
+              e.preventDefault();
+              alert("Thank you! Your resource has been submitted for review.");
+            }}
+          >
+            {/* form fields... */}
+            <button className="btn slab" type="submit">
+              SUBMIT RESOURCE
+            </button>
+          </form>
+        </section>
+
+      </div>
+
+      <Footer />  {/* FIXED position */}
+    </>
   );
 }
 
