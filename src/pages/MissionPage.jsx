@@ -65,6 +65,8 @@ export default function MissionPage() {
           feeling for anyone who visits.
         </p>
       </section>
+      <Footer />
+
 
     </div>
   );
