@@ -130,6 +130,8 @@ export default function ReferencePage() {
           <li>Neighbors In Need — mutual aid resources and community narratives</li>
         </ul>
       </section>
+      <Footer />
+
     </div>
   );
 }
