@@ -179,8 +179,9 @@ export default function ArchivePage() {
         </form>
       
       </section>
-        <Footer />
+       
     </div>
+     <Footer />
   );
 }
 
