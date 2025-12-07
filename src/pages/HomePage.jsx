@@ -51,15 +51,16 @@ export default function HomePage({ setCurrentPage }) {
   }, []);
 
   return (
-    <div className="page home">
-      <section className="hero">
+    <div className="page home page-enter page-enter-active">
+      <section className="hero reveal">
         <canvas ref={canvasRef} className="hero-canvas" />
         <div className="hero-inner">
           <h1 className="hero-title">
             Coppell <span className="outline">ARCHIVE</span>
           </h1>
           <p className="hero-kicker">Showing the Community</p>
-          <div className="hero-cta">
+
+          <div className="hero-cta reveal delay-1">
             <button
               className="btn slab"
               onClick={() => setCurrentPage("timeline")}
@@ -85,7 +86,10 @@ export default function HomePage({ setCurrentPage }) {
           { num: "10K+", label: "NEIGHBORS CONNECTED" },
           { num: "4", label: "ANCHOR ORGS FEATURED" },
         ].map((s, i) => (
-          <div key={i} className={`stat-card skew-${(i % 3) + 1}`}>
+          <div
+            key={i}
+            className={`stat-card skew-${(i % 3) + 1} reveal delay-${i + 1}`}
+          >
             <div className="stat-num">{s.num}</div>
             <div className="stat-label">{s.label}</div>
           </div>
@@ -107,7 +111,9 @@ export default function HomePage({ setCurrentPage }) {
         ].map((item, i) => (
           <button
             key={i}
-            className={`split-card ${i === 0 ? "tilt-left" : "tilt-right"}`}
+            className={`split-card ${
+              i === 0 ? "tilt-left" : "tilt-right"
+            } reveal delay-${i + 1}`}
             onClick={() => setCurrentPage(item.page)}
           >
             <h3>{item.title}</h3>
@@ -117,7 +123,7 @@ export default function HomePage({ setCurrentPage }) {
         ))}
       </section>
 
-      <section className="slab people-section">
+      <section className="slab people-section reveal">
         <div className="eyebrow">THE PEOPLE OF COPPELL</div>
         <h3 className="display">Why We Are A Community</h3>
         <p className="lead">
@@ -127,7 +133,7 @@ export default function HomePage({ setCurrentPage }) {
         </p>
 
         <div className="people-grid">
-          <div className="people-card gift-card">
+          <div className="people-card gift-card reveal delay-1">
             <div className="people-tag">Market Volunteer</div>
             <h4>Saturday Regular</h4>
             <p>
@@ -135,7 +141,8 @@ export default function HomePage({ setCurrentPage }) {
               remembers your favorite bread.
             </p>
           </div>
-          <div className="people-card gift-card gift-card-delay">
+
+          <div className="people-card gift-card gift-card-delay reveal delay-2">
             <div className="people-tag">Youth Leader</div>
             <h4>NoteLove Mentor</h4>
             <p>
@@ -143,7 +150,8 @@ export default function HomePage({ setCurrentPage }) {
               themselves on stage someday.
             </p>
           </div>
-          <div className="people-card gift-card gift-card-late">
+
+          <div className="people-card gift-card gift-card-late reveal delay-3">
             <div className="people-tag">Neighbor In Action</div>
             <h4>Metrocrest Advocate</h4>
             <p>
@@ -151,7 +159,8 @@ export default function HomePage({ setCurrentPage }) {
               stability when they need it most.
             </p>
           </div>
-          <div className="people-card gift-card gift-card-late">
+
+          <div className="people-card gift-card gift-card-late reveal delay-4">
             <div className="people-tag">Mutual Aid Organizer</div>
             <h4>Neighbors In Need</h4>
             <p>
@@ -162,7 +171,7 @@ export default function HomePage({ setCurrentPage }) {
         </div>
       </section>
 
-      <section className="slab">
+      <section className="slab reveal">
         <div className="eyebrow">COMMUNITY RESOURCES</div>
         <h3 className="display">Anchor Organizations in Coppell</h3>
         <p className="lead">
@@ -171,92 +180,54 @@ export default function HomePage({ setCurrentPage }) {
         </p>
 
         <div className="spotlight-grid" style={{ marginTop: "2rem" }}>
-          <a
-            href="https://coppellfarmersmarket.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="spotlight-card"
-          >
-            <img
-              src={farmersImg}
-              className="spotlight-img"
-              alt="Coppell Farmers Market"
-            />
-            <h4>Coppell Farmers Market</h4>
-            <p
-              className="lead"
-              style={{ fontSize: "0.95rem", marginTop: "0.5rem" }}
+          {[ 
+            {
+              name: "Coppell Farmers Market",
+              img: farmersImg,
+              link: "https://coppellfarmersmarket.org/",
+              desc:
+                "Local growers, food artisans, and weekend rituals that keep Coppell rooted in community.",
+            },
+            {
+              name: "NoteLove",
+              img: noteloveImg,
+              link: "https://www.notelove.org/",
+              desc:
+                "A youth-led nonprofit offering free music lessons to students across DFW.",
+            },
+            {
+              name: "Metrocrest Services",
+              img: metrocrestImg,
+              link: "https://metrocrestservices.org/",
+              desc:
+                "A regional lifeline providing food, housing assistance, senior services, and crisis support.",
+            },
+            {
+              name: "Neighbors In Need",
+              img: neighborsInNeedImg,
+              link: "https://www.instagram.com/neighbors_in_need_/",
+              desc:
+                "A neighbors-helping-neighbors initiative organizing mutual aid, from meal trains to supply drops.",
+            },
+          ].map((org, i) => (
+            <a
+              key={i}
+              href={org.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`spotlight-card reveal delay-${i + 1}`}
             >
-              Local growers, food artisans, and weekend rituals that keep
-              Coppell rooted in community.
-            </p>
-          </a>
-
-          <a
-            href="https://www.notelove.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="spotlight-card"
-          >
-            <img
-              src={noteloveImg}
-              className="spotlight-img"
-              alt="NoteLove"
-            />
-            <h4>NoteLove</h4>
-            <p
-              className="lead"
-              style={{ fontSize: "0.95rem", marginTop: "0.5rem" }}
-            >
-              A youth-led nonprofit offering free music lessons to students
-              across DFW, including Coppell.
-            </p>
-          </a>
-
-          <a
-            href="https://metrocrestservices.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="spotlight-card"
-          >
-            <img
-              src={metrocrestImg}
-              className="spotlight-img"
-              alt="Metrocrest Services"
-            />
-            <h4>Metrocrest Services</h4>
-            <p
-              className="lead"
-              style={{ fontSize: "0.95rem", marginTop: "0.5rem" }}
-            >
-              A regional lifeline providing food, housing assistance, senior
-              services, and crisis support.
-            </p>
-          </a>
-
-          <a
-            href="https://www.instagram.com/neighbors_in_need_/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="spotlight-card"
-          >
-            <img
-              src={neighborsInNeedImg}
-              className="spotlight-img"
-              alt="Neighbors In Need"
-            />
-            <h4>Neighbors In Need</h4>
-            <p
-              className="lead"
-              style={{ fontSize: "0.95rem", marginTop: "0.5rem" }}
-            >
-              A neighbors-helping-neighbors initiative organizing mutual aid,
-              from meal trains to essential supply drops.
-            </p>
-          </a>
+              <img src={org.img} className="spotlight-img" alt={org.name} />
+              <h4>{org.name}</h4>
+              <p className="lead" style={{ fontSize: "0.95rem", marginTop: "0.5rem" }}>
+                {org.desc}
+              </p>
+            </a>
+          ))}
         </div>
       </section>
     </div>
   );
 }
+
 
