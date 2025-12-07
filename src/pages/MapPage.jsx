@@ -108,6 +108,8 @@ export default function MapPage() {
           )}
         </aside>
       </div>
+      <Footer />
+
     </div>
   );
 }
