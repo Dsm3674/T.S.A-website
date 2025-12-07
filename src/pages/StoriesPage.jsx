@@ -11,48 +11,42 @@ export default function StoriesPage() {
     {
       title: "FIRST BUSINESS OPENS",
       year: 1840,
-      excerpt: "A small corner café becomes the unofficial meeting spot.",
+      excerpt: "A small corner café becomes the unofficial meeting spot for early settlers.",
       img: historyImg,
       link: "https://www.coppelltx.gov/610/History-of-Coppell",
     },
-
     {
-      title: "Coppell Farmers Market Becomes a Weekly Ritual",
+      title: "Farmers Market Becomes a Ritual",
       year: 2009,
-      excerpt:
-        "Residents gather every Saturday to support local growers, makers, and family-owned businesses.",
+      excerpt: "Residents gather every Saturday to support local growers and family-owned businesses.",
       link: "https://coppellfarmersmarket.org/",
       img: farmersImg,
     },
     {
-      title: "NoteLove Brings Free Music Lessons to Local Students",
+      title: "NoteLove Brings Free Music",
       year: 2019,
-      excerpt:
-        "Youth volunteers turn practice rooms and living rooms into studios, expanding access to music education.",
+      excerpt: "Youth volunteers turn practice rooms and living rooms into studios.",
       link: "https://www.notelove.org/",
       img: noteloveImg,
     },
     {
-      title: "Metrocrest Services Expands Support in Coppell",
+      title: "Metrocrest Expands Support",
       year: 2023,
-      excerpt:
-        "Food pantry lines, housing questions, and senior needs all meet a regional safety net headquartered nearby.",
+      excerpt: "Food pantry lines and housing needs meet a regional safety net.",
       link: "https://metrocrestservices.org/",
       img: metrocrestImg,
     },
     {
-      title: "Neighbors In Need Rallies Mutual Aid",
+      title: "Neighbors In Need Rallies",
       year: 2024,
-      excerpt:
-        "Residents coordinate grocery drops, rides, and support so families never feel alone.",
+      excerpt: "Residents coordinate grocery drops and rides so families never feel alone.",
       link: "https://www.instagram.com/neighbors_in_need_/",
       img: neighborsInNeedImg,
     },
   ];
 
   return (
-    <div className="page stories page-enter page-enter-active">
-      
+    <div className="page stories">
       <header className="page-head fade-in">
         <h2 className="xxl skew">STORIES</h2>
         <p className="kicker">Raw narratives — bold layout — living history</p>
@@ -61,12 +55,11 @@ export default function StoriesPage() {
       <div className="stories-list">
         {stories.map((s, i) => (
           <div
-            key={`story-${i}-${s.year}`}
-            className={`story-row reveal fade-in-up tilt-hover delay-${(i % 5) + 1} ${
-              i % 2 ? "tilt-r" : "tilt-l"
-            }`}
+            key={`story-${i}`}
+            // Added fade-in-up class here so the whole row animates in
+            className={`story-row fade-in-up delay-${(i % 3) + 1}`}
           >
-            <div className="story-card slab pop-hover">
+            <div className="story-card slab">
               <div className="eyebrow">{s.year}</div>
               <h3 className="display">{s.title}</h3>
               <p className="lead">{s.excerpt}</p>
@@ -89,58 +82,13 @@ export default function StoriesPage() {
               <img
                 src={s.img}
                 alt={s.title}
-                className={`story-photo ${
-                  s.img === historyImg ? "sepia" : "clean"
-                }`}
+                className="story-photo"
+                loading="lazy"
               />
             </div>
           </div>
         ))}
       </div>
-
-      <section className="slab block-pop reveal delay-2" style={{ marginTop: "4rem" }}>
-        <div className="eyebrow">WHY THESE ORGANIZATIONS</div>
-        <h3 className="display">Why We Wanted to Highlight Them</h3>
-
-        <p className="lead">
-          As students growing up in Coppell, we have seen how different parts 
-          of the community support one another — from food access to youth arts 
-          to mutual aid. We chose these organizations because they represent 
-          the real backbone of our city.
-        </p>
-
-        <ul className="why-list" style={{ marginTop: "1.25rem" }}>
-          <li>
-            <strong>Coppell Farmers Market</strong> — shows how food brings people together  
-            every weekend and gives small businesses a place to grow.
-          </li>
-
-          <li>
-            <strong>NoteLove</strong> — demonstrates how youth in Coppell step up to teach, 
-            mentor, and create opportunities for others.
-          </li>
-
-          <li>
-            <strong>Metrocrest Services</strong> — represents compassion and stability for neighbors 
-            facing financial, housing, or food insecurity.
-          </li>
-
-          <li>
-            <strong>Neighbors In Need</strong> — captures the heart of mutual aid: people helping 
-            people, no questions asked.
-          </li>
-
-          <li>
-            <strong>Coppell Historical Archives</strong> — remind us how far the city has come 
-            and how community identity is built over generations.
-          </li>
-        </ul>
-
-        <p className="lead" style={{ marginTop: "1rem" }}>
-          Partnering with these organizations allowed us to build a project that honors
-          real local impact while telling a strong visual story for TSA.
-        </p>
-      </section>
 
       <Footer />
     </div>
