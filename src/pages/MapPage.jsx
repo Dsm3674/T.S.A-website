@@ -2,114 +2,88 @@ import React from "react";
 import Footer from "../components/Footer";
 
 export default function MapPage() {
-  const pins = [
-    { x: 540, y: 580, title: "Coppell Farmers Market" },
-    { x: 620, y: 270, title: "Metrocrest Services" },
-    { x: 460, y: 330, title: "NoteLove" },
-    { x: 700, y: 520, title: "Neighbors In Need" },
-  ];
-
   return (
     <div className="page map">
       <header className="page-head fade-in">
-        <h2 className="xxl skew">MAP</h2>
-        <p className="kicker">SECTION OF COPPELL</p>
+        <h2 className="xxl skew">COMMUNITY GRAPH</h2>
+        <p className="kicker">how coppell organizations interconnect</p>
       </header>
 
-      {/* Use same floating + tilt animation block */}
-      <div className="map-spin-frame fade-in-up reveal">
-        <span className="map-label">Section of Coppell — SVG Reference</span>
+      {/* Graph container using SAME animations as map */}
+      <div className="map-spin-frame fade-in-up reveal" style={{ maxWidth: "650px", margin: "0 auto" }}>
+        
+        {/* Label on top-left */}
+        <span className="map-label">Coppell Community Network Graph</span>
 
-        {/* SVG Map (brutalist) */}
-        <div className="svg-map-container">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1200 900"
-            className="svg-map" // this already spins in your CSS
-          >
-            <defs>
-              <pattern
-                id="brutalGrid"
-                width="40"
-                height="40"
-                patternUnits="userSpaceOnUse"
-              >
-                <rect
-                  width="40"
-                  height="40"
-                  fill="none"
-                  stroke="#555"
-                  strokeWidth="1"
-                  opacity="0.15"
-                />
-              </pattern>
-            </defs>
+        {/* Small SVG Graph (replaces the map) */}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 800 600"
+          className="svg-map"        /* this gives spin + float automatically */
+          style={{ padding: "20px" }}
+        >
+          {/* Background grid still works */}
+          <defs>
+            <pattern id="gridPattern" width="40" height="40" patternUnits="userSpaceOnUse">
+              <rect width="40" height="40" fill="none" stroke="#555" strokeWidth="1" opacity="0.12" />
+            </pattern>
+          </defs>
 
-            <rect width="100%" height="100%" fill="var(--panel)" />
-            <rect width="100%" height="100%" fill="url(#brutalGrid)" />
+          <rect width="100%" height="100%" fill="var(--panel)" />
+          <rect width="100%" height="100%" fill="url(#gridPattern)" />
 
-            <path
-              d="M180 160 L1020 200 L1130 380
-                 L1020 560 L780 740 L420 760 L200 540 Z"
-              fill="#e6dfc7"
-              stroke="var(--ink)"
-              strokeWidth="14"
-            />
+          {/* Connections */}
+          <line x1="400" y1="100" x2="200" y2="300" stroke="var(--ink)" strokeWidth="8" />
+          <line x1="400" y1="100" x2="600" y2="300" stroke="var(--ink)" strokeWidth="8" />
+          <line x1="400" y1="100" x2="400" y2="450" stroke="var(--ink)" strokeWidth="8" />
+          <line x1="200" y1="300" x2="400" y2="450" stroke="var(--ink)" strokeWidth="8" />
+          <line x1="600" y1="300" x2="400" y2="450" stroke="var(--ink)" strokeWidth="8" />
 
-            {/* lake = blue */}
-            <ellipse
-              cx="600"
-              cy="380"
-              rx="120"
-              ry="75"
-              fill="#1b4fff"
-              stroke="var(--ink)"
-              strokeWidth="10"
-            />
+          {/* Nodes */}
+          <circle cx="400" cy="100" r="35" fill="var(--mag)" stroke="var(--ink)" strokeWidth="6" />
+          <circle cx="200" cy="300" r="30" fill="var(--cyan)" stroke="var(--ink)" strokeWidth="6" />
+          <circle cx="600" cy="300" r="30" fill="var(--cyan)" stroke="var(--ink)" strokeWidth="6" />
+          <circle cx="400" cy="450" r="32" fill="var(--lime)" stroke="var(--ink)" strokeWidth="6" />
 
-            <path d="M160 480 L1090 500" stroke="var(--ink)" strokeWidth="14" />
-            <path d="M350 120 L390 780" stroke="var(--ink)" strokeWidth="14" />
+          {/* Labels */}
+          <text x="400" y="95" textAnchor="middle" fontFamily="Courier New" fontSize="18" fill="var(--ink)">
+            Farmers Market
+          </text>
 
-            <text
-              x="600"
-              y="470"
-              fontFamily="Courier New, monospace"
-              fontSize="64"
-              fill="var(--ink)"
-              textAnchor="middle"
-              fontWeight="700"
-            >
-              COPPELL
-            </text>
+          <text x="200" y="295" textAnchor="middle" fontFamily="Courier New" fontSize="18" fill="var(--ink)">
+            NoteLove
+          </text>
 
-            <text
-              x="600"
-              y="320"
-              fontFamily="Courier New, monospace"
-              fontSize="26"
-              fill="var(--ink)"
-              textAnchor="middle"
-            >
-              Duck Pond Park
-            </text>
-          </svg>
+          <text x="600" y="295" textAnchor="middle" fontFamily="Courier New" fontSize="18" fill="var(--ink)">
+            Metrocrest
+          </text>
 
-          {/* Pins use same classes as before */}
-          {pins.map((p, i) => (
-            <button
-              key={i}
-              className="map-pin" // already styled
-              style={{ left: p.x, top: p.y }}
-            >
-              <span className="pin-dot"></span>
-              <span className="pin-tooltip">{p.title}</span>
-            </button>
-          ))}
-        </div>
+          <text x="400" y="445" textAnchor="middle" fontFamily="Courier New" fontSize="20" fill="var(--ink)">
+            Neighbors In Need
+          </text>
+        </svg>
       </div>
+
+      {/* Sidebar explanation */}
+      <section className="slab block-pop fade-in-up delay-1">
+        <div className="eyebrow">HOW TO READ THIS GRAPH</div>
+        <h3 className="display">Community Systems Work Together</h3>
+        <p className="lead">
+          Coppell’s support ecosystem is interconnected. This graph visualizes how
+          food access, arts programs, housing assistance, and mutual aid groups reinforce
+          each other to support families across the city.
+        </p>
+        <ul>
+          <li><strong>Farmers Market</strong> provides local food and volunteers.</li>
+          <li><strong>NoteLove</strong> enriches culture and community bonding.</li>
+          <li><strong>Metrocrest</strong> anchors social services and emergency aid.</li>
+          <li><strong>Neighbors In Need</strong> fills critical gaps through mutual aid.</li>
+        </ul>
+      </section>
 
       <Footer />
     </div>
   );
 }
+
 
