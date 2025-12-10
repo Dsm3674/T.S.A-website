@@ -1751,4 +1751,30 @@ textarea:focus {
 
 
 
+/* Prevent reflow & resizing */
+@media (max-width: 768px) {
+  .map-pane.compact-map {
+    min-height: 280px !important;
+    height: 280px !important;
+  }
+
+  /* Disable scaling and transform-jumps */
+  .map-pin {
+    transform: translate(-50%, -50%) !important;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* Prevent parent from resizing on interaction */
+  .map-pane {
+    overflow: hidden;
+    touch-action: none;
+    position: relative;
+  }
+}
+
+
+
+
 
