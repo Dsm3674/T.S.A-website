@@ -1730,5 +1730,12 @@ textarea:focus {
   color: inherit !important;
 }
 
+.timeline-era {
+  font-size: 0.8rem;
+  color: var(--ink-dim);
+  margin-top: 0.5rem;
+}
+
+
 
 
