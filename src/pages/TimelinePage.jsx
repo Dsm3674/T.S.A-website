@@ -6,6 +6,20 @@ export default function TimelinePage() {
   const [selectedEra, setSelectedEra] = useState(null);
   const scrollRef = useRef(null);
 
+
+  <div className="slab reveal fade-in-up">
+  <h2 className="display">Why Coppell’s Eras Matter</h2>
+  <p className="lead" style={{ marginTop: "1rem" }}>
+    Coppell’s history unfolds in distinct eras—early settlement, agricultural
+    growth, suburban expansion, and modern community development. Understanding
+    these shifts helps us see how local identity, culture, and resources evolved.
+    Each era brought new institutions, diverse voices, and changes in how
+    residents lived and connected. The timeline highlights how past decisions and
+    community values shaped today’s Coppell.
+  </p>
+</div>
+
+  
   const eras = [
     {
       id: 1,
