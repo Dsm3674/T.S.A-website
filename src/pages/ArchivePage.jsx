@@ -39,6 +39,15 @@ export default function ArchivePage() {
     },
   ];
 
+  {
+  title: "Neighbors In Need",
+  description:
+    "A grassroots support network providing groceries, rides, and mutual aid to Coppell families.",
+  image: "/images/neighbors-in-need.jpg",
+  link: "https://www.instagram.com/neighbors_in_need_/"
+}
+
+
   <div className="slab reveal fade-in-up">
   <h2 className="display">Why Our Community Archive Matters</h2>
   <p className="lead" style={{ marginTop: "1rem" }}>
