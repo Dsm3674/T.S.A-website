@@ -39,6 +39,18 @@ export default function ArchivePage() {
     },
   ];
 
+  <div className="slab reveal fade-in-up">
+  <h2 className="display">Why Our Community Archive Matters</h2>
+  <p className="lead" style={{ marginTop: "1rem" }}>
+    The Coppell Community Archive preserves the stories, organizations, and
+    cultural foundations that shape our city. By documenting local projects—
+    from Metrocrest Services to NoteLove and neighborhood-led initiatives like
+    Neighbors In Need—we create a living record of community support, resilience,
+    and shared history. This archive ensures future generations understand the
+    people and groups who strengthened Coppell.
+  </p>
+</div>
+
   return (
     <div className="page archive">
       <header className="page-head fade-in">
