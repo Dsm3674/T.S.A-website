@@ -1838,6 +1838,145 @@ textarea:focus {
   text-transform: uppercase;
 }
 
+.map-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: 2.5rem;
+  align-items: flex-start;
+  margin-top: 2.5rem;
+}
+
+.map-side-copy ul {
+  margin-top: 0.75rem;
+  padding-left: 1.2rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .map-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================
+   MAP FRAME – FLOAT + TILT (MAITSO STYLE)
+   ========================================= */
+
+.map-spin-frame {
+  position: relative;
+  border: 4px solid var(--ink);
+  box-shadow: 14px 14px 0 var(--shadow);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  animation: mapFloat 12s ease-in-out infinite;
+  background: var(--panel);
+}
+
+.map-spin-frame:hover {
+  transform: rotate3d(1, 1, 0, 8deg) translateY(-8px);
+  box-shadow: 22px 22px 0 var(--mag);
+}
+
+/* slow float */
+@keyframes mapFloat {
+  0%   { transform: rotate(0deg) translateY(0); }
+  50%  { transform: rotate(1.5deg) translateY(-10px); }
+  100% { transform: rotate(0deg) translateY(0); }
+}
+
+.map-image {
+  width: 100%;
+  display: block;
+}
+
+/* label on top of the map */
+.map-label {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 6px 12px;
+  background: rgba(0, 0, 0, 0.7);
+  color: var(--ink);
+  font-family: "Courier New", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  border: 2px solid var(--ink);
+  text-transform: uppercase;
+  z-index: 4;
+}
+
+/* =========================================
+   MAP PINS – NOW STABLE
+   ========================================= */
+
+.map-pin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%); /* anchor above coordinate */
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 5;
+}
+
+/* only the dot scales – prevents pin jumping */
+.pin-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--mag);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 0 2px var(--ink), 0 6px 0 var(--shadow);
+  transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease);
+}
+
+.map-pin:hover .pin-dot,
+.map-pin:focus-visible .pin-dot {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 2px var(--mag), 0 8px 0 var(--shadow);
+}
+
+/* tooltip */
+.pin-tooltip {
+  position: absolute;
+  left: 50%;
+  top: -10px;
+  transform: translate(-50%, -135%);
+  background: var(--bg);
+  color: var(--ink);
+  padding: 8px 10px;
+  border: 2px solid var(--ink);
+  font-size: 0.75rem;
+  max-width: 220px;
+  text-align: left;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.18s var(--ease), transform 0.18s var(--ease);
+  white-space: normal;
+}
+
+.map-pin:hover .pin-tooltip,
+.map-pin:focus-visible .pin-tooltip {
+  opacity: 1;
+  transform: translate(-50%, -155%);
+}
+
+/* Mobile: calmer + readable */
+@media (max-width: 768px) {
+  .map-spin-frame {
+    animation: none; /* disable tilt/float on small screens */
+    transform: none !important;
+    box-shadow: 10px 10px 0 var(--shadow);
+  }
+
+  .pin-tooltip {
+    font-size: 0.7rem;
+    max-width: 180px;
+  }
+}
 
 
 
