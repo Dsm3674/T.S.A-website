@@ -967,6 +967,9 @@ textarea:focus {
   border: var(--border-width) solid var(--ink);
   background: radial-gradient(circle at top, #0b1220, #020617);
   box-shadow: 16px 16px 0 var(--shadow);
+  verflow: hidden;
+  position: relative;
+  touch-action: manipulation;
 }
 
 /* compact map aspect ratio for MapPage */
@@ -1690,6 +1693,31 @@ textarea:focus {
     animation-iteration-count: 1 !important;
     transition: none !important;
     transform: none !important;
+  }
+}
+/* MOBILE FIXES FOR MAP */
+@media (max-width: 768px) {
+  .map-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem;
+  }
+
+  .map-pane.compact-map {
+    aspect-ratio: 4 / 3 !important;
+    min-height: 260px !important;
+  }
+
+  .map-pin {
+    transform: translate(-50%, -50%) scale(1.4);
+  }
+
+  .pin-tooltip {
+    font-size: 0.65rem;
+    padding: 3px 6px;
+  }
+
+  .map-side .slab {
+    padding: 1.35rem;
   }
 }
 
