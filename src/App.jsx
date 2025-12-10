@@ -11,7 +11,7 @@ import ReferencePage from "./pages/ReferencePage";
 import MissionPage from "./pages/MissionPage";
 import "./styles/brutalist.css";
 
-// --- CHATBOT COMPONENT (Keep exactly as before) ---
+
 function Chatbot() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([]);
@@ -19,55 +19,131 @@ function Chatbot() {
   const [loading, setLoading] = useState(false);
   const chatEndRef = useRef(null);
 
+  // Replace this with your Gemini API key
+  const GEMINI_KEY = "YOUR_GEMINI_API_KEY_HERE";
+
   useEffect(() => {
-    setMessages([{ role: "assistant", content: "Hey, I'm Archive Bot. Ask me about Coppell, community history, or how this archive works." }]);
+    setMessages([
+      {
+        role: "assistant",
+        content:
+          "Hey, I'm Archive Bot. Ask me about Coppell, community history, or how this archive works."
+      }
+    ]);
   }, []);
 
-  useEffect(() => { chatEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages, loading, open]);
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, loading, open]);
 
+  // ================================
+  // SEND FUNCTION USING GEMINI
+  // ================================
   const send = async () => {
     const trimmed = userInput.trim();
     if (!trimmed || loading) return;
+
     setMessages((prev) => [...prev, { role: "user", content: trimmed }]);
     setUserInput("");
     setLoading(true);
+
     try {
-      const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-      if (isDev) {
-        const res = await fetch("/api/chat", {
-          method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userPrompt: trimmed }),
-        });
-        if (!res.ok) throw new Error();
-        const data = await res.json();
-        setMessages((prev) => [...prev, { role: "assistant", content: data.reply || "⚠️ Empty response." }]);
-      } else {
-        await new Promise(r => setTimeout(r, 500));
-        setMessages((prev) => [...prev, { role: "assistant", content: "I'm here to help learn about Coppell! (API unavailable in static demo)" }]);
-      }
-    } catch (err) {
-      setMessages((prev) => [...prev, { role: "assistant", content: "I'm having trouble connecting right now." }]);
+      // BUILD PROMPT FOR CHATBOT
+      const prompt = [
+        {
+          parts: [{ text: trimmed }],
+          role: "user"
+        }
+      ];
+
+      // CALL GEMINI API
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_KEY}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ contents: prompt })
+        }
+      );
+
+      const data = await response.json();
+      const text =
+        data?.candidates?.[0]?.content?.parts?.[0]?.text ||
+        "Sorry—Gemini didn't return a response.";
+
+      setMessages((prev) => [...prev, { role: "assistant", content: text }]);
+    } catch (e) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content: "⚠️ Trouble connecting to Gemini. Try again."
+        }
+      ]);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleKeyDown = (e) => { if (e.key === "Enter") { e.preventDefault(); send(); } };
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      send();
+    }
+  };
 
   return (
     <>
-      <button className="chat-toggle" onClick={() => setOpen((o) => !o)}>💬</button>
+      <button className="chat-toggle" onClick={() => setOpen((o) => !o)}>
+        💬
+      </button>
+
       <AnimatePresence>
         {open && (
-          <motion.div className="chatbot-container" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }}>
-            <div className="chatbot-header"><span>Archive Bot</span><button className="close-btn" onClick={() => setOpen(false)}>✕</button></div>
+          <motion.div
+            className="chatbot-container"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+          >
+            <div className="chatbot-header">
+              <span>Archive Bot</span>
+              <button className="close-btn" onClick={() => setOpen(false)}>
+                ✕
+              </button>
+            </div>
+
             <div className="chatbot-messages">
-              {messages.map((m, i) => <div key={i} className={`message ${m.role === "user" ? "user" : "bot"}`}>{m.content}</div>)}
-              {loading && <div className="loading"><span className="dot" /><span className="dot" /><span className="dot" /></div>}
+              {messages.map((m, i) => (
+                <div
+                  key={i}
+                  className={`message ${m.role === "user" ? "user" : "bot"}`}
+                >
+                  {m.content}
+                </div>
+              ))}
+
+              {loading && (
+                <div className="loading">
+                  <span className="dot" />
+                  <span className="dot" />
+                  <span className="dot" />
+                </div>
+              )}
+
               <div ref={chatEndRef} />
             </div>
+
             <div className="chatbot-input">
-              <input value={userInput} onChange={(e) => setUserInput(e.target.value)} onKeyDown={handleKeyDown} placeholder="Ask about Coppell..." />
-              <button onClick={send} disabled={loading}>{loading ? "..." : "Send"}</button>
+              <input
+                value={userInput}
+                onChange={(e) => setUserInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder="Ask about Coppell..."
+              />
+              <button onClick={send} disabled={loading}>
+                {loading ? "..." : "Send"}
+              </button>
             </div>
           </motion.div>
         )}
@@ -76,7 +152,9 @@ function Chatbot() {
   );
 }
 
-// --- MAIN APP COMPONENT ---
+/* ============================================================
+   MAIN APP COMPONENT
+   ============================================================ */
 export default function App() {
   const [currentPage, setCurrentPage] = useState("home");
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
@@ -86,13 +164,13 @@ export default function App() {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  // --- FORCE SCROLL TO TOP LOGIC ---
+  // Reset scroll + animations when switching pages
   useEffect(() => {
-    // 1. Force instant scroll to top
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
 
-    // 2. Re-trigger animations
-    const revealEls = document.querySelectorAll(".reveal, .fade-in, .fade-in-up");
+    const revealEls = document.querySelectorAll(
+      ".reveal, .fade-in, .fade-in-up"
+    );
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -104,27 +182,43 @@ export default function App() {
       },
       { threshold: 0.1 }
     );
+
     revealEls.forEach((el) => obs.observe(el));
     return () => obs.disconnect();
-  }, [currentPage]); 
+  }, [currentPage]);
 
   const renderPage = () => {
     switch (currentPage) {
-      case "stories": return <StoriesPage />;
-      case "timeline": return <TimelinePage />;
-      case "map": return <MapPage />;
-      case "archive": return <ArchivePage />;
-      case "reference": return <ReferencePage />;
-      case "mission": return <MissionPage />;
-      default: return <HomePage setCurrentPage={setCurrentPage} />;
+      case "stories":
+        return <StoriesPage />;
+      case "timeline":
+        return <TimelinePage />;
+      case "map":
+        return <MapPage />;
+      case "archive":
+        return <ArchivePage />;
+      case "reference":
+        return <ReferencePage />;
+      case "mission":
+        return <MissionPage />;
+      default:
+        return <HomePage setCurrentPage={setCurrentPage} />;
     }
   };
 
   return (
     <div className="app-container">
-      <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} theme={theme} setTheme={setTheme} />
+      <Navigation
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        theme={theme}
+        setTheme={setTheme}
+      />
+
       <main className="page-content">{renderPage()}</main>
+
       <Chatbot />
     </div>
   );
 }
+
