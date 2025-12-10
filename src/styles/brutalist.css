@@ -1738,4 +1738,17 @@ textarea:focus {
 
 
 
+/* When IntersectionObserver fires normally */
+.slice-reveal.show::after {
+  animation: sliceOut 0.8s var(--smooth) forwards;
+}
+
+/* Force the slice reveal to run automatically for headers
+   near the top of the viewport (IO sometimes fails at top). */
+.page-head.slice-reveal::after {
+  animation: sliceOut 0.9s var(--smooth) forwards;
+}
+
+
+
 
