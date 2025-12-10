@@ -1721,5 +1721,14 @@ textarea:focus {
   }
 }
 
+.reference-grid .slab {
+  color: var(--ink) !important;
+  background: var(--panel) !important;
+}
+
+.reference-grid .slab * {
+  color: inherit !important;
+}
+
 
 
