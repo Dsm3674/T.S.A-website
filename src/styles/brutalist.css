@@ -1774,6 +1774,72 @@ textarea:focus {
   }
 }
 
+.map-spin-frame {
+  position: relative;
+  border: 4px solid var(--ink);
+  box-shadow: 14px 14px 0 var(--shadow);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  animation: mapFloat 12s ease-in-out infinite;
+}
+
+/* Hover tilt like MAITSO gift card */
+.map-spin-frame:hover {
+  transform: rotate3d(1, 1, 0, 8deg) translateY(-8px);
+  box-shadow: 22px 22px 0 var(--mag);
+}
+
+/* Slow breathing float */
+@keyframes mapFloat {
+  0%   { transform: rotate(0deg) translateY(0); }
+  50%  { transform: rotate(1.5deg) translateY(-10px); }
+  100% { transform: rotate(0deg) translateY(0); }
+}
+
+/* Optional subtle spin */
+@keyframes mapSubtleSpin {
+  0%   { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(0.8deg) scale(1.01); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+.map-image {
+  width: 100%;
+  display: block;
+  animation: mapSubtleSpin 18s ease-in-out infinite;
+}
+
+/* Mobile: disable tilt + heavy spin */
+@media (max-width: 768px) {
+  .map-spin-frame {
+    animation: none;
+    transform: none !important;
+    box-shadow: 10px 10px 0 var(--shadow);
+  }
+
+  .map-image {
+    animation: none !important;
+  }
+} 
+
+.map-label {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 6px 12px;
+  background: rgba(0,0,0,0.6);
+  color: var(--ink);
+  font-family: "Courier New", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  border: 2px solid var(--ink);
+  z-index: 4;
+  text-transform: uppercase;
+}
+
+
+
 
 
 
