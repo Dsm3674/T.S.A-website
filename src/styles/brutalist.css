@@ -1978,7 +1978,24 @@ textarea:focus {
   }
 }
 
+/* Improve right-side text readability */
+.map-side.slab {
+  padding: 2.5rem 2rem !important;
+}
 
+/* Medium screens: prevent text from hitting edge */
+@media (max-width: 1100px) {
+  .map-side.slab {
+    padding: 2rem 1.5rem !important;
+  }
+}
+
+/* Mobile already collapses into one column, but add extra safety */
+@media (max-width: 768px) {
+  .map-side.slab {
+    padding: 1.75rem !important;
+  }
+}
 
 
 
