@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+
+const { GoogleGenerativeAI } = await import(
+  "https://esm.run/@google/generative-ai"
+);
+
 import Navigation from "./components/Navigation";
 import HomePage from "./pages/HomePage";
 import StoriesPage from "./pages/StoriesPage";
@@ -9,8 +14,8 @@ import MapPage from "./pages/MapPage";
 import ArchivePage from "./pages/ArchivePage";
 import ReferencePage from "./pages/ReferencePage";
 import MissionPage from "./pages/MissionPage";
-import "./styles/brutalist.css";
 
+import "./styles/brutalist.css";
 
 function Chatbot() {
   const [open, setOpen] = useState(false);
@@ -19,15 +24,16 @@ function Chatbot() {
   const [loading, setLoading] = useState(false);
   const chatEndRef = useRef(null);
 
-  // Replace this with your Gemini API key
-  const GEMINI_KEY = "YOUR_GEMINI_API_KEY_HERE";
+  // ✅ USE CDN GEMINI CLIENT
+  const genAI = new GoogleGenerativeAI("YOUR_API_KEY_HERE");
+  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
   useEffect(() => {
     setMessages([
       {
         role: "assistant",
         content:
-          "Hey, I'm Archive Bot. Ask me about Coppell, community history, or how this archive works."
+          "Hey, I'm Archive Bot. Ask me about Coppell or the community archive!"
       }
     ]);
   }, []);
@@ -36,56 +42,35 @@ function Chatbot() {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading, open]);
 
-  // ================================
-  // SEND FUNCTION USING GEMINI
-  // ================================
   const send = async () => {
-    const trimmed = userInput.trim();
-    if (!trimmed || loading) return;
+    const text = userInput.trim();
+    if (!text || loading) return;
 
-    setMessages((prev) => [...prev, { role: "user", content: trimmed }]);
+    setMessages((prev) => [...prev, { role: "user", content: text }]);
     setUserInput("");
     setLoading(true);
 
     try {
-      // BUILD PROMPT FOR CHATBOT
-      const prompt = [
-        {
-          parts: [{ text: trimmed }],
-          role: "user"
-        }
-      ];
+      const result = await model.generateContent(text);
+      const reply = result.response.text();
 
-      // CALL GEMINI API
-      const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_KEY}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ contents: prompt })
-        }
-      );
-
-      const data = await response.json();
-      const text =
-        data?.candidates?.[0]?.content?.parts?.[0]?.text ||
-        "Sorry—Gemini didn't return a response.";
-
-      setMessages((prev) => [...prev, { role: "assistant", content: text }]);
-    } catch (e) {
+      setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
+    } catch (err) {
+      console.error(err);
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
-          content: "⚠️ Trouble connecting to Gemini. Try again."
+          content:
+            "⚠️ Gemini couldn't respond. Check your API key restrictions."
         }
       ]);
-    } finally {
-      setLoading(false);
     }
+
+    setLoading(false);
   };
 
-  const handleKeyDown = (e) => {
+  const enterKey = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       send();
@@ -115,19 +100,16 @@ function Chatbot() {
 
             <div className="chatbot-messages">
               {messages.map((m, i) => (
-                <div
-                  key={i}
-                  className={`message ${m.role === "user" ? "user" : "bot"}`}
-                >
+                <div key={i} className={`message ${m.role}`}>
                   {m.content}
                 </div>
               ))}
 
               {loading && (
                 <div className="loading">
-                  <span className="dot" />
-                  <span className="dot" />
-                  <span className="dot" />
+                  <span className="dot"></span>
+                  <span className="dot"></span>
+                  <span className="dot"></span>
                 </div>
               )}
 
@@ -138,7 +120,7 @@ function Chatbot() {
               <input
                 value={userInput}
                 onChange={(e) => setUserInput(e.target.value)}
-                onKeyDown={handleKeyDown}
+                onKeyDown={enterKey}
                 placeholder="Ask about Coppell..."
               />
               <button onClick={send} disabled={loading}>
@@ -152,23 +134,21 @@ function Chatbot() {
   );
 }
 
-/* ============================================================
-   MAIN APP COMPONENT
-   ============================================================ */
 export default function App() {
   const [currentPage, setCurrentPage] = useState("home");
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") || "dark"
+  );
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  // Reset scroll + animations when switching pages
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    window.scrollTo({ top: 0, behavior: "instant" });
 
-    const revealEls = document.querySelectorAll(
+    const reveals = document.querySelectorAll(
       ".reveal, .fade-in, .fade-in-up"
     );
     const obs = new IntersectionObserver(
@@ -183,7 +163,7 @@ export default function App() {
       { threshold: 0.1 }
     );
 
-    revealEls.forEach((el) => obs.observe(el));
+    reveals.forEach((el) => obs.observe(el));
     return () => obs.disconnect();
   }, [currentPage]);
 
@@ -214,11 +194,10 @@ export default function App() {
         theme={theme}
         setTheme={setTheme}
       />
-
       <main className="page-content">{renderPage()}</main>
-
       <Chatbot />
     </div>
   );
 }
+
 
