@@ -1,94 +1,109 @@
-import React, { useState } from "react";
+// src/pages/MapPage.jsx
+import React from "react";
 import Footer from "../components/Footer";
+import coppellMapImg from "../assets/coppell-map.png";
 
-const LOCATIONS = [
+const pins = [
   {
-    id: "metrocrest",
-    name: "Metrocrest Services",
-    desc: "A regional hub for food security, housing support, and emergency aid.",
-    top: "70%",
-    left: "35%",
-    link: "https://metrocrestservices.org/",
+    title: "Coppell Farmers Market",
+    subtitle: "Local growers, food, and weekly community gathering.",
+    x: "36%", // adjust if needed
+    y: "54%",
   },
   {
-    id: "notelove",
-    name: "NoteLove",
-    desc: "Youth-led nonprofit offering free music lessons to students.",
-    top: "45%",
-    left: "25%",
-    link: "https://www.notelove.org/",
+    title: "Metrocrest Services",
+    subtitle: "Food security, housing, and wraparound support.",
+    x: "63%",
+    y: "68%",
   },
   {
-    id: "farmers",
-    name: "Coppell Farmers Market",
-    desc: "Weekly gathering for local food, artisans, and community connection.",
-    top: "35%",
-    left: "50%",
-    link: "https://coppellfarmersmarket.org/",
+    title: "NoteLove",
+    subtitle: "Youth-led free music lessons across Coppell.",
+    x: "28%",
+    y: "40%",
   },
   {
-    id: "neighbors",
-    name: "Neighbors In Need",
-    desc: "Mutual aid group organizing rides, groceries, and support for Coppell families.",
-    top: "58%",
-    left: "60%",
-    link: "https://www.instagram.com/neighbors_in_need_/",
+    title: "Neighbors In Need",
+    subtitle: "Mutual-aid network helping local families.",
+    x: "49%",
+    y: "46%",
   },
 ];
 
-
 export default function MapPage() {
-  const [activeLoc, setActiveLoc] = useState(LOCATIONS[0]);
-
   return (
-    <div className="page map-page">
+    <div className="page map">
+      {/* HEADER */}
       <header className="page-head fade-in">
-        <h2 className="xxl skew">COMMUNITY MAP</h2>
-        <p className="kicker">Interactive Geography</p>
+        <h2 className="xxl skew">MAP</h2>
+        <p className="kicker">SECTION OF COPPELL — COMMUNITY NETWORK</p>
       </header>
 
-      <div className="map-grid fade-in-up">
-        {/* MAP CONTAINER */}
-        <div className="map-pane compact-map">
-          <div style={{
-            position: 'absolute', inset: 0,
-            backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
-            backgroundSize: '40px 40px'
-          }} />
+      {/* MAP + COPY */}
+      <section className="map-layout">
+        {/* MAP CARD */}
+        <div className="map-spin-frame fade-in-up">
+          <span className="map-label">
+            Section of Coppell — Geographic Reference
+          </span>
 
-          {LOCATIONS.map((loc) => (
+          <img
+            src={coppellMapImg}
+            alt="Map of Coppell, Texas"
+            className="map-image"
+          />
+
+          {/* PINS (now locked in place) */}
+          {pins.map((p, i) => (
             <button
-              key={loc.id}
-              className={`map-pin ${activeLoc.id === loc.id ? "active" : ""}`}
-              style={{ top: loc.top, left: loc.left }}
-              onClick={() => setActiveLoc(loc)}
+              key={i}
+              type="button"
+              className="map-pin"
+              style={{ top: p.y, left: p.x }}
             >
-              <div className="pin-dot" />
-              {activeLoc.id === loc.id && (
-                <span className="pin-tooltip">
-                  {loc.name}
-                </span>
-              )}
+              <span className="pin-dot" />
+              <span className="pin-tooltip">
+                <strong>{p.title}</strong>
+                <br />
+                <span>{p.subtitle}</span>
+              </span>
             </button>
           ))}
         </div>
 
-        {/* INFO SIDEBAR */}
-        <aside className="map-side">
-          <div className="slab" style={{ height: '100%', marginBottom: 0, padding: '2rem' }}>
-            <div className="eyebrow">SELECTED LOCATION</div>
-            <h3 className="display" style={{ fontSize: '2rem', marginBottom: '1rem' }}>
-              {activeLoc.name}
-            </h3>
-            <p className="lead" style={{ fontSize: '1rem', marginBottom: '2rem' }}>
-              {activeLoc.desc}
-            </p>
-            <a href={activeLoc.link} target="_blank" rel="noreferrer" className="btn wire">
-              Visit Website
-            </a>
-          </div>
+        {/* TEXT EXPLAINING THIS SECTION OF COPPELL */}
+        <aside className="slab block-pop fade-in-up delay-1 map-side-copy">
+          <div className="eyebrow">WHY THIS AREA MATTERS</div>
+          <h3 className="display">Overlapping Support Systems</h3>
+          <p className="lead">
+            This section of Coppell captures where food security, mutual aid, and
+            arts education intersect. The archive isn’t just a list of links—it
+            is a map of how neighbors support each other in real life.
+          </p>
+          <ul>
+            <li>
+              <strong>Coppell Farmers Market</strong> anchors local food access
+              and small businesses.
+            </li>
+            <li>
+              <strong>Metrocrest Services</strong> provides safety nets for
+              housing, food, and seniors.
+            </li>
+            <li>
+              <strong>NoteLove</strong> fills cultural and creative gaps through
+              free music lessons.
+            </li>
+            <li>
+              <strong>Neighbors In Need</strong> shows how informal mutual-aid
+              groups keep families afloat.
+            </li>
+          </ul>
+          <p className="lead" style={{ marginTop: "0.75rem" }}>
+            Together, these pins visualize the ecosystem that inspired the
+            timeline, stories, and archive cards across the site.
+          </p>
         </aside>
-      </div>
+      </section>
 
       <Footer />
     </div>
