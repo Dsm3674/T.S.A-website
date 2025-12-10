@@ -8,7 +8,7 @@ const LOCATIONS = [
     desc: "A regional hub for food security, housing support, and emergency aid.",
     top: "70%",
     left: "35%",
-    link: "https://metrocrestservices.org/"
+    link: "https://metrocrestservices.org/",
   },
   {
     id: "notelove",
@@ -16,17 +16,26 @@ const LOCATIONS = [
     desc: "Youth-led nonprofit offering free music lessons to students.",
     top: "45%",
     left: "25%",
-    link: "https://notelove.org/"
+    link: "https://www.notelove.org/",
   },
   {
     id: "farmers",
-    name: "Farmers Market",
+    name: "Coppell Farmers Market",
     desc: "Weekly gathering for local food, artisans, and community connection.",
     top: "35%",
     left: "50%",
-    link: "https://coppellfarmersmarket.org/"
-  }
+    link: "https://coppellfarmersmarket.org/",
+  },
+  {
+    id: "neighbors",
+    name: "Neighbors In Need",
+    desc: "Mutual aid group organizing rides, groceries, and support for Coppell families.",
+    top: "58%",
+    left: "60%",
+    link: "https://www.instagram.com/neighbors_in_need_/",
+  },
 ];
+
 
 export default function MapPage() {
   const [activeLoc, setActiveLoc] = useState(LOCATIONS[0]);
