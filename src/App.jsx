@@ -1,11 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-
-const { GoogleGenerativeAI } = await import(
-  "https://esm.run/@google/generative-ai"
-);
-
 import Navigation from "./components/Navigation";
 import HomePage from "./pages/HomePage";
 import StoriesPage from "./pages/StoriesPage";
@@ -17,6 +12,7 @@ import MissionPage from "./pages/MissionPage";
 
 import "./styles/brutalist.css";
 
+
 function Chatbot() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([]);
@@ -24,16 +20,12 @@ function Chatbot() {
   const [loading, setLoading] = useState(false);
   const chatEndRef = useRef(null);
 
-  // ✅ USE CDN GEMINI CLIENT
-  const genAI = new GoogleGenerativeAI("YOUR_API_KEY_HERE");
-  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-
   useEffect(() => {
     setMessages([
       {
         role: "assistant",
         content:
-          "Hey, I'm Archive Bot. Ask me about Coppell or the community archive!"
+          "Hey, I'm Archive Bot. Ask me about Coppell, community history, or how this archive works."
       }
     ]);
   }, []);
@@ -43,26 +35,35 @@ function Chatbot() {
   }, [messages, loading, open]);
 
   const send = async () => {
-    const text = userInput.trim();
-    if (!text || loading) return;
+    const trimmed = userInput.trim();
+    if (!trimmed || loading) return;
 
-    setMessages((prev) => [...prev, { role: "user", content: text }]);
+    setMessages(prev => [...prev, { role: "user", content: trimmed }]);
     setUserInput("");
     setLoading(true);
 
     try {
-      const result = await model.generateContent(text);
+      // Load Gemini web SDK
+      const { GoogleGenerativeAI } = await import(
+        "https://esm.run/@google/generative-ai"
+      );
+
+      const genAI = new GoogleGenerativeAI("AIzaSyCnlXM9CyUxpfM4hFkDDysyiyIxcfj-gKM"); 
+
+      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+
+      const result = await model.generateContent(trimmed);
       const reply = result.response.text();
 
-      setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
+      setMessages(prev => [...prev, { role: "assistant", content: reply }]);
     } catch (err) {
       console.error(err);
-      setMessages((prev) => [
+      setMessages(prev => [
         ...prev,
         {
           role: "assistant",
           content:
-            "⚠️ Gemini couldn't respond. Check your API key restrictions."
+            "⚠️ Gemini couldn't respond. Check your API domain restrictions."
         }
       ]);
     }
@@ -70,7 +71,7 @@ function Chatbot() {
     setLoading(false);
   };
 
-  const enterKey = (e) => {
+  const handleKeyDown = e => {
     if (e.key === "Enter") {
       e.preventDefault();
       send();
@@ -79,7 +80,8 @@ function Chatbot() {
 
   return (
     <>
-      <button className="chat-toggle" onClick={() => setOpen((o) => !o)}>
+      {/* Chat Toggle Button */}
+      <button className="chat-toggle" onClick={() => setOpen(o => !o)}>
         💬
       </button>
 
@@ -100,16 +102,19 @@ function Chatbot() {
 
             <div className="chatbot-messages">
               {messages.map((m, i) => (
-                <div key={i} className={`message ${m.role}`}>
+                <div
+                  key={i}
+                  className={`message ${m.role === "user" ? "user" : "bot"}`}
+                >
                   {m.content}
                 </div>
               ))}
 
               {loading && (
                 <div className="loading">
-                  <span className="dot"></span>
-                  <span className="dot"></span>
-                  <span className="dot"></span>
+                  <span className="dot" />
+                  <span className="dot" />
+                  <span className="dot" />
                 </div>
               )}
 
@@ -119,9 +124,9 @@ function Chatbot() {
             <div className="chatbot-input">
               <input
                 value={userInput}
-                onChange={(e) => setUserInput(e.target.value)}
-                onKeyDown={enterKey}
-                placeholder="Ask about Coppell..."
+                onChange={e => setUserInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder="Ask Archive Bot…"
               />
               <button onClick={send} disabled={loading}>
                 {loading ? "..." : "Send"}
@@ -134,26 +139,29 @@ function Chatbot() {
   );
 }
 
+
 export default function App() {
   const [currentPage, setCurrentPage] = useState("home");
-  const [theme, setTheme] = useState(
-    localStorage.getItem("theme") || "dark"
-  );
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     localStorage.setItem("theme", theme);
   }, [theme]);
 
+  /* ----------------------
+     FORCE SCROLL + ANIMATIONS
+     ---------------------- */
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" });
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
 
-    const reveals = document.querySelectorAll(
+    const revealEls = document.querySelectorAll(
       ".reveal, .fade-in, .fade-in-up"
     );
+
     const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+      entries => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add("show");
             obs.unobserve(entry.target);
@@ -163,10 +171,13 @@ export default function App() {
       { threshold: 0.1 }
     );
 
-    reveals.forEach((el) => obs.observe(el));
+    revealEls.forEach(el => obs.observe(el));
     return () => obs.disconnect();
   }, [currentPage]);
 
+  /* ----------------------
+     ROUTING LOGIC
+     ---------------------- */
   const renderPage = () => {
     switch (currentPage) {
       case "stories":
@@ -186,6 +197,7 @@ export default function App() {
     }
   };
 
+ 
   return (
     <div className="app-container">
       <Navigation
@@ -194,7 +206,9 @@ export default function App() {
         theme={theme}
         setTheme={setTheme}
       />
+
       <main className="page-content">{renderPage()}</main>
+
       <Chatbot />
     </div>
   );
