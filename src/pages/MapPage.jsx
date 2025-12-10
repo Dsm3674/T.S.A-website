@@ -17,7 +17,7 @@ export default function GraphPage() {
 
           {/* SVG GRAPH */}
           <svg 
-            viewBox="0 0 1200 900"
+            viewBox="0 0 1200 1100"
             style={{
               width: "100%",
               display: "block",
@@ -37,7 +37,7 @@ export default function GraphPage() {
               </pattern>
             </defs>
 
-            {/* CONNECTION LINES (brutalist thick) */}
+            {/* CONNECTION LINES (thick brutalist) */}
             <line x1="600" y1="200" x2="300" y2="450"
               stroke="var(--ink)" strokeWidth="18" />
             <line x1="600" y1="200" x2="900" y2="450"
@@ -47,7 +47,11 @@ export default function GraphPage() {
             <line x1="900" y1="450" x2="600" y2="700"
               stroke="var(--ink)" strokeWidth="18" />
 
-            {/* CENTRAL NODE */}
+            {/* NEW: METROCREST → NEIGHBORS LINE */}
+            <line x1="600" y1="700" x2="600" y2="950"
+              stroke="var(--ink)" strokeWidth="18" />
+
+            {/* CENTRAL NODE — COPPELL */}
             <g>
               <circle cx="600" cy="200" r="70"
                 fill="var(--mag)"
@@ -58,8 +62,7 @@ export default function GraphPage() {
                 fontFamily="Courier New"
                 fontSize="26"
                 fill="var(--bg)"
-                fontWeight="bold"
-              >
+                fontWeight="bold">
                 COPPELL
               </text>
             </g>
@@ -81,7 +84,7 @@ export default function GraphPage() {
               </text>
             </g>
 
-            {/* NOTEL0VE */}
+            {/* NOTELOVE */}
             <g>
               <circle cx="900" cy="450" r="60"
                 fill="var(--lime)"
@@ -101,34 +104,59 @@ export default function GraphPage() {
               <text x="600" y="710" textAnchor="middle"
                 fontFamily="Courier New"
                 fontSize="22"
-                fill="var(--bg)" fontWeight="bold">
+                fill="var(--panel)"
+                fontWeight="bold">
                 Metrocrest
+              </text>
+            </g>
+
+            {/* ⭐ NEW NODE — NEIGHBORS IN NEED */}
+            <g>
+              <circle cx="600" cy="950" r="65"
+                fill="var(--cyan)"
+                stroke="var(--ink)"
+                strokeWidth="14"
+              />
+              <text x="600" y="955" textAnchor="middle"
+                fontFamily="Courier New"
+                fontSize="22"
+                fill="var(--bg)"
+                fontWeight="bold">
+                Neighbors
+              </text>
+              <text x="600" y="982" textAnchor="middle"
+                fontFamily="Courier New"
+                fontSize="22"
+                fill="var(--bg)"
+                fontWeight="bold">
+                In Need
               </text>
             </g>
 
           </svg>
         </div>
 
-        {/* RIGHT: TEXT CONTENT */}
+        {/* RIGHT SIDE TEXT */}
         <aside className="slab fade-in-up">
           <h3 className="display" style={{ marginBottom: "1rem" }}>
             Why a Network?
           </h3>
-          <p className="lead" style={{ marginBottom: "1.2rem" }}>
-            Coppell’s community is built on interlocking systems of support.
-            Instead of a geographic map, this brutalist network highlights how
-            organizations share volunteers, resources, culture, and impact.
+
+          <p className="lead">
+            This graph shows how Coppell’s support systems interconnect.
+            Instead of focusing on geography, it highlights how community groups
+            share volunteers, food access, cultural enrichment, and direct aid.
           </p>
 
           <ul className="map-side-copy">
-            <li><strong>Coppell Farmers Market</strong> connects families to local growers and small business.</li>
-            <li><strong>NoteLove</strong> widens youth access to arts and music education.</li>
-            <li><strong>Metrocrest Services</strong> provides food, housing, and senior support.</li>
-            <li><strong>Neighbors In Need</strong> amplifies neighborhood-led mutual aid.</li>
+            <li><strong>Farmers Market</strong> connects families to local growers.</li>
+            <li><strong>NoteLove</strong> expands arts education for youth.</li>
+            <li><strong>Metrocrest</strong> anchors housing, food, and senior support.</li>
+            <li><strong>Neighbors In Need</strong> strengthens mutual aid and emergency help.</li>
           </ul>
 
           <p className="lead" style={{ marginTop: "1.5rem" }}>
-            Together, they form the backbone of real community resilience.
+            Together, these organizations form the backbone of real community resilience.
           </p>
         </aside>
 
