@@ -21,7 +21,9 @@ app.use(express.json());
 
 const BASE_API_URL = "https://generativelanguage.googleapis.com";
 const API_VERSION = "v1beta";
-const MODEL_NAME = "gemini-1.5-flash";
+
+// 🔥 FIXED MODEL NAME
+const MODEL_NAME = "gemini-1.5-flash-latest";
 
 const GEMINI_URL = `${BASE_API_URL}/${API_VERSION}/models/${MODEL_NAME}:generateContent`;
 const API_KEY = process.env.GEMINI_API_KEY;
