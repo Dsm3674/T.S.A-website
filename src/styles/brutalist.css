@@ -1,5 +1,3 @@
-
-
 /* ROOT THEME VARIABLES */
 :root {
   --bg: #050505;
@@ -948,82 +946,127 @@ textarea:focus {
   animation: slideDown 0.5s var(--smooth);
 }
 
-/* MAP PAGE */
+/* =========================================
+   MAP PAGE — UNIFIED NETWORK VIEW
+   ========================================= */
+
 .map-page .page-head {
   max-width: 52rem;
 }
 
-.map-grid {
+/* main two-column layout */
+.map-layout {
   display: grid;
-  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  grid-template-columns: 2.3fr 1.7fr;
   gap: 2.5rem;
+  align-items: flex-start;
   margin-top: 2.5rem;
 }
 
-.map-pane {
+/* left: animated frame around SVG */
+.map-spin-frame {
   position: relative;
-  border-radius: 18px;
+  border: 4px solid var(--ink);
+  box-shadow: 14px 14px 0 var(--shadow);
   overflow: hidden;
-  border: var(--border-width) solid var(--ink);
-  background: radial-gradient(circle at top, #0b1220, #020617);
-  box-shadow: 16px 16px 0 var(--shadow);
-  verflow: hidden;
-  position: relative;
-  touch-action: manipulation;
+  transform-style: preserve-3d;
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  animation: mapFloat 12s ease-in-out infinite;
+  background: var(--panel);
 }
 
-/* compact map aspect ratio for MapPage */
-.compact-map {
-  aspect-ratio: 16 / 7;
-  min-height: 350px;
+.map-spin-frame:hover {
+  transform: rotate3d(1, 1, 0, 8deg) translateY(-8px);
+  box-shadow: 22px 22px 0 var(--mag);
 }
 
-/* Pins (MapPage) */
-.map-pin {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  text-align: left;
+/* slow float */
+@keyframes mapFloat {
+  0% {
+    transform: rotate(0deg) translateY(0);
+  }
+  50% {
+    transform: rotate(1.5deg) translateY(-10px);
+  }
+  100% {
+    transform: rotate(0deg) translateY(0);
+  }
 }
 
-.pin-dot {
-  width: 16px;
-  height: 16px;
-  border-radius: 999px;
-  border: 2px solid var(--bg);
-  background: var(--mag);
-  box-shadow:
-    0 0 0 2px rgba(255, 42, 109, 0.4),
-    0 0 16px rgba(255, 42, 109, 0.9);
+.map-image {
+  width: 100%;
   display: block;
 }
 
-.pin-tooltip {
-  margin-top: 8px;
-  background: var(--bg);
-  padding: 4px 8px;
-  border: 1px solid var(--cyan);
-  font-size: 0.75rem;
-  font-weight: bold;
-  white-space: nowrap;
-  color: var(--cyan);
+/* label overlay in the top-left of map */
+.map-label {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 6px 12px;
+  background: rgba(0, 0, 0, 0.7);
+  color: var(--ink);
+  font-family: "Courier New", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  border: 2px solid var(--ink);
+  text-transform: uppercase;
+  z-index: 4;
 }
 
+/* right side: text slab */
 .map-side {
-  display: flex;
-  align-items: stretch;
+  display: block;
 }
 
 .map-side .slab {
   height: 100%;
   margin-bottom: 0;
-  padding: 2rem;
+  padding: 2.5rem 2rem;
 }
 
-/* CHATBOT */
+.map-side ul {
+  margin-top: 1rem;
+  padding-left: 1.2rem;
+  line-height: 1.7;
+}
+
+/* slightly tighten on medium screens so slab doesn't hug edges */
+@media (max-width: 1100px) {
+  .map-layout {
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.5fr);
+    gap: 2rem;
+  }
+
+  .map-side .slab {
+    padding: 2rem 1.5rem;
+  }
+}
+
+/* mobile: stack columns, remove float animation */
+@media (max-width: 900px) {
+  .map-layout {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .map-spin-frame {
+    animation: none;
+    transform: none !important;
+    box-shadow: 10px 10px 0 var(--shadow);
+  }
+
+  .map-side .slab {
+    padding: 1.75rem;
+  }
+}
+
+/* =========================================
+   CHATBOT
+   ========================================= */
+
 .chat-toggle {
   position: fixed;
   bottom: 2rem;
@@ -1553,17 +1596,8 @@ textarea:focus {
    ========================================= */
 
 @media (max-width: 900px) {
-  .map-grid {
+  .reference-grid {
     grid-template-columns: 1fr;
-  }
-
-  .compact-map {
-    aspect-ratio: 4 / 3;
-    min-height: 300px;
-  }
-
-  .map-pane {
-    box-shadow: 10px 10px 0 var(--shadow);
   }
 }
 
@@ -1609,10 +1643,6 @@ textarea:focus {
   .slab {
     padding: 1.75rem;
     margin-bottom: 2rem;
-  }
-
-  .reference-grid {
-    grid-template-columns: 1fr;
   }
 
   .pro-footer {
@@ -1695,32 +1725,8 @@ textarea:focus {
     transform: none !important;
   }
 }
-/* MOBILE FIXES FOR MAP */
-@media (max-width: 768px) {
-  .map-grid {
-    grid-template-columns: 1fr !important;
-    gap: 1.5rem;
-  }
 
-  .map-pane.compact-map {
-    aspect-ratio: 4 / 3 !important;
-    min-height: 260px !important;
-  }
-
-  .map-pin {
-    transform: translate(-50%, -50%) scale(1.4);
-  }
-
-  .pin-tooltip {
-    font-size: 0.65rem;
-    padding: 3px 6px;
-  }
-
-  .map-side .slab {
-    padding: 1.35rem;
-  }
-}
-
+/* Reference page color fix */
 .reference-grid .slab {
   color: var(--ink) !important;
   background: var(--panel) !important;
@@ -1735,268 +1741,6 @@ textarea:focus {
   color: var(--ink-dim);
   margin-top: 0.5rem;
 }
-
-
-
-/* When IntersectionObserver fires normally */
-.slice-reveal.show::after {
-  animation: sliceOut 0.8s var(--smooth) forwards;
-}
-
-/* Force the slice reveal to run automatically for headers
-   near the top of the viewport (IO sometimes fails at top). */
-.page-head.slice-reveal::after {
-  animation: sliceOut 0.9s var(--smooth) forwards;
-}
-
-
-
-/* Prevent reflow & resizing */
-@media (max-width: 768px) {
-  .map-pane.compact-map {
-    min-height: 280px !important;
-    height: 280px !important;
-  }
-
-  /* Disable scaling and transform-jumps */
-  .map-pin {
-    transform: translate(-50%, -50%) !important;
-    touch-action: manipulation;
-    -webkit-user-select: none;
-    user-select: none;
-  }
-
-  /* Prevent parent from resizing on interaction */
-  .map-pane {
-    overflow: hidden;
-    touch-action: none;
-    position: relative;
-  }
-}
-
-.map-spin-frame {
-  position: relative;
-  border: 4px solid var(--ink);
-  box-shadow: 14px 14px 0 var(--shadow);
-  overflow: hidden;
-  transform-style: preserve-3d;
-  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
-  animation: mapFloat 12s ease-in-out infinite;
-}
-
-/* Hover tilt like MAITSO gift card */
-.map-spin-frame:hover {
-  transform: rotate3d(1, 1, 0, 8deg) translateY(-8px);
-  box-shadow: 22px 22px 0 var(--mag);
-}
-
-/* Slow breathing float */
-@keyframes mapFloat {
-  0%   { transform: rotate(0deg) translateY(0); }
-  50%  { transform: rotate(1.5deg) translateY(-10px); }
-  100% { transform: rotate(0deg) translateY(0); }
-}
-
-/* Optional subtle spin */
-@keyframes mapSubtleSpin {
-  0%   { transform: rotate(0deg) scale(1); }
-  50%  { transform: rotate(0.8deg) scale(1.01); }
-  100% { transform: rotate(0deg) scale(1); }
-}
-
-.map-image {
-  width: 100%;
-  display: block;
-  animation: mapSubtleSpin 18s ease-in-out infinite;
-}
-
-/* Mobile: disable tilt + heavy spin */
-@media (max-width: 768px) {
-  .map-spin-frame {
-    animation: none;
-    transform: none !important;
-    box-shadow: 10px 10px 0 var(--shadow);
-  }
-
-  .map-image {
-    animation: none !important;
-  }
-} 
-
-.map-label {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  padding: 6px 12px;
-  background: rgba(0,0,0,0.6);
-  color: var(--ink);
-  font-family: "Courier New", monospace;
-  font-size: 0.75rem;
-  letter-spacing: 1px;
-  border: 2px solid var(--ink);
-  z-index: 4;
-  text-transform: uppercase;
-}
-
-.map-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-  gap: 2.5rem;
-  align-items: flex-start;
-  margin-top: 2.5rem;
-}
-
-.map-side-copy ul {
-  margin-top: 0.75rem;
-  padding-left: 1.2rem;
-  line-height: 1.5;
-}
-
-@media (max-width: 900px) {
-  .map-layout {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* =========================================
-   MAP FRAME – FLOAT + TILT (MAITSO STYLE)
-   ========================================= */
-
-.map-spin-frame {
-  position: relative;
-  border: 4px solid var(--ink);
-  box-shadow: 14px 14px 0 var(--shadow);
-  overflow: hidden;
-  transform-style: preserve-3d;
-  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
-  animation: mapFloat 12s ease-in-out infinite;
-  background: var(--panel);
-}
-
-.map-spin-frame:hover {
-  transform: rotate3d(1, 1, 0, 8deg) translateY(-8px);
-  box-shadow: 22px 22px 0 var(--mag);
-}
-
-/* slow float */
-@keyframes mapFloat {
-  0%   { transform: rotate(0deg) translateY(0); }
-  50%  { transform: rotate(1.5deg) translateY(-10px); }
-  100% { transform: rotate(0deg) translateY(0); }
-}
-
-.map-image {
-  width: 100%;
-  display: block;
-}
-
-/* label on top of the map */
-.map-label {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  padding: 6px 12px;
-  background: rgba(0, 0, 0, 0.7);
-  color: var(--ink);
-  font-family: "Courier New", monospace;
-  font-size: 0.7rem;
-  letter-spacing: 1px;
-  border: 2px solid var(--ink);
-  text-transform: uppercase;
-  z-index: 4;
-}
-
-/* =========================================
-   MAP PINS – NOW STABLE
-   ========================================= */
-
-.map-pin {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -100%); /* anchor above coordinate */
-  background: transparent;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  z-index: 5;
-}
-
-/* only the dot scales – prevents pin jumping */
-.pin-dot {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--mag);
-  border: 3px solid var(--bg);
-  box-shadow: 0 0 0 2px var(--ink), 0 6px 0 var(--shadow);
-  transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease);
-}
-
-.map-pin:hover .pin-dot,
-.map-pin:focus-visible .pin-dot {
-  transform: scale(1.2);
-  box-shadow: 0 0 0 2px var(--mag), 0 8px 0 var(--shadow);
-}
-
-/* tooltip */
-.pin-tooltip {
-  position: absolute;
-  left: 50%;
-  top: -10px;
-  transform: translate(-50%, -135%);
-  background: var(--bg);
-  color: var(--ink);
-  padding: 8px 10px;
-  border: 2px solid var(--ink);
-  font-size: 0.75rem;
-  max-width: 220px;
-  text-align: left;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.18s var(--ease), transform 0.18s var(--ease);
-  white-space: normal;
-}
-
-.map-pin:hover .pin-tooltip,
-.map-pin:focus-visible .pin-tooltip {
-  opacity: 1;
-  transform: translate(-50%, -155%);
-}
-
-/* Mobile: calmer + readable */
-@media (max-width: 768px) {
-  .map-spin-frame {
-    animation: none; /* disable tilt/float on small screens */
-    transform: none !important;
-    box-shadow: 10px 10px 0 var(--shadow);
-  }
-
-  .pin-tooltip {
-    font-size: 0.7rem;
-    max-width: 180px;
-  }
-}
-
-/* Improve right-side text readability */
-.map-side.slab {
-  padding: 2.5rem 2rem !important;
-}
-
-/* Medium screens: prevent text from hitting edge */
-@media (max-width: 1100px) {
-  .map-side.slab {
-    padding: 2rem 1.5rem !important;
-  }
-}
-
-/* Mobile already collapses into one column, but add extra safety */
-@media (max-width: 768px) {
-  .map-side.slab {
-    padding: 1.75rem !important;
-  }
-}
-
 
 
 
