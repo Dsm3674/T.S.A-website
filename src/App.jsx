@@ -40,7 +40,7 @@ function Chatbot() {
     setLoading(true);
 
     try {
-      // 🔥 SAFE — Calls your backend instead of exposing your API key
+     
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
