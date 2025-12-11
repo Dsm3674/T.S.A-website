@@ -1802,4 +1802,22 @@ textarea:focus {
   border: none !important;
 }
 
+.page-head {
+  padding: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  background: none !important;
+  border: none !important;
+}
+
+.page-head h1,
+.page-head h2,
+.page-head .title {
+  /* ONLY restore styling when titles are actually present */
+  padding: 2rem 0 !important;
+  background: var(--panel);
+  border-bottom: var(--border-width) solid var(--ink);
+}
+
+
 
