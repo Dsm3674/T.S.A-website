@@ -87,16 +87,27 @@ export default function TimelinePage() {
       </header>
 
       {/* TIMELINE GRID */}
-      <div className="timeline-grid reveal fade-in-up">
+      <div className="timeline-grid reveal fade-in-up" style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+        gap: '1.5rem',
+        maxWidth: '1000px',
+        margin: '0 auto 3rem'
+      }}>
         {eras.map((era) => (
           <div
             key={era.id}
             className="timeline-card slab"
             onClick={() => setSelectedEra(era)}
+            style={{
+              padding: '1.25rem',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease'
+            }}
           >
-            <h3>{era.era}</h3>
-            <p className="years">{era.years}</p>
-            <p className="short">{era.shortDesc}</p>
+            <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem' }}>{era.era}</h3>
+            <p className="years" style={{ fontSize: '0.8rem', marginBottom: '0.5rem' }}>{era.years}</p>
+            <p className="short" style={{ fontSize: '0.85rem', lineHeight: '1.4' }}>{era.shortDesc}</p>
           </div>
         ))}
       </div>
