@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "../components/Footer";
 import { CheckCircle } from "lucide-react";
 
@@ -10,7 +10,14 @@ import neighborsImg from "../assets/neighbors-in-need.jpg";
 
 export default function ArchivePage() {
   const [submitted, setSubmitted] = useState(false);
-  const [query, setQuery] = useState(""); // ✅ NEW
+  const [query, setQuery] = useState("");
+
+  /* ⭐ ADD-ON FIX — prevents only Farmers Market appearing */
+  useEffect(() => {
+    const els = document.querySelectorAll(".fade-in, .fade-in-up, .reveal");
+    els.forEach((el) => el.classList.add("show"));
+  }, []);
+  /* ⭐ END FIX */
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,7 +54,6 @@ export default function ArchivePage() {
     },
   ];
 
-  // FILTERED RESULTS
   const filtered = resources.filter((r) => {
     const q = query.toLowerCase();
     return (
@@ -58,9 +64,9 @@ export default function ArchivePage() {
 
   return (
     <div className="page archive">
+
       {/* ======= CSS INSIDE COMPONENT ======= */}
       <style>{`
-        /* SEARCH SECTION */
         .archive-search-section {
           width: 100%;
           display: flex;
@@ -107,7 +113,6 @@ export default function ArchivePage() {
           font-style: italic;
         }
 
-        /* CARD HOVER ENHANCEMENTS */
         .archive-card-uniform {
           transition: 0.35s ease;
         }
@@ -145,7 +150,7 @@ export default function ArchivePage() {
         </p>
       </div>
 
-      {/* ===== SEARCH BAR ===== */}
+      {/* SEARCH BAR */}
       <section className="archive-search-section fade-in-up">
         <input
           type="text"
@@ -196,7 +201,7 @@ export default function ArchivePage() {
         </div>
       </section>
 
-      {/* SUBMISSION FORM */}
+      {/* SUBMIT FORM */}
       <section className="slab fade-in-up delay-2" style={{ marginTop: "4rem" }}>
         <h3 className="display">Submit a New Resource</h3>
 
