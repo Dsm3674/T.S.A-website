@@ -1958,3 +1958,26 @@ textarea:focus {
 .reference-grid .slab a:hover {
   color: var(--mag) !important;
 }
+:root {
+  --bg: #050505;
+  --ink: #f0f0f0;
+  --ink-dim: #888888;
+  --panel: #111111;
+
+  /* OLD
+  --mag: #ff2a6d;
+  --cyan: #05d9e8;
+  */
+
+  /* ⭐ NEW PALETTE BELOW ⭐ */
+  --mag: #8b3f2f;     /* reddish-brown */
+  --cyan: #98ffdb;    /* mint green */
+
+  --lime: #d1f7ff;
+  --shadow: rgba(255, 255, 255, 0.2);
+  --border-width: 3px;
+  --ease: cubic-bezier(0.23, 1, 0.32, 1);
+  --smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-speed: 0.4s;
+}
+
