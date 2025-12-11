@@ -1819,5 +1819,19 @@ textarea:focus {
   border-bottom: var(--border-width) solid var(--ink);
 }
 
+/* FINAL OVERRIDE — REMOVE HEADER BLOCK ON MAP + REFERENCE */
+.map-page .page-head,
+.reference-page .page-head {
+  padding: 0 !important;
+  margin: 0 !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  overflow: hidden !important;
+  display: none !important;   /* <-- this is the key */
+}
+
+
 
 
