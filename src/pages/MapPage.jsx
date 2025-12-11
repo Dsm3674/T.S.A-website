@@ -3,9 +3,9 @@ import Footer from "../components/Footer";
 
 export default function MapPage() {
   
-  // ✅ REVEAL EFFECT ON SCROLL
+  // Reveal effect on scroll
   useEffect(() => {
-    const revealEls = document.querySelectorAll('.reveal, .fade-in-up');
+    const revealEls = document.querySelectorAll('.reveal, .fade-in-up, .fade-in');
     
     const obs = new IntersectionObserver(
       entries => {
@@ -173,16 +173,202 @@ export default function MapPage() {
           </ul>
 
           <p className="lead" style={{ marginTop: "1.25rem" }}>
-            Together, they form a **real network of care** that your archive
+            Together, they form a <strong>real network of care</strong> that your archive
             documents and makes visible.
           </p>
         </div>
       </div>
 
+      {/* EXPANDED NETWORK DESCRIPTION SECTION */}
+      <section className="slab reveal fade-in-up" style={{ marginTop: '4rem' }}>
+        <div className="eyebrow">NETWORK STRUCTURE</div>
+        <h3 className="display">How Coppell's Organizations Connect</h3>
+        
+        <p className="lead" style={{ marginTop: '1.5rem', marginBottom: '2rem' }}>
+          The community network above isn't just a visual metaphor — it represents
+          real connections between organizations that strengthen Coppell every day.
+          Each relationship creates pathways for support, resources, and collaboration.
+        </p>
+
+        {/* Organization Deep Dives */}
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '2rem',
+          marginTop: '2rem'
+        }}>
+          
+          {/* Farmers Market */}
+          <div style={{
+            border: '3px solid var(--ink)',
+            padding: '1.5rem',
+            background: 'rgba(230, 220, 197, 0.1)'
+          }}>
+            <h4 style={{
+              fontSize: '1.3rem',
+              fontWeight: '800',
+              textTransform: 'uppercase',
+              marginBottom: '0.75rem',
+              color: '#e6dcc5'
+            }}>
+              Coppell Farmers Market
+            </h4>
+            <p style={{ fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '1rem' }}>
+              Every Saturday morning, local growers, artisans, and food vendors gather
+              to create a community hub. The market serves as a meeting place where
+              neighbors connect over fresh produce and local goods.
+            </p>
+            <div style={{
+              fontFamily: '"Courier New", monospace',
+              fontSize: '0.8rem',
+              color: 'var(--ink-dim)',
+              letterSpacing: '0.05em'
+            }}>
+              <strong>Impact:</strong> Food access, small business support
+            </div>
+          </div>
+
+          {/* NoteLove */}
+          <div style={{
+            border: '3px solid var(--ink)',
+            padding: '1.5rem',
+            background: 'rgba(210, 199, 178, 0.1)'
+          }}>
+            <h4 style={{
+              fontSize: '1.3rem',
+              fontWeight: '800',
+              textTransform: 'uppercase',
+              marginBottom: '0.75rem',
+              color: '#d2c7b2'
+            }}>
+              NoteLove
+            </h4>
+            <p style={{ fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '1rem' }}>
+              Youth-led nonprofit providing free music lessons to students across
+              Coppell. Volunteer instructors transform practice rooms and living
+              rooms into studios, making music education accessible to all.
+            </p>
+            <div style={{
+              fontFamily: '"Courier New", monospace',
+              fontSize: '0.8rem',
+              color: 'var(--ink-dim)',
+              letterSpacing: '0.05em'
+            }}>
+              <strong>Impact:</strong> Youth mentorship, creative access
+            </div>
+          </div>
+
+          {/* Metrocrest */}
+          <div style={{
+            border: '3px solid var(--ink)',
+            padding: '1.5rem',
+            background: 'rgba(230, 220, 197, 0.1)'
+          }}>
+            <h4 style={{
+              fontSize: '1.3rem',
+              fontWeight: '800',
+              textTransform: 'uppercase',
+              marginBottom: '0.75rem',
+              color: '#e6dcc5'
+            }}>
+              Metrocrest Services
+            </h4>
+            <p style={{ fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '1rem' }}>
+              Regional hub providing food pantry services, housing assistance,
+              senior support, and emergency aid. Metrocrest acts as a safety net
+              for families facing financial hardship or unexpected crises.
+            </p>
+            <div style={{
+              fontFamily: '"Courier New", monospace',
+              fontSize: '0.8rem',
+              color: 'var(--ink-dim)',
+              letterSpacing: '0.05em'
+            }}>
+              <strong>Impact:</strong> Food security, housing support, crisis aid
+            </div>
+          </div>
+
+          {/* Neighbors In Need */}
+          <div style={{
+            border: '3px solid var(--ink)',
+            padding: '1.5rem',
+            background: 'rgba(210, 199, 178, 0.1)'
+          }}>
+            <h4 style={{
+              fontSize: '1.3rem',
+              fontWeight: '800',
+              textTransform: 'uppercase',
+              marginBottom: '0.75rem',
+              color: '#d2c7b2'
+            }}>
+              Neighbors In Need
+            </h4>
+            <p style={{ fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '1rem' }}>
+              Grassroots mutual aid network coordinating grocery deliveries,
+              transportation, and direct support for Coppell families. This
+              hyperlocal approach ensures no neighbor feels isolated or forgotten.
+            </p>
+            <div style={{
+              fontFamily: '"Courier New", monospace',
+              fontSize: '0.8rem',
+              color: 'var(--ink-dim)',
+              letterSpacing: '0.05em'
+            }}>
+              <strong>Impact:</strong> Mutual aid, direct community support
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ADDITIONAL NETWORK INSIGHTS */}
+      <section className="slab reveal fade-in-up delay-1" style={{ marginTop: '3rem' }}>
+        <div className="eyebrow">ECOSYSTEM ANALYSIS</div>
+        <h3 className="display">The Power of Interconnection</h3>
+        
+        <p className="lead" style={{ marginTop: '1.5rem' }}>
+          What makes Coppell's network special isn't just the organizations themselves —
+          it's how they work together. When one organization connects people with food
+          access, another provides music education, and others offer emergency support,
+          the entire community becomes more resilient.
+        </p>
+
+        <div style={{
+          marginTop: '2rem',
+          padding: '2rem',
+          border: '3px dashed var(--ink-dim)',
+          background: 'rgba(255, 42, 109, 0.05)'
+        }}>
+          <h4 style={{
+            fontSize: '1.2rem',
+            fontWeight: '800',
+            textTransform: 'uppercase',
+            marginBottom: '1rem',
+            color: '#ff2a6d'
+          }}>
+            Network Effects in Action
+          </h4>
+          <ul style={{ 
+            paddingLeft: '1.5rem', 
+            lineHeight: '1.8',
+            fontSize: '1rem'
+          }}>
+            <li>Farmers Market vendors partner with Metrocrest food pantry</li>
+            <li>NoteLove volunteers connect families to Neighbors In Need support</li>
+            <li>Shared volunteer base strengthens all organizations simultaneously</li>
+            <li>Cultural events bring together multiple community groups</li>
+            <li>Information networks help residents access the right resources quickly</li>
+          </ul>
+        </div>
+
+        <p className="lead" style={{ marginTop: '2rem' }}>
+          This archive exists to document and celebrate these connections, ensuring
+          future residents understand the community fabric that makes Coppell home.
+        </p>
+      </section>
+
       <Footer />
     </div>
   );
 }
-
 
 
