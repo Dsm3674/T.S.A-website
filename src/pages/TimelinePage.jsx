@@ -73,6 +73,18 @@ const timelineStyles = `
   .modal-img {
     border-radius: 0;
   }
+
+  const timelineStyles = `
+  ...existing styles...
+
+  /* Match TIMELINE subtitle to header font */
+  .page-head .lead {
+    font-family: inherit !important;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+  }
+`;
+
 `;
 
 if (typeof document !== "undefined") {
