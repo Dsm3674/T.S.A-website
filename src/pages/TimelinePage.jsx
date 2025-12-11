@@ -1,13 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // UPDATED IMAGES — using your actual assets folder names
-const earlyImg = "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400";
-const era1950 = "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400";
-const era1990 = "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=400";
-const era2025 = "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=400";
+import earlyImg from "../assets/Document.jpg";
+import era1950 from "../assets/image.png";
+import era1990 from "../assets/2010.png";
+import era2025 from "../assets/Document (1).jpeg";
+
+import "../styles/brutalist.css";
 
 export default function TimelinePage() {
   const [selectedEra, setSelectedEra] = useState(null);
+
+  // ✅ REVEAL EFFECT ON SCROLL
+  useEffect(() => {
+    const revealEls = document.querySelectorAll('.reveal, .fade-in-up');
+    
+    const obs = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    revealEls.forEach(el => obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
 
   const eras = [
     {
@@ -56,39 +78,11 @@ export default function TimelinePage() {
   ];
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'var(--bg)',
-      color: 'var(--ink)',
-      padding: '2rem 1.5rem 8rem',
-      maxWidth: '1600px',
-      margin: '0 auto'
-    }}>
-      
-      <header style={{
-        marginBottom: '4rem',
-        borderBottom: '3px solid var(--ink)',
-        paddingBottom: '1.5rem'
-      }}>
-        <h2 style={{
-          fontSize: 'clamp(3rem, 10vw, 8rem)',
-          lineHeight: '0.85',
-          textTransform: 'uppercase',
-          fontWeight: '800',
-          transform: 'skewX(-6deg)',
-          marginBottom: '1rem'
-        }}>
-          TIMELINE
-        </h2>
-        <p style={{
-          fontFamily: '"Courier New", monospace',
-          color: '#ff2a6d',
-          fontSize: '0.875rem',
-          letterSpacing: '0.1em',
-          fontWeight: '700'
-        }}>
-          Explore Coppell's cultural eras
-        </p>
+    <div className="page-container">
+
+      <header className="page-head reveal fade-in">
+        <h2 className="xxl skew reveal">TIMELINE</h2>
+        <p className="lead reveal">Explore Coppell's cultural eras.</p>
       </header>
 
       {/* HORIZONTAL TIMELINE */}
@@ -98,7 +92,7 @@ export default function TimelinePage() {
         overflow: 'visible'
       }}>
         {/* Timeline Line */}
-        <div style={{
+        <div className="reveal fade-in" style={{
           position: 'absolute',
           top: '50%',
           left: '5%',
@@ -120,6 +114,7 @@ export default function TimelinePage() {
           {eras.map((era, index) => (
             <div
               key={era.id}
+              className={`reveal fade-in-up delay-${index + 1}`}
               onClick={() => setSelectedEra(era)}
               style={{
                 cursor: 'pointer',
@@ -230,153 +225,52 @@ export default function TimelinePage() {
       {/* MODAL */}
       {selectedEra && (
         <div 
+          className="timeline-modal"
           onClick={() => setSelectedEra(null)}
-          style={{
-            position: 'fixed',
-            inset: 0,
-            background: 'rgba(0, 0, 0, 0.92)',
-            zIndex: 1000,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '2rem',
-            backdropFilter: 'blur(8px)',
-            animation: 'fadeIn 0.3s ease'
-          }}
         >
           <div 
+            className="modal-content slab"
             onClick={(e) => e.stopPropagation()}
-            style={{
-              background: 'var(--panel)',
-              border: '3px solid var(--ink)',
-              maxWidth: '800px',
-              width: '100%',
-              maxHeight: '90vh',
-              overflow: 'auto',
-              padding: '3rem',
-              position: 'relative',
-              boxShadow: '16px 16px 0 rgba(255, 255, 255, 0.2)',
-              animation: 'slideUp 0.4s cubic-bezier(0.23, 1, 0.32, 1)'
-            }}
           >
-            {/* Close Button */}
-            <button
+            <button 
+              className="close-overlay" 
               onClick={() => setSelectedEra(null)}
-              style={{
-                position: 'absolute',
-                top: '1.5rem',
-                right: '1.5rem',
-                background: 'var(--ink)',
-                color: 'var(--bg)',
-                border: 'none',
-                width: '40px',
-                height: '40px',
-                fontSize: '1.5rem',
-                cursor: 'pointer',
-                fontWeight: 'bold',
-                transition: 'all 0.2s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = '#ff2a6d';
-                e.currentTarget.style.transform = 'rotate(90deg)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'var(--ink)';
-                e.currentTarget.style.transform = 'rotate(0deg)';
-              }}
             >
               ✕
             </button>
 
-            {/* Content */}
-            <h3 style={{
-              fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-              fontWeight: '800',
-              textTransform: 'uppercase',
-              marginBottom: '0.5rem',
-              lineHeight: '0.95'
-            }}>
-              {selectedEra.era}
-            </h3>
-            
-            <p style={{
-              fontFamily: '"Courier New", monospace',
-              fontSize: '1rem',
-              color: 'var(--ink-dim)',
-              marginBottom: '2rem',
-              letterSpacing: '0.08em'
-            }}>
-              {selectedEra.years}
-            </p>
+            <h3>{selectedEra.era}</h3>
+            <p className="years">{selectedEra.years}</p>
 
             <img
               src={selectedEra.img}
               alt={selectedEra.era}
-              style={{
-                width: '100%',
-                height: 'auto',
-                maxHeight: '400px',
-                objectFit: 'cover',
-                border: '3px solid var(--ink)',
-                marginBottom: '2rem'
-              }}
+              className="modal-img"
             />
 
-            <p style={{
-              fontSize: '1.05rem',
-              lineHeight: '1.6',
-              marginBottom: '1.5rem'
-            }}>
-              {selectedEra.fullDetails}
-            </p>
+            <div className="modal-body">
+              <p className="lead">{selectedEra.fullDetails}</p>
 
-            {selectedEra.citation && (
-              <p style={{
-                fontSize: '0.85rem',
-                fontStyle: 'italic',
-                color: 'var(--ink-dim)',
-                borderTop: '2px dashed var(--ink-dim)',
-                paddingTop: '1rem'
-              }}>
-                Photo Source:{" "}
-                <a
-                  href={selectedEra.citation}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    color: '#ff2a6d',
-                    textDecoration: 'underline'
-                  }}
-                >
-                  {selectedEra.citation}
-                </a>
-              </p>
-            )}
+              {selectedEra.citation && (
+                <p className="citation">
+                  <em>
+                    Photo Source:{" "}
+                    <a
+                      href={selectedEra.citation}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {selectedEra.citation}
+                    </a>
+                  </em>
+                </p>
+              )}
+            </div>
           </div>
         </div>
       )}
 
       <style>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-
-        @keyframes slideUp {
-          from {
-            opacity: 0;
-            transform: translateY(40px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
         @media (max-width: 1024px) {
           div[style*="gridTemplateColumns: repeat(4, 1fr)"] {
             grid-template-columns: repeat(2, 1fr) !important;
