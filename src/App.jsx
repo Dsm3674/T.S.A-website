@@ -41,7 +41,7 @@ function Chatbot() {
  
     try {
       const res = await fetch(
-        "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=AIzaSyCnlXM9CyUxpfM4hFkDDysyiyIxcfj-gKM%22,"
+        "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=AIzaSyCnlXM9CyUxpfM4hFkDDysyiyIxcfj-gKM",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -177,7 +177,7 @@ export default function App() {
       case "stories":
         return <StoriesPage />;
       case "timeline":
-        return <TimelinePage />;
+        return <TimelineTimelinePage />;
       case "map":
         return <MapPage />;
       case "archive":
