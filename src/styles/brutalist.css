@@ -4,10 +4,13 @@
   --ink: #ffffff;
   --ink-dim: #666666;
   --panel: #0a0a0a;
-  --mag: #98ffdb;
-  --cyan: #98ffdb;
-  --lime: #98ffdb;
-  --shadow: rgba(152, 255, 219, 0.3);
+
+  /* UPDATED PALETTE */
+  --mag: #8b3f2f;      /* reddish brown */
+  --cyan: #98ffdb;     /* mint green */
+  --lime: #98ffdb;     /* mint green */
+
+  --shadow: rgba(139, 63, 47, 0.35); /* brown depth shadow */
   --border-width: 4px;
   --ease: cubic-bezier(0.23, 1, 0.32, 1);
   --smooth: cubic-bezier(0.16, 1, 0.3, 1);
@@ -19,10 +22,28 @@
   --ink: #000000;
   --ink-dim: #333333;
   --panel: #f5f5f5;
-  --mag: #00d9a0;
+
+  --mag: #8b3f2f;
   --cyan: #00d9a0;
   --lime: #00d9a0;
+
   --shadow: rgba(0, 0, 0, 0.25);
+}
+
+/* === BRUTALIST NOISE TEXTURE (ADD-ON) === */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background-image: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'>\
+<filter id='noise'>\
+<feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/>\
+</filter>\
+<rect width='100%' height='100%' filter='url(%23noise)' opacity='0.07'/>\
+</svg>");
 }
 
 /* RESET + GLOBAL */
@@ -47,7 +68,7 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: -2;
   background-image: 
     repeating-linear-gradient(0deg, transparent, transparent 50px, var(--ink-dim) 50px, var(--ink-dim) 51px),
     repeating-linear-gradient(90deg, transparent, transparent 50px, var(--ink-dim) 50px, var(--ink-dim) 51px);
@@ -366,7 +387,7 @@ h1, h2, h3, h4, h5, h6, button, input, .nav-link {
 
 .btn:hover {
   transform: translate(-6px, -6px);
-  box-shadow: 8px 8px 0 var(--mag);
+  box-shadow: 8px 8px 0 var(--mag), 0 0 25px rgba(139,63,47,0.35);
 }
 
 .btn:active {
@@ -384,7 +405,7 @@ h1, h2, h3, h4, h5, h6, button, input, .nav-link {
   background: var(--ink);
   border-color: var(--ink);
   color: var(--bg);
-  box-shadow: 8px 8px 0 var(--mag);
+  box-shadow: 8px 8px 0 var(--mag), 0 0 25px rgba(139,63,47,0.35);
 }
 
 .btn.wire {
@@ -397,10 +418,6 @@ h1, h2, h3, h4, h5, h6, button, input, .nav-link {
   background: var(--mag);
   color: var(--bg);
   border-color: var(--mag);
-}
-
-.btn.secondary {
-  font-size: 0.9rem;
 }
 
 /* GENERIC INPUTS */
@@ -430,6 +447,16 @@ input:focus, textarea:focus {
   margin-bottom: 3rem;
   position: relative;
   box-shadow: 12px 12px 0 var(--shadow);
+}
+
+/* === BRUTAL OUTLINE HALO (ADD-ON) === */
+.slab::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border: 2px solid var(--mag);
+  opacity: 0.25;
+  pointer-events: none;
 }
 
 .slab::after {
@@ -679,7 +706,7 @@ input:focus, textarea:focus {
 
 .spotlight-card:hover {
   transform: translate(-6px, -6px);
-  box-shadow: 12px 12px 0 var(--mag);
+  box-shadow: 12px 12px 0 var(--mag), 0 0 25px rgba(139,63,47,0.35);
   background: var(--mag);
   color: var(--bg);
 }
@@ -725,7 +752,7 @@ input:focus, textarea:focus {
 
 .story-card:hover {
   animation: wobbleCard 0.3s ease-in-out;
-  box-shadow: 12px 12px 0 var(--mag);
+  box-shadow: 12px 12px 0 var(--mag), 0 0 25px rgba(139,63,47,0.35);
 }
 
 .story-img {
@@ -767,9 +794,19 @@ input:focus, textarea:focus {
 
 .archive-card-uniform:hover {
   transform: translateY(-8px);
-  box-shadow: 12px 12px 0 var(--mag);
+  box-shadow: 12px 12px 0 var(--mag), 0 0 25px rgba(139,63,47,0.35);
   border-color: var(--mag);
   z-index: 2;
+}
+
+/* === HALO ADD-ON TO ARCHIVE CARDS === */
+.archive-card-uniform::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border: 2px solid var(--mag);
+  opacity: 0.25;
+  pointer-events: none;
 }
 
 .archive-thumb-box {
@@ -1039,9 +1076,20 @@ input:focus, textarea:focus {
   transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), background 0.3s;
 }
 
+/* === HALO ADD-ON FOR TIMELINE CARDS === */
+.timeline-card-h::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border: 2px solid var(--mag);
+  opacity: 0.25;
+  pointer-events: none;
+}
+
 .timeline-card-h:hover,
 .timeline-card-h.is-active {
   transform: translateY(-10px);
-  box-shadow: 12px 12px 0 var(--mag);
-  border-color: var(--mag 
+  box-shadow: 12px 12px 0 var(--mag), 0 0 25px rgba(139,63,47,0.35);
+  border-color: var(--mag);
+}
 
