@@ -1,136 +1,140 @@
-import React, { useState, useRef } from "react";
-import Footer from "../components/Footer";
-import historyImg from "../assets/Document.jpg";
+import React, { useState } from "react";
+import historyImg from "../assets/history.jpg";
+
+// NEW IMAGE IMPORTS
+import era1950 from "../assets/image.png";               
+import era1990 from "../assets/2010.png";                
+import era2025 from "../assets/Document (1).jpeg";       
+
+import "../styles/brutalist.css";
 
 export default function TimelinePage() {
   const [selectedEra, setSelectedEra] = useState(null);
-  const scrollRef = useRef(null);
 
-
-  <div className="slab reveal fade-in-up">
-  <h2 className="display">Why Coppell’s Eras Matter</h2>
-  <p className="lead" style={{ marginTop: "1rem" }}>
-    Coppell’s history unfolds in distinct eras—early settlement, agricultural
-    growth, suburban expansion, and modern community development. Understanding
-    these shifts helps us see how local identity, culture, and resources evolved.
-    Each era brought new institutions, diverse voices, and changes in how
-    residents lived and connected. The timeline highlights how past decisions and
-    community values shaped today’s Coppell.
-  </p>
-</div>
-
-  
+  // UPDATED ERAS ARRAY
   const eras = [
     {
       id: 1,
       era: "Early Roots",
       years: "1840–1950",
       shortDesc: "Small farming settlement.",
-      fullDetails: "Coppell began in 1840 as a small farming settlement originally named Gibbs Station. Early community life centered on one-room schoolhouses, local churches, and family-run cotton/farming operations. It was a quiet, rural existence defined by hard work and close neighborly bonds.",
+      fullDetails:
+        "Coppell began in 1840 as a small farming settlement originally called Gibbs Station. Life centered around agriculture, one-room schoolhouses, and small community churches. These early decades formed Coppell’s foundation of close-knit living and neighborly support.",
       img: historyImg
     },
     {
       id: 2,
       era: "Growth & Identity",
       years: "1950–1990",
-      shortDesc: "Schools & rapid expansion.",
-      fullDetails: "Following the opening of DFW Airport, Coppell transformed from a village to a suburb. Neighborhoods expanded, the school district (CISD) became a major draw for families, and the city officially incorporated. This era defined the 'education-first' identity of the town.",
-      img: historyImg
+      shortDesc: "Schools, music, & rapid expansion.",
+      fullDetails:
+        "After the opening of DFW Airport, Coppell shifted from rural farmland into a flourishing suburb. School spirit, marching band culture, and the rise of youth arts shaped the city’s identity. This era’s photo captures how music and youth expression reflected changing culture.",
+      img: era1950,
+      citation:
+        "https://coppellstudentmedia.com/121647/entertainment/rock-musics-evolution-its-influence-on-the-world-and-coppell/"
     },
     {
       id: 3,
       era: "Community Era",
       years: "1990–2010",
-      shortDesc: "Farmers markets & pride.",
-      fullDetails: "As the population boom settled, culture took root. The Coppell Farmers Market was established (2003), youth sports programs exploded, and the Senior Center opened. A culture of connection and hometown pride solidified during these decades.",
-      img: historyImg
+      shortDesc: "Farmers markets, youth programs, & culture.",
+      fullDetails:
+        "As the city matured, culture and community institutions took center stage. The Coppell Farmers Market launched, youth sports grew, and community traditions formed. This era’s image highlights key cultural moments from the time.",
+      img: era1990,
+      citation:
+        "https://coppellstudentmedia.com/20840/entertainment/the-end-of-the-harry-potter-era/"
     },
     {
       id: 4,
       era: "Present Day",
       years: "2010–2025",
-      shortDesc: "Mutual aid & modern arts.",
-      fullDetails: "Today, Coppell is a diverse, modern city. Initiatives like NoteLove, Neighbors in Need, and the Arts Center highlight a shift towards mutual aid and cultural expression. It is no longer just a bedroom community, but a hub for active, caring citizenship.",
-      img: historyImg
+      shortDesc: "Modern arts, mutual aid, & civic identity.",
+      fullDetails:
+        "Coppell now embraces a diverse and connected civic culture. From NoteLove to Neighbors in Need to expanded city arts initiatives, this era reflects a shift toward collaboration and creative expression.",
+      img: era2025,
+      citation:
+        "https://www.coppelltx.gov/1225/2025-Yard-of-the-Month-Winners"
     }
   ];
 
-  const handleMouseDown = (e) => {
-    const slider = scrollRef.current;
-    let isDown = true;
-    let startX = e.pageX - slider.offsetLeft;
-    let scrollLeft = slider.scrollLeft;
-    const onMouseUp = () => { isDown = false; };
-    const onMouseLeave = () => { isDown = false; };
-    const onMouseMove = (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - slider.offsetLeft;
-      const walk = (x - startX) * 2; 
-      slider.scrollLeft = scrollLeft - walk;
-    };
-    slider.addEventListener('mouseleave', onMouseLeave);
-    slider.addEventListener('mouseup', onMouseUp);
-    slider.addEventListener('mousemove', onMouseMove);
-  };
-
   return (
-    <div className="page timeline">
+    <div className="page-container">
+      {/* MAP HEADER ADDITION */}
+      <section className="slab reveal fade-in-up" style={{ marginTop: "2rem" }}>
+        <div className="eyebrow">MAP + TIMELINE OVERVIEW</div>
+        <h3 className="display">How Geography + History Connect</h3>
+        <p className="lead" style={{ marginTop: "1rem" }}>
+          Coppell’s growth and its cultural eras are tightly linked. The map
+          highlights the city’s anchor organizations, while this timeline shows
+          how the community evolved across settlement, expansion, culture
+          building, and modern civic engagement.
+        </p>
+      </section>
+
       <header className="page-head fade-in">
         <h2 className="xxl skew">TIMELINE</h2>
-        <p className="kicker">Scroll to explore • Click for details</p>
+        <p className="lead">
+          Four eras that shaped Coppell’s identity and community culture.
+        </p>
       </header>
 
-      {/* Horizontal Scroll Section */}
-      <div 
-        className="timeline-scroll-container fade-in-up" 
-        ref={scrollRef}
-        onMouseDown={handleMouseDown}
-      >
-        <div className="timeline-track">
-          {eras.map((item) => (
-            <div 
-              key={item.id} 
-              className={`timeline-card-h ${selectedEra?.id === item.id ? 'is-active' : ''}`}
-              onClick={() => setSelectedEra(item)}
-            >
-              <div className="t-img-box">
-                <img src={item.img} alt={item.era} />
-              </div>
-              <div className="eyebrow">{item.years}</div>
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', textTransform: 'uppercase' }}>
-                {item.era}
-              </h3>
-              <p style={{ opacity: 0.8 }}>{item.shortDesc}</p>
-            </div>
-          ))}
-        </div>
+      <div className="timeline-container reveal fade-in-up">
+        {eras.map((era) => (
+          <div
+            key={era.id}
+            className="timeline-card slab"
+            onClick={() => setSelectedEra(era)}
+          >
+            <h3>{era.era}</h3>
+            <p className="years">{era.years}</p>
+            <p className="short">{era.shortDesc}</p>
+          </div>
+        ))}
       </div>
 
-      <div id="era-details">
-        {selectedEra ? (
-          // Added 'padding: 3.5rem' here to separate text from border
-          <div className="timeline-detail-panel slab" style={{ padding: "3.5rem" }}>
-            <div className="eyebrow">HISTORICAL CONTEXT: {selectedEra.years}</div>
-            <h3 className="display">{selectedEra.era}</h3>
-            <hr style={{ border: 'none', borderTop: '2px solid var(--ink)', margin: '1.5rem 0' }} />
+      {selectedEra && (
+        <div className="timeline-overlay fade-in-up">
+          <button
+            className="close-overlay"
+            onClick={() => setSelectedEra(null)}
+          >
+            ✕
+          </button>
+
+          <div className="overlay-content slab">
+            <h3>{selectedEra.era}</h3>
+            <p className="years">{selectedEra.years}</p>
+            <img
+              src={selectedEra.img}
+              alt={selectedEra.era}
+              className="overlay-img"
+            />
             <p className="lead">{selectedEra.fullDetails}</p>
-            <button 
-              className="btn wire" 
-              style={{ marginTop: '2rem' }}
-              onClick={() => setSelectedEra(null)}
-            >
-              Close Details
-            </button>
-          </div>
-        ) : (
-          <div className="fade-in-up delay-2" style={{ textAlign: 'center', padding: '4rem', opacity: 0.5 }}>
-            <p>Select a card above to see what happened during that era.</p>
-          </div>
-        )}
-      </div>
 
-      <Footer />
+            {/* Citation Rendering */}
+            {selectedEra.citation && (
+              <p
+                style={{
+                  marginTop: "1rem",
+                  fontSize: "0.85rem",
+                  opacity: 0.6
+                }}
+              >
+                <em>
+                  Photo Source:{" "}
+                  <a
+                    href={selectedEra.citation}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {selectedEra.citation}
+                  </a>
+                </em>
+              </p>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
