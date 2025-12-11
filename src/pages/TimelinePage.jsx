@@ -8,6 +8,79 @@ import era2025 from "../assets/Document (1).jpeg";
 
 import "../styles/brutalist.css";
 
+const timelineStyles = `
+  /* Header polish */
+  .page-head {
+    margin-bottom: 2.2rem;
+    text-align: center;
+  }
+
+  .page-head .lead {
+    max-width: 620px;
+    margin: 0.8rem auto 0;
+    line-height: 1.55;
+  }
+
+  /* Grid improvements */
+  .timeline-grid {
+    padding-top: 1rem;
+    width: 100%;
+  }
+
+  .timeline-card {
+    border: 3px solid var(--ink);
+    background: var(--panel);
+    box-shadow: 8px 8px 0 var(--shadow);
+    border-radius: 2px;
+  }
+
+  .timeline-card:hover h3 {
+    color: #ff2a6d;
+  }
+
+  /* Timeline Flow header polish */
+  .slab h3.display {
+    text-align: center;
+    border-bottom: 3px solid var(--ink);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  /* Improve timeline flow dots */
+  .timeline-dot,
+  .timeline-flow-dot {
+    width: 24px;
+    height: 24px;
+    background: #ff2a6d;
+    border: 4px solid var(--ink);
+    border-radius: 50%;
+    margin: 0 auto;
+    box-shadow: 0 0 0 8px var(--bg);
+  }
+
+  /* Modal readability boosts */
+  .modal-body {
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .modal-content h3 {
+    margin-top: 0.25rem;
+  }
+
+  /* Slight image refinement */
+  .timeline-card img,
+  .modal-img {
+    border-radius: 0;
+  }
+`;
+
+if (typeof document !== "undefined") {
+  const styleInject = document.createElement("style");
+  styleInject.textContent = timelineStyles;
+  document.head.appendChild(styleInject);
+}
+
 export default function TimelinePage() {
   const [selectedEra, setSelectedEra] = useState(null);
 
