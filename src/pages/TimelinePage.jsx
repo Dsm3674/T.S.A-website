@@ -6,8 +6,6 @@ import era1950 from "../assets/image.png";
 import era1990 from "../assets/2010.png";
 import era2025 from "../assets/Document (1).jpeg";
 
-import "../styles/brutalist.css";
-
 const timelineStyles = `
   /* Header polish */
   .page-head {
@@ -19,6 +17,9 @@ const timelineStyles = `
     max-width: 620px;
     margin: 0.8rem auto 0;
     line-height: 1.55;
+    font-family: inherit !important;   /* MATCH FONT FIX */
+    font-weight: 700;
+    letter-spacing: 0.03em;
   }
 
   /* Grid improvements */
@@ -73,18 +74,6 @@ const timelineStyles = `
   .modal-img {
     border-radius: 0;
   }
-
-  const timelineStyles = `
-  ...existing styles...
-
-  /* Match TIMELINE subtitle to header font */
-  .page-head .lead {
-    font-family: inherit !important;
-    font-weight: 700;
-    letter-spacing: 0.03em;
-  }
-`;
-
 `;
 
 if (typeof document !== "undefined") {
