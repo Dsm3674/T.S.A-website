@@ -1,5 +1,4 @@
-// FILE 5: server.js
-// REPLACE YOUR ENTIRE server.js WITH THIS:
+
 
 import express from "express";
 import fetch from "node-fetch";
@@ -22,7 +21,7 @@ app.use(express.json());
 const BASE_API_URL = "https://generativelanguage.googleapis.com";
 const API_VERSION = "v1beta";
 
-// 🔥 FIXED MODEL NAME
+
 const MODEL_NAME = "gemini-1.5-flash-latest";
 
 const GEMINI_URL = `${BASE_API_URL}/${API_VERSION}/models/${MODEL_NAME}:generateContent`;
