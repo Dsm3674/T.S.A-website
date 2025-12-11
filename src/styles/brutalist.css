@@ -946,9 +946,7 @@ textarea:focus {
   animation: slideDown 0.5s var(--smooth);
 }
 
-/* =========================================
-   MAP PAGE — UNIFIED NETWORK VIEW
-   ========================================= */
+
 
 .map-page .page-head {
   max-width: 52rem;
@@ -1330,9 +1328,7 @@ textarea:focus {
   opacity: 0.7;
 }
 
-/* =========================================
-   CLEAN SCROLL REVEAL (used by App.jsx)
-   ========================================= */
+
 
 .reveal,
 .fade-in,
@@ -1370,9 +1366,6 @@ textarea:focus {
   transition-delay: 0.6s;
 }
 
-/* =========================================
-   ANIMATIONS — MAITSO-STYLE PACK
-   ========================================= */
 
 /* glitch hero */
 @keyframes glitch {
@@ -1591,9 +1584,7 @@ textarea:focus {
   }
 }
 
-/* =========================================
-   RESPONSIVE / MOBILE POLISH
-   ========================================= */
+
 
 @media (max-width: 900px) {
   .reference-grid {
