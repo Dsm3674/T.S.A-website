@@ -1832,6 +1832,38 @@ textarea:focus {
   display: none !important;   /* <-- this is the key */
 }
 
+/* Reference page fixes */
+.reference {
+  background: var(--bg) !important;
+}
 
+.reference-grid {
+  background: transparent;
+}
+
+.reference-grid .slab {
+  color: var(--ink) !important;
+  background: var(--panel) !important;
+  border: var(--border-width) solid var(--ink) !important;
+}
+
+.reference-grid .slab * {
+  color: var(--ink) !important;
+}
+
+.reference-grid .slab h3,
+.reference-grid .slab h4,
+.reference-grid .slab .display {
+  color: var(--ink) !important;
+}
+
+.reference-grid .slab a {
+  color: var(--ink) !important;
+  text-decoration: underline;
+}
+
+.reference-grid .slab a:hover {
+  color: var(--mag) !important;
+}
 
 
