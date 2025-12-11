@@ -806,15 +806,19 @@ export default function TimelinePage() {
                       </>
                     )}
                     {selectedEra.id === 2 && (
-                      <>
-                        <li style={{ animation: 'fade
-                                            {selectedEra.id === 2 && (
-                      <>
-                        <li style={{ animation: 'fadeInLeft 0.5s ease 0.1s both' }}>Opening of DFW International Airport (1974)</li>
-                        <li style={{ animation: 'fadeInLeft 0.5s ease 0.2s both' }}>Rapid suburban development and population growth</li>
-                        <li style={{ animation: 'fadeInLeft 0.5s ease 0.3s both' }}>Establishment of school music and arts programs</li>
-                      </>
-                    )}
+  <>
+    <li style={{ animation: 'fadeInLeft 0.5s ease 0.1s both' }}>
+      Opening of DFW International Airport (1974)
+    </li>
+    <li style={{ animation: 'fadeInLeft 0.5s ease 0.2s both' }}>
+      Rapid suburban development and population growth
+    </li>
+    <li style={{ animation: 'fadeInLeft 0.5s ease 0.3s both' }}>
+      Establishment of school music and arts programs
+    </li>
+  </>
+)}
+
                     {selectedEra.id === 3 && (
                       <>
                         <li style={{ animation: 'fadeInLeft 0.5s ease 0.1s both' }}>Launch of Coppell Farmers Market</li>
