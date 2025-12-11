@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-// UPDATED IMAGES — using your actual assets folder names
+// Import your actual images
 import earlyImg from "../assets/Document.jpg";
 import era1950 from "../assets/image.png";
 import era1990 from "../assets/2010.png";
@@ -11,9 +11,9 @@ import "../styles/brutalist.css";
 export default function TimelinePage() {
   const [selectedEra, setSelectedEra] = useState(null);
 
-  // ✅ REVEAL EFFECT ON SCROLL
+  // Reveal effect on scroll
   useEffect(() => {
-    const revealEls = document.querySelectorAll('.reveal, .fade-in-up');
+    const revealEls = document.querySelectorAll('.reveal, .fade-in-up, .fade-in');
     
     const obs = new IntersectionObserver(
       entries => {
@@ -80,158 +80,119 @@ export default function TimelinePage() {
   return (
     <div className="page-container">
 
-      <header className="page-head reveal fade-in">
+      {/* PAGE HEADER */}
+      <header className="page-head fade-in reveal">
         <h2 className="xxl skew reveal">TIMELINE</h2>
         <p className="lead reveal">Explore Coppell's cultural eras.</p>
       </header>
 
-      {/* HORIZONTAL TIMELINE */}
-      <div style={{
-        position: 'relative',
-        padding: '4rem 0',
-        overflow: 'visible'
-      }}>
-        {/* Timeline Line */}
-        <div className="reveal fade-in" style={{
-          position: 'absolute',
-          top: '50%',
-          left: '5%',
-          right: '5%',
-          height: '4px',
-          background: 'var(--ink)',
-          transform: 'translateY(-50%)',
-          zIndex: 1
-        }} />
-
-        {/* Timeline Cards */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: '2rem',
-          position: 'relative',
-          zIndex: 2
-        }}>
-          {eras.map((era, index) => (
-            <div
-              key={era.id}
-              className={`reveal fade-in-up delay-${index + 1}`}
-              onClick={() => setSelectedEra(era)}
-              style={{
-                cursor: 'pointer',
-                transition: 'all 0.4s cubic-bezier(0.23, 1, 0.32, 1)',
-                position: 'relative'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-20px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-              }}
-            >
-              {/* Timeline Dot */}
-              <div style={{
-                width: '24px',
-                height: '24px',
-                background: '#ff2a6d',
-                border: '4px solid var(--ink)',
-                borderRadius: '50%',
-                margin: '0 auto 2rem',
-                position: 'relative',
-                zIndex: 3,
-                boxShadow: '0 0 0 8px var(--bg)'
-              }} />
-
-              {/* Card */}
-              <div style={{
-                background: 'var(--panel)',
-                border: '3px solid var(--ink)',
-                padding: '1.5rem',
-                boxShadow: '8px 8px 0 rgba(255, 255, 255, 0.2)',
-                transition: 'all 0.3s ease'
-              }}>
-                {/* Image */}
-                <div style={{
-                  width: '100%',
-                  height: '180px',
-                  overflow: 'hidden',
-                  marginBottom: '1rem',
-                  border: '2px solid var(--ink-dim)',
-                  background: 'var(--bg)'
-                }}>
-                  <img 
-                    src={era.img} 
-                    alt={era.era}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                      transition: 'transform 0.5s ease'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = 'scale(1.1)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = 'scale(1)';
-                    }}
-                  />
-                </div>
-
-                {/* Content */}
-                <h3 style={{
-                  fontSize: '1.5rem',
-                  fontWeight: '800',
-                  textTransform: 'uppercase',
-                  marginBottom: '0.5rem',
-                  letterSpacing: '-0.02em'
-                }}>
-                  {era.era}
-                </h3>
-                
-                <p style={{
-                  fontFamily: '"Courier New", monospace',
-                  fontSize: '0.8rem',
-                  color: 'var(--ink-dim)',
-                  marginBottom: '0.75rem',
-                  letterSpacing: '0.05em'
-                }}>
-                  {era.years}
-                </p>
-                
-                <p style={{
-                  fontSize: '0.95rem',
-                  lineHeight: '1.4',
-                  opacity: 0.85
-                }}>
-                  {era.shortDesc}
-                </p>
-
-                {/* Click indicator */}
-                <div style={{
-                  marginTop: '1rem',
-                  fontSize: '0.75rem',
-                  color: '#ff2a6d',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.1em',
-                  fontWeight: '700'
-                }}>
-                  Click to expand →
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+      {/* TIMELINE GRID */}
+      <div className="timeline-grid reveal fade-in-up">
+        {eras.map((era) => (
+          <div
+            key={era.id}
+            className="timeline-card slab"
+            onClick={() => setSelectedEra(era)}
+          >
+            <h3>{era.era}</h3>
+            <p className="years">{era.years}</p>
+            <p className="short">{era.shortDesc}</p>
+          </div>
+        ))}
       </div>
 
-      {/* MODAL */}
+      {/* HORIZONTAL TIMELINE VISUALIZATION */}
+      <div className="slab reveal fade-in-up" style={{ marginTop: '4rem', padding: '3rem' }}>
+        <h3 className="display" style={{ marginBottom: '2rem' }}>
+          Timeline Flow
+        </h3>
+        
+        <div style={{ 
+          position: 'relative', 
+          padding: '3rem 0',
+          overflow: 'visible'
+        }}>
+          {/* Timeline Line */}
+          <div style={{
+            position: 'absolute',
+            top: '50%',
+            left: '5%',
+            right: '5%',
+            height: '4px',
+            background: 'var(--ink)',
+            transform: 'translateY(-50%)',
+            zIndex: 1
+          }} />
+
+          {/* Timeline Points */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: '2rem',
+            position: 'relative',
+            zIndex: 2
+          }}>
+            {eras.map((era, index) => (
+              <div
+                key={`timeline-point-${era.id}`}
+                style={{
+                  textAlign: 'center',
+                  cursor: 'pointer'
+                }}
+                onClick={() => setSelectedEra(era)}
+              >
+                {/* Dot */}
+                <div style={{
+                  width: '24px',
+                  height: '24px',
+                  background: '#ff2a6d',
+                  border: '4px solid var(--ink)',
+                  borderRadius: '50%',
+                  margin: '0 auto 1rem',
+                  position: 'relative',
+                  boxShadow: '0 0 0 8px var(--bg)',
+                  transition: 'all 0.3s ease'
+                }} />
+
+                {/* Year Label */}
+                <div style={{
+                  fontFamily: '"Courier New", monospace',
+                  fontSize: '0.75rem',
+                  color: 'var(--ink-dim)',
+                  letterSpacing: '0.05em',
+                  fontWeight: '700'
+                }}>
+                  {era.years}
+                </div>
+
+                {/* Era Name */}
+                <div style={{
+                  fontSize: '0.9rem',
+                  fontWeight: '800',
+                  textTransform: 'uppercase',
+                  marginTop: '0.5rem',
+                  color: 'var(--ink)'
+                }}>
+                  {era.era}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <p className="lead" style={{ marginTop: '2rem', textAlign: 'center' }}>
+          Click any era above or in the grid to explore its full story.
+        </p>
+      </div>
+
+      {/* EXPANDED MODAL */}
       {selectedEra && (
-        <div 
-          className="timeline-modal"
-          onClick={() => setSelectedEra(null)}
-        >
+        <div className="timeline-modal" onClick={() => setSelectedEra(null)}>
           <div 
-            className="modal-content slab"
+            className="modal-content slab" 
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Close Button */}
             <button 
               className="close-overlay" 
               onClick={() => setSelectedEra(null)}
@@ -239,18 +200,95 @@ export default function TimelinePage() {
               ✕
             </button>
 
+            {/* Modal Header */}
             <h3>{selectedEra.era}</h3>
             <p className="years">{selectedEra.years}</p>
 
+            {/* Modal Image */}
             <img
               src={selectedEra.img}
               alt={selectedEra.era}
               className="modal-img"
             />
 
+            {/* Modal Body */}
             <div className="modal-body">
               <p className="lead">{selectedEra.fullDetails}</p>
 
+              {/* Historical Context Section */}
+              <div style={{
+                marginTop: '2rem',
+                padding: '1.5rem',
+                background: 'rgba(255, 42, 109, 0.05)',
+                border: '2px dashed var(--ink-dim)'
+              }}>
+                <h4 style={{
+                  fontSize: '1.2rem',
+                  fontWeight: '800',
+                  textTransform: 'uppercase',
+                  marginBottom: '0.75rem',
+                  color: '#ff2a6d'
+                }}>
+                  Historical Context
+                </h4>
+                <p style={{ 
+                  fontSize: '0.95rem', 
+                  lineHeight: '1.6',
+                  color: 'var(--ink)'
+                }}>
+                  {selectedEra.id === 1 && "This era laid the foundation for Coppell's agricultural heritage and community spirit that continues today."}
+                  {selectedEra.id === 2 && "The transformation from rural to suburban brought new opportunities and challenges, shaping modern Coppell."}
+                  {selectedEra.id === 3 && "Community institutions emerged as pillars of support, creating lasting bonds between residents."}
+                  {selectedEra.id === 4 && "Today's Coppell reflects decades of growth while maintaining its commitment to community connection."}
+                </p>
+              </div>
+
+              {/* Key Events Section */}
+              <div style={{ marginTop: '2rem' }}>
+                <h4 style={{
+                  fontSize: '1.2rem',
+                  fontWeight: '800',
+                  textTransform: 'uppercase',
+                  marginBottom: '1rem'
+                }}>
+                  Key Developments
+                </h4>
+                <ul style={{
+                  paddingLeft: '1.5rem',
+                  lineHeight: '1.8'
+                }}>
+                  {selectedEra.id === 1 && (
+                    <>
+                      <li>Establishment of Gibbs Station trading post</li>
+                      <li>Formation of first community churches</li>
+                      <li>Development of agricultural infrastructure</li>
+                    </>
+                  )}
+                  {selectedEra.id === 2 && (
+                    <>
+                      <li>Opening of DFW International Airport (1974)</li>
+                      <li>Rapid suburban development and population growth</li>
+                      <li>Establishment of school music programs</li>
+                    </>
+                  )}
+                  {selectedEra.id === 3 && (
+                    <>
+                      <li>Launch of Coppell Farmers Market</li>
+                      <li>Growth of youth arts and sports programs</li>
+                      <li>Strengthening of community traditions</li>
+                    </>
+                  )}
+                  {selectedEra.id === 4 && (
+                    <>
+                      <li>Expansion of NoteLove music education</li>
+                      <li>Growth of Metrocrest Services support network</li>
+                      <li>Rise of grassroots mutual aid initiatives</li>
+                    </>
+                  )}
+                </ul>
+              </div>
+
+              {/* Citation */}
               {selectedEra.citation && (
                 <p className="citation">
                   <em>
@@ -269,21 +307,6 @@ export default function TimelinePage() {
           </div>
         </div>
       )}
-
-      <style>{`
-        @media (max-width: 1024px) {
-          div[style*="gridTemplateColumns: repeat(4, 1fr)"] {
-            grid-template-columns: repeat(2, 1fr) !important;
-          }
-        }
-
-        @media (max-width: 640px) {
-          div[style*="gridTemplateColumns: repeat(4, 1fr)"],
-          div[style*="grid-template-columns: repeat(2, 1fr)"] {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      `}</style>
     </div>
   );
 }
