@@ -1741,6 +1741,35 @@ textarea:focus {
   color: var(--ink-dim);
   margin-top: 0.5rem;
 }
+/* === MAP FIX — FORCE REASONABLE HEIGHT AND PROPER SCALING === */
 
+.map-spin-frame {
+  max-height: 520px;       /* controls total map height */
+  height: auto;
+  overflow: hidden;
+}
+
+.map-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;     /* ensures SVG scales without stretching */
+}
+
+/* reduce the box shadow so frame doesn’t clip when height is smaller */
+.map-spin-frame {
+  box-shadow: 12px 12px 0 var(--shadow);
+}
+
+/* Ensure right column aligns with left */
+.map-layout {
+  align-items: start !important;
+}
+
+/* Make SVG label sit properly inside resized frame */
+.map-label {
+  top: 10px;
+  left: 10px;
+}
 
 
