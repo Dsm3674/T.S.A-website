@@ -41,7 +41,7 @@ function Chatbot() {
  
     try {
       const res = await fetch(
-        "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=AIzaSyCnlXM9CyUxpfM4hFkDDysyiyIxcfj-gKM",
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyCnlXM9CyUxpfM4hFkDDysyiyIxcfj-gKM",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -81,62 +81,62 @@ function Chatbot() {
   };
  
   return (
-<>
-<button className="chat-toggle" onClick={() => setOpen(o => !o)}>
+    <>
+      <button className="chat-toggle" onClick={() => setOpen(o => !o)}>
         💬
-</button>
+      </button>
  
       <AnimatePresence>
         {open && (
-<motion.div
+          <motion.div
             className="chatbot-container"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
->
-<div className="chatbot-header">
-<span>Archive Bot</span>
-<button className="close-btn" onClick={() => setOpen(false)}>
+          >
+            <div className="chatbot-header">
+              <span>Archive Bot</span>
+              <button className="close-btn" onClick={() => setOpen(false)}>
                 ✕
-</button>
-</div>
+              </button>
+            </div>
  
             <div className="chatbot-messages">
               {messages.map((m, i) => (
-<div
+                <div
                   key={i}
                   className={`message ${m.role === "user" ? "user" : "bot"}`}
->
+                >
                   {m.content}
-</div>
+                </div>
               ))}
  
               {loading && (
-<div className="loading">
-<span className="dot" />
-<span className="dot" />
-<span className="dot" />
-</div>
+                <div className="loading">
+                  <span className="dot" />
+                  <span className="dot" />
+                  <span className="dot" />
+                </div>
               )}
  
               <div ref={chatEndRef} />
-</div>
+            </div>
  
             <div className="chatbot-input">
-<input
+              <input
                 value={userInput}
                 onChange={e => setUserInput(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Ask Archive Bot…"
               />
-<button onClick={send} disabled={loading}>
+              <button onClick={send} disabled={loading}>
                 {loading ? "..." : "Send"}
-</button>
-</div>
-</motion.div>
+              </button>
+            </div>
+          </motion.div>
         )}
-</AnimatePresence>
-</>
+      </AnimatePresence>
+    </>
   );
 }
  
@@ -177,7 +177,7 @@ export default function App() {
       case "stories":
         return <StoriesPage />;
       case "timeline":
-        return <TimelineTimelinePage />;
+        return <TimelinePage />;
       case "map":
         return <MapPage />;
       case "archive":
@@ -192,8 +192,8 @@ export default function App() {
   };
  
   return (
-<div className="app-container">
-<Navigation
+    <div className="app-container">
+      <Navigation
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         theme={theme}
@@ -203,7 +203,7 @@ export default function App() {
       <main className="page-content">{renderPage()}</main>
  
       <Chatbot />
-</div>
+    </div>
   );
 }
 
