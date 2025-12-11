@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import historyImg from "../assets/history.jpg";
+import historyImg from "../assets/Document.jpg";
 
 // NEW IMAGE IMPORTS
 import era1950 from "../assets/image.png";               
