@@ -9,7 +9,7 @@ import era2025 from "../assets/Document (1).jpeg";
 export default function TimelinePage() {
   const [selectedEra, setSelectedEra] = useState(null);
 
-  
+ 
   useEffect(() => {
     if (typeof IntersectionObserver === "undefined") return;
 
@@ -67,34 +67,37 @@ export default function TimelinePage() {
     <div className="page">
       <header className="page-head reveal">
         <h2 className="xxl skew">TIMELINE</h2>
-        <p className="kicker">Tap an era to explore</p>
+        <p className="kicker">Community evolution</p>
       </header>
 
-      {/* MOBILE HORIZONTAL SCROLL */}
+      {/* Horizontal timeline rail */}
       <section
+        className="timeline-scroll"
         style={{
           display: "flex",
           gap: "1rem",
           overflowX: "auto",
-          paddingBottom: "1rem"
+          paddingBottom: "1.25rem"
         }}
       >
         {eras.map(e => (
           <button
             key={e.id}
             onClick={() => setSelectedEra(e)}
-            className="timeline-card-h reveal fade-in-up"
+            className={`timeline-card-h reveal fade-in-up ${
+              selectedEra?.id === e.id ? "is-active" : ""
+            }`}
             style={{
               minWidth: "260px",
-              textAlign: "left",
-              flexShrink: 0
+              flexShrink: 0,
+              textAlign: "left"
             }}
           >
             <div className="t-img-box">
               <img src={e.img} alt={e.era} loading="lazy" />
             </div>
+            <div className="eyebrow">{e.years}</div>
             <strong>{e.era}</strong>
-            <p className="years">{e.years}</p>
             <p>{e.desc}</p>
           </button>
         ))}
@@ -105,14 +108,30 @@ export default function TimelinePage() {
         <div
           className="timeline-modal"
           onClick={() => setSelectedEra(null)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "rgba(0,0,0,0.85)",
+            zIndex: 999,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "1.5rem"
+          }}
         >
           <div
             className="slab"
-            style={{ maxWidth: "90vw" }}
+            style={{
+              maxWidth: "720px",
+              width: "100%",
+              borderColor: "var(--mag)"
+            }}
             onClick={e => e.stopPropagation()}
           >
-            <h3>{selectedEra.era}</h3>
+            <div className="eyebrow">{selectedEra.years}</div>
+            <h3 className="display">{selectedEra.era}</h3>
             <p className="lead">{selectedEra.desc}</p>
+
             <button
               className="btn slab"
               onClick={() => setSelectedEra(null)}
@@ -127,3 +146,4 @@ export default function TimelinePage() {
     </div>
   );
 }
+
