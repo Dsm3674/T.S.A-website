@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import useReveal from "../hooks/useReveal";
+import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 
 import earlyImg from "../assets/Document.jpg";
@@ -8,8 +7,30 @@ import era1990 from "../assets/2010.png";
 import era2025 from "../assets/Document (1).jpeg";
 
 export default function TimelinePage() {
-  useReveal();
   const [selectedEra, setSelectedEra] = useState(null);
+
+  
+  useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    document
+      .querySelectorAll(".reveal, .fade-in, .fade-in-up")
+      .forEach(el => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
 
   const eras = [
     {
@@ -49,8 +70,8 @@ export default function TimelinePage() {
         <p className="kicker">Tap an era to explore</p>
       </header>
 
-      {/* MOBILE-FRIENDLY HORIZONTAL SCROLL */}
-      <div
+      {/* MOBILE HORIZONTAL SCROLL */}
+      <section
         style={{
           display: "flex",
           gap: "1rem",
@@ -63,7 +84,11 @@ export default function TimelinePage() {
             key={e.id}
             onClick={() => setSelectedEra(e)}
             className="timeline-card-h reveal fade-in-up"
-            style={{ minWidth: "260px", textAlign: "left" }}
+            style={{
+              minWidth: "260px",
+              textAlign: "left",
+              flexShrink: 0
+            }}
           >
             <div className="t-img-box">
               <img src={e.img} alt={e.era} loading="lazy" />
@@ -73,7 +98,7 @@ export default function TimelinePage() {
             <p>{e.desc}</p>
           </button>
         ))}
-      </div>
+      </section>
 
       {/* MODAL */}
       {selectedEra && (
