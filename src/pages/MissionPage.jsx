@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 
 export default function MissionPage() {
+  const navigate = useNavigate();
   const [activeCard, setActiveCard] = useState(null);
   const [scrollY, setScrollY] = useState(0);
 
@@ -574,6 +576,7 @@ export default function MissionPage() {
         }}>
           <button 
             className="btn slab"
+            onClick={() => navigate('/stories')}
             style={{
               animation: 'popIn 0.6s ease 0.8s both',
               transition: 'all 0.3s ease'
@@ -591,6 +594,7 @@ export default function MissionPage() {
           </button>
           <button 
             className="btn wire"
+            onClick={() => navigate('/map')}
             style={{
               animation: 'popIn 0.6s ease 1s both',
               transition: 'all 0.3s ease'
