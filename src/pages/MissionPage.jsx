@@ -6,6 +6,9 @@ export default function MissionPage({ setCurrentPage }) {
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
+    // Ensure the page starts at the top when navigated to
+    window.scrollTo(0, 0);
+
     const revealEls = document.querySelectorAll('.reveal, .fade-in-up, .fade-in');
     
     const obs = new IntersectionObserver(
@@ -32,10 +35,10 @@ export default function MissionPage({ setCurrentPage }) {
   }, []);
 
   const stats = [
-    { number: '100+', label: 'Stories Collected', color: '#ff2a6d' },
-    { number: '4', label: 'Anchor Organizations', color: '#05d9e8' },
-    { number: '10K+', label: 'Community Members', color: '#d1f7ff' },
-    { number: '2025', label: 'TSA Competition', color: '#ff2a6d' }
+    { number: '100+', label: 'Stories Collected', color: '#ff2a6d', target: 'stories' },
+    { number: '4', label: 'Anchor Orgs', color: '#05d9e8', target: 'archive' },
+    { number: '10K+', label: 'Community Pins', color: '#d1f7ff', target: 'map' },
+    { number: '2025', label: 'TSA Competition', color: '#ff2a6d', target: 'home' }
   ];
 
   const pillars = [
@@ -43,6 +46,7 @@ export default function MissionPage({ setCurrentPage }) {
       title: 'ORGANIZATIONS',
       subtitle: 'Anchors, Not Ads',
       icon: '🏛️',
+      target: 'archive',
       content: 'We highlight groups like Coppell Farmers Market, NoteLove, Metrocrest Services, and Neighbors In Need as pillars of daily life. These aren\'t sponsors — they\'re community anchors. Together, they reflect food access, youth mentorship, mutual aid, and wraparound support that help Coppell stay connected and resilient.',
       features: ['Food Access Networks', 'Youth Mentorship', 'Mutual Aid Systems', 'Emergency Support']
     },
@@ -50,6 +54,7 @@ export default function MissionPage({ setCurrentPage }) {
       title: 'PEOPLE',
       subtitle: 'Neighbors First',
       icon: '👥',
+      target: 'map',
       content: 'Every pin on our map represents real people: volunteers packing grocery bags, teens offering music lessons, families supporting one another during hard weeks, coaches, teachers, artists, and local workers who make daily life feel personal rather than distant. Coppell\'s community is not abstract — it is built on human stories.',
       features: ['Volunteer Network', 'Local Artists', 'Community Leaders', 'Student Voices']
     },
@@ -57,6 +62,7 @@ export default function MissionPage({ setCurrentPage }) {
       title: 'DESIGN',
       subtitle: 'Brutalist On Purpose',
       icon: '🎨',
+      target: 'stories',
       content: 'Our bold, blocky design mirrors a living bulletin board: layers of posters, handwritten notes, maps, announcements, and reminders — the kind of materials you see in real community spaces. The design celebrates honesty, texture, and the raw energy of a city that shows up.',
       features: ['Bold Typography', 'Raw Layouts', 'Honest Design', 'Community Aesthetic']
     }
@@ -117,13 +123,12 @@ export default function MissionPage({ setCurrentPage }) {
         }} />
       </header>
 
-      {/* HERO STATS SECTION */}
+      {/* HERO STATS SECTION - INTERACTIVE */}
       <section className="slab fade-in-up reveal" style={{
         background: 'var(--panel)',
         position: 'relative',
         overflow: 'hidden'
       }}>
-        {/* Parallax background pattern */}
         <div style={{
           position: 'absolute',
           inset: 0,
@@ -151,6 +156,7 @@ export default function MissionPage({ setCurrentPage }) {
           {stats.map((stat, idx) => (
             <div
               key={idx}
+              onClick={() => setCurrentPage(stat.target)}
               style={{
                 border: '4px solid var(--ink)',
                 padding: '1.5rem',
@@ -173,7 +179,6 @@ export default function MissionPage({ setCurrentPage }) {
                 e.currentTarget.style.borderColor = 'var(--ink)';
               }}
             >
-              {/* Animated background accent */}
               <div style={{
                 position: 'absolute',
                 top: '-50%',
@@ -212,7 +217,7 @@ export default function MissionPage({ setCurrentPage }) {
         </div>
       </section>
 
-      {/* PURPOSE SECTION WITH ANIMATION */}
+      {/* PURPOSE SECTION */}
       <section className="slab fade-in-up reveal" style={{
         position: 'relative',
         overflow: 'hidden'
@@ -243,7 +248,6 @@ export default function MissionPage({ setCurrentPage }) {
           that show how Coppell cares for its people.
         </p>
 
-        {/* Decorative quote box */}
         <div style={{
           marginTop: '2rem',
           padding: '1.5rem',
@@ -257,7 +261,7 @@ export default function MissionPage({ setCurrentPage }) {
         </div>
       </section>
 
-      {/* ENHANCED THREE PILLARS */}
+      {/* THREE PILLARS - INTERACTIVE NAVIGATION */}
       <section className="slab mission-grid" style={{
         background: 'var(--panel)',
         position: 'relative'
@@ -283,27 +287,13 @@ export default function MissionPage({ setCurrentPage }) {
               transform: activeCard === idx ? 'scale(1.02)' : 'scale(1)'
             }}
             onClick={() => setActiveCard(activeCard === idx ? null : idx)}
-            onMouseEnter={(e) => {
-              if (activeCard !== idx) {
-                e.currentTarget.style.transform = 'translateY(-8px)';
-                e.currentTarget.style.boxShadow = '12px 12px 0 rgba(255, 42, 109, 0.3)';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (activeCard !== idx) {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = 'none';
-              }
-            }}
           >
-            {/* Icon badge */}
             <div style={{
               position: 'absolute',
               top: '1rem',
               right: '1rem',
               fontSize: '2rem',
               opacity: 0.3,
-              animation: `bounce 2s ease-in-out infinite ${idx * 0.3}s`
             }}>
               {pillar.icon}
             </div>
@@ -312,7 +302,6 @@ export default function MissionPage({ setCurrentPage }) {
             <h4 style={{
               fontSize: '1.4rem',
               marginBottom: '1rem',
-              transition: 'color 0.3s ease',
               color: activeCard === idx ? '#ff2a6d' : 'inherit'
             }}>
               {pillar.subtitle}
@@ -321,368 +310,87 @@ export default function MissionPage({ setCurrentPage }) {
               {pillar.content}
             </p>
 
-            {/* Expandable features list */}
             <div style={{
-              maxHeight: activeCard === idx ? '300px' : '0',
+              maxHeight: activeCard === idx ? '400px' : '0',
               overflow: 'hidden',
-              transition: 'max-height 0.5s ease, opacity 0.5s ease',
+              transition: 'all 0.5s ease',
               opacity: activeCard === idx ? 1 : 0
             }}>
-              <div style={{
-                paddingTop: '1rem',
-                borderTop: '2px dashed var(--ink-dim)',
-                marginTop: '1rem'
-              }}>
-                <h5 style={{
-                  fontSize: '0.85rem',
-                  fontWeight: '800',
-                  textTransform: 'uppercase',
-                  marginBottom: '0.75rem',
-                  color: '#ff2a6d',
-                  letterSpacing: '0.1em'
-                }}>
-                  Key Features:
-                </h5>
-                <ul style={{
-                  paddingLeft: '1.2rem',
-                  lineHeight: '1.8',
-                  fontSize: '0.9rem'
-                }}>
-                  {pillar.features.map((feature, fIdx) => (
-                    <li key={fIdx} style={{
-                      animation: activeCard === idx ? `fadeInLeft 0.5s ease ${fIdx * 0.1}s both` : 'none'
-                    }}>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <ul style={{ paddingLeft: '1.2rem', lineHeight: '1.8', fontSize: '0.9rem', marginBottom: '1.5rem' }}>
+                {pillar.features.map((feature, fIdx) => (
+                  <li key={fIdx}>{feature}</li>
+                ))}
+              </ul>
+              <button 
+                className="btn wire" 
+                style={{ padding: '0.6rem 1.2rem', fontSize: '0.75rem' }}
+                onClick={(e) => { e.stopPropagation(); setCurrentPage(pillar.target); }}
+              >
+                OPEN {pillar.title} →
+              </button>
             </div>
-
-            {/* Click indicator */}
-            <div style={{
-              marginTop: '1rem',
-              fontSize: '0.75rem',
-              color: '#ff2a6d',
-              fontWeight: '700',
-              textTransform: 'uppercase',
-              letterSpacing: '0.1em'
-            }}>
-              {activeCard === idx ? 'Click to collapse ↑' : 'Click to expand →'}
+            <div style={{ marginTop: '1rem', fontSize: '0.75rem', color: '#ff2a6d', fontWeight: '700' }}>
+              {activeCard === idx ? 'CLICK TO COLLAPSE ↑' : 'CLICK TO EXPAND ↓'}
             </div>
           </div>
         ))}
       </section>
 
-      {/* WHY COPPELL IS SPECIAL - ENHANCED */}
+      {/* WHY COPPELL IS SPECIAL */}
       <section className="slab fade-in-up reveal" style={{
         position: 'relative',
         background: 'linear-gradient(135deg, var(--panel) 0%, rgba(255, 42, 109, 0.05) 100%)'
       }}>
         <div className="eyebrow">WHY COPPELL IS SPECIAL</div>
         <h3 className="display">A City Built on Connection</h3>
-        
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '2rem',
-          marginTop: '2rem'
-        }}>
-          <div style={{
-            animation: 'fadeInUp 1s ease 0.2s both'
-          }}>
-            <p className="lead">
-              Coppell is more than a suburb — it is a community shaped by moments of 
-              showing up for one another. Growing up here means meeting people who 
-              give their time, skills, and energy so others can succeed.
-            </p>
-          </div>
-
-          <div style={{
-            animation: 'fadeInUp 1s ease 0.4s both'
-          }}>
-            <p className="lead">
-              From weekend markets to youth-led initiatives, and from cultural 
-              celebrations to mutual aid groups, Coppell stands out because its 
-              identity is rooted in participation. Everyone contributes something,
-              and everyone benefits from the shared effort.
-            </p>
-          </div>
-        </div>
-
-        {/* Visual timeline snippet */}
-        <div style={{
-          marginTop: '3rem',
-          padding: '2rem',
-          border: '3px solid var(--ink)',
-          background: 'var(--bg)',
-          position: 'relative',
-          animation: 'zoomIn 1s ease 0.6s both'
-        }}>
-          <h4 style={{
-            fontSize: '1.2rem',
-            fontWeight: '800',
-            textTransform: 'uppercase',
-            marginBottom: '1.5rem',
-            textAlign: 'center'
-          }}>
-            Community Evolution Timeline
-          </h4>
-          
-          <div style={{
-            position: 'relative',
-            height: '4px',
-            background: 'var(--ink)',
-            margin: '2rem 0'
-          }}>
-            {['1840', '1950', '1990', '2025'].map((year, idx) => (
-              <div
-                key={year}
-                style={{
-                  position: 'absolute',
-                  left: `${(idx / 3) * 100}%`,
-                  transform: 'translateX(-50%)',
-                  top: '-10px'
-                }}
-              >
-                <div style={{
-                  width: '24px',
-                  height: '24px',
-                  background: '#ff2a6d',
-                  border: '4px solid var(--ink)',
-                  borderRadius: '50%',
-                  animation: `pulse 2s ease-in-out infinite ${idx * 0.3}s`
-                }} />
-                <div style={{
-                  marginTop: '1.5rem',
-                  fontFamily: '"Courier New", monospace',
-                  fontSize: '0.85rem',
-                  fontWeight: '700',
-                  whiteSpace: 'nowrap'
-                }}>
-                  {year}
-                </div>
-              </div>
-            ))}
-          </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', marginTop: '2rem' }}>
+          <p className="lead">Coppell is more than a suburb — it is a community shaped by moments of showing up for one another.</p>
+          <p className="lead">From weekend markets to youth-led initiatives, everyone contributes something, and everyone benefits.</p>
         </div>
       </section>
 
-      {/* WHY THIS ARCHIVE MATTERS - ENHANCED */}
-      <section className="slab fade-in-up reveal" style={{
-        background: 'var(--panel)',
-        position: 'relative',
-        overflow: 'hidden'
-      }}>
-        {/* Animated corner accent */}
-        <div style={{
-          position: 'absolute',
-          bottom: 0,
-          right: 0,
-          width: '300px',
-          height: '300px',
-          background: 'radial-gradient(circle at bottom right, rgba(255, 42, 109, 0.1) 0%, transparent 70%)',
-          pointerEvents: 'none',
-          animation: 'pulse 4s ease-in-out infinite'
-        }} />
-
-        <div className="eyebrow" style={{ position: 'relative', zIndex: 2 }}>WHY THIS ARCHIVE MATTERS</div>
-        <h3 className="display" style={{ position: 'relative', zIndex: 2 }}>
-          Preserving What Makes Us Who We Are
-        </h3>
-        
-        <div style={{
-          marginTop: '2rem',
-          position: 'relative',
-          zIndex: 2
-        }}>
-          <p className="lead" style={{
-            padding: '1.5rem',
-            background: 'rgba(255, 42, 109, 0.05)',
-            borderLeft: '5px solid #ff2a6d',
-            animation: 'slideRight 1s ease 0.3s both'
-          }}>
-            For students like us, creating this archive is a way to honor the 
-            community that shaped our childhood. We built it so future residents, 
-            volunteers, and students can understand the heart of Coppell — not 
-            through statistics or city brochures, but through real community stories.
-          </p>
-
-          <p className="lead" style={{
-            marginTop: '1.5rem',
-            padding: '1.5rem',
-            background: 'rgba(5, 217, 232, 0.05)',
-            borderLeft: '5px solid #05d9e8',
-            animation: 'slideRight 1s ease 0.5s both'
-          }}>
-            This project captures the culture, generosity, and local pride that make
-            Coppell feel like home. It is a snapshot of the people and places that 
-            gave us opportunities, supported us, and taught us what it means to 
-            belong.
-          </p>
-        </div>
-      </section>
-
-      {/* FINAL MESSAGE - ENHANCED */}
+      {/* FINAL MESSAGE - CTAs REPAIRED */}
       <section className="slab fade-in-up reveal" style={{
         textAlign: 'center',
         background: 'var(--bg)',
         position: 'relative'
       }}>
-        {/* Animated grid background */}
-        <div style={{
-          position: 'absolute',
-          inset: 0,
-          backgroundImage: 'radial-gradient(circle, rgba(255, 42, 109, 0.1) 1px, transparent 1px)',
-          backgroundSize: '30px 30px',
-          opacity: 0.3,
-          animation: 'gridPulse 4s ease-in-out infinite',
-          pointerEvents: 'none'
-        }} />
-
         <div className="eyebrow" style={{ position: 'relative', zIndex: 2 }}>WHAT WE REPRESENT</div>
-        <h3 className="display" style={{ 
-          marginBottom: '2rem',
-          position: 'relative',
-          zIndex: 2,
-          fontSize: 'clamp(2rem, 5vw, 4rem)'
-        }}>
+        <h3 className="display" style={{ marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
           A Community That Shows Up
         </h3>
         
-        <p className="lead" style={{ 
-          maxWidth: '800px',
-          margin: '0 auto 2rem',
-          position: 'relative',
-          zIndex: 2
-        }}>
-          Coppell is special because it is built on connection. Growing up here
-          means learning from diverse neighbors, discovering new experiences,
-          and seeing how people support one another. This archive preserves that
-          feeling for anyone who visits — now and in the future.
+        <p className="lead" style={{ maxWidth: '800px', margin: '0 auto 2rem', position: 'relative', zIndex: 2 }}>
+          Coppell is special because it is built on connection. This archive preserves that feeling for anyone who visits.
         </p>
 
-        {/* Call to action buttons */}
-        <div style={{
-          display: 'flex',
-          gap: '1rem',
-          justifyContent: 'center',
-          flexWrap: 'wrap',
-          marginTop: '2rem',
-          position: 'relative',
-          zIndex: 2
-        }}>
-          <a 
-            href="/stories"
+        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2rem', position: 'relative', zIndex: 2 }}>
+          <button 
             className="btn slab"
-            style={{
-              animation: 'popIn 0.6s ease 0.8s both',
-              transition: 'all 0.3s ease',
-              textDecoration: 'none',
-              display: 'inline-block'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-4px) scale(1.05)';
-              e.currentTarget.style.boxShadow = '12px 12px 0 var(--ink)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0) scale(1)';
-              e.currentTarget.style.boxShadow = 'none';
-            }}
+            onClick={() => setCurrentPage('stories')}
           >
             EXPLORE STORIES
-          </a>
-          <a 
-            href="/map"
+          </button>
+          <button 
             className="btn wire"
-            style={{
-              animation: 'popIn 0.6s ease 1s both',
-              transition: 'all 0.3s ease',
-              textDecoration: 'none',
-              display: 'inline-block'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-4px) scale(1.05)';
-              e.currentTarget.style.boxShadow = '12px 12px 0 #ff2a6d';
-              e.currentTarget.style.borderColor = '#ff2a6d';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0) scale(1)';
-              e.currentTarget.style.boxShadow = 'none';
-              e.currentTarget.style.borderColor = 'var(--ink)';
-            }}
+            onClick={() => setCurrentPage('map')}
           >
             VIEW MAP
-          </a>
+          </button>
         </div>
       </section>
 
       <Footer />
 
-      {/* Enhanced Animations */}
       <style>{`
         @keyframes titleGlitch {
           0%, 90%, 100% { transform: translate(0); }
           91% { transform: translate(-2px, 2px); }
           92% { transform: translate(2px, -2px); }
-          93% { transform: translate(-2px, -2px); }
-          94% { transform: translate(2px, 2px); }
         }
-
-        @keyframes slideWidth {
-          from { width: 0%; }
-          to { width: 100%; }
-        }
-
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideRight {
-          from { opacity: 0; transform: translateX(-40px); }
-          to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes fadeInLeft {
-          from { opacity: 0; transform: translateX(-20px); }
-          to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes popIn {
-          from { opacity: 0; transform: scale(0.8); }
-          to { opacity: 1; transform: scale(1); }
-        }
-
-        @keyframes pulse {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 0.6; transform: scale(1.05); }
-        }
-
-        @keyframes rotate {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-
-        @keyframes bounce {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
-
-        @keyframes expandWidth {
-          from { width: 0%; }
-          to { width: 100%; }
-        }
-
-        @keyframes zoomIn {
-          from { opacity: 0; transform: scale(0.9); }
-          to { opacity: 1; transform: scale(1); }
-        }
-
-        @keyframes gridPulse {
-          0%, 100% { opacity: 0.2; }
-          50% { opacity: 0.4; }
-        }
+        @keyframes slideWidth { from { width: 0%; } to { width: 100%; } }
+        @keyframes popIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+        @keyframes expandWidth { from { width: 0%; } to { width: 100%; } }
       `}</style>
     </div>
   );
