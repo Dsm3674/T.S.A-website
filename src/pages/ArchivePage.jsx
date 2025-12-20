@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
-import useReveal from "../hooks/useReveal";
 import { CheckCircle, Search } from "lucide-react";
-
 
 import farmersImg from "../assets/coppell-farmers-market.jpg";
 import noteloveImg from "../assets/notelove.jpg";
@@ -10,11 +8,32 @@ import metrocrestImg from "../assets/metrocrest.jpg";
 import neighborsImg from "../assets/neighbors-in-need.jpg";
 
 export default function ArchivePage() {
-  useReveal();
-
   const [submitted, setSubmitted] = useState(false);
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
+
+  // ✅ INLINE reveal logic (NO external hook → CI safe)
+  useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    document
+      .querySelectorAll(".reveal, .fade-in, .fade-in-up")
+      .forEach(el => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
 
   const categories = ["All", "Food", "Arts", "Social Services", "Mutual Aid"];
 
@@ -201,4 +220,5 @@ export default function ArchivePage() {
     </div>
   );
 }
+
 
