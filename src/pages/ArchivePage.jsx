@@ -12,7 +12,7 @@ export default function ArchivePage() {
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
 
-  // ✅ INLINE reveal logic (NO external hook → CI safe)
+  
   useEffect(() => {
     if (typeof IntersectionObserver === "undefined") return;
 
@@ -84,15 +84,9 @@ export default function ArchivePage() {
         <p className="kicker">Community Records</p>
       </header>
 
-      {/* SEARCH / FILTER */}
+      {/* SEARCH + FILTER */}
       <section className="reveal fade-in-up">
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "1rem"
-          }}
-        >
+        <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
           <div style={{ position: "relative" }}>
             <Search
               size={18}
@@ -105,39 +99,41 @@ export default function ArchivePage() {
             />
             <input
               style={{ paddingLeft: "38px" }}
-              placeholder="Search the archive..."
+              placeholder="Search the archive…"
               value={query}
               onChange={e => setQuery(e.target.value)}
             />
           </div>
 
-          {/* MOBILE-SAFE CATEGORY BAR */}
-          <div
-            style={{
-              display: "flex",
-              gap: "0.5rem",
-              overflowX: "auto",
-              paddingBottom: "0.25rem"
-            }}
-          >
-            {categories.map(cat => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className="btn wire"
-                style={{
-                  whiteSpace: "nowrap",
-                  background:
-                    activeCategory === cat ? "var(--mag)" : "transparent",
-                  color:
-                    activeCategory === cat
-                      ? "var(--bg)"
-                      : "var(--ink)"
-                }}
-              >
-                {cat}
-              </button>
-            ))}
+          {/* Horizontal category rail (mobile-friendly, dense) */}
+          <div className="archive-filter-wrap">
+            <div
+              style={{
+                display: "flex",
+                gap: "0.5rem",
+                overflowX: "auto",
+                paddingBottom: "0.25rem"
+              }}
+            >
+              {categories.map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className="btn wire"
+                  style={{
+                    whiteSpace: "nowrap",
+                    background:
+                      activeCategory === cat ? "var(--mag)" : "transparent",
+                    color:
+                      activeCategory === cat
+                        ? "var(--bg)"
+                        : "var(--ink)"
+                  }}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -220,5 +216,6 @@ export default function ArchivePage() {
     </div>
   );
 }
+
 
 
