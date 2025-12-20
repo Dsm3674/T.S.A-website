@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 
-export default function MissionPage() {
+export default function MissionPage({ setCurrentPage }) {
   const [activeCard, setActiveCard] = useState(null);
   const [scrollY, setScrollY] = useState(0);
 
@@ -572,14 +572,12 @@ export default function MissionPage() {
           position: 'relative',
           zIndex: 2
         }}>
-          <a 
-            href="/stories"
+          <button 
             className="btn slab"
+            onClick={() => setCurrentPage('stories')}
             style={{
               animation: 'popIn 0.6s ease 0.8s both',
-              transition: 'all 0.3s ease',
-              textDecoration: 'none',
-              display: 'inline-block'
+              transition: 'all 0.3s ease'
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'translateY(-4px) scale(1.05)';
@@ -591,15 +589,13 @@ export default function MissionPage() {
             }}
           >
             EXPLORE STORIES
-          </a>
-          <a 
-            href="/map"
+          </button>
+          <button 
             className="btn wire"
+            onClick={() => setCurrentPage('map')}
             style={{
               animation: 'popIn 0.6s ease 1s both',
-              transition: 'all 0.3s ease',
-              textDecoration: 'none',
-              display: 'inline-block'
+              transition: 'all 0.3s ease'
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'translateY(-4px) scale(1.05)';
@@ -613,7 +609,7 @@ export default function MissionPage() {
             }}
           >
             VIEW MAP
-          </a>
+          </button>
         </div>
       </section>
 
