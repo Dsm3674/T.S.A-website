@@ -572,12 +572,14 @@ export default function MissionPage({ setCurrentPage }) {
           position: 'relative',
           zIndex: 2
         }}>
-          <button 
+          <a 
+            href="/stories"
             className="btn slab"
-            onClick={() => setCurrentPage('stories')}
             style={{
               animation: 'popIn 0.6s ease 0.8s both',
-              transition: 'all 0.3s ease'
+              transition: 'all 0.3s ease',
+              textDecoration: 'none',
+              display: 'inline-block'
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'translateY(-4px) scale(1.05)';
@@ -589,13 +591,15 @@ export default function MissionPage({ setCurrentPage }) {
             }}
           >
             EXPLORE STORIES
-          </button>
-          <button 
+          </a>
+          <a 
+            href="/map"
             className="btn wire"
-            onClick={() => setCurrentPage('map')}
             style={{
               animation: 'popIn 0.6s ease 1s both',
-              transition: 'all 0.3s ease'
+              transition: 'all 0.3s ease',
+              textDecoration: 'none',
+              display: 'inline-block'
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'translateY(-4px) scale(1.05)';
@@ -609,7 +613,7 @@ export default function MissionPage({ setCurrentPage }) {
             }}
           >
             VIEW MAP
-          </button>
+          </a>
         </div>
       </section>
 
