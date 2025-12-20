@@ -3,10 +3,8 @@ import Footer from "../components/Footer";
 
 export default function MapPage() {
   const [hoveredNode, setHoveredNode] = useState(null);
+  const [activeAnalysis, setActiveAnalysis] = useState(0);
   
-  // NOTE: We no longer need the IntersectionObserver inside this file 
-  // because App.jsx now handles it globally for all pages.
-
   const organizations = [
     {
       id: 'farmers',
@@ -38,6 +36,12 @@ export default function MapPage() {
     }
   ];
 
+  const insights = [
+    { title: "Direct Food Pipelines", text: "The Farmers Market and Metrocrest cooperate to ensure surplus fresh produce reaches families in need, reducing waste and increasing nutrition access." },
+    { title: "Creative Resilience", text: "NoteLove provides a creative outlet for students who may be receiving support from other network nodes, proving that community care includes the arts." },
+    { title: "The Safety Net", text: "Neighbors In Need serves as the 'last mile' of support, picking up where institutional services end to provide rides and immediate groceries." }
+  ];
+
   return (
     <div className="page map-page">
 
@@ -52,6 +56,7 @@ export default function MapPage() {
           animation: 'glitchText 8s infinite'
         }}>
           MAP
+          {/* Animated underline */}
           <div style={{
             position: 'absolute',
             bottom: '-8px',
@@ -59,12 +64,14 @@ export default function MapPage() {
             width: '100%',
             height: '6px',
             background: '#ff2a6d',
+            animation: 'slideRight 1s cubic-bezier(0.23, 1, 0.32, 1)'
           }} />
         </h2>
-        <p className="kicker">
+        <p className="kicker" style={{ animation: 'fadeIn 2s ease' }}>
           brutalist — community — network
         </p>
 
+        {/* Decorative corner accent */}
         <div style={{
           position: 'absolute',
           top: 0,
@@ -80,17 +87,24 @@ export default function MapPage() {
 
       <div className="map-layout">
 
-        {/* LEFT SIDE — SVG Network */}
+        {/* LEFT SIDE — ENHANCED SVG NETWORK */}
         <div 
           className="map-spin-frame reveal fade-in-up"
           style={{
             position: 'relative',
             animation: 'floatMap 8s ease-in-out infinite',
-            transition: 'all 0.5s cubic-bezier(0.23, 1, 0.32, 1)'
+            transition: 'all 0.5s cubic-bezier(0.23, 1, 0.32, 1)',
+            background: 'var(--panel)',
+            border: '4px solid var(--ink)',
+            boxShadow: '14px 14px 0 var(--shadow)'
           }}
         >
-          <div className="map-label">
-            COPPELL COMMUNITY NETWORK
+          <div className="map-label" style={{
+            position: 'absolute', top: '15px', left: '15px', 
+            background: 'var(--ink)', color: 'var(--bg)', 
+            padding: '5px 10px', fontSize: '0.7rem', fontWeight: '900', zIndex: 5
+          }}>
+            COPPELL COMMUNITY NETWORK v1.0
           </div>
 
           <svg
@@ -102,12 +116,12 @@ export default function MapPage() {
             className="map-image"
           >
             <defs>
-              <pattern id="grid" width="22" height="22" patternUnits="userSpaceOnUse">
-                <path d="M 22 0 L 0 0 0 22" stroke="#777" strokeWidth="0.4" />
+              <pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse">
+                <path d="M 25 0 L 0 0 0 25" stroke="#444" strokeWidth="0.5" />
               </pattern>
               
               <filter id="glow">
-                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
                 <feMerge>
                   <feMergeNode in="coloredBlur"/>
                   <feMergeNode in="SourceGraphic"/>
@@ -115,114 +129,121 @@ export default function MapPage() {
               </filter>
             </defs>
 
-            <rect width="100%" height="100%" fill="url(#grid)" opacity="0.22" />
+            <rect width="100%" height="100%" fill="url(#grid)" opacity="0.3" />
 
-            {/* Connection Lines */}
+            {/* Animated Connection Lines */}
             <g filter="url(#glow)">
-              <line x1="300" y1="120" x2="150" y2="240" stroke="#050505" strokeWidth="6">
-                <animate attributeName="stroke-width" values="6;8;6" dur="3s" repeatCount="indefinite" />
-              </line>
-              <line x1="300" y1="120" x2="450" y2="240" stroke="#050505" strokeWidth="6">
-                <animate attributeName="stroke-width" values="6;8;6" dur="3s" begin="0.5s" repeatCount="indefinite" />
-              </line>
-              <line x1="150" y1="240" x2="300" y2="360" stroke="#050505" strokeWidth="6">
-                <animate attributeName="stroke-width" values="6;8;6" dur="3s" begin="1s" repeatCount="indefinite" />
-              </line>
-              <line x1="450" y1="240" x2="300" y2="360" stroke="#050505" strokeWidth="6">
-                <animate attributeName="stroke-width" values="6;8;6" dur="3s" begin="1.5s" repeatCount="indefinite" />
-              </line>
-              <line x1="300" y1="360" x2="300" y2="450" stroke="#050505" strokeWidth="6">
-                <animate attributeName="stroke-width" values="6;8;6" dur="3s" begin="2s" repeatCount="indefinite" />
-              </line>
+              {[
+                {x1:300, y1:120, x2:150, y2:240, delay: '0s'},
+                {x1:300, y1:120, x2:450, y2:240, delay: '0.5s'},
+                {x1:150, y1:240, x2:300, y2:360, delay: '1s'},
+                {x1:450, y1:240, x2:300, y2:360, delay: '1.5s'},
+                {x1:300, y1:360, x2:300, y2:450, delay: '2s'}
+              ].map((line, i) => (
+                <line key={i} x1={line.x1} y1={line.y1} x2={line.x2} y2={line.y2} stroke="var(--ink)" strokeWidth="4" opacity="0.6">
+                  <animate attributeName="stroke-width" values="4;7;4" dur="4s" begin={line.delay} repeatCount="indefinite" />
+                  <animate attributeName="opacity" values="0.3;0.8;0.3" dur="4s" begin={line.delay} repeatCount="indefinite" />
+                </line>
+              ))}
             </g>
 
             {/* COPPELL CENTER NODE */}
-            <circle cx="300" cy="120" r="42" fill="#ff2a6d" stroke="#050505" strokeWidth="6">
-              <animate attributeName="r" values="42;46;42" dur="2s" repeatCount="indefinite" />
+            <circle cx="300" cy="120" r="45" fill="#ff2a6d" stroke="var(--ink)" strokeWidth="5" style={{ filter: 'drop-shadow(0 0 10px #ff2a6d)' }}>
+              <animate attributeName="r" values="45;48;45" dur="3s" repeatCount="indefinite" />
             </circle>
-            <text x="300" y="124" fontFamily="Courier New" fontSize="12" fill="#050505" textAnchor="middle" fontWeight="bold">COPPELL</text>
+            <text x="300" y="125" fontFamily="monospace" fontSize="13" fill="var(--bg)" textAnchor="middle" fontWeight="900">COPPELL</text>
 
-            {/* Farmers Market */}
-            <circle cx="150" cy="240" r="38" fill="#e6dcc5" stroke="#050505" strokeWidth="6"
-              style={{ cursor: 'pointer' }}
-              onMouseEnter={() => setHoveredNode('farmers')}
-              onMouseLeave={() => setHoveredNode(null)}
-            />
-            <text x="150" y="238" fontSize="11" fill="#050505" textAnchor="middle">Farmers</text>
-            <text x="150" y="253" fontSize="11" fill="#050505" textAnchor="middle">Market</text>
+            {/* Interactive Organization Nodes */}
+            {organizations.map((org, i) => {
+              const coords = [
+                {x: 150, y: 240, label: ['Farmers', 'Market']},
+                {x: 450, y: 240, label: ['NoteLove', '']},
+                {x: 300, y: 360, label: ['Metrocrest', '']},
+                {x: 300, y: 450, label: ['Neighbors', 'In Need']}
+              ][i];
 
-            {/* NoteLove */}
-            <circle cx="450" cy="240" r="38" fill="#d2c7b2" stroke="#050505" strokeWidth="6"
-              style={{ cursor: 'pointer' }}
-              onMouseEnter={() => setHoveredNode('notelove')}
-              onMouseLeave={() => setHoveredNode(null)}
-            />
-            <text x="450" y="245" fontSize="11" fill="#050505" textAnchor="middle">NoteLove</text>
-
-            {/* Metrocrest */}
-            <circle cx="300" cy="360" r="42" fill="#e6dcc5" stroke="#050505" strokeWidth="6"
-              style={{ cursor: 'pointer' }}
-              onMouseEnter={() => setHoveredNode('metrocrest')}
-              onMouseLeave={() => setHoveredNode(null)}
-            />
-            <text x="300" y="364" fontSize="12" fill="#050505" textAnchor="middle">Metrocrest</text>
-
-            {/* Neighbors */}
-            <circle cx="300" cy="450" r="36" fill="#d2c7b2" stroke="#050505" strokeWidth="6"
-              style={{ cursor: 'pointer' }}
-              onMouseEnter={() => setHoveredNode('neighbors')}
-              onMouseLeave={() => setHoveredNode(null)}
-            />
-            <text x="300" y="447" fontSize="11" fill="#050505" textAnchor="middle">Neighbors</text>
-            <text x="300" y="462" fontSize="11" fill="#050505" textAnchor="middle">In Need</text>
+              return (
+                <g key={org.id} 
+                   style={{ cursor: 'pointer' }} 
+                   onMouseEnter={() => setHoveredNode(org.id)} 
+                   onMouseLeave={() => setHoveredNode(null)}>
+                  <circle cx={coords.x} cy={coords.y} r="38" fill={org.color} stroke="var(--ink)" strokeWidth="4" 
+                          style={{ transition: 'all 0.3s ease', transformBox: 'fill-box', transformOrigin: 'center' }}>
+                    {hoveredNode === org.id && <animateTransform attributeName="transform" type="scale" values="1;1.15;1" dur="0.5s" repeatCount="indefinite" />}
+                  </circle>
+                  <text x={coords.x} y={coords.y - 2} fontSize="11" fill="var(--bg)" textAnchor="middle" fontWeight="bold">{coords.label[0]}</text>
+                  <text x={coords.x} y={coords.y + 12} fontSize="11" fill="var(--bg)" textAnchor="middle" fontWeight="bold">{coords.label[1]}</text>
+                </g>
+              );
+            })}
           </svg>
 
-          {/* Hover Panel */}
+          {/* DYNAMIC HOVER OVERLAY */}
           {hoveredNode && (
             <div style={{
-              position: 'absolute',
-              bottom: '1rem', left: '1rem', right: '1rem',
-              background: 'rgba(0, 0, 0, 0.9)',
-              border: '2px solid #ff2a6d',
-              padding: '1rem', color: 'white', zIndex: 10
+              position: 'absolute', bottom: '20px', left: '20px', right: '20px',
+              background: 'rgba(5, 5, 5, 0.95)', border: '3px solid #ff2a6d',
+              padding: '1.2rem', color: 'white', zIndex: 10, animation: 'slideUp 0.3s ease'
             }}>
-              <div style={{ color: '#ff2a6d', fontWeight: 'bold' }}>
+              <div style={{ color: '#ff2a6d', fontWeight: '900', textTransform: 'uppercase', marginBottom: '0.3rem', fontSize: '1.1rem' }}>
                 {organizations.find(o => o.id === hoveredNode)?.name}
               </div>
-              <div style={{ fontSize: '0.85rem' }}>
+              <div style={{ fontSize: '0.9rem', lineHeight: '1.4', opacity: 0.9 }}>
                 {organizations.find(o => o.id === hoveredNode)?.impact}
               </div>
             </div>
           )}
         </div>
 
-        {/* RIGHT SIDE — Legend */}
-        <div className="map-side slab reveal delay-2">
-          <h3 className="display">Why This Network Matters</h3>
-          <p className="lead">
-            Coppell's community isn't random — it's a connected ecosystem. 
-            Each node represents a real organization showing how food, arts, and mutual aid overlap.
-          </p>
-          <ul style={{ marginTop: "1rem", lineHeight: "1.7" }}>
-            <li><strong>Coppell:</strong> The center city identity.</li>
-            <li><strong>Farmers Market:</strong> Food access hub.</li>
-            <li><strong>Metrocrest:</strong> Essential social safety net.</li>
-            <li><strong>NoteLove:</strong> Creative access for youth.</li>
-            <li><strong>Neighbors In Need:</strong> Hyperlocal aid.</li>
-          </ul>
+        {/* RIGHT SIDE — Legend & Insights */}
+        <div className="map-side reveal delay-2">
+          <div className="slab" style={{ height: '100%', marginBottom: 0 }}>
+            <div className="eyebrow">LEGEND</div>
+            <h3 className="display">Ecosystem Dynamics</h3>
+            <p className="lead" style={{ marginTop: '1rem' }}>
+              Coppell’s network is a <strong>closed-loop support system</strong>. Resources generated at one node flow to strengthen others.
+            </p>
+            
+            <ul style={{ marginTop: "1.5rem", listStyle: 'none' }}>
+              {organizations.map((org, i) => (
+                <li key={i} style={{ 
+                  marginBottom: '1rem', paddingLeft: '1.5rem', borderLeft: `4px solid ${org.color}`,
+                  transition: 'all 0.3s ease'
+                }}>
+                  <strong style={{ textTransform: 'uppercase' }}>{org.name}:</strong> 
+                  <span style={{ display: 'block', fontSize: '0.9rem', opacity: 0.8 }}>{org.impact}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '2px dashed var(--ink-dim)' }}>
+              <div className="eyebrow">NETWORK INSIGHTS</div>
+              <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+                {insights.map((_, i) => (
+                  <button key={i} onClick={() => setActiveAnalysis(i)} 
+                          style={{ 
+                            flex: 1, height: '4px', background: activeAnalysis === i ? '#ff2a6d' : 'var(--ink-dim)',
+                            border: 'none', cursor: 'pointer', transition: '0.3s' 
+                          }} />
+                ))}
+              </div>
+              <h4 style={{ fontSize: '1rem', color: '#ff2a6d' }}>{insights[activeAnalysis].title}</h4>
+              <p style={{ fontSize: '0.85rem', marginTop: '0.5rem' }}>{insights[activeAnalysis].text}</p>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* DETAILED CARDS SECTION */}
-      <section className="slab reveal fade-in-up" style={{ marginTop: '4rem' }}>
-        <div className="eyebrow">NETWORK STRUCTURE</div>
-        <h3 className="display">Organizational Deep Dive</h3>
+      {/* ENHANCED ORGANIZATIONAL DEEP DIVE */}
+      <section className="slab reveal fade-in-up" style={{ marginTop: '4rem', background: 'var(--panel)' }}>
+        <div className="eyebrow">DATABASE VIEW</div>
+        <h3 className="display">Community Node Analysis</h3>
         
         <div style={{ 
           display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-          gap: '1.5rem',
-          marginTop: '2rem'
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '2rem',
+          marginTop: '2.5rem'
         }}>
           {organizations.map((org, idx) => (
             <div
@@ -230,15 +251,31 @@ export default function MapPage() {
               className="reveal delay-1"
               style={{
                 border: '3px solid var(--ink)',
-                padding: '1.25rem',
-                background: 'var(--panel)',
+                padding: '2rem',
+                background: 'var(--bg)',
+                position: 'relative',
                 transition: 'all 0.4s var(--ease)',
               }}
+              onMouseEnter={(e) => e.currentTarget.style.boxShadow = `10px 10px 0 ${org.color}`}
+              onMouseLeave={(e) => e.currentTarget.style.boxShadow = 'none'}
             >
-              <h4 style={{ color: '#ff2a6d', marginBottom: '0.5rem' }}>{org.name}</h4>
-              <p style={{ fontSize: '0.9rem', marginBottom: '1rem' }}>{org.description}</p>
-              <div style={{ fontSize: '0.75rem', opacity: 0.7 }}>
-                <strong>IMPACT:</strong> {org.impact}
+              <div style={{
+                position: 'absolute', top: '-15px', left: '20px',
+                background: org.color, color: 'var(--bg)', 
+                padding: '2px 10px', fontSize: '0.7rem', fontWeight: '900'
+              }}>
+                NODE_0{idx + 1}
+              </div>
+              <h4 style={{ fontSize: '1.3rem', textTransform: 'uppercase', marginBottom: '0.75rem' }}>{org.name}</h4>
+              <p style={{ fontSize: '0.95rem', lineHeight: '1.5', opacity: 0.85, marginBottom: '1.2rem' }}>
+                {org.description}
+              </p>
+              <div style={{ 
+                fontFamily: 'monospace', fontSize: '0.75rem', 
+                padding: '0.5rem', background: 'rgba(255,255,255,0.05)',
+                borderLeft: `3px solid ${org.color}`
+              }}>
+                CORE_IMPACT: {org.impact.toUpperCase()}
               </div>
             </div>
           ))}
@@ -247,16 +284,25 @@ export default function MapPage() {
 
       <Footer />
 
-      {/* Internal Animations specific to this page */}
+      {/* Page Specific Animations */}
       <style>{`
         @keyframes floatMap {
           0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
+          50% { transform: translateY(-12px); }
         }
         @keyframes glitchText {
           0%, 90%, 100% { transform: translate(0); }
-          92% { transform: translate(-2px, 2px); }
-          94% { transform: translate(2px, -2px); }
+          91% { transform: translate(-3px, 2px); }
+          93% { transform: translate(3px, -1px); }
+          95% { transform: translate(-2px, -3px); }
+        }
+        @keyframes slideRight {
+          from { width: 0; }
+          to { width: 100%; }
+        }
+        @keyframes slideUp {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
         }
       `}</style>
     </div>
