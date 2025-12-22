@@ -3,7 +3,7 @@ import { CheckCircle, Search, Filter, Archive } from "lucide-react";
 
 
 const farmersImg = "https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=800&q=80";
-const noteloveImg = "https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=800&q=80";
+const noteloveImg = "../assets/notelove.jpg";
 const metrocrestImg = "../assets/metrocrest.jpg";
 const neighborsImg = "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&q=80";
 
