@@ -44,7 +44,7 @@ export default function TimelinePage() {
       years: "1840–1950",
       shortDesc: "Small farming settlement.",
       fullDetails: "Coppell began in 1840 as a farming settlement originally called Gibbs Station. Life centered around agriculture, small churches, and one-room schoolhouses.",
-      img: "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=800&q=80",
+      img: "/assets/Document.jpg",
       citation: "https://www.coppelltx.gov/610/History-of-Coppell",
       color: "#e6dcc5"
     },
