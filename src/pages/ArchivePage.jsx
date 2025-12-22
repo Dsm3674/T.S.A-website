@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { CheckCircle, Search, Filter, Archive } from "lucide-react";
 
 
-const farmersImg = "../assets/coppell-farmers-market.jpg";
-const noteloveImg = "../assets/notelove.jpg";
-const metrocrestImg = "../assets/metrocrest.jpg";
-const neighborsImg = "../assets/neighbors-in-need.jpg";
+import farmersImg from "../assets/coppell-farmers-market.jpg";
+import noteloveImg from "../assets/notelove.jpg";
+import metrocrestImg from "../assets/metrocrest.jpg";
+import neighborsImg from "../assets/neighbors-in-need.jpg";
+
 
 export default function ArchivePage() {
   const [submitted, setSubmitted] = useState(false);
