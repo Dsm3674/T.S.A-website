@@ -74,7 +74,7 @@ export default function TimelinePage() {
       years: "2010–2025",
       shortDesc: "Modern arts and mutual aid.",
       fullDetails: "Coppell now embraces a diverse civic culture shaped by arts programs, mutual aid organizations, and young community-driven initiatives.",
-      img: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800&q=80",
+      img: "/assets/Document (1).jpeg",
       citation: "https://www.coppelltx.gov/1225/2025-Yard-of-the-Month-Winners",
       color: "#ff2a6d"
     }
