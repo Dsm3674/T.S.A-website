@@ -561,54 +561,6 @@ export default function MissionPage() {
           and seeing how people support one another. This archive preserves that
           feeling for anyone who visits — now and in the future.
         </p>
-
-        {/* Call to action buttons */}
-        <div style={{
-          display: 'flex',
-          gap: '1rem',
-          justifyContent: 'center',
-          flexWrap: 'wrap',
-          marginTop: '2rem',
-          position: 'relative',
-          zIndex: 2
-        }}>
-          <button 
-            className="btn slab"
-            style={{
-              animation: 'popIn 0.6s ease 0.8s both',
-              transition: 'all 0.3s ease'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-4px) scale(1.05)';
-              e.currentTarget.style.boxShadow = '12px 12px 0 var(--ink)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0) scale(1)';
-              e.currentTarget.style.boxShadow = 'none';
-            }}
-          >
-            EXPLORE STORIES
-          </button>
-          <button 
-            className="btn wire"
-            style={{
-              animation: 'popIn 0.6s ease 1s both',
-              transition: 'all 0.3s ease'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-4px) scale(1.05)';
-              e.currentTarget.style.boxShadow = '12px 12px 0 #ff2a6d';
-              e.currentTarget.style.borderColor = '#ff2a6d';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0) scale(1)';
-              e.currentTarget.style.boxShadow = 'none';
-              e.currentTarget.style.borderColor = 'var(--ink)';
-            }}
-          >
-            VIEW MAP
-          </button>
-        </div>
       </section>
 
       <Footer />
@@ -681,4 +633,3 @@ export default function MissionPage() {
     </div>
   );
 }
-
