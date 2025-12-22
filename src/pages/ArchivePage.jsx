@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { CheckCircle, Search, Filter, Archive } from "lucide-react";
 
 
-const farmersImg = "https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=800&q=80";
+const farmersImg = "../assets/coppell-farmers-market.jpg";
 const noteloveImg = "../assets/notelove.jpg";
 const metrocrestImg = "../assets/metrocrest.jpg";
 const neighborsImg = "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&q=80";
