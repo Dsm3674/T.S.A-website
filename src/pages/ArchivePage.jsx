@@ -60,10 +60,11 @@ export default function ArchivePage() {
   });
 
   const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
     setTimeout(() => {
-      setSubmitted(true);
       window.scrollTo({ top: isMobile ? 300 : 400, behavior: "smooth" });
-    }, 400);
+    }, 100);
   };
 
   useEffect(() => {
