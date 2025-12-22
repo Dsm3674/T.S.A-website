@@ -54,7 +54,7 @@ export default function TimelinePage() {
       years: "1950–1990",
       shortDesc: "Schools, music, and rapid expansion.",
       fullDetails: "After the opening of DFW Airport, Coppell shifted from rural farmland to a growing suburb. Music, marching band culture, and youth arts shaped the city's identity.",
-      img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&q=80",
+      img: "/assets/Screenshot-2023-05-17-at-11.54.44-AM.png",
       citation: "https://coppellstudentmedia.com/121647/entertainment/rock-musics-evolution-its-influence-on-the-world-and-coppell/",
       color: "#05d9e8"
     },
