@@ -5,7 +5,7 @@ import { CheckCircle, Search, Filter, Archive } from "lucide-react";
 const farmersImg = "../assets/coppell-farmers-market.jpg";
 const noteloveImg = "../assets/notelove.jpg";
 const metrocrestImg = "../assets/metrocrest.jpg";
-const neighborsImg = "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&q=80";
+const neighborsImg = "../assets/neighbors-in-need.jpg";
 
 export default function ArchivePage() {
   const [submitted, setSubmitted] = useState(false);
