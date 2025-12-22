@@ -64,7 +64,7 @@ export default function TimelinePage() {
       years: "1990–2010",
       shortDesc: "Farmers markets, youth programs, and culture.",
       fullDetails: "Community institutions began defining Coppell's character. The Farmers Market, youth programs, and school traditions strengthened community ties.",
-      img: "https://images.unsplash.com/photo-1488998427799-e3362cec87c3?w=800&q=80",
+      img: "/assets/image.png",
       citation: "https://coppellstudentmedia.com/20840/entertainment/the-end-of-the-harry-potter-era/",
       color: "#d1f7ff"
     },
