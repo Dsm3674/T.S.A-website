@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react";
+import doc1 from "../assets/Document.jpg";
+import screenshot from "../assets/Screenshot-2023-05-17-at-11.54.44-AM.png";
+import imagePng from "../assets/image.png";
+import doc2 from "../assets/Document (1).jpeg";
 
 export default function TimelinePage() {
   const [selectedEra, setSelectedEra] = useState(null);
@@ -44,7 +48,7 @@ export default function TimelinePage() {
       years: "1840–1950",
       shortDesc: "Small farming settlement.",
       fullDetails: "Coppell began in 1840 as a farming settlement originally called Gibbs Station. Life centered around agriculture, small churches, and one-room schoolhouses.",
-      img: "../assets/Document.jpg",
+      img: doc1,
       citation: "https://www.coppelltx.gov/610/History-of-Coppell",
       color: "#e6dcc5"
     },
@@ -54,7 +58,7 @@ export default function TimelinePage() {
       years: "1950–1990",
       shortDesc: "Schools, music, and rapid expansion.",
       fullDetails: "After the opening of DFW Airport, Coppell shifted from rural farmland to a growing suburb. Music, marching band culture, and youth arts shaped the city's identity.",
-      img: "../assets/Screenshot-2023-05-17-at-11.54.44-AM.png",
+      img: screenshot,
       citation: "https://coppellstudentmedia.com/121647/entertainment/rock-musics-evolution-its-influence-on-the-world-and-coppell/",
       color: "#05d9e8"
     },
@@ -64,7 +68,7 @@ export default function TimelinePage() {
       years: "1990–2010",
       shortDesc: "Farmers markets, youth programs, and culture.",
       fullDetails: "Community institutions began defining Coppell's character. The Farmers Market, youth programs, and school traditions strengthened community ties.",
-      img: "../assets/image.png",
+      img: imagePng,
       citation: "https://coppellstudentmedia.com/20840/entertainment/the-end-of-the-harry-potter-era/",
       color: "#d1f7ff"
     },
@@ -74,7 +78,7 @@ export default function TimelinePage() {
       years: "2010–2025",
       shortDesc: "Modern arts and mutual aid.",
       fullDetails: "Coppell now embraces a diverse civic culture shaped by arts programs, mutual aid organizations, and young community-driven initiatives.",
-      img: "../assets/Document (1).jpeg",
+      img: doc2,
       citation: "https://www.coppelltx.gov/1225/2025-Yard-of-the-Month-Winners",
       color: "#ff2a6d"
     }
