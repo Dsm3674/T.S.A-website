@@ -5,7 +5,7 @@ export default defineConfig(({ command }) => {
   return {
     plugins: [react()],
 
-    base: command === "serve" ? "/" : "/T.S.A-website/",
+    base: "/",  // Changed for Vercel
 
     build: {
       outDir: 'dist',
@@ -24,7 +24,7 @@ export default defineConfig(({ command }) => {
       port: 5173,
       proxy: {
         "/api": {
-          target: "http://localhost:3001",
+          target: "http://localhost:3000",
           changeOrigin: true,
           secure: false
         },
