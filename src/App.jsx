@@ -37,19 +37,28 @@ function Chatbot() {
     setLoading(true);
 
     try {
+      // This works on Vercel AND localhost
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userPrompt: trimmed })
       });
 
-      if (!res.ok) throw new Error("Offline");
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.error || `HTTP ${res.status}`);
+      }
+      
       const data = await res.json();
-      setMessages(prev => [...prev, { role: "assistant", content: data.reply }]);
+      setMessages(prev => [...prev, { 
+        role: "assistant", 
+        content: data.reply || "No response received"
+      }]);
     } catch (err) {
+      console.error("Chat error:", err);
       setMessages(prev => [...prev, {
         role: "assistant",
-        content: "Note: The AI server is currently offline. In production, this would connect to the Gemini API via our node backend!"
+        content: `⚠️ Connection error: ${err.message}. The chatbot backend may be offline.`
       }]);
     }
     setLoading(false);
@@ -60,20 +69,49 @@ function Chatbot() {
       <button className="chat-toggle" onClick={() => setOpen(o => !o)}>💬</button>
       <AnimatePresence>
         {open && (
-          <motion.div className="chatbot-container" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }}>
-            <div className="chatbot-header" style={{background:'var(--ink)', color:'var(--bg)', padding:'1rem', display:'flex', justifyContent:'space-between'}}>
+          <motion.div 
+            className="chatbot-container" 
+            initial={{ opacity: 0, y: 20 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            exit={{ opacity: 0, y: 20 }}
+          >
+            <div className="chatbot-header">
               <span>Archive Bot</span>
-              <button onClick={() => setOpen(false)} style={{background:'none', border:'none', cursor:'pointer'}}>✕</button>
+              <button 
+                className="close-btn"
+                onClick={() => setOpen(false)}
+              >
+                ✕
+              </button>
             </div>
             <div className="chatbot-messages">
               {messages.map((m, i) => (
-                <div key={i} className={`message ${m.role === "user" ? "user" : "bot"}`}>{m.content}</div>
+                <div 
+                  key={i} 
+                  className={`message ${m.role === "user" ? "user" : "bot"}`}
+                >
+                  {m.content}
+                </div>
               ))}
+              {loading && (
+                <div className="message bot">
+                  <div className="loading">
+                    <span className="dot"></span>
+                    <span className="dot"></span>
+                    <span className="dot"></span>
+                  </div>
+                </div>
+              )}
               <div ref={chatEndRef} />
             </div>
-            <div className="chatbot-input" style={{display:'flex', borderTop:'3px solid var(--ink)'}}>
-              <input value={userInput} onChange={e => setUserInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && send()} placeholder="Ask me..." style={{flex:1, padding:'1rem', border:'none'}} />
-              <button onClick={send} style={{padding:'0 1rem', background:'var(--ink)', color:'var(--bg)', border:'none'}}>Send</button>
+            <div className="chatbot-input">
+              <input 
+                value={userInput} 
+                onChange={e => setUserInput(e.target.value)} 
+                onKeyDown={e => e.key === 'Enter' && send()} 
+                placeholder="Ask me..." 
+              />
+              <button onClick={send}>Send</button>
             </div>
           </motion.div>
         )}
@@ -129,7 +167,12 @@ export default function App() {
 
   return (
     <div className="app-container">
-      <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} theme={theme} setTheme={setTheme} />
+      <Navigation 
+        currentPage={currentPage} 
+        setCurrentPage={setCurrentPage} 
+        theme={theme} 
+        setTheme={setTheme} 
+      />
       <main className="page-content">{renderPage()}</main>
       <Chatbot />
     </div>
