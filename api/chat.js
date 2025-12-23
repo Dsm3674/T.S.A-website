@@ -31,22 +31,18 @@ export default async function handler(req, res) {
       });
     }
 
-    const systemPrompt =
-      "You are an informative and friendly chatbot focused on Coppell, Texas " +
-      "and the Brutalist Community Archive TSA 2025 project. " +
-      "Keep answers concise, specific, and grounded in the idea of a community archive.";
+    const systemPrompt = "You are an informative and friendly chatbot focused on Coppell, Texas and the Brutalist Community Archive TSA 2025 project. Keep answers concise, specific, and grounded in the idea of a community archive.";
 
+    // FIXED: Changed model name from gemini-1.5-flash-latest to gemini-1.5-flash
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           contents: [{
             role: 'user',
-            parts: [{
-              text: `${systemPrompt}\n\nUser: ${userPrompt}`
-            }]
+            parts: [{ text: `${systemPrompt}\n\nUser: ${userPrompt}` }]
           }],
           generationConfig: {
             temperature: 0.7,
@@ -67,11 +63,7 @@ export default async function handler(req, res) {
       });
     }
 
-    const reply =
-      data?.candidates?.[0]?.content?.parts
-        ?.map(p => p.text)
-        .join(' ')
-        .trim() || 'No response received';
+    const reply = data?.candidates?.[0]?.content?.parts?.map(p => p.text).join(' ').trim() || 'No response received';
 
     res.status(200).json({ reply });
 
