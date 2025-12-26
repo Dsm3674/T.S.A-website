@@ -1,35 +1,28 @@
 name: Deploy Website
-
 on:
   push:
     branches:
       - main   # your default branch
-
 permissions:
-  contents: write   # 👈 allow pushing to gh-pages
-
+  contents: write   
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 20
-
       - name: Install Dependencies
         run: npm install
-
       - name: Build Project
         run: npm run build
-
+        env:
+          GITHUB_PAGES: true   
       - name: Disable Jekyll
         run: echo "" > dist/.nojekyll
-
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -37,4 +30,3 @@ jobs:
           publish_dir: ./dist
           publish_branch: gh-pages
           force_orphan: true
-
