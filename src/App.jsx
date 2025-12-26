@@ -37,7 +37,6 @@ function Chatbot() {
     setLoading(true);
 
     try {
-      // This works on Vercel AND localhost
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -45,6 +44,9 @@ function Chatbot() {
       });
 
       if (!res.ok) {
+        if (res.status === 404) {
+          throw new Error("API not available");
+        }
         const errorData = await res.json().catch(() => ({}));
         throw new Error(errorData.error || `HTTP ${res.status}`);
       }
@@ -56,9 +58,14 @@ function Chatbot() {
       }]);
     } catch (err) {
       console.error("Chat error:", err);
+      
+      const errorMessage = err.message.includes("API not available") || err.message.includes("Failed to fetch")
+        ? "⚠️ Chatbot requires backend deployment. Works on Vercel. For GitHub Pages, the API needs to be deployed separately."
+        : `⚠️ Connection error: ${err.message}`;
+      
       setMessages(prev => [...prev, {
         role: "assistant",
-        content: `⚠️ Connection error: ${err.message}. The chatbot backend may be offline.`
+        content: errorMessage
       }]);
     }
     setLoading(false);
@@ -129,7 +136,6 @@ export default function App() {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  // ANIMATION REVEAL LOGIC
   useEffect(() => {
     window.scrollTo(0, 0);
     
