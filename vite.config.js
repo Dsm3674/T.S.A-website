@@ -2,13 +2,13 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig(() => {
+  // Only GitHub Pages sets this env var
   const isGitHubPages = process.env.GITHUB_PAGES === "true";
-  const isVercel = process.env.VERCEL === "1";
 
   return {
     plugins: [react()],
 
-    // GitHub Pages needs subpath, Vercel needs root
+   
     base: isGitHubPages ? "/T.S.A-website/" : "/",
 
     build: {
