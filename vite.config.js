@@ -2,10 +2,14 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig(({ command }) => {
+ 
+  const isGitHubPages = process.env.GITHUB_PAGES === 'true';
+  const base = isGitHubPages ? '/your-repo-name/'T.S.A-website'/';
+  
   return {
     plugins: [react()],
 
-    base: "/",  // Changed for Vercel
+    base: base,
 
     build: {
       outDir: 'dist',
