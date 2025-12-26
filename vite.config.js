@@ -1,37 +1,42 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-export default defineConfig({
-  plugins: [react()],
+export default defineConfig(() => {
+  const isGitHubPages = process.env.GITHUB_PAGES === "true";
+  const isVercel = process.env.VERCEL === "1";
 
-  // REQUIRED for GitHub Pages
-  base: "/T.S.A-website/",
+  return {
+    plugins: [react()],
 
-  build: {
-    outDir: "dist",
-    assetsDir: "assets",
-    sourcemap: false,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          "react-vendor": ["react", "react-dom"],
+    // GitHub Pages needs subpath, Vercel needs root
+    base: isGitHubPages ? "/T.S.A-website/" : "/",
+
+    build: {
+      outDir: "dist",
+      assetsDir: "assets",
+      sourcemap: false,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            "react-vendor": ["react", "react-dom"],
+          },
         },
       },
     },
-  },
 
-  server: {
-    port: 5173,
-    proxy: {
-      "/api": {
-        target: "http://localhost:3001",
-        changeOrigin: true,
-        secure: false,
+    server: {
+      port: 5173,
+      proxy: {
+        "/api": {
+          target: "http://localhost:3001",
+          changeOrigin: true,
+          secure: false,
+        },
       },
     },
-  },
 
-  preview: {
-    port: 4173,
-  },
+    preview: {
+      port: 4173,
+    },
+  };
 });
