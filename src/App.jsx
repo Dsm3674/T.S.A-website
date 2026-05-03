@@ -8,7 +8,7 @@ import MapPage from "./pages/MapPage";
 import ArchivePage from "./pages/ArchivePage";
 import ReferencePage from "./pages/ReferencePage";
 import MissionPage from "./pages/MissionPage";
-import "./styles/brutalist.css";
+import "./styles/editorial.css";
 
 function Chatbot() {
   const [open, setOpen] = useState(false);
@@ -129,12 +129,11 @@ function Chatbot() {
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState("home");
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
 
   useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+    document.documentElement.dataset.theme = "light";
+    localStorage.setItem("theme", "light");
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -175,9 +174,7 @@ export default function App() {
     <div className="app-container">
       <Navigation 
         currentPage={currentPage} 
-        setCurrentPage={setCurrentPage} 
-        theme={theme} 
-        setTheme={setTheme} 
+        setCurrentPage={setCurrentPage}
       />
       <main className="page-content">{renderPage()}</main>
       <Chatbot />

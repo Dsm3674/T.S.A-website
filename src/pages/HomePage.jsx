@@ -1,230 +1,190 @@
-import React, { useEffect, useRef } from "react";
-import metrocrestImg from "../assets/metrocrest.jpg";
-import noteloveImg from "../assets/notelove.jpg";
-import farmersImg from "../assets/coppell-farmers-market.jpg";
-import neighborsInNeedImg from "../assets/neighbors-in-need.jpg";
+import React from "react";
+import { ArrowUpRight } from "lucide-react";
+import { communityImages } from "../data/communityAssets";
 import Footer from "../components/Footer";
 
 export default function HomePage({ setCurrentPage }) {
-  const canvasRef = useRef(null);
+  const heroCards = [
+    { img: communityImages.farmers, label: "Market mornings" },
+    { img: communityImages.notelove, label: "Youth music" },
+    { img: communityImages.metrocrest, label: "Care network" },
+    { img: communityImages.neighbors, label: "Mutual aid" },
+    { img: communityImages.history, label: "Local memory" },
+  ];
 
-  useEffect(() => {
-    const c = canvasRef.current;
-    if (!c) return;
+  const stats = [
+    { num: "100+", label: "Stories gathered" },
+    { num: "10K+", label: "Neighbors connected" },
+    { num: "4", label: "Anchor orgs featured" },
+  ];
 
-    const ctx = c.getContext("2d");
-    let raf;
-    let t = 0;
+  const people = [
+    {
+      tag: "Market Volunteer",
+      title: "Saturday Regular",
+      desc: "A resident who knows the rhythm of every stall and every hello.",
+    },
+    {
+      tag: "Youth Leader",
+      title: "NoteLove Mentor",
+      desc: "A student musician turning practice into access for younger learners.",
+    },
+    {
+      tag: "Neighbor In Action",
+      title: "Metrocrest Advocate",
+      desc: "Helping families find food, housing support, and stability.",
+    },
+    {
+      tag: "Mutual Aid Organizer",
+      title: "Neighbors In Need",
+      desc: "Coordinating rides, groceries, and support across the city.",
+    },
+  ];
 
-    const resize = () => {
-      c.width = window.innerWidth;
-      c.height = Math.max(560, window.innerHeight * 0.8);
-    };
-    resize();
-    window.addEventListener("resize", resize);
-
-    const draw = () => {
-      t += 0.008;
-      ctx.clearRect(0, 0, c.width, c.height);
-
-      for (let i = 0; i < 120; i++) {
-        const x =
-          c.width / 2 +
-          Math.sin(t * 1.3 + i * 0.21) * (c.width * 0.25) +
-          Math.sin(t * 0.7 + i) * 30;
-
-        const y =
-          c.height / 2 +
-          Math.cos(t * 1.1 + i * 0.17) * (c.height * 0.18) +
-          Math.cos(t * 0.9 + i) * 20;
-
-        const r = 1.2 + Math.sin(t * 2 + i) * 1;
-
-        ctx.beginPath();
-        ctx.fillStyle = `hsla(${(i * 6 + t * 120) % 360}, 90%, ${
-          40 + (i % 2) * 20
-        }%, 0.14)`;
-        ctx.arc(x, y, r, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      raf = requestAnimationFrame(draw);
-    };
-
-    draw();
-
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("resize", resize);
-    };
-  }, []);
+  const orgs = [
+    {
+      name: "Coppell Farmers Market",
+      img: communityImages.farmers,
+      link: "https://coppellfarmersmarket.org/",
+      desc: "Local growers, artisans, and Saturday morning rituals.",
+    },
+    {
+      name: "NoteLove",
+      img: communityImages.notelove,
+      link: "https://www.notelove.org/",
+      desc: "Youth-led music lessons that make the arts easier to reach.",
+    },
+    {
+      name: "Metrocrest Services",
+      img: communityImages.metrocrest,
+      link: "https://metrocrestservices.org/",
+      desc: "Food, housing, senior care, and practical stability.",
+    },
+    {
+      name: "Neighbors In Need",
+      img: communityImages.neighbors,
+      link: "https://www.instagram.com/neighbors_in_need_/",
+      desc: "Mutual aid, rides, groceries, and direct neighbor support.",
+    },
+  ];
 
   return (
     <>
-      <div className="page home page-enter page-enter-active">
-        
-        <section className="hero reveal">
-          <canvas ref={canvasRef} className="hero-canvas" />
-          <div className="hero-inner">
+      <div className="home page-enter page-enter-active">
+        <section className="editorial-hero reveal">
+          <div className="hero-copy">
+            <div className="hero-badge">Coppell Community Files</div>
             <h1 className="hero-title">
-              Coppell <span className="outline">ARCHIVE</span>
+              WHAT&apos;S HERE
+              <span>IN COPPELL</span>
             </h1>
-            <p className="hero-kicker">Showing the Community</p>
-
+            <p className="hero-kicker">
+              A living archive of the people, places, and organizations that
+              keep the city connected.
+            </p>
             <div className="hero-cta reveal delay-1">
-              <button
-                className="btn slab"
-                onClick={() => setCurrentPage("timeline")}
-              >
-                EXPLORE TIMELINE
+              <button className="btn primary" onClick={() => setCurrentPage("timeline")}>
+                Explore timeline <ArrowUpRight size={18} />
               </button>
-
-              <button className="btn wire" onClick={() => setCurrentPage("map")}>
-                OPEN MAP
+              <button className="btn secondary" onClick={() => setCurrentPage("map")}>
+                Open map
               </button>
-
-              <button
-                className="btn wire secondary"
-                onClick={() => setCurrentPage("mission")}
-              >
-                WHY WE EXIST
+              <button className="btn ghost" onClick={() => setCurrentPage("mission")}>
+                Why we exist
               </button>
             </div>
           </div>
+
+          <div className="hero-card-fan" aria-label="Featured archive images">
+            {heroCards.map((card, index) => (
+              <figure className={`fan-card fan-card-${index + 1}`} key={card.label}>
+                <img src={card.img} alt={card.label} />
+                <figcaption>{card.label}</figcaption>
+              </figure>
+            ))}
+          </div>
+
+          <aside className="next-file">
+            <span>Next file</span>
+            <strong>Community Map</strong>
+            <small>4 anchor organizations</small>
+          </aside>
         </section>
 
         <section className="stat-grid">
-          {[
-            { num: "100+", label: "STORIES GATHERED" },
-            { num: "10K+", label: "NEIGHBORS CONNECTED" },
-            { num: "4", label: "ANCHOR ORGS FEATURED" },
-          ].map((s, i) => (
-            <div
-              key={`stat-${i}`}
-              className={`stat-card skew-${(i % 3) + 1} reveal delay-${i + 1}`}
-            >
-              <div className="stat-num">{s.num}</div>
-              <div className="stat-label">{s.label}</div>
+          {stats.map((stat, index) => (
+            <div key={stat.label} className={`stat-card reveal delay-${index + 1}`}>
+              <div className="stat-num">{stat.num}</div>
+              <div className="stat-label">{stat.label}</div>
             </div>
           ))}
         </section>
 
         <section className="split-cta">
-          {[
-            {
-              title: "INTERACTIVE TIMELINE",
-              desc: "Scroll through eras of growth, art, and mutual aid in Coppell.",
-              page: "timeline",
-            },
-            {
-              title: "COMMUNITY MAP",
-              desc: "Click noir pins to jump from farmers market mornings to music nights.",
-              page: "map",
-            },
-          ].map((item, i) => (
-            <button
-              key={`split-${i}`}
-              className={`split-card ${
-                i === 0 ? "tilt-left" : "tilt-right"
-              } reveal delay-${i + 1}`}
-              onClick={() => setCurrentPage(item.page)}
-            >
-              <h3>{item.title}</h3>
-              <p>{item.desc}</p>
-              <span>OPEN →</span>
-            </button>
-          ))}
+          <button className="split-card reveal delay-1" onClick={() => setCurrentPage("timeline")}>
+            <span className="eyebrow">01 / Timeline</span>
+            <h3>Interactive civic eras</h3>
+            <p>Move through eras of growth, art, service, and mutual aid in Coppell.</p>
+            <strong>Open timeline</strong>
+          </button>
+          <button className="split-card reveal delay-2" onClick={() => setCurrentPage("map")}>
+            <span className="eyebrow">02 / Map</span>
+            <h3>Community node map</h3>
+            <p>Trace how anchor organizations connect people, care, and culture.</p>
+            <strong>Open map</strong>
+          </button>
         </section>
 
-        <section className="slab people-section reveal">
-          <div className="eyebrow">THE PEOPLE OF COPPELL</div>
-          <h3 className="display">Why We Are A Community</h3>
-          <p className="lead">
-            Coppell is more than streets and buildings...
-          </p>
+        <section className="editorial-section people-section reveal">
+          <div className="section-heading">
+            <span className="eyebrow">The people of Coppell</span>
+            <h2>Why we are a community</h2>
+            <p>
+              Coppell is more than streets and buildings. The archive follows
+              the daily care work that turns a city into a network.
+            </p>
+          </div>
 
           <div className="people-grid">
-            <div className="people-card gift-card reveal delay-1">
-              <div className="people-tag">Market Volunteer</div>
-              <h4>Saturday Regular</h4>
-              <p>A resident who knows every stall...</p>
-            </div>
-
-            <div className="people-card gift-card reveal delay-2">
-              <div className="people-tag">Youth Leader</div>
-              <h4>NoteLove Mentor</h4>
-              <p>A teen musician offering lessons...</p>
-            </div>
-
-            <div className="people-card gift-card reveal delay-3">
-              <div className="people-tag">Neighbor In Action</div>
-              <h4>Metrocrest Advocate</h4>
-              <p>Helping families find stability...</p>
-            </div>
-
-            <div className="people-card gift-card reveal delay-4">
-              <div className="people-tag">Mutual Aid Organizer</div>
-              <h4>Neighbors In Need</h4>
-              <p>Coordinating rides, groceries & support...</p>
-            </div>
-          </div>
-        </section>
-
-        <section className="slab reveal">
-          <div className="eyebrow">COMMUNITY RESOURCES</div>
-          <h3 className="display">Anchor Organizations in Coppell</h3>
-          <p className="lead">
-            This archive spotlights real community partners...
-          </p>
-
-          <div className="spotlight-grid" style={{ marginTop: "2rem" }}>
-            {[
-              {
-                name: "Coppell Farmers Market",
-                img: farmersImg,
-                link: "https://coppellfarmersmarket.org/",
-                desc: "Local growers and artisans...",
-              },
-              {
-                name: "NoteLove",
-                img: noteloveImg,
-                link: "https://www.notelove.org/",
-                desc: "Youth-led free music lessons...",
-              },
-              {
-                name: "Metrocrest Services",
-                img: metrocrestImg,
-                link: "https://metrocrestservices.org/",
-                desc: "Food, housing, senior care...",
-              },
-              {
-                name: "Neighbors In Need",
-                img: neighborsInNeedImg,
-                link: "https://www.instagram.com/neighbors_in_need_/",
-                desc: "Mutual aid across Coppell...",
-              },
-            ].map((org, i) => (
-              <a
-                key={`org-${i}`}
-                href={org.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`spotlight-card reveal delay-${i + 1}`}
-              >
-                <img src={org.img} className="spotlight-img" alt={org.name} />
-                <h4>{org.name}</h4>
-                <p className="lead" style={{ fontSize: "0.95rem" }}>
-                  {org.desc}
-                </p>
-              </a>
+            {people.map((person, index) => (
+              <article key={person.title} className={`people-card reveal delay-${index + 1}`}>
+                <div className="people-tag">{person.tag}</div>
+                <h3>{person.title}</h3>
+                <p>{person.desc}</p>
+              </article>
             ))}
           </div>
         </section>
 
+        <section className="editorial-section reveal">
+          <div className="section-heading">
+            <span className="eyebrow">Community resources</span>
+            <h2>Anchor organizations in Coppell</h2>
+            <p>Real community partners, presented as living records.</p>
+          </div>
+
+          <div className="spotlight-grid">
+            {orgs.map((org, index) => (
+              <a
+                key={org.name}
+                href={org.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`spotlight-card reveal delay-${index + 1}`}
+              >
+                <img src={org.img} className="spotlight-img" alt={org.name} />
+                <div className="spotlight-body">
+                  <h3>{org.name}</h3>
+                  <p>{org.desc}</p>
+                  <span>Visit resource</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
       </div>
 
       <Footer />
     </>
   );
 }
-

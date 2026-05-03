@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { CheckCircle, Search, Filter, Archive } from "lucide-react";
+import { CheckCircle, Search } from "lucide-react";
 
-
-import farmersImg from "../assets/coppell-farmers-market.jpg";
-import noteloveImg from "../assets/notelove.jpg";
-import metrocrestImg from "../assets/metrocrest.jpg";
-import neighborsImg from "../assets/neighbors-in-need.jpg";
+import { communityImages } from "../data/communityAssets";
 
 
 export default function ArchivePage() {
@@ -20,7 +16,7 @@ export default function ArchivePage() {
     {
       title: "Coppell Farmers Market",
       link: "https://coppellfarmersmarket.org/",
-      img: farmersImg,
+      img: communityImages.farmers,
       category: "Food",
       desc:
         "A cornerstone of Coppell culture. Providing fresh, local produce and a weekly gathering space for residents to support small-scale agriculture.",
@@ -28,7 +24,7 @@ export default function ArchivePage() {
     {
       title: "NoteLove",
       link: "https://www.notelove.org/",
-      img: noteloveImg,
+      img: communityImages.notelove,
       category: "Arts",
       desc:
         "Bridging the gap in music education. This youth-led nonprofit offers free lessons, ensuring that creative expression is accessible to every student.",
@@ -36,7 +32,7 @@ export default function ArchivePage() {
     {
       title: "Metrocrest Services",
       link: "https://metrocrestservices.org/",
-      img: metrocrestImg,
+      img: communityImages.metrocrest,
       category: "Social Services",
       desc:
         "The regional safety net. From rent assistance to a robust food pantry, they provide essential support for neighbors facing financial crisis.",
@@ -44,7 +40,7 @@ export default function ArchivePage() {
     {
       title: "Neighbors In Need",
       link: "https://www.instagram.com/neighbors_in_need_/",
-      img: neighborsImg,
+      img: communityImages.neighbors,
       category: "Mutual Aid",
       desc:
         "Hyperlocal community care. A grassroots network coordinating direct help, rides, and grocery deliveries across the city of Coppell.",

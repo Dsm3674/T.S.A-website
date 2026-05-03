@@ -1,9 +1,5 @@
 import React from "react";
-import farmersImg from "../assets/coppell-farmers-market.jpg";
-import noteloveImg from "../assets/notelove.jpg";
-import metrocrestImg from "../assets/metrocrest.jpg";
-import neighborsInNeedImg from "../assets/neighbors-in-need.jpg";
-import historyImg from "../assets/Document.jpg";
+import { communityImages } from "../data/communityAssets";
 import Footer from "../components/Footer";
 
 export default function StoriesPage() {
@@ -12,7 +8,7 @@ export default function StoriesPage() {
       title: "FIRST BUSINESS OPENS",
       year: 1840,
       excerpt: "A small corner café becomes the unofficial meeting spot for early settlers.",
-      img: historyImg,
+      img: communityImages.history,
       link: "https://www.coppelltx.gov/610/History-of-Coppell",
     },
     {
@@ -20,28 +16,28 @@ export default function StoriesPage() {
       year: 2009,
       excerpt: "Residents gather every Saturday to support local growers and family-owned businesses.",
       link: "https://coppellfarmersmarket.org/",
-      img: farmersImg,
+      img: communityImages.farmers,
     },
     {
       title: "NoteLove Brings Free Music",
       year: 2019,
       excerpt: "Youth volunteers turn practice rooms and living rooms into studios.",
       link: "https://www.notelove.org/",
-      img: noteloveImg,
+      img: communityImages.notelove,
     },
     {
       title: "Metrocrest Expands Support",
       year: 2023,
       excerpt: "Food pantry lines and housing needs meet a regional safety net.",
       link: "https://metrocrestservices.org/",
-      img: metrocrestImg,
+      img: communityImages.metrocrest,
     },
     {
       title: "Neighbors In Need Rallies",
       year: 2024,
       excerpt: "Residents coordinate grocery drops and rides so families never feel alone.",
       link: "https://www.instagram.com/neighbors_in_need_/",
-      img: neighborsInNeedImg,
+      img: communityImages.neighbors,
     },
   ];
 
@@ -94,4 +90,3 @@ export default function StoriesPage() {
     </div>
   );
 }
-
